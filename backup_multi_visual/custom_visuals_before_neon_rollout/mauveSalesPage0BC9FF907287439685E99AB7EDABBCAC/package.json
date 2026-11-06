@@ -1,0 +1,17 @@
+{
+		"version": "1.0.0.7",
+		"author": {"name":"hedi.souaeid","email":"rahmawjlassi@gmail.com"},
+		"resources": [
+			{
+				"resourceId": "rId0",
+				"sourceType": 5,
+				"file": "resources/mauveSalesPage0BC9FF907287439685E99AB7EDABBCAC.pbiviz.json"
+			}
+		],
+		"visual": {"name":"mauveSalesPage","displayName":"Mauve Sales Page","guid":"mauveSalesPage0BC9FF907287439685E99AB7EDABBCAC","visualClassName":"Visual","version":"1.0.0.7","description":"Complete Sales Overview page: KPIs, charts, product table and built-in filters.","supportUrl":"https://learn.microsoft.com/power-bi/developer/visuals/","gitHubUrl":""},
+		"metadata": {
+			"pbivizjson": {
+				"resourceId": "rId0"
+			}
+		}
+	}

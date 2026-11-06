@@ -1,0 +1,39 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "Columns",
+            "name": "columns",
+            "kind": "GroupingOrMeasure"
+        }
+    ],
+    "objects": {
+        "table": {
+            "properties": {
+                "title": { "type": { "text": true } },
+                "subtitle": { "type": { "text": true } },
+                "fontSize": { "type": { "numeric": true } },
+                "showSearch": { "type": { "bool": true } },
+                "showFilters": { "type": { "bool": true } },
+                "sortColumn": { "type": { "text": true } },
+                "sortDescending": { "type": { "bool": true } }
+            }
+        }
+    },
+    "dataViewMappings": [
+        {
+            "table": {
+                "rows": {
+                    "select": [
+                        { "for": { "in": "columns" } }
+                    ],
+                    "dataReductionAlgorithm": {
+                        "top": { "count": 30000 }
+                    }
+                }
+            }
+        }
+    ],
+    "supportsKeyboardFocus": true,
+    "supportsMultiVisualSelection": true,
+    "privileges": []
+}

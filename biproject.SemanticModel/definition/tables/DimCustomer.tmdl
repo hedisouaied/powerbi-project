@@ -1,0 +1,71 @@
+table DimCustomer
+	lineageTag: 611f2e75-0135-52f6-b569-8f5941452cf5
+
+	column 'CustomerKey'
+		dataType: string
+		isKey
+		lineageTag: 545aacdd-afe0-5389-bbfa-7ec4e54b505b
+		summarizeBy: none
+		sourceColumn: CustomerKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer_Name'
+		dataType: string
+		lineageTag: 809588da-feb2-5f5a-8cb1-6f701bd44769
+		summarizeBy: none
+		sourceColumn: Customer_Name
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email'
+		dataType: string
+		lineageTag: 968754cf-38b2-59d4-942b-01505a7874e0
+		summarizeBy: none
+		sourceColumn: Email
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email_Is_Valid'
+		dataType: boolean
+		lineageTag: d16e9bea-5548-511b-b48a-58ca7d98aa35
+		summarizeBy: none
+		sourceColumn: Email_Is_Valid
+		annotation SummarizationSetBy = Automatic
+
+	column 'City'
+		dataType: string
+		lineageTag: 1d5e69d7-bcbb-51a1-afe7-6b5f6d8e7636
+		summarizeBy: none
+		sourceColumn: City
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signup_Date'
+		dataType: dateTime
+		lineageTag: 5584f46b-5907-5eb2-aef0-069af71f8217
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: Signup_Date
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment'
+		dataType: string
+		lineageTag: 0d96c3ab-84f6-58b3-bfcd-9026b13ebdde
+		summarizeBy: none
+		sourceColumn: Segment
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is_Unknown'
+		dataType: boolean
+		lineageTag: f7f5926e-a1d6-5e68-8bdf-d0733cb43d5e
+		summarizeBy: none
+		sourceColumn: Is_Unknown
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCustomer = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\DimCustomer.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"CustomerKey", type text}, {"Customer_Name", type text}, {"Email", type text}, {"Email_Is_Valid", type logical}, {"City", type text}, {"Signup_Date", type date}, {"Segment", type text}, {"Is_Unknown", type logical}}, "en-US"),
+				    Blanks = Table.ReplaceValue(Typed, "", null, Replacer.ReplaceValue, Table.ColumnsOfType(Typed, {type text, type nullable text}))
+				in
+				    Blanks

@@ -1,0 +1,336 @@
+========================================================================================
+FINAL VALIDATION REPORT
+========================================================================================
+Dataset validated : output/clean_sales.csv
+Validator         : Senior Data Quality Engineer (independent re-check)
+Validation date   : 2026-11-02 14:12:46
+Also inspected    : output/data_quality_report.txt
+                    output/cleaning_summary.txt
+                    output/rejected_records.csv
+                    output/cleaning_log.csv
+Original CSV files: read-only; not modified by this validation.
+========================================================================================
+
+0. EXECUTIVE SUMMARY
+----------------------------------------------------------------------------------------
+Total rows                            : 32
+Total columns                         : 30
+Distinct Order_ID values              : 32
+Duplicate Order_ID values             : 0
+Fully duplicated rows                 : 0
+Blank cells (all columns)             : 63
+Blank cells excluding Data_Quality_Flag: 45
+Invalid date values in final file     : 0
+Negative quantities                   : 0
+Negative unit prices                  : 0
+Discount values outside 0-100         : 0
+Gross-sales arithmetic discrepancies  : 0
+Net-sales formula discrepancies       : 3
+Unmatched customer/product/store keys : 3
+Payment reconciliation issues         : 6
+Rejected records documented           : 5
+
+Reported Gross Sales (TND)            : 4,105.60
+Reported Net Sales (TND)              : 3,498.60
+Recalculated Gross Sales (TND)        : 4,105.60
+Formula Net Sales, all rows (TND)     : 4,105.60
+Business-recognised Net Sales (TND)   : 3,498.60
+Payment amount total in file (TND)    : 4,401.10
+
+FINAL STATUS: FAIL
+The file passes row-grain, date, quantity, price and gross-arithmetic checks,
+but it fails critical business/data-quality gates: one order contains multiple
+products, three dimension references are unresolved, and payment reconciliation
+is not complete. It must not be certified as ready for a product-level or
+payment-level Power BI dashboard until the corrections in section 9 are applied.
+
+1. SCOPE AND METHOD
+----------------------------------------------------------------------------------------
+The validation is independent of the cleaning script. It re-parses the delivered
+CSV, re-computes every financial formula, re-checks all dates and keys, and
+compares the final payment aggregates with the de-duplicated raw payments.
+The cleaning log and rejected-record file are used only to confirm that
+exclusions are documented, not as proof that the final numbers are correct.
+
+2. TASK 1 - DATA VALIDATION
+----------------------------------------------------------------------------------------
+2.1 Duplicate Order_ID values ......................... PASS
+    0 duplicate Order_ID values; 32 rows / 32 distinct orders.
+    ORD-1001 is not a duplicate order: it is one legitimate multi-line order
+    aggregated into one row. The exact duplicate source line was removed and
+    logged. No full duplicate rows remain in the final file.
+
+2.2 Missing critical values ........................... PASS
+    All critical keys and measures are present: Order_ID=0, Order_Date=0, Customer_ID=0, Product_SKU=0, Store_Code=0, Quantity=0, Unit_Price_TND=0, Gross_Sales_TND=0, Net_Sales_TND=0, Order_Status=0.
+    Descriptive fields are null only where documented:
+            column  missing_cells
+     Customer_Name              1
+     Customer_City              1
+  Customer_Segment             32
+      Product_Name              1
+  Product_Category              1
+        Store_Name              1
+      Store_Region              1
+    Payment_Method              2
+Payment_Amount_TND              3
+      Payment_Date              2
+ Data_Quality_Flag             18
+    - Customer_Segment is null for all 32 rows because the source file has no
+      segment field. This is a missing source attribute, not a cleaning loss.
+    - Customer_Name/City, Product_Name/Category and Store_Name/Region are null
+      only for the three unresolved dimension keys described in 2.11.
+    - Payment_Method/Amount/Date are null only where no payment exists or the
+      source payment amount is missing.
+    - Blank Data_Quality_Flag means no flag was raised for that row.
+
+2.3 Data types ........................................ WARNING
+    Because the deliverable is a CSV, every field is stored as text. All
+    numeric and date fields are consistently parseable (0 non-numeric values
+    in non-blank numeric cells; 0 invalid date strings), so Power BI will
+    normally detect them. Explicit typing in Power Query is still required.
+    Recommended: Order_ID/Customer_ID/Product_SKU/Store_Code = Text;
+    Order_Date/Payment_Date = Date; Quantity/Payment_Count = Whole Number;
+    all TND and percentage fields = Decimal Number.
+
+2.4 Invalid dates ..................................... PASS
+    Invalid Order_Date values: 0.
+    Invalid non-blank Payment_Date values: 0.
+    All dates that are present conform to YYYY-MM-DD. The two impossible/
+    ambiguous source dates were resolved or rejected during cleaning.
+
+2.5 Negative quantities ............................... PASS
+    Negative quantities: 0. Zero quantities: 0.
+    The zero-quantity order ORD-1026 was rejected and is documented.
+
+2.6 Negative or invalid prices ........................ PASS
+    Negative unit prices: 0. Zero unit prices: 0.
+    Non-numeric/blank unit prices in the final file: 0.
+
+2.7 Discount range .................................... PASS
+    Minimum discount: 0.00%; maximum: 0.00%. Values outside 0-100: 0.
+
+2.8 Gross sales calculations .......................... PASS
+    Recalculated Quantity x Unit_Price_TND for all 32 rows.
+    Rows with a difference greater than 0.005 TND: 0.
+    The weighted unit price of the multi-line order ORD-1001 (70.00) reproduces
+    its gross of 210.00 exactly.
+
+2.9 Net sales calculations ............................ PASS (with documented business exception)
+    Rows where Net differs from Gross x (1 - Discount/100): 3.
+    All three are intentional non-revenue rows:
+Order_ID Order_Status Gross_Sales_TND  formula_net Net_Sales_TND  difference
+ORD-1003    Cancelled          250.00        250.0          0.00       250.0
+ORD-1011     Returned           37.00         37.0          0.00        37.0
+ORD-1017    Cancelled          320.00        320.0          0.00       320.0
+    ORD-1003 and ORD-1017 are Cancelled; ORD-1011 is Returned with a refunded
+    payment. Their Net is deliberately 0. Their Gross (250.00, 320.00 and
+    37.00 = 607.00 total) is retained for audit, not revenue.
+
+2.10 Cancelled orders included in revenue ............. PASS
+    Cancelled orders: 2. Cancelled rows with non-zero Net: 0.
+    Returned orders: 1. Returned rows with non-zero Net: 0.
+    WARNING: Gross_Sales_TND still contains 250.00 (ORD-1003) and 320.00
+    (ORD-1017) for cancelled orders. Gross is an audit/potential-value
+    measure; if a Power BI card sums Gross and labels it 'revenue', cancelled
+    orders would be counted. Revenue must use Net_Sales_TND / Revenue_Eligible.
+
+2.11 Unmatched customer, product and store references . FAIL
+    Three final orders reference keys that do not exist in the cleaned masters:
+Order_ID Customer_ID Product_SKU Store_Code  Data_Quality_Flag
+ORD-1029        C005        P010       ST99    UNMATCHED_STORE
+ORD-1031        C999        P002       ST01 UNMATCHED_CUSTOMER
+ORD-1032        C007        P999       ST03  UNMATCHED_PRODUCT
+    The orders and their revenue were correctly retained rather than deleted,
+    and the missing descriptions are null. However, referential integrity is
+    not complete: dashboards will show blank customer/product/store names for
+    these orders. This is a critical quality gap for a professional dashboard.
+
+2.12 Payment inconsistencies .......................... FAIL
+    Payment association by Order_ID is correct, but reconciliation is incomplete:
+Order_ID                               Issue                                                                       Detail
+ORD-1003    Refunded payment amount retained Payment_Amount_TND=250.00 with Payment_Status=Refunded; Net revenue is zero.
+ORD-1007                   No payment record                                Order status=Pending; payment amount is null.
+ORD-1011    Refunded payment amount retained  Payment_Amount_TND=37.00 with Payment_Status=Refunded; Net revenue is zero.
+ORD-1017                   No payment record                              Order status=Cancelled; payment amount is null.
+ORD-1021              Payment amount missing                                 Payment_Status=Paid; no amount is available.
+ORD-1030 Payment does not reconcile to order                               Paid 999.00 vs gross 45.00; difference 954.00.
+    ORD-1030 is the material financial inconsistency: 999.00 paid against a
+    recalculated order gross of 45.00 (difference 954.00). It was preserved and
+    flagged, not silently corrected; it still blocks certified payment totals.
+
+2.13 Duplicate or incorrectly consolidated payments .. PASS
+    Raw payments were de-duplicated on order/date/amount/method/status before
+    aggregation. PAY035 (duplicate of PAY001 on ORD-1001) was removed.
+    ORD-1005 has two genuine split payments (40.00 + 49.90) that were summed
+    to 89.90. Final Payment_Count and Payment_Amount match the de-duplicated
+    raw payments for every order. Count mismatches: 0; amount mismatches: 0.
+
+3. TASK 2 - FINANCIAL VALIDATION
+----------------------------------------------------------------------------------------
+Discount convention:
+    The column is named Discount_Percent and all values are 0.00. The values
+    are therefore treated as percentage points on a 0-100 scale. At zero, the
+    percentage and decimal conventions produce the same result, so no ambiguity
+    affects the current totals. The formula used for validation is:
+        Net = Gross x (1 - Discount_Percent / 100)
+    If non-zero discounts are added later, the 0-100 convention must be kept
+    and the Power BI measure must divide by 100.
+
+Independent recalculation:
+    Gross: Quantity x Unit_Price_TND, all 32 rows.
+      Rows above tolerance : 0
+      File total           : 4,105.60 TND
+      Recalculated total   : 4,105.60 TND
+
+    Net: Gross x (1 - Discount_Percent/100).
+      Rows above tolerance: 3 (all documented non-revenue rows)
+      Formula total, all rows          : 4,105.60 TND
+      Business-recognised total        : 3,498.60 TND
+      File Net_Sales_TND total         : 3,498.60 TND
+      Explained difference             : 607.00 TND
+
+    The difference is exactly the gross value of the Cancelled and Returned
+    orders (250.00 + 320.00 + 37.00 = 607.00 TND) that was deliberately
+    excluded from recognised revenue. No unexplained financial difference remains.
+
+Payment comparison (payments are not revenue):
+    Payment_Amount_TND total in final file : 4,401.10 TND
+    Of which status Paid                   : 4,114.10 TND
+    Of which status Refunded               : 287.00 TND
+    Payment_Amount_TND must not be summed as revenue. It contains refunded
+    amounts and the ORD-1030 overpayment, and it excludes the missing PAY020
+    amount plus the two orders with no payment. Filter Payment_Status = 'Paid'
+    for cash-collected analysis, and still exclude ORD-1030 until resolved.
+
+4. TASK 3 - BUSINESS VALIDATION
+----------------------------------------------------------------------------------------
+4.1 Each order has one customer ......................... PASS
+    Orders with more than one customer: 0. Customer_ID is a single value on
+    every row. (Three orders have unresolved customers; see 2.11.)
+
+4.2 Each order has one product .......................... FAIL
+    Orders with more than one product: 1.
+Order_ID Product_SKU                       Product_Name Quantity
+ORD-1001 P001 | P003 Wireless Mouse | Bluetooth Speaker        3
+    ORD-1001 legitimately contains P001 (Wireless Mouse) and P003 (Bluetooth
+    Speaker). It was aggregated to satisfy 'one row per order', so Product_SKU
+    and Product_Name hold concatenated values. This breaks the one-product-per-
+    order rule and is unsafe for product-level slicers: Power BI would treat
+    'P001 | P003' as a single pseudo-product.
+
+4.3 Each order has one store ............................ PASS
+    Orders with more than one store: 0.
+
+4.4 Each Order_ID appears only once ..................... PASS
+    Duplicate Order_ID values: 0.
+
+4.5 Payment records correctly associated with orders .... PASS (association) / FAIL (completeness)
+    Every payment that is present on a valid order is linked by Order_ID and
+    its de-duplicated aggregate matches the final Payment_Count and
+    Payment_Amount. However, two orders have no payment record (ORD-1007,
+    ORD-1017) and one payment amount is missing (ORD-1021). Payment reporting
+    is therefore not complete enough to certify.
+
+4.6 Cancelled orders excluded from revenue .............. PASS
+    ORD-1003 and ORD-1017 have Net_Sales_TND = 0 and Revenue_Eligible = No.
+    Returned ORD-1011 is also zero because its payment is Refunded (documented
+    stricter rule). Gross is retained only for audit.
+
+5. INVALID / REJECTED RECORDS
+----------------------------------------------------------------------------------------
+Records in output/rejected_records.csv: 5.
+They are documented, not silently lost:
+        source_file record_type record_id                                      rejection_reason
+   01_sales_raw.csv sales_order  ORD-1023            Invalid or missing order date '31/02/2026'
+   01_sales_raw.csv sales_order  ORD-1026                           Non-positive quantity (0.0)
+05_payments_raw.csv     payment    PAY022 Payment belongs to an order rejected from clean sales
+05_payments_raw.csv     payment    PAY025 Payment belongs to an order rejected from clean sales
+05_payments_raw.csv     payment    PAY034          Orphan payment: order ID has no sales record
+
+The final clean_sales.csv contains 0 invalid rows after these exclusions.
+Rejected orders: 2; excluded payment records: 3.
+
+6. UNMATCHED RELATIONSHIP DETAIL
+----------------------------------------------------------------------------------------
+    ORD-1031: Customer_ID C999 has no customer master record -> Customer_Name,
+              Customer_City and Customer_Segment are null.
+    ORD-1032: Product_SKU P999 has no product master record -> Product_Name and
+              Product_Category are null.
+    ORD-1029: Store_Code ST99 has no store master record -> Store_Name and
+              Store_Region are null.
+    The revenue amounts for these orders are retained. The keys remain in the
+    file so the records can be repaired once master data is available.
+
+7. PAYMENT ISSUE DETAIL
+----------------------------------------------------------------------------------------
+    ORD-1001: PAY001 retained, PAY035 duplicate removed; amount 210.00 = gross.
+    ORD-1005: two payments summed (40.00 + 49.90 = 89.90) = gross; correct.
+    ORD-1030: payment 999.00 vs gross 45.00; unexplained 954.00 overpayment.
+    ORD-1021: payment record exists but amount is missing; left null.
+    ORD-1007: no payment record; order is Pending.
+    ORD-1017: no payment record; order is Cancelled and Net is zero.
+    ORD-1003/ORD-1011: refunded amounts (250.00 and 37.00) remain in
+    Payment_Amount_TND but Net is zero. Filter out Refunded status for cash KPIs.
+    Excluded from the final file: PAY022 (250.00, order rejected),
+    PAY025 (0.00 Pending, order rejected) and PAY034 (75.00, orphan ORD-9999).
+
+8. CROSS-FILE / AUDIT CONSISTENCY
+----------------------------------------------------------------------------------------
+    - data_quality_report.txt documents the raw profiling and the cleaning
+      decisions, including the ambiguous dates and the payment discrepancy.
+    - cleaning_summary.txt totals agree with this independent recalculation:
+      Gross 4,105.60; Net 3,498.60.
+    - cleaning_log.csv contains 4 duplicate-removal decisions, 2 rejected
+      orders, 3 excluded payment records, 3 unmatched-relationship flags and
+      the financial-correction entries used by the final file.
+    - rejected_records.csv preserves the original values for every excluded
+      order/payment. No original source CSV was modified.
+
+9. REQUIRED CORRECTIONS AND RECOMMENDATIONS
+----------------------------------------------------------------------------------------
+1. Fix the product grain (critical). Create a line-level Power BI fact table
+   (one row per order line, with an Order_Line_ID) and keep an order header
+   table for order-level measures. Alternatively split ORD-1001, but that
+   would duplicate Order_ID and break the one-row-per-order rule. The current
+   order-level file can support order/revenue KPIs, not product-level slicing.
+2. Resolve C999, P999 and ST99 against the master data. If the master data
+   cannot be found, create explicit 'Unknown' dimension members and map them;
+   do not leave null names in a certified dashboard.
+3. Investigate ORD-1030 at source: reconcile the 999.00 payment with the 45.00
+   order gross. Correct the source, not the clean file, and re-run validation.
+4. Obtain the missing PAY020 amount and confirm the payment status for
+   ORD-1007/ORD-1017. Do not treat a null amount as zero.
+5. Add Customer_Segment to the source or remove segment visuals from the
+   dashboard. All 32 values are currently null.
+6. Apply explicit data types in Power Query (Text, Date, Whole Number, Decimal).
+7. Revenue measures must use Net_Sales_TND and Revenue_Eligible = 'Yes'.
+   Never use Gross_Sales_TND as recognised revenue without excluding
+   Cancelled/Returned orders.
+8. Payment measures must filter Payment_Status = 'Paid', exclude Refunded
+   amounts, and exclude ORD-1030 until its discrepancy is resolved.
+
+10. FINAL VALIDATION STATUS
+========================================================================================
+STATUS: FAIL
+
+Reason 1 (critical): one-product-per-order rule is violated. ORD-1001 has
+  two distinct products in one row (P001 | P003), so product-level Power BI
+  analysis would be incorrect.
+Reason 2 (critical): referential integrity is incomplete. C999, P999 and ST99
+  have no master records, producing null customer/product/store attributes.
+Reason 3 (critical for payment reporting): payment reconciliation is not clean.
+  ORD-1030 has a 954.00 discrepancy, ORD-1021 has no payment amount, and two
+  orders have no payment record.
+
+What passes: no duplicate Order_IDs, no invalid dates in the final file, no
+negative/zero quantities or prices, discounts in range, gross arithmetic is
+correct for all rows, net revenue is correctly zero for cancelled/returned
+orders, one customer and one store per order, and payment aggregation/de-
+duplication is correct.
+
+The dataset is NOT certified ready for Power BI under the strict gate. It can
+be used for order/revenue totals only after accepting the documented warnings
+and ensuring the dashboard uses Net_Sales_TND/Revenue_Eligible, filters
+Payment_Status = 'Paid', and does not offer product-level or payment-level
+drill-down until the three critical issues above are corrected.
+========================================================================================

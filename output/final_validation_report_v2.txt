@@ -1,0 +1,296 @@
+========================================================================================
+FINAL VALIDATION REPORT V2
+========================================================================================
+Validation date   : 2026-11-02 14:45:30
+Validator         : Senior Data Engineer (independent re-check)
+Inputs            : original five CSV files (read-only)
+Deliverables      : output/clean_sales_lines.csv
+                    output/clean_sales.csv
+                    output/FactSales.csv, FactPayments.csv
+                    output/DimCustomer.csv, DimProduct.csv, DimStore.csv,
+                    DimDate.csv, DimOrder.csv
+========================================================================================
+
+0. EXECUTIVE SUMMARY
+----------------------------------------------------------------------------------------
+ACTUAL FILE DIMENSIONS
+  clean_sales.csv            32 rows x  25 columns
+  clean_sales_lines.csv      33 rows x  22 columns
+  FactSales.csv              33 rows x  14 columns
+  FactPayments.csv           31 rows x   9 columns
+  DimCustomer.csv            16 rows x   8 columns
+  DimProduct.csv             14 rows x   6 columns
+  DimStore.csv                7 rows x   5 columns
+  DimDate.csv                69 rows x  10 columns
+  DimOrder.csv               32 rows x   8 columns
+
+KEY COUNTS
+  Valid orders                              : 32
+  Valid order lines                         : 33
+  Orders with one line                      : 31
+  Orders with multiple lines                : 1
+  Payment records in FactPayments           : 31
+  Unknown dimension members                 : 3 (C999, P999, ST99)
+  Documented payment exceptions             : 4
+
+FINANCIAL TOTALS
+  Gross sales, line-level (TND)             : 4,105.60
+  Net sales, line-level (TND)               : 3,498.60
+  Gross sales, order-level (TND)            : 4,105.60
+  Net sales, order-level (TND)              : 3,498.60
+  Payment amount total (TND)                : 4,401.10
+  Of which Paid (TND)                       : 4,114.10
+  Of which Refunded (TND)                   : 287.00
+
+FINAL STATUS: PASS WITH DOCUMENTED EXCEPTIONS
+All structural, financial, grain and referential-integrity checks pass.
+The exceptions below are preserved business data-quality exceptions,
+not silent corrections. They must be resolved with the business before
+payment totals are certified.
+
+1. SCOPE AND METHOD
+----------------------------------------------------------------------------------------
+This validation is independent of clean_data.py. It re-reads the delivered
+CSV files, re-computes every line and order total, re-checks all keys and
+relationships, and compares the star-schema facts with the order/line files.
+
+2. TASK 1 - PRODUCT GRAIN
+----------------------------------------------------------------------------------------
+  clean_sales_lines.csv : 33 rows x 22 columns
+  clean_sales.csv       : 32 rows x 25 columns
+  Order_Line_ID         : 33 distinct / 33 rows / 0 duplicates
+  Line count per order  : 31 single-line orders, 1 multi-line order(s)
+
+  ORD-1001 source split:
+    ORD-1001-L01  P001  Wireless Mouse       qty= 2  price=45.00  gross=90.00
+    ORD-1001-L02  P003  Bluetooth Speaker    qty= 1  price=120.00  gross=120.00
+    Line sum=210.00; order-level ORD-1001 gross=210.00; expected=210.00.
+  RESULT: PASS - the order-level file still has one row per order, while
+  the new line-level file has one row per source product line.
+
+3. TASK 2 - UNMATCHED REFERENCES
+----------------------------------------------------------------------------------------
+  Investigation result (all original source files):
+    C999  source=customer in_sales=True  in_master=False unknown_member=True
+    P999  source=product  in_sales=True  in_master=False unknown_member=True
+    ST99  source=store    in_sales=True  in_master=False unknown_member=True
+
+  No correct master record was found for C999, P999 or ST99 in
+  02_customers_raw.csv, 03_products_raw.csv, 04_stores_raw.csv or any
+  payment row. No real name, city, category or region was inferred.
+
+  Action taken:
+    - Kept the original unresolved keys in the facts.
+    - Created explicit Unknown members in DimCustomer, DimProduct and DimStore.
+    - Set Is_Unknown=True on those members.
+    - Used clear labels such as 'Unknown Customer (C999)' and left
+      non-derivable details null (for example Segment and List_Price_TND).
+    - Retained UNMATCHED_CUSTOMER / UNMATCHED_PRODUCT / UNMATCHED_STORE flags
+      on the affected fact rows.
+  RESULT: PASS for referential integrity. The true identities remain an
+  open business-data issue, not a silent data change.
+
+4. TASK 3 - PAYMENT ISSUES
+----------------------------------------------------------------------------------------
+  FactPayments: 31 rows x 9 columns
+  Payment total=4,401.10; Paid=4,114.10; Refunded=287.00.
+  Missing payment amounts: PAY020
+
+  Preserved exceptions:
+    ORD-1030  payment=PAY029  amount=999.00   status=Paid
+      Issue : Paid 999.00 vs order gross 45.00; difference 954.00.
+      Action: Amount preserved exactly; row flagged PAYMENT_AMOUNT_MISMATCH.
+    ORD-1021  payment=PAY020  amount=null     status=Paid
+      Issue : Payment status Paid but source amount is missing.
+      Action: Left null; not converted to zero; flagged PAYMENT_AMOUNT_MISSING.
+    ORD-1007  payment=none    amount=null     status=No Payment
+      Issue : Order is Pending and has no payment record.
+      Action: No payment row created; order flagged NO_PAYMENT_RECORD.
+    ORD-1017  payment=none    amount=null     status=No Payment
+      Issue : Order is Cancelled and has no payment record.
+      Action: No payment row created; order flagged NO_PAYMENT_RECORD.
+    ORD-1003  payment=PAY003  amount=250.00   status=Refunded
+      Issue : Refunded amount still present in the payment source.
+      Action: Amount preserved; net revenue is zero; flagged REFUNDED_AMOUNT_RETAINED.
+    ORD-1011  payment=PAY011  amount=37.00    status=Refunded
+      Issue : Refunded amount still present in the payment source.
+      Action: Amount preserved; net revenue is zero; flagged REFUNDED_AMOUNT_RETAINED.
+
+  Payment reconciliation by order (non-reconciling orders only):
+    ORD-1007  payments=0  NO_PAYMENT_RECORD: gross=320.00; no payment row
+    ORD-1017  payments=0  NO_PAYMENT_RECORD: gross=320.00; no payment row
+    ORD-1021  payments=1  PAYMENT_AMOUNT_MISSING: gross=18.50; paid amount missing (not zero)
+    ORD-1030  payments=1  PAYMENT_AMOUNT_MISMATCH: gross=45.00; paid=999.00; difference=954.00
+
+  Duplicate/split payment handling: PAY035 (duplicate of PAY001) was
+  removed; ORD-1005 split payments PAY005=40.00 and PAY006=49.90 were
+  summed to 89.90. Rejected payments PAY022, PAY025 and PAY034 are absent
+  from FactPayments and remain in the audit outputs.
+  RESULT: PASS for preservation and traceability. Payment totals are not
+  certified until ORD-1030, ORD-1021, ORD-1007 and ORD-1017 are resolved.
+
+5. TASK 4 - CUSTOMER SEGMENT
+----------------------------------------------------------------------------------------
+  Customer_Segment null in clean_sales.csv      : 32
+  Customer_Segment null in clean_sales_lines.csv: 33
+  Segment null in DimCustomer.csv               : 16
+  The source has no reliable customer segment field. The column is kept
+  null; no segment was inferred from customer name, city or spend.
+  LIMITATION: segmentation, RFM by segment and segment-level dashboards
+  are not supported until a reliable segment source is provided.
+
+6. FINANCIAL VALIDATION
+----------------------------------------------------------------------------------------
+  Gross sales calculation:
+    Rows checked                    : 33
+    Arithmetic discrepancies        : 0
+    Line total (TND)                : 4,105.60
+    Order total (TND)               : 4,105.60
+
+  Net sales calculation:
+    Formula discrepancies           : 0
+    Discount range violations       : 0
+    Net total (TND)                 : 3,498.60
+    Non-revenue orders              : 3 (gross 607.00, net 0.00)
+    Cancelled/Returned gross        : 607.00
+    The difference between formula net and delivered net is exactly the
+    gross of Cancelled/Returned orders: 607.00 TND.
+
+  Discount note: the source has no discount field. Discount_Percent is
+  0.00 for every line; this is an absence of data, not an invented value.
+  RESULT: PASS - all delivered financial arithmetic reconciles.
+
+7. POWER BI STAR-SCHEMA VALIDATION
+----------------------------------------------------------------------------------------
+  Tables and grain:
+    FactSales       one row per order line
+    FactPayments    one row per matched payment record
+    DimCustomer     one row per customer key (including Unknown)
+    DimProduct      one row per product key (including Unknown)
+    DimStore        one row per store key (including Unknown)
+    DimDate         one row per calendar date
+    DimOrder        one row per order (bridge for the two facts)
+
+  Primary-key checks:
+    [PASS] clean_sales_lines.Order_Line_ID: 33 rows, 0 duplicate keys, 0 null keys.
+    [PASS] clean_sales.Order_ID: 32 rows, 0 duplicate keys, 0 null keys.
+    [PASS] FactSales.Order_Line_ID: 33 rows, 0 duplicate keys, 0 null keys.
+    [PASS] FactPayments.Payment_ID: 31 rows, 0 duplicate keys, 0 null keys.
+    [PASS] DimCustomer.CustomerKey: 16 rows, 0 duplicate keys, 0 null keys.
+    [PASS] DimProduct.ProductKey: 14 rows, 0 duplicate keys, 0 null keys.
+    [PASS] DimStore.StoreKey: 7 rows, 0 duplicate keys, 0 null keys.
+    [PASS] DimDate.DateKey: 69 rows, 0 duplicate keys, 0 null keys.
+    [PASS] DimOrder.Order_ID: 32 rows, 0 duplicate keys, 0 null keys.
+
+  Foreign-key orphan counts:
+    [PASS] FactSales.CustomerKey -> DimCustomer: 0
+    [PASS] FactSales.ProductKey -> DimProduct: 0
+    [PASS] FactSales.StoreKey -> DimStore: 0
+    [PASS] FactSales.DateKey -> DimDate: 0
+    [PASS] FactSales.Order_ID -> DimOrder: 0
+    [PASS] FactPayments.Order_ID -> DimOrder: 0
+    [PASS] FactPayments.CustomerKey -> DimCustomer: 0
+    [PASS] FactPayments.StoreKey -> DimStore: 0
+    [PASS] FactPayments.DateKey -> DimDate: 0
+
+  DimDate coverage: fact range 20260103..20260312; DimDate contains 69 continuous days.
+  FactSales rows=33; clean_sales_lines rows=33; gross=4,105.60; net=3,498.60.
+  FactPayments rows=31; unique Payment_ID=31.
+  RESULT: PASS - the star schema is structurally sound. Unknown members
+  allow every fact row to resolve to a dimension row.
+
+8. POWER BI PREPARATION AND RELATIONSHIPS
+----------------------------------------------------------------------------------------
+  Recommended model:
+
+    DimCustomer[CustomerKey] 1 ---- * FactSales[CustomerKey]
+    DimProduct[ProductKey]   1 ---- * FactSales[ProductKey]
+    DimStore[StoreKey]       1 ---- * FactSales[StoreKey]
+    DimDate[DateKey]         1 ---- * FactSales[DateKey]
+    DimOrder[Order_ID]       1 ---- * FactSales[Order_ID]
+
+    DimCustomer[CustomerKey] 1 ---- * FactPayments[CustomerKey]
+    DimStore[StoreKey]       1 ---- * FactPayments[StoreKey]
+    DimDate[DateKey]         1 ---- * FactPayments[DateKey]
+    DimOrder[Order_ID]       1 ---- * FactPayments[Order_ID]
+
+  Relationship rules:
+    - Use single-direction filtering from dimensions to facts.
+    - Do not create a direct FactSales-FactPayments relationship:
+      FactSales has multiple rows per Order_ID, so that would create a
+      many-to-many relationship. Use DimOrder as the bridge.
+    - Hide all *Key columns from report view; keep them for relationships.
+    - Mark DimDate as the date table and sort Month_Name by Month.
+    - Set DateKey, Quantity, Payment_Count and Line_Count to Whole Number;
+      financial fields to Fixed Decimal Number (2 decimals); dates to Date.
+
+  Suggested base measures:
+    Gross Sales   = SUM ( FactSales[Gross_Sales_TND] )
+    Net Revenue   = SUM ( FactSales[Net_Sales_TND] )
+    Order Count   = DISTINCTCOUNT ( FactSales[Order_ID] )
+    Units Sold    = SUM ( FactSales[Quantity] )
+    AOV           = DIVIDE ( [Net Revenue], [Order Count] )
+    Cash Collected= CALCULATE ( SUM ( FactPayments[Payment_Amount_TND] ),
+                    FactPayments[Payment_Status] = "Paid" )
+    Do not use SUM(FactPayments[Payment_Amount_TND]) as revenue: it
+    contains refunds and the unresolved ORD-1030 payment.
+
+  Unknown-member handling:
+    - Keep Is_Unknown = TRUE rows in the dimensions so totals remain complete.
+    - Add a report filter or visual cue for Is_Unknown = TRUE; do not
+      present the Unknown labels as real customer/product/store names.
+
+9. READINESS ASSESSMENT
+----------------------------------------------------------------------------------------
+  READY FOR POWER BI:
+    - Order-level and line-level sales reporting, product/customer/store
+      slicing, date trending and revenue KPIs using Net_Sales_TND.
+    - Gross-vs-net analysis, cancelled/returned audit views, order counts,
+      units sold and average order value.
+    - Payment analysis after filtering Payment_Status and excluding the
+      unresolved ORD-1030 exception.
+
+  NOT YET CERTIFIED / REMAINS UNRESOLVED:
+    - ORD-1030: 999.00 paid against 45.00 gross (954.00 difference).
+    - ORD-1021: Paid status with a missing amount (left null).
+    - ORD-1007 (Pending) and ORD-1017 (Cancelled): no payment record.
+    - C999, P999 and ST99 true identities are unknown. Explicit Unknown
+      members are used; no real master data was invented.
+    - Customer segment is unavailable; no segmentation or segment-level
+      analysis is possible until a reliable source is supplied.
+    - No discount data exists in the source; Discount_Percent is 0.00.
+
+  Do not certify payment totals or customer-segment analysis until the
+  exceptions above are resolved by the business.
+
+10. CHECK RESULTS
+----------------------------------------------------------------------------------------
+  [PASS] One row per order line: 33 lines / 33 distinct Order_Line_ID; 0 duplicate line IDs.
+  [PASS] Order-level file remains one row per order: 32 rows / 32 distinct Order_ID; 0 duplicate order IDs.
+  [PASS] ORD-1001 split into its two source product lines: Lines=2, products=['P001', 'P003'], line gross=210.00, order gross=210.00.
+  [PASS] Line and order grains reconcile: Line gross/net=4105.60/3498.60; order gross/net=4105.60/3498.60.
+  [PASS] Unresolved references handled by explicit Unknown members: Unknown members created for C999/P999/ST99; 3 fact lines retain an UNMATCHED_* flag.
+  [PASS] Payment records preserved and not altered: 31 payment rows; 0 duplicate Payment_ID; PAY020 amount null=True; PAY029 amount=999.00.
+  [PASS] Payment exceptions are documented: ORD-1007/ORD-1017 no payment=True; rejected payments absent=True; ORD-1030 difference=954.00.
+  [PASS] Refunded amounts retained and flagged: PAY003=250.00 and PAY011=37.00 remain in FactPayments with Payment_Flag=REFUNDED_AMOUNT_RETAINED.
+  [PASS] Customer Segment remains null and documented: Nulls: orders=32/32, lines=33/33, customers=16/16.
+  [PASS] Gross = Quantity x Unit Price on every line: 0 line-level arithmetic discrepancies.
+  [PASS] Net = Gross x (1 - Discount), zero for non-revenue lines: 0 net-formula discrepancies; 3 non-revenue orders excluded from net.
+  [PASS] Order totals equal line totals: 0 order/line total differences.
+  [PASS] Discount values within 0-100: 0 values outside the valid range; all delivered values are 0.00.
+  [PASS] Unique key: clean_sales_lines.Order_Line_ID: 33 rows, 0 duplicate keys, 0 null keys.
+  [PASS] Unique key: clean_sales.Order_ID: 32 rows, 0 duplicate keys, 0 null keys.
+  [PASS] Unique key: FactSales.Order_Line_ID: 33 rows, 0 duplicate keys, 0 null keys.
+  [PASS] Unique key: FactPayments.Payment_ID: 31 rows, 0 duplicate keys, 0 null keys.
+  [PASS] Unique key: DimCustomer.CustomerKey: 16 rows, 0 duplicate keys, 0 null keys.
+  [PASS] Unique key: DimProduct.ProductKey: 14 rows, 0 duplicate keys, 0 null keys.
+  [PASS] Unique key: DimStore.StoreKey: 7 rows, 0 duplicate keys, 0 null keys.
+  [PASS] Unique key: DimDate.DateKey: 69 rows, 0 duplicate keys, 0 null keys.
+  [PASS] Unique key: DimOrder.Order_ID: 32 rows, 0 duplicate keys, 0 null keys.
+  [PASS] Star-schema foreign keys resolve: FactSales.CustomerKey -> DimCustomer=0; FactSales.ProductKey -> DimProduct=0; FactSales.StoreKey -> DimStore=0; FactSales.DateKey -> DimDate=0; FactSales.Order_ID -> DimOrder=0; FactPayments.Order_ID -> DimOrder=0; FactPayments.CustomerKey -> DimCustomer=0; FactPayments.StoreKey -> DimStore=0; FactPayments.DateKey -> DimDate=0
+  [PASS] DimDate covers every fact date: Fact date range=20260103..20260312; DimDate rows=69.
+  [PASS] FactSales grain matches clean_sales_lines: FactSales=33 rows; lines=33; gross=4105.60; net=3498.60.
+  [PASS] FactPayments grain matches the matched payment records: 31 payment rows; 0 duplicate IDs; total=4401.10.
+
+FINAL STATUS: PASS WITH DOCUMENTED EXCEPTIONS
+========================================================================================

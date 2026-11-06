@@ -1,0 +1,90 @@
+table DimDate
+	lineageTag: c496c056-d455-585f-891c-6983b323b3db
+	dataCategory: Time
+
+	column 'DateKey'
+		dataType: int64
+		isHidden
+		lineageTag: 38366601-a3f9-533c-889f-52d292b99fb9
+		summarizeBy: none
+		sourceColumn: DateKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date'
+		dataType: dateTime
+		isKey
+		lineageTag: 22e44685-baa2-5920-956f-14ae90b50ee0
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: Date
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year'
+		dataType: int64
+		lineageTag: f682903c-1c6c-5257-bd22-8827a584b91c
+		summarizeBy: none
+		sourceColumn: Year
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter'
+		dataType: int64
+		lineageTag: 215c0f67-461e-56a9-b97c-72770aa4ea3c
+		summarizeBy: none
+		sourceColumn: Quarter
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month'
+		dataType: int64
+		isHidden
+		lineageTag: 323a5d84-701f-5bd9-a167-4c5cf8127ff3
+		summarizeBy: none
+		sourceColumn: Month
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month_Name'
+		dataType: string
+		lineageTag: 8ab01b62-5a10-5c4b-a78b-cd35f34a0b2d
+		summarizeBy: none
+		sortByColumn: Month
+		sourceColumn: Month_Name
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day'
+		dataType: int64
+		lineageTag: a24512ba-c2b6-59db-95d6-486b3ce8fdee
+		summarizeBy: none
+		sourceColumn: Day
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day_Name'
+		dataType: string
+		lineageTag: 10a27b57-156d-5946-a2a3-2fc6fd3c5790
+		summarizeBy: none
+		sortByColumn: Weekday_Number
+		sourceColumn: Day_Name
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekday_Number'
+		dataType: int64
+		lineageTag: e35ab216-1d85-573e-ad40-96ffea508219
+		summarizeBy: none
+		sourceColumn: Weekday_Number
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is_Weekend'
+		dataType: boolean
+		lineageTag: 843a89dc-5589-5e57-8611-0fd7107a2769
+		summarizeBy: none
+		sourceColumn: Is_Weekend
+		annotation SummarizationSetBy = Automatic
+
+	partition DimDate = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\DimDate.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"DateKey", Int64.Type}, {"Date", type date}, {"Year", Int64.Type}, {"Quarter", Int64.Type}, {"Month", Int64.Type}, {"Month_Name", type text}, {"Day", Int64.Type}, {"Day_Name", type text}, {"Weekday_Number", Int64.Type}, {"Is_Weekend", type logical}}, "en-US"),
+				    Blanks = Table.ReplaceValue(Typed, "", null, Replacer.ReplaceValue, Table.ColumnsOfType(Typed, {type text, type nullable text}))
+				in
+				    Blanks

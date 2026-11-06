@@ -1,0 +1,17 @@
+﻿customer_id,customer_name,email,city,signup_date
+C001,Amira Ben Salah,amira.bensalah@email.tn,Sousse,2025-03-12
+C002,Youssef Trabelsi,y.trabelsi@email.tn,Tunis,2025-04-20
+C003,Meriem Gharbi,meriem.g@email.tn,Monastir,2025-05-01
+C004,Karim Mansour,karim.m@email.tn,Sfax,2025-06-15
+C005,Salma Jaziri,salma.j@email.tn,Sousse,2025-07-09
+C006,Nour Ben Amor,nour.ba@email.tn,Tunis,2025-08-22
+C007,Fares Khelifi,fares.k@email.tn,Nabeul,2025-09-10
+C008,Ines Mabrouk,ines.m@email.tn,Sfax,2025-10-05
+C009,Omar Saidi,omar.s@email.tn,Sousse,2025-11-18
+C010,Rania Chaabane,rania.c@email.tn,Tunis,2025-12-02
+C011,Hatem Bouazizi,,Monastir,2025-12-11
+C012,Lina Kammoun,lina.k@email.tn,Nabeul,2025-12-20
+C013,Duplicate Example,dup@email.tn,Tunis,2025-12-21
+C013,Duplicate Example,dup@email.tn,Tunis,2025-12-21
+C014,  Sami  Ben Ali  ,sami@email.tn, Sousse ,2025-12-22
+C015,Unknown City,unknown@email.tn,,2025-12-23

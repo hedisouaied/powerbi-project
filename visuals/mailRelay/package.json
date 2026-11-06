@@ -1,0 +1,13 @@
+{
+  "name": "mail-relay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local service that lets the Mauve Sales Page visual send its email report over SMTP.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "nodemailer": "10.2.1"
+  }
+}

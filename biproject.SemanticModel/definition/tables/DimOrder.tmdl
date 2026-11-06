@@ -1,0 +1,71 @@
+table DimOrder
+	lineageTag: 0fddef53-4b9d-5094-9766-11408994be4e
+
+	column 'Order_ID'
+		dataType: string
+		isKey
+		lineageTag: 67515d6e-46fb-5739-a0c2-c0a82c30f154
+		summarizeBy: none
+		sourceColumn: Order_ID
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order_Date'
+		dataType: dateTime
+		lineageTag: 62340419-b028-5ca4-84a5-4051cba2ffe1
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: Order_Date
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order_Status'
+		dataType: string
+		lineageTag: ea8dbaa5-3e0b-51f9-879f-32fb43d05e5b
+		summarizeBy: none
+		sourceColumn: Order_Status
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue_Eligible'
+		dataType: string
+		lineageTag: 07e86d34-eba5-56e1-ad7f-4df8b40b2e75
+		summarizeBy: none
+		sourceColumn: Revenue_Eligible
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment_Status'
+		dataType: string
+		lineageTag: 291078c4-b5a3-5ae6-a0bc-6fe531cd1b91
+		summarizeBy: none
+		sourceColumn: Payment_Status
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment_Count'
+		dataType: int64
+		lineageTag: 84f7de7a-83fa-51a9-b55c-2b3989a50202
+		summarizeBy: none
+		sourceColumn: Payment_Count
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data_Quality_Flag'
+		dataType: string
+		lineageTag: 9bce9756-bd45-5687-953b-9c831a4b5419
+		summarizeBy: none
+		sourceColumn: Data_Quality_Flag
+		annotation SummarizationSetBy = Automatic
+
+	column 'Line_Count'
+		dataType: int64
+		lineageTag: 01d48d51-015a-5928-ad9a-3a8916bc1dd3
+		summarizeBy: none
+		sourceColumn: Line_Count
+		annotation SummarizationSetBy = Automatic
+
+	partition DimOrder = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\DimOrder.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"Order_ID", type text}, {"Order_Date", type date}, {"Order_Status", type text}, {"Revenue_Eligible", type text}, {"Payment_Status", type text}, {"Payment_Count", Int64.Type}, {"Data_Quality_Flag", type text}, {"Line_Count", Int64.Type}}, "en-US"),
+				    Blanks = Table.ReplaceValue(Typed, "", null, Replacer.ReplaceValue, Table.ColumnsOfType(Typed, {type text, type nullable text}))
+				in
+				    Blanks

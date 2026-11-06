@@ -1,0 +1,80 @@
+table FactPayments
+	lineageTag: c201ddcc-8ba0-5c98-8978-0eb612976478
+
+	column 'Payment_ID'
+		dataType: string
+		lineageTag: c2e71a87-f7ce-5731-847e-7754d3fe09f9
+		summarizeBy: none
+		sourceColumn: Payment_ID
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order_ID'
+		dataType: string
+		lineageTag: 398aeb9d-49ec-5ef4-8588-43a7e123ecf9
+		summarizeBy: none
+		sourceColumn: Order_ID
+		annotation SummarizationSetBy = Automatic
+
+	column 'DateKey'
+		dataType: int64
+		isHidden
+		lineageTag: 9e7a03d6-06c0-5bfa-95c6-473029d895d3
+		summarizeBy: none
+		sourceColumn: DateKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'CustomerKey'
+		dataType: string
+		isHidden
+		lineageTag: 2049b375-fe1e-5c14-944b-d1796ffe5f71
+		summarizeBy: none
+		sourceColumn: CustomerKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'StoreKey'
+		dataType: string
+		isHidden
+		lineageTag: 6b0eff66-69ad-5b2b-bc08-3954c157b33e
+		summarizeBy: none
+		sourceColumn: StoreKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment_Amount_TND'
+		dataType: double
+		lineageTag: 287f314f-2deb-5a0c-988d-f2ed294ef9f7
+		formatString: #,0.00
+		summarizeBy: sum
+		sourceColumn: Payment_Amount_TND
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment_Method'
+		dataType: string
+		lineageTag: d50d14b3-913b-5462-a8c8-ee87ee778cad
+		summarizeBy: none
+		sourceColumn: Payment_Method
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment_Status'
+		dataType: string
+		lineageTag: 95ed859c-2fe5-5ddb-9cb8-a7bf2d69916b
+		summarizeBy: none
+		sourceColumn: Payment_Status
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment_Flag'
+		dataType: string
+		lineageTag: b759b032-6048-516d-a6c5-53d145a3cb21
+		summarizeBy: none
+		sourceColumn: Payment_Flag
+		annotation SummarizationSetBy = Automatic
+
+	partition FactPayments = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\FactPayments.csv"), [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"Payment_ID", type text}, {"Order_ID", type text}, {"DateKey", Int64.Type}, {"CustomerKey", type text}, {"StoreKey", type text}, {"Payment_Amount_TND", type number}, {"Payment_Method", type text}, {"Payment_Status", type text}, {"Payment_Flag", type text}}, "en-US"),
+				    Blanks = Table.ReplaceValue(Typed, "", null, Replacer.ReplaceValue, Table.ColumnsOfType(Typed, {type text, type nullable text}))
+				in
+				    Blanks

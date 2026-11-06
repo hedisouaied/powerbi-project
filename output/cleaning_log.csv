@@ -1,0 +1,52 @@
+stage,source_file,record_id,field,original_value,cleaned_value,action,reason
+customers,02_customers_raw.csv,C013,ALL,"{""customer_id"": ""C013"", ""customer_name"": ""Duplicate Example"", ""email"": ""dup@email.tn"", ""city"": ""Tunis"", ""signup_date"": ""2025-12-21""}",,remove_exact_duplicate,Exact duplicate customer row; first occurrence retained.
+customers,02_customers_raw.csv,C011,email,,,keep_missing,Email missing in source; left null (not invented).
+customers,02_customers_raw.csv,C014,customer_name,  Sami  Ben Ali  ,Sami Ben Ali,normalise_text,Trimmed/collapsed whitespace and title-cased name.
+customers,02_customers_raw.csv,C014,city, Sousse ,Sousse,normalise_text,Trimmed/collapsed whitespace and title-cased city.
+customers,02_customers_raw.csv,C015,city,,,keep_missing,City missing in source; left null (not invented).
+products,03_products_raw.csv,P002,category, electronics ,Electronics,canonicalise,Mapped category to canonical spelling.
+products,03_products_raw.csv,P002,product_status,active,Active,canonicalise,Mapped status to canonical spelling.
+products,03_products_raw.csv,P003,category,ELECTRONICS,Electronics,canonicalise,Mapped category to canonical spelling.
+products,03_products_raw.csv,P006,category,Home and Living,Home & Living,canonicalise,Mapped category to canonical spelling.
+products,03_products_raw.csv,P009,category,accessories ,Accessories,canonicalise,Mapped category to canonical spelling.
+products,03_products_raw.csv,P013,list_price_tnd,,,keep_missing,List price missing in source; left null (not invented).
+stores,04_stores_raw.csv,ST04,store_id,st04,ST04,standardise_key,Trimmed and uppercased store code.
+stores,04_stores_raw.csv,ST04,store_id,st04,,remove_duplicate_key,Store 'st04' duplicates ST04 after case standardisation; first row retained.
+payments,05_payments_raw.csv,PAY008,payment_method,Mobile wallet,Mobile Wallet,canonicalise,Mapped payment method.
+payments,05_payments_raw.csv,PAY010,payment_status,paid ,Paid,canonicalise,Mapped payment status.
+payments,05_payments_raw.csv,PAY012,payment_method,Mobile wallet,Mobile Wallet,canonicalise,Mapped payment method.
+payments,05_payments_raw.csv,PAY014,payment_amount_tnd,"105,00",105.0,normalise_number,Parsed amount; comma treated as decimal separator.
+payments,05_payments_raw.csv,PAY020,payment_amount_tnd,,,keep_missing,Payment amount missing in source; left null (not invented).
+payments,05_payments_raw.csv,PAY035,ALL,"{""order_id"": ""ORD-1001"", ""payment_date"": ""2026-01-03 00:00:00"", ""payment_amount_tnd"": 210.0, ""payment_method"": ""Card"", ""payment_status"": ""Paid""}",,remove_duplicate_business_payment,Same order/date/amount/method/status as an earlier payment; duplicate record removed.
+sales,01_sales_raw.csv,ORD-1001,ALL,"{""order_id"": ""ORD-1001"", ""order_date"": ""2026-01-03"", ""customer_id"": ""C001"", ""product_id"": ""P001"", ""store_id"": ""ST01"", ""quantity"": ""2"", ""unit_price_tnd"": ""45.00"", ""line_total_tnd"": ""90.00"", ""order_status"": ""Completed""}",,remove_exact_duplicate,Exact duplicate sales line; first occurrence retained.
+sales,01_sales_raw.csv,ORD-1005,customer_id, C005 ,C005,standardise_key,Trimmed/collapsed whitespace and uppercased key.
+sales,01_sales_raw.csv,ORD-1008,product_id,P009 ,P009,standardise_key,Trimmed/collapsed whitespace and uppercased key.
+sales,01_sales_raw.csv,ORD-1028,store_id, st04 ,ST04,standardise_key,Trimmed/collapsed whitespace and uppercased key.
+sales,01_sales_raw.csv,ORD-1002,order_status,completed ,Completed,canonicalise,Mapped order status to canonical spelling.
+sales,01_sales_raw.csv,ORD-1003,order_status,CANCELLED,Cancelled,canonicalise,Mapped order status to canonical spelling.
+sales,01_sales_raw.csv,ORD-1012,order_status, completed ,Completed,canonicalise,Mapped order status to canonical spelling.
+sales,01_sales_raw.csv,ORD-1002,order_date,04/01/2026,2026-01-04,normalise_date,ambiguous date '04/01/2026' resolved with payment reference 2026-01-04 -> 2026-01-04
+sales,01_sales_raw.csv,ORD-1005,order_date,2026/01/08,2026-01-08,normalise_date,Normalised to YYYY-MM-DD.
+sales,01_sales_raw.csv,ORD-1007,order_date,10-01-2026,2026-01-10,normalise_date,day-first hyphen date '10-01-2026' -> 2026-01-10
+sales,01_sales_raw.csv,ORD-1014,order_date,02/03/2026,2026-02-03,normalise_date,ambiguous date '02/03/2026' resolved with payment reference 2026-02-03 -> 2026-02-03
+sales,01_sales_raw.csv,ORD-1002,unit_price_tnd,"18,500",18.5,normalise_number,Parsed number; comma treated as decimal separator.
+sales,01_sales_raw.csv,ORD-1002,line_total_tnd,"55,500",55.5,normalise_number,Parsed number; comma treated as decimal separator.
+sales,01_sales_raw.csv,ORD-1020,unit_price_tnd,,45.0,derive_from_columns,Missing unit price derived from line_total / quantity (existing values only).
+sales,01_sales_raw.csv,ORD-1030,line_total_tnd,999.0,45.0,recalculate_financial,Stored line total disagrees with quantity x unit price; gross recalculated from the business formula.
+sales,01_sales_raw.csv,ORD-1023,ALL,,,reject_order,Invalid or missing order date '31/02/2026'
+sales,01_sales_raw.csv,ORD-1026,ALL,,,reject_order,Non-positive quantity (0.0)
+dimensions,01_sales_raw.csv,C999,customer_id,C999,C999,create_unknown_member,No reliable customer master record exists in any source file; explicit Unknown member created without inventing real details.
+dimensions,01_sales_raw.csv,P999,product_id,P999,P999,create_unknown_member,No reliable product master record exists in any source file; explicit Unknown member created without inventing real details.
+dimensions,01_sales_raw.csv,ST99,store_id,ST99,ST99,create_unknown_member,No reliable store master record exists in any source file; explicit Unknown member created without inventing real details.
+payments,05_payments_raw.csv,PAY022,order_id,ORD-1023,,reject_payment,Payment belongs to an order rejected from clean sales
+payments,05_payments_raw.csv,PAY025,order_id,ORD-1026,,reject_payment,Payment belongs to an order rejected from clean sales
+payments,05_payments_raw.csv,PAY034,order_id,ORD-9999,,reject_payment,Orphan payment: order ID has no sales record
+payments,05_payments_raw.csv,ORD-1005,payment_amount_tnd,,89.9,aggregate_multiple_payments,Summed 2 payments for the order; no single payment was arbitrarily selected.
+payments,05_payments_raw.csv,ORD-1021,payment_amount_tnd,,,keep_missing,At least one payment amount is missing; no total is invented.
+consolidation,01_sales_raw.csv,ORD-1001,ALL,2 sales lines,1 order row,aggregate_lines,Legitimate multi-line order aggregated to one row; product descriptions joined with ' | ' and unit price weighted by quantity.
+consolidation,01_sales_raw.csv,ORD-1003,net_sales_tnd,250.0,0.0,exclude_cancelled_revenue,Cancelled order excluded from recognised revenue (explicit rule); gross retained for audit.
+payments,05_payments_raw.csv,ORD-1007,payment_amount_tnd,,,keep_missing,No payment record for this order; payment fields left null.
+consolidation,01_sales_raw.csv,ORD-1011,net_sales_tnd,37.0,0.0,exclude_returned_revenue,Returned order excluded from recognised revenue because its payment is Refunded; gross retained for audit.
+consolidation,01_sales_raw.csv,ORD-1017,net_sales_tnd,320.0,0.0,exclude_cancelled_revenue,Cancelled order excluded from recognised revenue (explicit rule); gross retained for audit.
+payments,05_payments_raw.csv,ORD-1017,payment_amount_tnd,,,keep_missing,No payment record for this order; payment fields left null.
+payments,05_payments_raw.csv,ORD-1030,payment_amount_tnd,999.0,,flag_payment_discrepancy,Payment total differs from gross transaction value by 954.00; left unchanged and flagged.

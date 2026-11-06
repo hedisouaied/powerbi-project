@@ -1,0 +1,26 @@
+{
+    "visual": {
+        "name": "mauveReportPage",
+        "displayName": "Mauve Report Page",
+        "guid": "mauveReportPage54F8CE52AF994908A86522ADBF64F28C",
+        "visualClassName": "Visual",
+        "version": "1.0.0.3",
+        "description": "Product, order, price, trend and data quality report pages in the dark mauve design.",
+        "supportUrl": "https://learn.microsoft.com/power-bi/developer/visuals/",
+        "gitHubUrl": ""
+    },
+    "apiVersion": "5.11.1",
+    "author": {
+        "name": "hedi.souaeid",
+        "email": "rahmawjlassi@gmail.com"
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": null,
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": [],
+    "version": "1.0.0.3"
+}

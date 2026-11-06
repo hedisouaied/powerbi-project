@@ -1,0 +1,26 @@
+{
+    "visual": {
+        "name": "mauveSalesPage",
+        "displayName": "Mauve Sales Page",
+        "guid": "mauveSalesPage0BC9FF907287439685E99AB7EDABBCAC",
+        "visualClassName": "Visual",
+        "version": "1.0.0.8",
+        "description": "Complete Sales Overview page: KPIs, charts, product table and built-in filters.",
+        "supportUrl": "https://learn.microsoft.com/power-bi/developer/visuals/",
+        "gitHubUrl": ""
+    },
+    "apiVersion": "5.11.1",
+    "author": {
+        "name": "hedi.souaeid",
+        "email": "rahmawjlassi@gmail.com"
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": null,
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": [],
+    "version": "1.0.0.8"
+}

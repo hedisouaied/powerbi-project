@@ -1,0 +1,14 @@
+﻿product_id,product_name,category,list_price_tnd,product_status
+P001,Wireless Mouse,Electronics,45.00,Active
+P002,USB-C Cable, electronics ,18.50,active
+P003,Bluetooth Speaker,ELECTRONICS,120.00,Active
+P004,Office Chair,Furniture,250.00,Active
+P005,Desk Lamp,Home & Living,35.00,Active
+P006,Coffee Maker,Home and Living,89.90,Active
+P007,Notebook A5,Stationery,12.00,Active
+P008,Premium Backpack,Accessories,320.00,Active
+P009,Water Bottle,accessories ,27.50,Active
+P010,Smart Watch,Electronics,150.00,Discontinued
+P011,Office Desk,Furniture,450.00,Active
+P012,Pen Set,Stationery,8.50,Active
+P013,Mystery Product,Other,,Active

@@ -1,0 +1,139 @@
+/* Report pages; shares the variables and base classes of visual.less. */
+.sp-page {
+    overflow: hidden;
+}
+
+.rp-header {
+    height: 76px;
+}
+
+.rp-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+}
+
+.rp-subtitle {
+    font-size: 16px;
+    color: #8B93B8;
+}
+
+.rp-pill-warning {
+    border-color: rgba(244, 114, 182, 0.55);
+    background: rgba(244, 114, 182, 0.10);
+    color: #FBCFE8;
+    box-shadow: 0 0 18px rgba(244, 114, 182, 0.2);
+}
+
+.rp-filters-one {
+    grid-template-columns: minmax(0, 720px) auto;
+    justify-content: space-between;
+}
+
+.sp-grow-1,
+.sp-grow-2,
+.sp-grow-3 {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.sp-grow-1 { flex: 1 1 0; }
+.sp-grow-2 { flex: 2 1 0; }
+.sp-grow-3 { flex: 3 1 0; }
+
+.sp-row-products { flex: none; height: 450px; }
+.sp-row-orders { flex: none; height: 490px; }
+.sp-row-price { flex: none; height: 490px; }
+.sp-row-daily { flex: none; height: 400px; }
+.sp-row-fill { flex: 1; }
+
+.rp-list-card {
+    flex: 0 0 1180px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sp-table-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.rp-kpi-long {
+    display: block;
+    font-size: 22px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sp-kpi-value-row {
+    min-width: 0;
+}
+
+.nx-kpi-text {
+    flex: 1;
+}
+
+.sp-kpi .nx-kpi-side.nx-kpi-side-small {
+    flex: none;
+    width: auto;
+}
+
+.rp-note { font-size: 14px; color: #8B93B8; white-space: nowrap; }
+.rp-strong { font-weight: 700; color: #EEF2FF; }
+
+.rp-no-click {
+    cursor: default;
+
+    &:hover {
+        background: none;
+    }
+}
+
+.rp-legend {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    flex: none;
+    margin-top: 2px;
+}
+
+.rp-key {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin-left: 10px;
+    box-sizing: border-box;
+}
+
+.rp-key-outline {
+    border: 1px solid rgba(148, 163, 255, 0.8);
+    background: rgba(148, 163, 255, 0.15);
+}
+
+.rp-key-fill {
+    background: #22D3EE;
+    box-shadow: 0 0 8px #22D3EE;
+}
+
+.rp-key-violet {
+    background: #A855F7;
+    box-shadow: 0 0 8px #A855F7;
+}
+
+.rp-table-total td {
+    position: sticky;
+    bottom: 0;
+    background: #131733;
+    border-top: 1px solid rgba(148, 163, 255, 0.28);
+    border-bottom: none;
+    font-weight: 700;
+    color: #EEF2FF;
+}
+
+.sp-table-scroll {
+    flex: 1;
+}

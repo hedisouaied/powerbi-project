@@ -1,0 +1,57 @@
+table DimProduct
+	lineageTag: 6029fae1-f077-5aed-82d8-bfb196bcaff8
+
+	column 'ProductKey'
+		dataType: string
+		isKey
+		lineageTag: c287368a-df62-5d0b-8104-3d22eda794c0
+		summarizeBy: none
+		sourceColumn: ProductKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product_Name'
+		dataType: string
+		lineageTag: 03989851-bd73-50fd-b93b-cf9f07b5af97
+		summarizeBy: none
+		sourceColumn: Product_Name
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category'
+		dataType: string
+		lineageTag: f346d2e4-1146-58ee-b080-17da9608f292
+		summarizeBy: none
+		sourceColumn: Category
+		annotation SummarizationSetBy = Automatic
+
+	column 'List_Price_TND'
+		dataType: double
+		lineageTag: 2ebab111-ca2a-5f7a-ae66-d79ef0280186
+		formatString: #,0.00
+		summarizeBy: none
+		sourceColumn: List_Price_TND
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product_Status'
+		dataType: string
+		lineageTag: 749f4da7-7ca4-567d-b57e-89e87de4a7ae
+		summarizeBy: none
+		sourceColumn: Product_Status
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is_Unknown'
+		dataType: boolean
+		lineageTag: 5a9e1296-c6b2-50bf-838d-c14c12231425
+		summarizeBy: none
+		sourceColumn: Is_Unknown
+		annotation SummarizationSetBy = Automatic
+
+	partition DimProduct = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\DimProduct.csv"), [Delimiter = ",", Columns = 6, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"ProductKey", type text}, {"Product_Name", type text}, {"Category", type text}, {"List_Price_TND", type number}, {"Product_Status", type text}, {"Is_Unknown", type logical}}, "en-US"),
+				    Blanks = Table.ReplaceValue(Typed, "", null, Replacer.ReplaceValue, Table.ColumnsOfType(Typed, {type text, type nullable text}))
+				in
+				    Blanks

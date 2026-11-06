@@ -1,0 +1,15 @@
+ProductKey,Product_Name,Category,List_Price_TND,Product_Status,Is_Unknown
+P001,Wireless Mouse,Electronics,45.00,Active,False
+P002,USB-C Cable,Electronics,18.50,Active,False
+P003,Bluetooth Speaker,Electronics,120.00,Active,False
+P004,Office Chair,Furniture,250.00,Active,False
+P005,Desk Lamp,Home & Living,35.00,Active,False
+P006,Coffee Maker,Home & Living,89.90,Active,False
+P007,Notebook A5,Stationery,12.00,Active,False
+P008,Premium Backpack,Accessories,320.00,Active,False
+P009,Water Bottle,Accessories,27.50,Active,False
+P010,Smart Watch,Electronics,150.00,Discontinued,False
+P011,Office Desk,Furniture,450.00,Active,False
+P012,Pen Set,Stationery,8.50,Active,False
+P013,Mystery Product,Other,,Active,False
+P999,Unknown Product (P999),Unknown,,Unknown,True

@@ -1,0 +1,8 @@
+StoreKey,Store_Name,City,Region,Is_Unknown
+ST01,Sousse Centre,Sousse,Sahel,False
+ST02,Tunis Lac,Tunis,Grand Tunis,False
+ST03,Sfax Medina,Sfax,South,False
+ST04,Nabeul Centre,Nabeul,Cap Bon,False
+ST05,Monastir Mall,Monastir,Sahel,False
+ST06,Bizerte Centre,Bizerte,North,False
+ST99,Unknown Store (ST99),Unknown,Unknown,True

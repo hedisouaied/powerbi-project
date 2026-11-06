@@ -1,0 +1,17 @@
+{
+		"version": "1.0.0.1",
+		"author": {"name":"hedi.souaeid","email":"rahmawjlassi@gmail.com"},
+		"resources": [
+			{
+				"resourceId": "rId0",
+				"sourceType": 5,
+				"file": "resources/mauveReportPage54F8CE52AF994908A86522ADBF64F28C.pbiviz.json"
+			}
+		],
+		"visual": {"name":"mauveReportPage","displayName":"Mauve Report Page","guid":"mauveReportPage54F8CE52AF994908A86522ADBF64F28C","visualClassName":"Visual","version":"1.0.0.1","description":"Product, order, price, trend and data quality report pages in the dark mauve design.","supportUrl":"https://learn.microsoft.com/power-bi/developer/visuals/","gitHubUrl":""},
+		"metadata": {
+			"pbivizjson": {
+				"resourceId": "rId0"
+			}
+		}
+	}

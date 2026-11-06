@@ -1,0 +1,68 @@
+{
+    "dataRoles": [
+        { "displayName": "Date", "name": "date", "kind": "Grouping" },
+        { "displayName": "Order ID", "name": "order", "kind": "Grouping" },
+        { "displayName": "Order line ID", "name": "line", "kind": "Grouping" },
+        { "displayName": "Product", "name": "product", "kind": "Grouping" },
+        { "displayName": "Product is unknown", "name": "productUnknown", "kind": "Grouping" },
+        { "displayName": "Category", "name": "category", "kind": "Grouping" },
+        { "displayName": "List price", "name": "listPrice", "kind": "Grouping" },
+        { "displayName": "Order status", "name": "status", "kind": "Grouping" },
+        { "displayName": "Quantity", "name": "quantity", "kind": "Grouping" },
+        { "displayName": "Discount percent", "name": "discount", "kind": "Grouping" },
+        { "displayName": "Gross sales", "name": "gross", "kind": "Grouping" },
+        { "displayName": "Net sales", "name": "net", "kind": "Grouping" },
+        { "displayName": "Flagged lines", "name": "flaggedLines", "kind": "Measure" },
+        { "displayName": "Order lines", "name": "orderLines", "kind": "Measure" },
+        { "displayName": "Unknown member lines", "name": "unknownLines", "kind": "Measure" },
+        { "displayName": "Missing payment amounts", "name": "missingPayments", "kind": "Measure" },
+        { "displayName": "Orders without payment", "name": "noPaymentOrders", "kind": "Measure" },
+        { "displayName": "Payment exceptions", "name": "paymentExceptions", "kind": "Measure" },
+        { "displayName": "Segment coverage", "name": "segmentCoverage", "kind": "Measure" },
+        { "displayName": "Customers missing a segment", "name": "missingSegments", "kind": "Measure" }
+    ],
+    "objects": {
+        "page": {
+            "properties": {
+                "kind": { "type": { "text": true } }
+            }
+        },
+        "state": {
+            "properties": {
+                "filters": { "type": { "text": true } }
+            }
+        }
+    },
+    "dataViewMappings": [
+        {
+            "table": {
+                "rows": {
+                    "select": [
+                        { "for": { "in": "date" } },
+                        { "for": { "in": "order" } },
+                        { "for": { "in": "line" } },
+                        { "for": { "in": "product" } },
+                        { "for": { "in": "productUnknown" } },
+                        { "for": { "in": "category" } },
+                        { "for": { "in": "listPrice" } },
+                        { "for": { "in": "status" } },
+                        { "for": { "in": "quantity" } },
+                        { "for": { "in": "discount" } },
+                        { "for": { "in": "gross" } },
+                        { "for": { "in": "net" } },
+                        { "for": { "in": "flaggedLines" } },
+                        { "for": { "in": "orderLines" } },
+                        { "for": { "in": "unknownLines" } },
+                        { "for": { "in": "missingPayments" } },
+                        { "for": { "in": "noPaymentOrders" } },
+                        { "for": { "in": "paymentExceptions" } },
+                        { "for": { "in": "segmentCoverage" } },
+                        { "for": { "in": "missingSegments" } }
+                    ],
+                    "dataReductionAlgorithm": { "top": { "count": 30000 } }
+                }
+            }
+        }
+    ],
+    "privileges": []
+}

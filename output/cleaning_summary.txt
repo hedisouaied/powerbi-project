@@ -1,0 +1,71 @@
+==============================================================================
+CLEANING SUMMARY
+==============================================================================
+
+ORIGINAL ROW COUNTS
+  sales      01_sales_raw.csv           36 rows
+  customers  02_customers_raw.csv       16 rows
+  products   03_products_raw.csv        13 rows
+  stores     04_stores_raw.csv           7 rows
+  payments   05_payments_raw.csv        35 rows
+
+RESULTS
+  Original distinct orders          : 34
+  Final valid orders                : 32
+  Duplicate records handled         : 4
+  Records rejected                  : 5
+    - rejected sales orders         : 2
+    - excluded payment records      : 3
+  Total gross sales (TND)           : 4,105.60
+  Total net sales / revenue (TND)   : 3,498.60
+  Cancelled orders                  : 2
+  Returned orders                   : 1
+  Pending orders                    : 1
+  Orders without a payment record   : 2
+
+UNMATCHED RELATIONSHIP COUNTS
+  unmatched_customer_orders         : 1
+  unmatched_product_orders          : 1
+  unmatched_store_orders            : 1
+  orders_without_payment            : 2
+  payment_discrepancies             : 1
+  orphan_payments                   : 1
+  payments_for_rejected_orders      : 2
+  Distinct unmatched records        : 4
+
+VALIDATION
+  [PASS] One row per order: 32 rows / 32 distinct Order_ID values.
+  [PASS] No duplicate Order_ID: 0 duplicate IDs.
+  [PASS] Gross = Quantity x Unit Price (tol 0.05 for weighted unit price): All gross values reconcile.
+  [PASS] Net = Gross x (1 - Discount), zero for non-revenue statuses: All net values reconcile.
+  [PASS] Critical fields present: Order_ID=0, Order_Date=0, Customer_ID=0, Product_SKU=0, Store_Code=0, Quantity=0, Unit_Price_TND=0, Gross_Sales_TND=0, Net_Sales_TND=0, Order_Status=0
+  [PASS] Unmatched relationships documented: {"unmatched_customer_orders": 1, "unmatched_product_orders": 1, "unmatched_store_orders": 1, "orders_without_payment": 2, "payment_discrepancies": 1}
+  [PASS] Original vs final record counts explained: Original distinct orders=34, final valid orders=32, rejected orders=2.
+
+OUTPUT FILES
+  output/clean_sales.csv          order-level dataset
+  output/clean_sales_lines.csv    line-level dataset
+  output/FactSales.csv            line-grain fact
+  output/FactPayments.csv         payment-grain fact
+  output/DimCustomer.csv          customer dimension
+  output/DimProduct.csv           product dimension
+  output/DimStore.csv             store dimension
+  output/DimDate.csv              calendar dimension
+  output/DimOrder.csv             order bridge dimension
+  output/data_quality_report.txt
+  output/cleaning_summary.txt
+  output/rejected_records.csv
+  output/cleaning_log.csv
+
+POWER BI NOTES
+  * FactSales is one row per order line; use Net_Sales_TND for revenue.
+  * clean_sales_lines.csv: 33 rows (one per order line).
+  * clean_sales.csv remains the one-row-per-order dataset.
+  * FactPayments is one row per payment; never sum it as revenue without
+    filtering Payment_Status and resolving the ORD-1030 exception.
+  * Use DimOrder to relate FactSales and FactPayments on Order_ID; do not
+    create a direct many-to-many relationship between the two facts.
+  * Customer_Segment is null because the source has no segment field.
+  * Unknown members C999, P999 and ST99 are explicit and flagged.
+  * Order_Date and Payment_Date are ISO text (YYYY-MM-DD) for Power BI.
+

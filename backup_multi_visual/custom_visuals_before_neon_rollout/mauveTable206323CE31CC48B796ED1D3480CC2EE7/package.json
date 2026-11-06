@@ -1,0 +1,17 @@
+{
+		"version": "1.0.0.5",
+		"author": {"name":"hedi.souaeid","email":"rahmawjlassi@gmail.com"},
+		"resources": [
+			{
+				"resourceId": "rId0",
+				"sourceType": 5,
+				"file": "resources/mauveTable206323CE31CC48B796ED1D3480CC2EE7.pbiviz.json"
+			}
+		],
+		"visual": {"name":"mauveTable","displayName":"Mauve Table","guid":"mauveTable206323CE31CC48B796ED1D3480CC2EE7","visualClassName":"Visual","version":"1.0.0.5","description":"Dark mauve table with per-column filters, search, sorting and row cross-filtering.","supportUrl":"https://learn.microsoft.com/power-bi/developer/visuals/","gitHubUrl":""},
+		"metadata": {
+			"pbivizjson": {
+				"resourceId": "rId0"
+			}
+		}
+	}

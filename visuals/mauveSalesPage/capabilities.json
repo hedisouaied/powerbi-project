@@ -1,0 +1,61 @@
+{
+    "dataRoles": [
+        { "displayName": "Date", "name": "date", "kind": "Grouping" },
+        { "displayName": "Order ID", "name": "order", "kind": "Grouping" },
+        { "displayName": "Order line ID", "name": "line", "kind": "Grouping" },
+        { "displayName": "Store", "name": "store", "kind": "Grouping" },
+        { "displayName": "Store is unknown", "name": "storeUnknown", "kind": "Grouping" },
+        { "displayName": "Product", "name": "product", "kind": "Grouping" },
+        { "displayName": "Category", "name": "category", "kind": "Grouping" },
+        { "displayName": "Order status", "name": "status", "kind": "Grouping" },
+        { "displayName": "Quantity", "name": "quantity", "kind": "Grouping" },
+        { "displayName": "Gross sales", "name": "gross", "kind": "Grouping" },
+        { "displayName": "Net sales", "name": "net", "kind": "Grouping" }
+    ],
+    "objects": {
+        "page": {
+            "properties": {
+                "eyebrow": { "type": { "text": true } },
+                "title": { "type": { "text": true } }
+            }
+        },
+        "state": {
+            "properties": {
+                "filters": { "type": { "text": true } }
+            }
+        }
+    },
+    "dataViewMappings": [
+        {
+            "conditions": [
+                {
+                    "date": { "max": 1 }, "order": { "max": 1 }, "line": { "max": 1 }, "store": { "max": 1 },
+                    "storeUnknown": { "max": 1 }, "product": { "max": 1 }, "category": { "max": 1 }, "status": { "max": 1 },
+                    "quantity": { "max": 1 }, "gross": { "max": 1 }, "net": { "max": 1 }
+                }
+            ],
+            "table": {
+                "rows": {
+                    "select": [
+                        { "for": { "in": "date" } },
+                        { "for": { "in": "order" } },
+                        { "for": { "in": "line" } },
+                        { "for": { "in": "store" } },
+                        { "for": { "in": "storeUnknown" } },
+                        { "for": { "in": "product" } },
+                        { "for": { "in": "category" } },
+                        { "for": { "in": "status" } },
+                        { "for": { "in": "quantity" } },
+                        { "for": { "in": "gross" } },
+                        { "for": { "in": "net" } }
+                    ],
+                    "dataReductionAlgorithm": { "top": { "count": 30000 } }
+                }
+            }
+        }
+    ],
+    "privileges": [
+        { "name": "ExportContent", "essential": false },
+        { "name": "WebAccess", "essential": false, "parameters": [ "http://127.0.0.1:8787" ] }
+    ]
+}

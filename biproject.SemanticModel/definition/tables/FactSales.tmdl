@@ -1,0 +1,1255 @@
+table FactSales
+	lineageTag: 557e5f1d-2feb-5159-be12-e7b628ac183c
+
+	measure 'Gross Sales' = SUM(FactSales[Gross_Sales_TND])
+		formatString: #,0.00
+		displayFolder: 01 Financial
+		lineageTag: 79e30705-5593-59da-b414-656816ae61df
+
+	measure 'Net Revenue' = SUM(FactSales[Net_Sales_TND])
+		formatString: #,0.00
+		displayFolder: 01 Financial
+		lineageTag: 09299b29-84b7-56fc-aa20-724533584c4c
+
+	measure 'Units Sold' = SUM(FactSales[Quantity])
+		formatString: #,0
+		displayFolder: 01 Financial
+		lineageTag: 53e027e8-ca58-576a-9225-5cf799ddca04
+
+	measure 'Order Count' = DISTINCTCOUNT(FactSales[Order_ID])
+		formatString: #,0
+		displayFolder: 01 Financial
+		lineageTag: c950bf7a-95a5-52b8-ba28-d6c4cc44500f
+
+	measure 'Line Count' = COUNTROWS(FactSales)
+		formatString: #,0
+		displayFolder: 01 Financial
+		lineageTag: b118faa6-eae5-52f1-a36c-c6b04abf61eb
+
+	measure 'AOV' = DIVIDE([Net Revenue], [Order Count])
+		formatString: #,0.00
+		displayFolder: 01 Financial
+		lineageTag: c97267f1-3994-51f5-aca9-03b30c7dd73f
+
+	measure 'Average Unit Price' = DIVIDE([Gross Sales], [Units Sold])
+		formatString: #,0.00
+		displayFolder: 02 Pricing
+		lineageTag: fafbda8b-e33b-5042-8540-3edf6fafcb2b
+
+	measure 'Average List Price' = AVERAGE(DimProduct[List_Price_TND])
+		formatString: #,0.00
+		displayFolder: 02 Pricing
+		lineageTag: e0b12dd9-bece-5327-b356-427d4f651a66
+
+	measure 'Discount %' = DIVIDE(SUMX(FactSales, FactSales[Gross_Sales_TND] * FactSales[Discount_Percent]), [Gross Sales])
+		formatString: 0.00"%"
+		displayFolder: 02 Pricing
+		lineageTag: a42f09f2-b36a-5279-bad9-4ec29cef8df0
+
+	measure 'Cancelled Gross' = CALCULATE([Gross Sales], FactSales[Order_Status] = "Cancelled")
+		formatString: #,0.00
+		displayFolder: 03 Status
+		lineageTag: 6240e7d6-c9ea-594e-a94a-ece4e1eca0c5
+
+	measure 'Returned Gross' = CALCULATE([Gross Sales], FactSales[Order_Status] = "Returned")
+		formatString: #,0.00
+		displayFolder: 03 Status
+		lineageTag: 1ad31550-c279-5e4f-a345-2a7ff85b5c62
+
+	measure 'Cash Collected' = CALCULATE(SUM(FactPayments[Payment_Amount_TND]), FactPayments[Payment_Status] = "Paid")
+		formatString: #,0.00
+		displayFolder: 04 Payments
+		lineageTag: a5a1d644-1125-50df-a1eb-ce52ac35d641
+
+	measure 'Refunded Amount' = CALCULATE(SUM(FactPayments[Payment_Amount_TND]), FactPayments[Payment_Status] = "Refunded")
+		formatString: #,0.00
+		displayFolder: 04 Payments
+		lineageTag: cbb865fc-b1ef-5184-ab3e-73b77069b0f2
+
+	measure 'Payment Amount Entered' = SUM(FactPayments[Payment_Amount_TND])
+		formatString: #,0.00
+		displayFolder: 04 Payments
+		lineageTag: 68b2a816-4476-58ab-8635-a176e560f09a
+
+	measure 'Payment Records' = COUNTROWS(FactPayments)
+		formatString: #,0
+		displayFolder: 04 Payments
+		lineageTag: 24019127-93fb-523c-ba5a-de1aef13a97a
+
+	measure 'Payment Variance' = [Payment Amount Entered] - [Gross Sales]
+		formatString: #,0.00
+		displayFolder: 04 Payments
+		lineageTag: dbafe634-958b-58e1-967a-4c6a385f6659
+
+	measure 'Missing Payment Amount Rows' = COUNTROWS(FILTER(FactPayments, ISBLANK(FactPayments[Payment_Amount_TND])))
+		formatString: #,0
+		displayFolder: 04 Payments
+		lineageTag: f1c7dc6f-ed7e-5e36-986a-70e853bbf969
+
+	measure 'Payment Exception Rows' = COUNTROWS(FILTER(FactPayments, NOT(ISBLANK(FactPayments[Payment_Flag]))))
+		formatString: #,0
+		displayFolder: 04 Payments
+		lineageTag: 4bbad16b-f22a-51a9-866a-d2cd13f45cf3
+
+	measure 'No Payment Orders' = CALCULATE(COUNTROWS(DimOrder), DimOrder[Payment_Status] = "No Payment")
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: daf3992d-7321-51c8-a6f1-4cf2e217b479
+
+	measure 'Unknown Customer Lines' = CALCULATE([Line Count], DimCustomer[Is_Unknown] = TRUE())
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: 2bffbd16-3c15-5c3d-a39c-9f9a0a8e9c91
+
+	measure 'Unknown Product Lines' = CALCULATE([Line Count], DimProduct[Is_Unknown] = TRUE())
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: 98834fd3-6582-5b23-9367-7da81571ca6b
+
+	measure 'Unknown Store Lines' = CALCULATE([Line Count], DimStore[Is_Unknown] = TRUE())
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: 97225f32-6f77-5bad-894f-c8b6a90871e9
+
+	measure 'Unknown Member Lines' = [Unknown Customer Lines] + [Unknown Product Lines] + [Unknown Store Lines]
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: e0c82fef-54db-5966-bb5b-dfbd64118fa4
+
+	measure 'Data Quality Flagged Lines' = COUNTROWS(FILTER(FactSales, NOT(ISBLANK(FactSales[Data_Quality_Flag]))))
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: ac44c89d-dafe-5111-af29-7ccf3255483f
+
+	measure 'Missing Segment Customers' = COUNTROWS(FILTER(DimCustomer, ISBLANK(DimCustomer[Segment])))
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: e47ef45b-8fa1-5db4-8285-ae3d34f73742
+
+	measure 'Segment Coverage %' = DIVIDE(COUNTROWS(DimCustomer) - [Missing Segment Customers], COUNTROWS(DimCustomer))
+		formatString: 0.00%
+		displayFolder: 05 Data Quality
+		lineageTag: f858bcfb-0b07-5d52-9452-59eb1ca66b31
+
+	measure 'Revenue Eligible %' = DIVIDE(CALCULATE([Gross Sales], FactSales[Revenue_Eligible] = "Yes"), [Gross Sales])
+		formatString: 0.00%
+		displayFolder: 05 Data Quality
+		lineageTag: 1861fc9f-3583-5d98-8861-e7545b5f88c5
+
+	measure 'Unknown Customers' = COUNTROWS(FILTER(DimCustomer, DimCustomer[Is_Unknown] = TRUE()))
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: 0bb73308-6428-5975-bcc4-8e6c07ffeaa5
+
+	measure 'Unknown Products' = COUNTROWS(FILTER(DimProduct, DimProduct[Is_Unknown] = TRUE()))
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: 33e66437-7c64-5171-a3a1-250da68b588a
+
+	measure 'Unknown Stores' = COUNTROWS(FILTER(DimStore, DimStore[Is_Unknown] = TRUE()))
+		formatString: #,0
+		displayFolder: 05 Data Quality
+		lineageTag: 799f421e-40b7-5a76-87e8-a9fcf2cd48a9
+
+	measure 'HTML Header' =
+			VAR _from = CALCULATE(MIN(DimDate[Date]), FactSales)
+			VAR _to = CALCULATE(MAX(DimDate[Date]), FactSales)
+			VAR _stores = CALCULATE(DISTINCTCOUNT(FactSales[StoreKey]))
+			VAR _range = IF(ISBLANK(_from), "No sales in selection", FORMAT(_from, "mmm d, yyyy", "en-US") & "  &#8594;  " & FORMAT(_to, "mmm d, yyyy", "en-US"))
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:0 4px;color:#F4ECFB'>"
+			& "<div><div style='font-size:11px;line-height:14px;letter-spacing:4px;text-transform:uppercase;color:#E0B0FF;font-weight:600'>Sales Performance</div>"
+			& "<div style='font-size:26px;line-height:32px;font-weight:700;letter-spacing:-0.5px;margin-top:2px'>Sales Overview</div></div>"
+			& "<div style='text-align:right'><div style='display:inline-block;padding:5px 14px;border:1px solid rgba(224,176,255,0.35);border-radius:999px;background:rgba(224,176,255,0.08);color:#E0B0FF;font-size:13px;font-weight:600'>" & _range & "</div>"
+			& "<div style='margin-top:4px;font-size:12px;color:#8E80A0'>" & FORMAT([Order Count], "#,0", "en-US") & " orders &#183; " & FORMAT(_stores, "#,0", "en-US") & " stores &#183; amounts in TND</div></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 1b93d2e4-5b8c-433b-a441-da577e2b090f
+
+	measure 'HTML KPI Cards' =
+			VAR _net = [Net Revenue]
+			VAR _gross = [Gross Sales]
+			VAR _lost = _gross - _net
+			VAR _cards = {
+			    (1, "Net Revenue", FORMAT(_net, "#,0.00", "en-US"), "TND", FORMAT(DIVIDE(_net, _gross), "0.0%", "en-US") & " of gross retained"),
+			    (2, "Gross Sales", FORMAT(_gross, "#,0.00", "en-US"), "TND", FORMAT(_lost, "#,0.00", "en-US") & " lost to cancels &amp; returns"),
+			    (3, "Orders", FORMAT([Order Count], "#,0", "en-US"), "", "AOV " & FORMAT([AOV], "#,0.00", "en-US") & " TND"),
+			    (4, "Units Sold", FORMAT([Units Sold], "#,0", "en-US"), "units", FORMAT([Line Count], "#,0", "en-US") & " order lines")
+			}
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;gap:20px'>"
+			& CONCATENATEX(
+			    _cards,
+			    "<div style='flex:1;min-width:0;position:relative;overflow:hidden;padding:16px 22px 14px;border-radius:16px;border:1px solid "
+			    & IF([Value1] = 1, "rgba(224,176,255,0.55)", "rgba(224,176,255,0.14)")
+			    & ";background:" & IF([Value1] = 1, "linear-gradient(135deg,#3B2652 0%,#1C1428 75%)", "linear-gradient(135deg,#1E1629 0%,#15101D 100%)") & "'>"
+			    & "<div style='position:absolute;top:0;left:24px;width:44px;height:3px;border-radius:0 0 3px 3px;background:#E0B0FF'></div>"
+			    & "<div style='font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A99BB8;font-weight:600'>" & [Value2] & "</div>"
+			    & "<div style='margin-top:6px;display:flex;align-items:baseline;gap:8px'><span style='font-size:36px;line-height:38px;font-weight:700;letter-spacing:-0.5px;color:"
+			    & IF([Value1] = 1, "#E0B0FF", "#F4ECFB") & "'>" & [Value3] & "</span><span style='font-size:14px;font-weight:600;color:#8E80A0'>" & [Value4] & "</span></div>"
+			    & "<div style='margin-top:4px;font-size:13px;color:#8E80A0'>" & [Value5] & "</div></div>",
+			    "",
+			    [Value1], ASC
+			)
+			& "</div>"
+		displayFolder: 06 HTML
+		lineageTag: 101dc33f-824c-474f-bc23-50a759c55e01
+
+	measure 'HTML Revenue by Month' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimDate, DimDate[Year], DimDate[Month], DimDate[Month_Name]),
+			            "@v", [Net Revenue],
+			            "@o", [Order Count],
+			            "@i", DimDate[Year] * 12 + DimDate[Month]
+			        ),
+			        NOT ISBLANK([@o])
+			    )
+			VAR _max = MAXX(_t, [@v])
+			VAR _total = SUMX(_t, [@v])
+			VAR _bars =
+			    CONCATENATEX(
+			        _t,
+			        "<div style='flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px'>"
+			        & "<div style='font-size:15px;font-weight:700;color:#F4ECFB'>" & FORMAT([@v], "#,0.00", "en-US") & "</div>"
+			        & "<div style='width:46%;max-width:150px;height:" & FORMAT(MAX(DIVIDE([@v], _max) * 104, 4), "0", "en-US")
+			        & "px;border-radius:10px 10px 3px 3px;background:linear-gradient(180deg,#E0B0FF 0%,#9D6CCF 55%,#5B3B80 100%);box-shadow:0 0 28px rgba(224,176,255,0.22)'></div></div>",
+			        "",
+			        [@i], ASC
+			    )
+			VAR _labels =
+			    CONCATENATEX(
+			        _t,
+			        "<div style='flex:1;text-align:center'><div style='font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A99BB8'>"
+			        & LEFT(DimDate[Month_Name], 3) & " " & DimDate[Year] & "</div><div style='margin-top:4px;font-size:11px;color:#6F6380'>"
+			        & FORMAT([@o], "#,0", "en-US") & " orders</div></div>",
+			        "",
+			        [@i], ASC
+			    )
+			VAR _chips =
+			    CONCATENATEX(
+			        _t,
+			        VAR _i = [@i]
+			        VAR _prev = MAXX(FILTER(_t, [@i] = _i - 1), [@v])
+			        VAR _delta = DIVIDE([@v] - _prev, _prev)
+			        RETURN
+			            "<div style='flex:1;text-align:center'>"
+			            & IF(
+			                ISBLANK(_prev),
+			                "<span style='font-size:11px;color:#6F6380'>baseline</span>",
+			                "<span style='font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;"
+			                & IF(_delta >= 0, "color:#BDF0D6;background:rgba(189,240,214,0.10)'>&#9650; ", "color:#F28DB2;background:rgba(242,141,178,0.12)'>&#9660; ")
+			                & FORMAT(ABS(_delta), "0.0%", "en-US") & " MoM</span>"
+			            )
+			            & "</div>",
+			        "",
+			        [@i], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>"
+			& "<div style='display:flex;justify-content:space-between;align-items:flex-start'><div><div style='font-size:17px;font-weight:700'>Net Revenue by Month</div>"
+			& "<div style='font-size:12px;color:#8E80A0;margin-top:2px'>Monthly net revenue with month-over-month change</div></div>"
+			& "<div style='text-align:right'><div style='font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8E80A0'>Period total</div>"
+			& "<div style='font-size:20px;font-weight:700;color:#E0B0FF'>" & FORMAT(_total, "#,0.00", "en-US") & " <span style='font-size:12px;color:#8E80A0'>TND</span></div></div></div>"
+			& "<div style='display:flex;gap:24px;height:140px;margin-top:4px;padding:0 12px;border-bottom:1px solid rgba(224,176,255,0.20);background-image:repeating-linear-gradient(to top,rgba(224,176,255,0.06) 0 1px,transparent 1px 36px)'>" & _bars & "</div>"
+			& "<div style='display:flex;gap:24px;padding:10px 12px 0'>" & _labels & "</div>"
+			& "<div style='display:flex;gap:24px;padding:8px 12px 0'>" & _chips & "</div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 4b0b21c6-c7ee-4a76-a48e-76d128bc8cca
+
+	measure 'HTML Order Status' =
+			VAR _t =
+			    ADDCOLUMNS(
+			        FILTER(VALUES(DimOrder[Order_Status]), NOT ISBLANK([Gross Sales])),
+			        "@g", [Gross Sales],
+			        "@n", [Net Revenue],
+			        "@k", SWITCH(DimOrder[Order_Status], "Completed", 1, "Shipped", 2, "Pending", 3, "Returned", 4, "Cancelled", 5, 6),
+			        "@c", SWITCH(DimOrder[Order_Status], "Completed", "#E0B0FF", "Shipped", "#B48AE0", "Pending", "#8460B3", "Returned", "#5D4A78", "Cancelled", "#F28DB2", "#A99BB8")
+			    )
+			VAR _gross = SUMX(_t, [@g])
+			VAR _net = SUMX(_t, [@n])
+			VAR _seg =
+			    ADDCOLUMNS(
+			        _t,
+			        "@s", VAR _k = [@k] RETURN COALESCE(DIVIDE(SUMX(FILTER(_t, [@k] < _k), [@g]), _gross) * 100, 0),
+			        "@e", VAR _k = [@k] RETURN DIVIDE(SUMX(FILTER(_t, [@k] <= _k), [@g]), _gross) * 100
+			    )
+			VAR _gradient = CONCATENATEX(_seg, [@c] & " " & FORMAT([@s], "0.00", "en-US") & "% " & FORMAT([@e], "0.00", "en-US") & "%", ",", [@k], ASC)
+			VAR _legend =
+			    CONCATENATEX(
+			        _seg,
+			        "<div style='display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(224,176,255,0.08)'>"
+			        & "<span style='width:10px;height:10px;border-radius:3px;background:" & [@c] & ";flex:none'></span>"
+			        & "<span style='flex:1;font-size:13px;color:#E6DAF2'>" & DimOrder[Order_Status] & "</span>"
+			        & "<span style='font-size:13px;font-weight:600;color:#F4ECFB;min-width:76px;text-align:right'>" & FORMAT([@g], "#,0.00", "en-US") & "</span>"
+			        & "<span style='font-size:12px;color:#8E80A0;min-width:46px;text-align:right'>" & FORMAT(DIVIDE([@g], _gross), "0.0%", "en-US") & "</span></div>",
+			        "",
+			        [@k], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>"
+			& "<div style='font-size:17px;font-weight:700'>Order Status Mix</div>"
+			& "<div style='font-size:12px;color:#8E80A0;margin-top:2px'>Share of gross sales by status</div>"
+			& "<div style='display:flex;align-items:center;gap:28px;margin-top:18px'>"
+			& "<div style='flex:none;width:184px;height:184px;border-radius:50%;background:conic-gradient(" & _gradient & ");display:flex;align-items:center;justify-content:center;box-shadow:0 0 36px rgba(224,176,255,0.18)'>"
+			& "<div style='width:124px;height:124px;border-radius:50%;background:#16101F;display:flex;flex-direction:column;align-items:center;justify-content:center'>"
+			& "<div style='font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8E80A0'>Net kept</div>"
+			& "<div style='font-size:26px;font-weight:700;color:#E0B0FF'>" & FORMAT(DIVIDE(_net, _gross), "0.0%", "en-US") & "</div></div></div>"
+			& "<div style='flex:1;min-width:0'>" & _legend & "</div></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 5e902375-d35c-4b7b-92c5-a2cc4b3b8dae
+
+	measure 'HTML Revenue by Store' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            VALUES(DimStore[Store_Name]),
+			            "@v", [Net Revenue],
+			            "@o", [Order Count],
+			            "@u", CALCULATE(SELECTEDVALUE(DimStore[Is_Unknown]))
+			        ),
+			        NOT ISBLANK([@o])
+			    )
+			VAR _max = MAXX(_t, [@v])
+			VAR _total = SUMX(_t, [@v])
+			VAR _rows =
+			    CONCATENATEX(
+			        _t,
+			        "<div style='display:flex;align-items:center;gap:14px;padding:9px 0'>"
+			        & "<div style='width:210px;flex:none;display:flex;align-items:center;gap:8px;min-width:0'>"
+			        & "<span style='font-size:13px;color:" & IF([@u], "#8E80A0", "#E6DAF2") & ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>"
+			        & SUBSTITUTE(SUBSTITUTE(DimStore[Store_Name], "&", "&amp;"), "<", "&lt;") & "</span>"
+			        & IF([@u], "<span style='flex:none;font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:4px;border:1px solid #F28DB2;color:#F28DB2'>UNKNOWN</span>", "") & "</div>"
+			        & "<div style='flex:1;height:14px;border-radius:999px;background:rgba(224,176,255,0.07);overflow:hidden'>"
+			        & "<div style='width:" & FORMAT(MAX(DIVIDE([@v], _max) * 100, 1), "0.0", "en-US") & "%;height:100%;border-radius:999px;background:"
+			        & IF([@u], "repeating-linear-gradient(45deg,#5D4A78 0 6px,#3E3052 6px 12px)", "linear-gradient(90deg,#7B4FA8,#E0B0FF)") & "'></div></div>"
+			        & "<div style='width:86px;flex:none;text-align:right;font-size:14px;font-weight:700;color:#F4ECFB'>" & FORMAT([@v], "#,0.00", "en-US") & "</div>"
+			        & "<div style='width:48px;flex:none;text-align:right;font-size:12px;color:#8E80A0'>" & FORMAT(DIVIDE([@v], _total), "0%", "en-US") & "</div></div>",
+			        "",
+			        [@v], DESC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>"
+			& "<div style='font-size:17px;font-weight:700'>Net Revenue by Store</div>"
+			& "<div style='font-size:12px;color:#8E80A0;margin-top:2px;margin-bottom:10px'>Ranked by net revenue &#183; share of total</div>"
+			& _rows & "</div>"
+		displayFolder: 06 HTML
+		lineageTag: d76ce124-733a-40bf-95a5-a094418d9509
+
+	measure 'HTML Product Table' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimProduct, DimProduct[Product_Name], DimProduct[Category]),
+			            "@u", [Units Sold],
+			            "@n", [Net Revenue],
+			            "@g", [Gross Sales]
+			        ),
+			        NOT ISBLANK([@g])
+			    )
+			VAR _ranked = ADDCOLUMNS(_t, "@r", RANKX(_t, [@n] * 1000 + [@g] / 1000, , DESC, Skip))
+			VAR _max = MAXX(_t, [@n])
+			VAR _head = "font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18)"
+			VAR _rows =
+			    CONCATENATEX(
+			        _ranked,
+			        "<tr>"
+			        & "<td style='padding:8px;color:#6F6380;font-size:12px;border-bottom:1px solid rgba(224,176,255,0.07)'>" & FORMAT([@r], "00") & "</td>"
+			        & "<td style='padding:8px;border-bottom:1px solid rgba(224,176,255,0.07)'><div style='font-size:13px;color:#F4ECFB;font-weight:600'>"
+			        & SUBSTITUTE(SUBSTITUTE(DimProduct[Product_Name], "&", "&amp;"), "<", "&lt;") & "</div>"
+			        & "<div style='margin-top:2px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#B48AE0'>" & DimProduct[Category] & "</div></td>"
+			        & "<td style='padding:8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07)'>" & FORMAT([@u], "#,0", "en-US") & "</td>"
+			        & "<td style='padding:8px;text-align:right;font-size:13px;color:#A99BB8;border-bottom:1px solid rgba(224,176,255,0.07)'>" & FORMAT([@g], "#,0.00", "en-US") & "</td>"
+			        & "<td style='padding:8px;border-bottom:1px solid rgba(224,176,255,0.07)'><div style='display:flex;align-items:center;justify-content:flex-end;gap:10px'>"
+			        & "<div style='width:90px;height:6px;border-radius:999px;background:rgba(224,176,255,0.08);overflow:hidden'><div style='width:"
+			        & FORMAT(MAX(DIVIDE([@n], _max) * 100, 0), "0.0", "en-US") & "%;height:100%;border-radius:999px;background:#E0B0FF'></div></div>"
+			        & "<span style='font-size:13px;font-weight:700;color:" & IF([@n] = 0, "#F28DB2", "#E0B0FF") & ";min-width:70px;text-align:right'>" & FORMAT([@n], "#,0.00", "en-US") & "</span></div></td>"
+			        & "</tr>",
+			        "",
+			        [@r], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>"
+			& "<div style='display:flex;justify-content:space-between;align-items:baseline'><div style='font-size:17px;font-weight:700'>Product Snapshot</div>"
+			& "<div style='font-size:12px;color:#8E80A0'>" & COUNTROWS(_t) & " products &#183; sorted by net revenue</div></div>"
+			& "<div style='margin-top:12px;max-height:228px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'>"
+			& "<table style='width:100%;border-collapse:collapse'><thead><tr>"
+			& "<th style='text-align:left;" & _head & "'>#</th><th style='text-align:left;" & _head & "'>Product</th>"
+			& "<th style='text-align:right;" & _head & "'>Units</th><th style='text-align:right;" & _head & "'>Gross</th><th style='text-align:right;" & _head & "'>Net Revenue</th>"
+			& "</tr></thead><tbody>" & _rows & "</tbody></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 4321914d-4c37-496d-9b30-fdeca763b8da
+
+	measure 'HTML Product Header' =
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:0 4px;color:#F4ECFB'><div><div style='font-size:11px;line-height:14px;letter-spacing:4px;text-transform:uppercase;color:#E0B0FF;font-weight:600'>Product Insights</div><div style='display:flex;align-items:baseline;gap:16px;margin-top:2px'><span style='font-size:26px;line-height:32px;font-weight:700;letter-spacing:-0.5px'>Product Performance</span><span style='font-size:13px;color:#8E80A0'>Revenue, mix and pricing by product</span></div></div>" & "</div>"
+		displayFolder: 06 HTML
+		lineageTag: 3574ccf2-8303-47a7-b5cc-0ad49d630186
+
+	measure 'HTML Product KPIs' =
+			VAR _sold = COUNTROWS(FILTER(VALUES(DimProduct[ProductKey]), NOT ISBLANK([Units Sold])))
+			VAR _catalogue = COUNTROWS(FILTER(DimProduct, NOT DimProduct[Is_Unknown]))
+			VAR _top = TOPN(1, FILTER(ADDCOLUMNS(VALUES(DimProduct[Product_Name]), "@n", [Net Revenue]), NOT ISBLANK([@n])), [@n], DESC, DimProduct[Product_Name], ASC)
+			VAR _cat = TOPN(1, FILTER(ADDCOLUMNS(VALUES(DimProduct[Category]), "@n", [Net Revenue]), NOT ISBLANK([@n])), [@n], DESC, DimProduct[Category], ASC)
+			VAR _cards = {
+			    (1, "Products Sold", FORMAT(_sold + 0, "#,0", "en-US"), "", "of " & FORMAT(_catalogue + 0, "#,0", "en-US") & " catalogue products", 0),
+			    (2, "Top Product", COALESCE(SUBSTITUTE(SUBSTITUTE(MAXX(_top, DimProduct[Product_Name]), "&", "&amp;"), "<", "&lt;"), "&#8212;"), "", FORMAT(MAXX(_top, [@n]), "#,0.00", "en-US") & " TND net revenue", 1),
+			    (3, "Top Category", COALESCE(SUBSTITUTE(SUBSTITUTE(MAXX(_cat, DimProduct[Category]), "&", "&amp;"), "<", "&lt;"), "&#8212;"), "", FORMAT(DIVIDE(MAXX(_cat, [@n]), [Net Revenue]), "0.0%", "en-US") & " of net revenue", 0),
+			    (4, "Avg Unit Price", FORMAT([Average Unit Price], "#,0.00", "en-US"), "TND", FORMAT([Units Sold] + 0, "#,0", "en-US") & " units sold", 0)
+			}
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;gap:20px'>" & CONCATENATEX(_cards, "<div style='flex:1;min-width:0;position:relative;overflow:hidden;padding:16px 22px 14px;border-radius:16px;border:1px solid " & SWITCH([Value6], 1, "rgba(224,176,255,0.55)", 2, "rgba(242,141,178,0.55)", "rgba(224,176,255,0.14)") & ";background:" & SWITCH([Value6], 1, "linear-gradient(135deg,#3B2652 0%,#1C1428 75%)", 2, "linear-gradient(135deg,#3A1F2E 0%,#1C1428 75%)", "linear-gradient(135deg,#1E1629 0%,#15101D 100%)") & "'>" & "<div style='position:absolute;top:0;left:24px;width:44px;height:3px;border-radius:0 0 3px 3px;background:" & IF([Value6] = 2, "#F28DB2", "#E0B0FF") & "'></div>" & "<div style='font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A99BB8;font-weight:600'>" & [Value2] & "</div>" & "<div style='margin-top:6px;display:flex;align-items:baseline;gap:8px;min-width:0'><span style='font-size:" & IF(LEN([Value3]) > 11, "24px", "36px") & ";line-height:38px;font-weight:700;letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:" & SWITCH([Value6], 1, "#E0B0FF", 2, "#F28DB2", "#F4ECFB") & "'>" & [Value3] & "</span>" & "<span style='font-size:14px;font-weight:600;color:#8E80A0'>" & [Value4] & "</span></div>" & "<div style='margin-top:4px;font-size:13px;color:#8E80A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & [Value5] & "</div></div>", "", [Value1], ASC) & "</div>"
+		displayFolder: 06 HTML
+		lineageTag: a1692ce5-f5f8-40d7-aef7-e15430261df3
+
+	measure 'HTML Product Revenue Bars' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimProduct, DimProduct[Product_Name], DimProduct[Category], DimProduct[Is_Unknown]),
+			            "@v", [Net Revenue],
+			            "@u", [Units Sold]
+			        ),
+			        NOT ISBLANK([@u])
+			    )
+			VAR _max = MAXX(_t, [@v])
+			VAR _total = SUMX(_t, [@v])
+			VAR _rows =
+			    CONCATENATEX(
+			        _t,
+			        "<div style='display:flex;align-items:center;gap:14px;padding:4px 0'>"
+			        & "<div style='width:240px;flex:none;display:flex;align-items:center;min-width:0'><span style='font-size:13px;color:" & IF(DimProduct[Is_Unknown], "#8E80A0", "#E6DAF2") & ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>"
+			        & SUBSTITUTE(SUBSTITUTE(DimProduct[Product_Name], "&", "&amp;"), "<", "&lt;") & "</span>" & IF(DimProduct[Is_Unknown], "<span style='flex:none;margin-left:6px;font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:4px;border:1px solid #F28DB2;color:#F28DB2'>UNKNOWN</span>", "") & "</div>"
+			        & "<div style='width:120px;flex:none;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#B48AE0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & SUBSTITUTE(SUBSTITUTE(DimProduct[Category], "&", "&amp;"), "<", "&lt;") & "</div>"
+			        & "<div style='flex:1;height:12px;border-radius:999px;background:rgba(224,176,255,0.07);overflow:hidden'><div style='width:" & FORMAT(MAX(DIVIDE([@v], _max), 0) * 100, "0.0", "en-US") & "%;height:100%;border-radius:999px;background:" & IF(DimProduct[Is_Unknown], "repeating-linear-gradient(45deg,#5D4A78 0 6px,#3E3052 6px 12px)", "linear-gradient(90deg,#7B4FA8,#E0B0FF)") & "'></div></div>"
+			        & "<div style='width:86px;flex:none;text-align:right;font-size:14px;font-weight:700;color:" & IF([@v] = 0, "#F28DB2", "#F4ECFB") & "'>" & FORMAT([@v], "#,0.00", "en-US") & "</div>"
+			        & "<div style='width:44px;flex:none;text-align:right;font-size:12px;color:#8E80A0'>" & FORMAT(DIVIDE([@v], _total), "0%", "en-US") & "</div></div>",
+			        "",
+			        [@v], DESC, DimProduct[Product_Name], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Net Revenue by Product</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Ranked by net revenue &#183; share of total</div>" & "<div style='margin-top:10px'>" & _rows & "</div></div>"
+		displayFolder: 06 HTML
+		lineageTag: be27a538-7c7c-4eee-9a5c-88d158464339
+
+	measure 'HTML Category Mix' =
+			VAR _t = FILTER(ADDCOLUMNS(VALUES(DimProduct[Category]), "@v", [Net Revenue], "@u", [Units Sold]), [@v] > 0)
+			VAR _total = SUMX(_t, [@v])
+			VAR _r =
+			    ADDCOLUMNS(
+			        _t,
+			        "@r", VAR _v = [@v] VAR _c = DimProduct[Category] RETURN COUNTROWS(FILTER(_t, [@v] > _v || ([@v] = _v && DimProduct[Category] < _c))) + 1
+			    )
+			VAR _seg =
+			    ADDCOLUMNS(
+			        _r,
+			        "@s", VAR _k = [@r] RETURN COALESCE(DIVIDE(SUMX(FILTER(_r, [@r] < _k), [@v]), _total) * 100, 0),
+			        "@e", VAR _k = [@r] RETURN DIVIDE(SUMX(FILTER(_r, [@r] <= _k), [@v]), _total) * 100,
+			        "@c", SWITCH([@r], 1, "#E0B0FF", 2, "#B48AE0", 3, "#8460B3", 4, "#5D4A78", 5, "#F2C9FF", "#3E3052")
+			    )
+			VAR _legend =
+			    CONCATENATEX(
+			        _seg,
+			        "<div style='display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(224,176,255,0.08)'>" & "<span style='width:10px;height:10px;border-radius:3px;flex:none;background:" & [@c] & "'></span>"
+			        & "<span style='flex:1;font-size:13px;color:#E6DAF2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & SUBSTITUTE(SUBSTITUTE(DimProduct[Category], "&", "&amp;"), "<", "&lt;") & "</span>"
+			        & "<span style='font-size:12px;color:#8E80A0'>" & FORMAT([@u], "#,0", "en-US") & " units</span>"
+			        & "<span style='font-size:13px;font-weight:600;min-width:72px;text-align:right'>" & FORMAT([@v], "#,0.00", "en-US") & "</span>"
+			        & "<span style='font-size:12px;color:#8E80A0;min-width:40px;text-align:right'>" & FORMAT(DIVIDE([@v], _total), "0%", "en-US") & "</span></div>",
+			        "",
+			        [@r], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Net Revenue by Category</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Share of net revenue</div>"
+			& "<div style='display:flex;align-items:center;gap:26px;margin-top:28px'>" & "<div style='flex:none;width:190px;height:190px;border-radius:50%;background:conic-gradient(" & CONCATENATEX(_seg, [@c] & " " & FORMAT([@s], "0.00", "en-US") & "% " & FORMAT([@e], "0.00", "en-US") & "%", ",", [@s], ASC) & ");display:flex;align-items:center;justify-content:center;box-shadow:0 0 36px rgba(224,176,255,0.18)'><div style='width:125px;height:125px;border-radius:50%;background:#16101F;display:flex;flex-direction:column;align-items:center;justify-content:center'><div style='font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8E80A0'>Net revenue</div><div style='font-size:26px;font-weight:700;color:#E0B0FF'>" & FORMAT(_total, "#,0", "en-US") & "</div></div></div>"
+			& "<div style='flex:1;min-width:0'>" & _legend & "</div></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: ed852389-ca55-4879-8722-a28d14c29e4e
+
+	measure 'HTML Product Metrics' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimProduct, DimProduct[Product_Name], DimProduct[Category]),
+			            "@u", [Units Sold],
+			            "@g", [Gross Sales],
+			            "@n", [Net Revenue],
+			            "@p", [Average Unit Price]
+			        ),
+			        NOT ISBLANK([@u])
+			    )
+			VAR _total = SUMX(_t, [@n])
+			VAR _ranked =
+			    ADDCOLUMNS(
+			        _t,
+			        "@r", VAR _n = [@n] VAR _p = DimProduct[Product_Name] RETURN COUNTROWS(FILTER(_t, [@n] > _n || ([@n] = _n && DimProduct[Product_Name] < _p))) + 1
+			    )
+			VAR _rows =
+			    CONCATENATEX(
+			        _ranked,
+			        "<tr>" & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#6F6380'>" & FORMAT([@r], "00") & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-weight:600;color:#F4ECFB'>" & SUBSTITUTE(SUBSTITUTE(DimProduct[Product_Name], "&", "&amp;"), "<", "&lt;") & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#B48AE0'>" & SUBSTITUTE(SUBSTITUTE(DimProduct[Category], "&", "&amp;"), "<", "&lt;") & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & FORMAT([@u], "#,0", "en-US") & "</td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & FORMAT([@p], "#,0.00", "en-US") & "</td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & FORMAT([@g], "#,0.00", "en-US") & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-weight:700;color:" & IF([@n] = 0, "#F28DB2", "#E0B0FF") & "'>" & FORMAT([@n], "#,0.00", "en-US") & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<div style='display:flex;align-items:center;gap:10px;width:240px'>" & "<div style='flex:1;height:12px;border-radius:999px;background:rgba(224,176,255,0.07);overflow:hidden'><div style='width:" & FORMAT(MAX(DIVIDE([@n], _total), 0) * 100, "0.0", "en-US") & "%;height:100%;border-radius:999px;background:" & "linear-gradient(90deg,#7B4FA8,#E0B0FF)" & "'></div></div>"
+			        & "<span style='font-size:12px;color:#8E80A0;min-width:44px;text-align:right'>" & FORMAT(DIVIDE([@n], _total), "0.0%", "en-US") & "</span></div></td></tr>",
+			        "",
+			        [@r], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='display:flex;justify-content:space-between;align-items:baseline'><div>" & "<div style='font-size:17px;font-weight:700'>Product Metrics</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Units, pricing and revenue for every product sold</div>" & "</div>"
+			& "<div style='font-size:12px;color:#8E80A0'>" & FORMAT(COUNTROWS(_t) + 0, "#,0", "en-US") & " products</div></div>"
+			& "<div style='margin-top:12px;max-height:218px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'><table style='width:100%;border-collapse:collapse'>" & "<thead><tr>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>#</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Product</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Category</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Units</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Avg Price</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Gross</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Net Revenue</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Share of Net</th>"
+			& "</tr></thead><tbody>" & _rows & "</tbody></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 282561f3-9f89-4199-947f-61dbb92e1fe3
+
+	measure 'HTML Orders Header' =
+			VAR _completed = CALCULATE([Order Count], FactSales[Order_Status] = "Completed")
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:0 4px;color:#F4ECFB'><div><div style='font-size:11px;line-height:14px;letter-spacing:4px;text-transform:uppercase;color:#E0B0FF;font-weight:600'>Order Insights</div><div style='display:flex;align-items:baseline;gap:16px;margin-top:2px'><span style='font-size:26px;line-height:32px;font-weight:700;letter-spacing:-0.5px'>Order Analysis</span><span style='font-size:13px;color:#8E80A0'>Order volume, status outcomes and line-level detail</span></div></div>"
+			& "<div style='text-align:right'>" & "<div style='display:inline-block;padding:6px 14px;border:1px solid rgba(224,176,255,0.35);border-radius:999px;background:rgba(224,176,255,0.08);color:#E0B0FF;font-size:13px;font-weight:600'>" & FORMAT([Order Count] + 0, "#,0", "en-US") & " orders &#183; " & FORMAT(_completed + 0, "#,0", "en-US") & " completed</div></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 9dfad13d-4138-4ccb-a09a-8898f6d85ef2
+
+	measure 'HTML Orders KPIs' =
+			VAR _completed = CALCULATE([Order Count], FactSales[Order_Status] = "Completed")
+			VAR _cancelled = CALCULATE([Order Count], FactSales[Order_Status] = "Cancelled")
+			VAR _cards = {
+			    (1, "Orders", FORMAT([Order Count] + 0, "#,0", "en-US"), "", FORMAT(_completed + 0, "#,0", "en-US") & " completed", 0),
+			    (2, "Order Lines", FORMAT([Line Count] + 0, "#,0", "en-US"), "", FORMAT(DIVIDE([Line Count], [Order Count]), "0.00", "en-US") & " lines per order", 0),
+			    (3, "Avg Order Value", FORMAT([AOV], "#,0.00", "en-US"), "TND", "net revenue per order", 1),
+			    (4, "Cancelled Gross", FORMAT([Cancelled Gross] + 0, "#,0.00", "en-US"), "TND", FORMAT(_cancelled + 0, "#,0", "en-US") & " cancelled &#183; " & FORMAT([Returned Gross] + 0, "#,0.00", "en-US") & " returned", 2)
+			}
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;gap:20px'>" & CONCATENATEX(_cards, "<div style='flex:1;min-width:0;position:relative;overflow:hidden;padding:16px 22px 14px;border-radius:16px;border:1px solid " & SWITCH([Value6], 1, "rgba(224,176,255,0.55)", 2, "rgba(242,141,178,0.55)", "rgba(224,176,255,0.14)") & ";background:" & SWITCH([Value6], 1, "linear-gradient(135deg,#3B2652 0%,#1C1428 75%)", 2, "linear-gradient(135deg,#3A1F2E 0%,#1C1428 75%)", "linear-gradient(135deg,#1E1629 0%,#15101D 100%)") & "'>" & "<div style='position:absolute;top:0;left:24px;width:44px;height:3px;border-radius:0 0 3px 3px;background:" & IF([Value6] = 2, "#F28DB2", "#E0B0FF") & "'></div>" & "<div style='font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A99BB8;font-weight:600'>" & [Value2] & "</div>" & "<div style='margin-top:6px;display:flex;align-items:baseline;gap:8px;min-width:0'><span style='font-size:" & IF(LEN([Value3]) > 11, "24px", "36px") & ";line-height:38px;font-weight:700;letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:" & SWITCH([Value6], 1, "#E0B0FF", 2, "#F28DB2", "#F4ECFB") & "'>" & [Value3] & "</span>" & "<span style='font-size:14px;font-weight:600;color:#8E80A0'>" & [Value4] & "</span></div>" & "<div style='margin-top:4px;font-size:13px;color:#8E80A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & [Value5] & "</div></div>", "", [Value1], ASC) & "</div>"
+		displayFolder: 06 HTML
+		lineageTag: af9e0eb8-9564-47bc-8239-0c3555d9fe17
+
+	measure 'HTML Orders Gross vs Net' =
+			VAR _t =
+			    ADDCOLUMNS(
+			        FILTER(VALUES(DimOrder[Order_Status]), NOT ISBLANK([Gross Sales])),
+			        "@g", [Gross Sales],
+			        "@n", [Net Revenue] + 0,
+			        "@o", [Order Count],
+			        "@k", SWITCH(DimOrder[Order_Status], "Completed", 1, "Shipped", 2, "Pending", 3, "Returned", 4, "Cancelled", 5, 6)
+			    )
+			VAR _max = MAXX(_t, [@g])
+			VAR _rows =
+			    CONCATENATEX(
+			        _t,
+			        "<div style='padding:7px 0;border-bottom:1px solid rgba(224,176,255,0.08)'>"
+			        & "<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:6px'><div style='display:flex;align-items:center;gap:10px'>"
+			        & "<span style='font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px;white-space:nowrap;color:" & SWITCH(DimOrder[Order_Status], "Completed", "#E0B0FF", "Shipped", "#B48AE0", "Pending", "#8460B3", "Returned", "#5D4A78", "Cancelled", "#F28DB2", "#A99BB8") & ";border:1px solid " & SWITCH(DimOrder[Order_Status], "Completed", "#E0B0FF", "Shipped", "#B48AE0", "Pending", "#8460B3", "Returned", "#5D4A78", "Cancelled", "#F28DB2", "#A99BB8") & "'>" & DimOrder[Order_Status] & "</span>" & "<span style='font-size:12px;color:#8E80A0'>" & FORMAT([@o], "#,0", "en-US") & " orders</span></div>"
+			        & "<div style='font-size:13px'><span style='color:#8E80A0'>Gross </span><span style='color:#E6DAF2;font-weight:600'>" & FORMAT([@g], "#,0.00", "en-US")
+			        & "</span><span style='color:#6F6380'> &#183; </span><span style='color:#8E80A0'>Net </span><span style='font-weight:700;color:" & IF([@n] = 0, "#F28DB2", "#E0B0FF") & "'>" & FORMAT([@n], "#,0.00", "en-US") & "</span></div></div>"
+			        & "<div style='position:relative;height:14px;border-radius:999px;background:rgba(224,176,255,0.06)'>"
+			        & "<div style='position:absolute;left:0;top:0;bottom:0;width:" & FORMAT(DIVIDE([@g], _max) * 100, "0.0", "en-US") & "%;border-radius:999px;background:rgba(224,176,255,0.16);border:1px solid rgba(224,176,255,0.40);box-sizing:border-box'></div>"
+			        & "<div style='position:absolute;left:0;top:0;bottom:0;width:" & FORMAT(DIVIDE([@n], _max) * 100, "0.0", "en-US") & "%;border-radius:999px;background:linear-gradient(90deg,#7B4FA8,#E0B0FF)'></div></div></div>",
+			        "",
+			        [@k], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='display:flex;justify-content:space-between;align-items:flex-start'><div>" & "<div style='font-size:17px;font-weight:700'>Gross vs Net by Order Status</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Outlined bar = gross sales &#183; filled bar = net revenue</div>" & "</div>"
+			& "<div style='display:flex;gap:14px;font-size:11px;color:#8E80A0'><span><span style='display:inline-block;width:10px;height:10px;border-radius:3px;border:1px solid rgba(224,176,255,0.5);background:rgba(224,176,255,0.16);vertical-align:middle'></span> Gross</span>"
+			& "<span><span style='display:inline-block;width:10px;height:10px;border-radius:3px;background:#E0B0FF;vertical-align:middle'></span> Net</span></div></div>"
+			& "<div style='margin-top:0'>" & _rows & "</div></div>"
+		displayFolder: 06 HTML
+		lineageTag: a8641f97-09f9-4e29-9cc5-bea06b85a700
+
+	measure 'HTML Orders Status Mix' =
+			VAR _t =
+			    ADDCOLUMNS(
+			        FILTER(VALUES(DimOrder[Order_Status]), NOT ISBLANK([Order Count])),
+			        "@o", [Order Count],
+			        "@n", [Net Revenue] + 0,
+			        "@k", SWITCH(DimOrder[Order_Status], "Completed", 1, "Shipped", 2, "Pending", 3, "Returned", 4, "Cancelled", 5, 6),
+			        "@c", SWITCH(DimOrder[Order_Status], "Completed", "#E0B0FF", "Shipped", "#B48AE0", "Pending", "#8460B3", "Returned", "#5D4A78", "Cancelled", "#F28DB2", "#A99BB8")
+			    )
+			VAR _total = SUMX(_t, [@o])
+			VAR _seg =
+			    ADDCOLUMNS(
+			        _t,
+			        "@s", VAR _k = [@k] RETURN COALESCE(DIVIDE(SUMX(FILTER(_t, [@k] < _k), [@o]), _total) * 100, 0),
+			        "@e", VAR _k = [@k] RETURN DIVIDE(SUMX(FILTER(_t, [@k] <= _k), [@o]), _total) * 100
+			    )
+			VAR _legend =
+			    CONCATENATEX(
+			        _seg,
+			        "<div style='display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(224,176,255,0.08)'>" & "<span style='width:10px;height:10px;border-radius:3px;flex:none;background:" & [@c] & "'></span>"
+			        & "<span style='flex:1;font-size:13px;color:#E6DAF2'>" & DimOrder[Order_Status] & "</span>"
+			        & "<span style='font-size:12px;color:#8E80A0'>" & FORMAT([@n], "#,0.00", "en-US") & " net</span>"
+			        & "<span style='font-size:14px;font-weight:700;min-width:40px;text-align:right'>" & FORMAT([@o], "#,0", "en-US") & "</span>"
+			        & "<span style='font-size:12px;color:#8E80A0;min-width:48px;text-align:right'>" & FORMAT(DIVIDE([@o], _total), "0.0%", "en-US") & "</span></div>",
+			        "",
+			        [@k], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Orders by Status</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Share of orders by status &#183; net revenue kept</div>"
+			& "<div style='display:flex;align-items:center;gap:36px;margin-top:22px;padding:0 12px'>" & "<div style='flex:none;width:220px;height:220px;border-radius:50%;background:conic-gradient(" & CONCATENATEX(_seg, [@c] & " " & FORMAT([@s], "0.00", "en-US") & "% " & FORMAT([@e], "0.00", "en-US") & "%", ",", [@s], ASC) & ");display:flex;align-items:center;justify-content:center;box-shadow:0 0 36px rgba(224,176,255,0.18)'><div style='width:145px;height:145px;border-radius:50%;background:#16101F;display:flex;flex-direction:column;align-items:center;justify-content:center'><div style='font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8E80A0'>Orders</div><div style='font-size:26px;font-weight:700;color:#E0B0FF'>" & FORMAT(_total, "#,0", "en-US") & "</div></div></div>"
+			& "<div style='flex:1;min-width:0'>" & _legend & "</div></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 41f15092-9874-4a1a-b61f-b275561ba6c3
+
+	measure 'HTML Orders Line Detail' =
+			VAR _lines = COUNTROWS(FactSales)
+			VAR _flagged = COUNTROWS(FILTER(FactSales, NOT ISBLANK(FactSales[Data_Quality_Flag])))
+			VAR _rows =
+			    CONCATENATEX(
+			        FactSales,
+			        "<tr>" & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & FactSales[Order_Line_ID] & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-weight:600;color:#F4ECFB'>" & FactSales[Order_ID] & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & SUBSTITUTE(SUBSTITUTE(RELATED(DimProduct[Product_Name]), "&", "&amp;"), "<", "&lt;") & IF(RELATED(DimProduct[Is_Unknown]), "<span style='flex:none;margin-left:6px;font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:4px;border:1px solid #F28DB2;color:#F28DB2'>UNKNOWN</span>", "") & "</td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & SUBSTITUTE(SUBSTITUTE(RELATED(DimStore[Store_Name]), "&", "&amp;"), "<", "&lt;") & IF(RELATED(DimStore[Is_Unknown]), "<span style='flex:none;margin-left:6px;font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:4px;border:1px solid #F28DB2;color:#F28DB2'>UNKNOWN</span>", "") & "</td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & FORMAT(FactSales[Quantity], "#,0", "en-US") & "</td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & FORMAT(FactSales[Unit_Price_TND], "#,0.00", "en-US") & "</td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & FORMAT(FactSales[Gross_Sales_TND], "#,0.00", "en-US") & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-weight:700;color:" & IF(FactSales[Net_Sales_TND] = 0, "#F28DB2", "#E0B0FF") & "'>" & FORMAT(FactSales[Net_Sales_TND], "#,0.00", "en-US") & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px;white-space:nowrap;color:" & SWITCH(FactSales[Order_Status], "Completed", "#E0B0FF", "Shipped", "#B48AE0", "Pending", "#8460B3", "Returned", "#5D4A78", "Cancelled", "#F28DB2", "#A99BB8") & ";border:1px solid " & SWITCH(FactSales[Order_Status], "Completed", "#E0B0FF", "Shipped", "#B48AE0", "Pending", "#8460B3", "Returned", "#5D4A78", "Cancelled", "#F28DB2", "#A99BB8") & "'>" & FactSales[Order_Status] & "</span>" & "</td>"
+			        & "<td style='padding:6px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07)'>" & IF(ISBLANK(FactSales[Data_Quality_Flag]), "<span style='color:#6F6380'>&#8212;</span>", "<span style='display:inline-block;margin:1px 4px 1px 0;font-size:10px;letter-spacing:0.5px;padding:2px 7px;border-radius:5px;background:rgba(242,141,178,0.10);color:#F2B5CB;border:1px solid rgba(242,141,178,0.30)'>" & SUBSTITUTE(FactSales[Data_Quality_Flag], "; ", "</span><span style='display:inline-block;margin:1px 4px 1px 0;font-size:10px;letter-spacing:0.5px;padding:2px 7px;border-radius:5px;background:rgba(242,141,178,0.10);color:#F2B5CB;border:1px solid rgba(242,141,178,0.30)'>") & "</span>") & "</td></tr>",
+			        "",
+			        FactSales[Order_Line_ID], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='display:flex;justify-content:space-between;align-items:baseline'><div>" & "<div style='font-size:17px;font-weight:700'>Order Line Detail</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Every order line with status and data quality flags</div>" & "</div>"
+			& "<div style='font-size:12px;color:#8E80A0'>" & FORMAT(_lines + 0, "#,0", "en-US") & " lines &#183; <span style='color:#F28DB2'>" & FORMAT(_flagged + 0, "#,0", "en-US") & " flagged</span></div></div>"
+			& "<div style='margin-top:12px;max-height:254px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'><table style='width:100%;border-collapse:collapse'>" & "<thead><tr>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Line</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Order</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Product</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Store</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Qty</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Unit Price</th>"
+			& "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Gross</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Net</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Status</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Data Quality Flags</th>" & "</tr></thead><tbody>" & _rows & "</tbody></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 526dc4b0-c1f1-46ea-a637-20255cd1d416
+
+	measure 'HTML Price Header' =
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:0 4px;color:#F4ECFB'><div><div style='font-size:11px;line-height:14px;letter-spacing:4px;text-transform:uppercase;color:#E0B0FF;font-weight:600'>Pricing Insights</div><div style='display:flex;align-items:baseline;gap:16px;margin-top:2px'><span style='font-size:26px;line-height:32px;font-weight:700;letter-spacing:-0.5px'>Price Analysis</span><span style='font-size:13px;color:#8E80A0'>Selling price, list price and volume by product</span></div></div>"
+			& "<div style='text-align:right'>" & "<div style='display:inline-block;padding:6px 14px;border:1px solid rgba(224,176,255,0.35);border-radius:999px;background:rgba(224,176,255,0.08);color:#E0B0FF;font-size:13px;font-weight:600'>" & "All prices in TND</div></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: b7345c9c-834b-4f4f-9551-7eb150103fc9
+
+	measure 'HTML Price KPIs' =
+			VAR _matched = FILTER(FactSales, NOT ISBLANK(RELATED(DimProduct[List_Price_TND])))
+			VAR _listValue = SUMX(_matched, FactSales[Quantity] * RELATED(DimProduct[List_Price_TND]))
+			VAR _soldValue = SUMX(_matched, FactSales[Gross_Sales_TND])
+			VAR _listed = COUNTROWS(FILTER(DimProduct, NOT ISBLANK(DimProduct[List_Price_TND])))
+			VAR _disc = [Discount %] + 0
+			VAR _cards = {
+			    (1, "Avg Selling Price", FORMAT([Average Unit Price], "#,0.00", "en-US"), "TND", "gross sales / units sold", 1),
+			    (2, "Avg List Price", FORMAT([Average List Price], "#,0.00", "en-US"), "TND", "average across " & FORMAT(_listed + 0, "#,0", "en-US") & " listed products", 0),
+			    (3, "Price Realisation", FORMAT(DIVIDE(_soldValue, _listValue), "0.0%", "en-US"), "", "selling value vs list value", 0),
+			    (4, "Avg Discount", FORMAT(_disc, "0.00", "en-US") & "%", "", IF(_disc = 0, "no discounts recorded", "weighted by gross sales"), 0)
+			}
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;gap:20px'>" & CONCATENATEX(_cards, "<div style='flex:1;min-width:0;position:relative;overflow:hidden;padding:16px 22px 14px;border-radius:16px;border:1px solid " & SWITCH([Value6], 1, "rgba(224,176,255,0.55)", 2, "rgba(242,141,178,0.55)", "rgba(224,176,255,0.14)") & ";background:" & SWITCH([Value6], 1, "linear-gradient(135deg,#3B2652 0%,#1C1428 75%)", 2, "linear-gradient(135deg,#3A1F2E 0%,#1C1428 75%)", "linear-gradient(135deg,#1E1629 0%,#15101D 100%)") & "'>" & "<div style='position:absolute;top:0;left:24px;width:44px;height:3px;border-radius:0 0 3px 3px;background:" & IF([Value6] = 2, "#F28DB2", "#E0B0FF") & "'></div>" & "<div style='font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A99BB8;font-weight:600'>" & [Value2] & "</div>" & "<div style='margin-top:6px;display:flex;align-items:baseline;gap:8px;min-width:0'><span style='font-size:" & IF(LEN([Value3]) > 11, "24px", "36px") & ";line-height:38px;font-weight:700;letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:" & SWITCH([Value6], 1, "#E0B0FF", 2, "#F28DB2", "#F4ECFB") & "'>" & [Value3] & "</span>" & "<span style='font-size:14px;font-weight:600;color:#8E80A0'>" & [Value4] & "</span></div>" & "<div style='margin-top:4px;font-size:13px;color:#8E80A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & [Value5] & "</div></div>", "", [Value1], ASC) & "</div>"
+		displayFolder: 06 HTML
+		lineageTag: c5b668c2-89bb-48c5-9e55-a9406088054a
+
+	measure 'HTML Price by Product' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimProduct, DimProduct[Product_Name], DimProduct[Is_Unknown]),
+			            "@p", [Average Unit Price],
+			            "@u", [Units Sold]
+			        ),
+			        NOT ISBLANK([@u])
+			    )
+			VAR _max = MAXX(_t, [@p])
+			VAR _rows =
+			    CONCATENATEX(
+			        _t,
+			        "<div style='display:flex;align-items:center;gap:14px;padding:2px 0'>"
+			        & "<div style='width:220px;flex:none;display:flex;align-items:center;min-width:0'><span style='font-size:13px;color:" & IF(DimProduct[Is_Unknown], "#8E80A0", "#E6DAF2") & ";white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>"
+			        & SUBSTITUTE(SUBSTITUTE(DimProduct[Product_Name], "&", "&amp;"), "<", "&lt;") & "</span>" & IF(DimProduct[Is_Unknown], "<span style='flex:none;margin-left:6px;font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:4px;border:1px solid #F28DB2;color:#F28DB2'>UNKNOWN</span>", "") & "</div>"
+			        & "<div style='flex:1;height:12px;border-radius:999px;background:rgba(224,176,255,0.07);overflow:hidden'><div style='width:" & FORMAT(MAX(DIVIDE([@p], _max), 0) * 100, "0.0", "en-US") & "%;height:100%;border-radius:999px;background:" & IF(DimProduct[Is_Unknown], "repeating-linear-gradient(45deg,#5D4A78 0 6px,#3E3052 6px 12px)", "linear-gradient(90deg,#7B4FA8,#E0B0FF)") & "'></div></div>"
+			        & "<div style='width:80px;flex:none;text-align:right;font-size:14px;font-weight:700'>" & FORMAT([@p], "#,0.00", "en-US") & "</div>"
+			        & "<div style='width:64px;flex:none;text-align:right;font-size:12px;color:#8E80A0'>" & FORMAT([@u], "#,0", "en-US") & " units</div></div>",
+			        "",
+			        [@p], DESC, DimProduct[Product_Name], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Average Unit Price by Product</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Gross sales / units sold &#183; ranked by price</div>" & "<div style='margin-top:10px'>" & _rows & "</div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 199f9e95-431d-4c77-9992-039c91698759
+
+	measure 'HTML Price Units Scatter' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimProduct, DimProduct[Product_Name], DimProduct[Is_Unknown]),
+			            "@u", [Units Sold],
+			            "@p", [Average Unit Price],
+			            "@n", [Net Revenue] + 0
+			        ),
+			        NOT ISBLANK([@u])
+			    )
+			VAR _maxU = MAXX(_t, [@u])
+			VAR _maxP = MAXX(_t, [@p])
+			VAR _maxN = MAXX(_t, [@n])
+			VAR _dots =
+			    CONCATENATEX(
+			        _t,
+			        VAR _size = ROUND(14 + SQRT(COALESCE(DIVIDE([@n], _maxN), 0)) * 30, 0)
+			        VAR _half = ROUND(_size / 2, 0)
+			        VAR _x = 4 + DIVIDE([@u], _maxU) * 88
+			        VAR _y = 6 + DIVIDE([@p], _maxP) * 82
+			        RETURN
+			            "<div style='position:absolute;left:" & FORMAT(_x, "0.0", "en-US") & "%;bottom:" & FORMAT(_y, "0.0", "en-US") & "%;display:flex;align-items:center;gap:6px;"
+			            & IF(_x > 70, "flex-direction:row-reverse;transform:translate(calc(-100% + " & _half & "px),50%)", "transform:translate(-" & _half & "px,50%)") & "'>"
+			            & "<div style='flex:none;width:" & _size & "px;height:" & _size & "px;border-radius:50%;"
+			            & IF(DimProduct[Is_Unknown], "background:rgba(242,141,178,0.30);border:1px solid #F28DB2", "background:radial-gradient(circle at 35% 35%,#F4DDFF,#B07EDB 60%,#6E4A9E);box-shadow:0 0 18px rgba(224,176,255,0.35)") & "'></div>"
+			            & "<span style='font-size:11px;color:#C9B8DA;white-space:nowrap'>" & SUBSTITUTE(SUBSTITUTE(DimProduct[Product_Name], "&", "&amp;"), "<", "&lt;") & "</span></div>",
+			        "",
+			        [@u], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Units vs Average Price</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Each bubble is a product &#183; bubble size = net revenue</div>"
+			& "<div style='position:relative;height:268px;margin-top:10px;border-left:1px solid rgba(224,176,255,0.22);border-bottom:1px solid rgba(224,176,255,0.22);"
+			& "background-image:linear-gradient(rgba(224,176,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(224,176,255,0.05) 1px,transparent 1px);background-size:100% 25%,20% 100%'>"
+			& "<div style='position:absolute;left:8px;top:6px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#6F6380'>&#8593; Avg unit price &#183; max " & FORMAT(_maxP, "#,0.00", "en-US") & "</div>"
+			& "<div style='position:absolute;right:8px;bottom:6px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#6F6380'>Units sold &#183; max " & FORMAT(_maxU, "#,0", "en-US") & " &#8594;</div>"
+			& _dots & "</div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 17c91362-9c31-40df-86dc-ce82f5512672
+
+	measure 'HTML Price vs List' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimProduct, DimProduct[Product_Name]),
+			            "@l", CALCULATE(MAX(DimProduct[List_Price_TND])),
+			            "@p", [Average Unit Price],
+			            "@u", [Units Sold]
+			        ),
+			        NOT ISBLANK([@l]) || NOT ISBLANK([@u])
+			    )
+			VAR _max = MAXX(_t, MAX([@l], [@p]))
+			VAR _rows =
+			    CONCATENATEX(
+			        _t,
+			        VAR _delta = DIVIDE([@p], [@l]) - 1
+			        VAR _chip =
+			            IF(
+			                ISBLANK([@u]), "<span style='font-size:11px;color:#6F6380'>not sold</span>",
+			                IF(
+			                    ISBLANK([@l]), "<span style='font-size:11px;color:#F28DB2;border:1px dashed rgba(242,141,178,0.5);padding:1px 8px;border-radius:999px;white-space:nowrap'>no list price</span>",
+			                    IF(
+			                        ABS(_delta) < 0.0005,
+			                        "<span style='font-size:11px;font-weight:600;color:#BDF0D6'>= list</span>",
+			                        "<span style='font-size:11px;font-weight:600;color:" & IF(_delta < 0, "#F28DB2", "#BDF0D6") & "'>" & IF(_delta < 0, "&#9660; ", "&#9650; ") & FORMAT(ABS(_delta), "0.0%", "en-US") & "</span>"
+			                    )
+			                )
+			            )
+			        RETURN
+			            "<div style='display:flex;align-items:center;gap:14px;padding:5px 0'>"
+			            & "<div style='width:200px;flex:none;font-size:13px;color:#E6DAF2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & SUBSTITUTE(SUBSTITUTE(DimProduct[Product_Name], "&", "&amp;"), "<", "&lt;") & "</div>"
+			            & "<div style='flex:1;position:relative;height:16px'>"
+			            & IF(ISBLANK([@l]), "", "<div style='position:absolute;left:0;top:0;bottom:0;width:" & FORMAT(DIVIDE([@l], _max) * 100, "0.0", "en-US") & "%;border:1px dashed rgba(224,176,255,0.55);border-radius:6px;box-sizing:border-box'></div>")
+			            & IF(ISBLANK([@p]), "", "<div style='position:absolute;left:0;top:4px;bottom:4px;width:" & FORMAT(DIVIDE([@p], _max) * 100, "0.0", "en-US") & "%;border-radius:999px;background:linear-gradient(90deg,#7B4FA8,#E0B0FF)'></div>")
+			            & "</div>"
+			            & "<div style='width:150px;flex:none;text-align:right;font-size:13px'><span style='font-weight:700;color:#E0B0FF'>" & IF(ISBLANK([@p]), "&#8212;", FORMAT([@p], "#,0.00", "en-US")) & "</span>"
+			            & "<span style='color:#6F6380'> / </span><span style='color:#A99BB8'>" & IF(ISBLANK([@l]), "&#8212;", FORMAT([@l], "#,0.00", "en-US")) & "</span></div>"
+			            & "<div style='width:90px;flex:none;text-align:right'>" & _chip & "</div></div>",
+			        "",
+			        [@l], DESC, DimProduct[Product_Name], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='display:flex;justify-content:space-between;align-items:flex-start'><div>" & "<div style='font-size:17px;font-weight:700'>Selling Price vs List Price</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Filled bar = avg selling price &#183; dashed outline = list price</div>" & "</div>"
+			& "<div style='font-size:12px;color:#8E80A0'>selling / list</div></div>"
+			& "<div style='margin-top:10px;max-height:240px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent;padding-right:6px'>" & _rows & "</div></div>"
+		displayFolder: 06 HTML
+		lineageTag: c1aadf35-b0a1-4df6-b6ae-5e62ac7ee499
+
+	measure 'HTML Price Metrics' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimProduct, DimProduct[Product_Name], DimProduct[Category]),
+			            "@l", CALCULATE(MAX(DimProduct[List_Price_TND])),
+			            "@p", [Average Unit Price],
+			            "@u", [Units Sold],
+			            "@g", [Gross Sales]
+			        ),
+			        NOT ISBLANK([@l]) || NOT ISBLANK([@u])
+			    )
+			VAR _rows =
+			    CONCATENATEX(
+			        _t,
+			        "<tr>" & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<div style='font-weight:600;color:#F4ECFB'>" & SUBSTITUTE(SUBSTITUTE(DimProduct[Product_Name], "&", "&amp;"), "<", "&lt;") & "</div>"
+			        & "<div style='font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#B48AE0'>" & SUBSTITUTE(SUBSTITUTE(DimProduct[Category], "&", "&amp;"), "<", "&lt;") & "</div></td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & IF(ISBLANK([@l]), "&#8212;", FORMAT([@l], "#,0.00", "en-US")) & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-weight:700;color:#E0B0FF'>" & IF(ISBLANK([@p]), "&#8212;", FORMAT([@p], "#,0.00", "en-US")) & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & IF(ISBLANK([@u]), "<span style='color:#6F6380'>0</span>", FORMAT([@u], "#,0", "en-US")) & "</td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & IF(ISBLANK([@g]), "<span style='color:#6F6380'>&#8212;</span>", FORMAT([@g], "#,0.00", "en-US")) & "</td></tr>",
+			        "",
+			        [@g], DESC, DimProduct[Product_Name], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Price Metrics</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>List vs selling price, volume and gross sales</div>"
+			& "<div style='margin-top:12px;max-height:234px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'><table style='width:100%;border-collapse:collapse'>" & "<thead><tr>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Product</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>List</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Selling</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Units</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Gross</th>"
+			& "</tr></thead><tbody>" & _rows & "</tbody></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 3b0dcaf8-b37c-4891-ab8d-d30f9686caa9
+
+	measure 'HTML Trend Header' =
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:0 4px;color:#F4ECFB'><div><div style='font-size:11px;line-height:14px;letter-spacing:4px;text-transform:uppercase;color:#E0B0FF;font-weight:600'>Time Insights</div><div style='display:flex;align-items:baseline;gap:16px;margin-top:2px'><span style='font-size:26px;line-height:32px;font-weight:700;letter-spacing:-0.5px'>Date Trends</span><span style='font-size:13px;color:#8E80A0'>Daily and monthly revenue, orders and units</span></div></div>" & "</div>"
+		displayFolder: 06 HTML
+		lineageTag: f079c4c4-12a5-4c12-b75e-b1459337ccb9
+
+	measure 'HTML Trend KPIs' =
+			VAR _days = COUNTROWS(DimDate)
+			VAR _active = CALCULATE(DISTINCTCOUNT(FactSales[DateKey]))
+			VAR _month = TOPN(1, FILTER(ADDCOLUMNS(SUMMARIZE(DimDate, DimDate[Year], DimDate[Month], DimDate[Month_Name]), "@v", [Net Revenue]), NOT ISBLANK([@v])), [@v], DESC, DimDate[Month], ASC)
+			VAR _day = TOPN(1, FILTER(ADDCOLUMNS(VALUES(DimDate[Date]), "@v", [Net Revenue]), NOT ISBLANK([@v])), [@v], DESC, DimDate[Date], ASC)
+			VAR _cards = {
+			    (1, "Active Sales Days", FORMAT(_active + 0, "#,0", "en-US"), "", "of " & FORMAT(_days + 0, "#,0", "en-US") & " days in range", 0),
+			    (2, "Avg Daily Net Revenue", FORMAT(DIVIDE([Net Revenue], _active), "#,0.00", "en-US"), "TND", "per active sales day", 1),
+			    (3, "Best Month", COALESCE(MAXX(_month, DimDate[Month_Name] & " " & DimDate[Year]), "&#8212;"), "", FORMAT(MAXX(_month, [@v]), "#,0.00", "en-US") & " TND net revenue", 0),
+			    (4, "Peak Day", IF(ISBLANK(MAXX(_day, DimDate[Date])), "&#8212;", FORMAT(MAXX(_day, DimDate[Date]), "mmm d", "en-US")), "", FORMAT(MAXX(_day, [@v]), "#,0.00", "en-US") & " TND net revenue", 0)
+			}
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;gap:20px'>" & CONCATENATEX(_cards, "<div style='flex:1;min-width:0;position:relative;overflow:hidden;padding:16px 22px 14px;border-radius:16px;border:1px solid " & SWITCH([Value6], 1, "rgba(224,176,255,0.55)", 2, "rgba(242,141,178,0.55)", "rgba(224,176,255,0.14)") & ";background:" & SWITCH([Value6], 1, "linear-gradient(135deg,#3B2652 0%,#1C1428 75%)", 2, "linear-gradient(135deg,#3A1F2E 0%,#1C1428 75%)", "linear-gradient(135deg,#1E1629 0%,#15101D 100%)") & "'>" & "<div style='position:absolute;top:0;left:24px;width:44px;height:3px;border-radius:0 0 3px 3px;background:" & IF([Value6] = 2, "#F28DB2", "#E0B0FF") & "'></div>" & "<div style='font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A99BB8;font-weight:600'>" & [Value2] & "</div>" & "<div style='margin-top:6px;display:flex;align-items:baseline;gap:8px;min-width:0'><span style='font-size:" & IF(LEN([Value3]) > 11, "24px", "36px") & ";line-height:38px;font-weight:700;letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:" & SWITCH([Value6], 1, "#E0B0FF", 2, "#F28DB2", "#F4ECFB") & "'>" & [Value3] & "</span>" & "<span style='font-size:14px;font-weight:600;color:#8E80A0'>" & [Value4] & "</span></div>" & "<div style='margin-top:4px;font-size:13px;color:#8E80A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & [Value5] & "</div></div>", "", [Value1], ASC) & "</div>"
+		displayFolder: 06 HTML
+		lineageTag: f2272b59-5f10-4883-b919-18d2fe81bc09
+
+	measure 'HTML Trend Daily Revenue' =
+			VAR _t = ADDCOLUMNS(VALUES(DimDate[Date]), "@v", [Net Revenue], "@o", [Order Count])
+			VAR _max = MAXX(_t, [@v])
+			VAR _active = COUNTROWS(FILTER(_t, NOT ISBLANK([@o])))
+			VAR _avg = DIVIDE(SUMX(_t, [@v]), _active)
+			VAR _peak = TOPN(1, FILTER(_t, NOT ISBLANK([@v])), [@v], DESC, DimDate[Date], ASC)
+			VAR _peakDate = MAXX(_peak, DimDate[Date])
+			VAR _bars =
+			    CONCATENATEX(
+			        _t,
+			        "<div style='flex:1;height:100%;display:flex;align-items:flex-end;padding:0 1px;box-sizing:border-box'><div style='width:100%;height:"
+			        & FORMAT(COALESCE(DIVIDE([@v], _max), 0) * 150, "0", "en-US") & "px;" & IF(ISBLANK([@o]), "", "min-height:3px;")
+			        & "border-radius:3px 3px 1px 1px;background:"
+			        & IF(DimDate[Date] = _peakDate, "linear-gradient(180deg,#FFFFFF,#E0B0FF)", IF(NOT ISBLANK([@o]) && [@v] = 0, "#F28DB2", "linear-gradient(180deg,#E0B0FF,#6E4A9E)"))
+			        & "'></div></div>",
+			        "",
+			        DimDate[Date], ASC
+			    )
+			VAR _months =
+			    CONCATENATEX(
+			        ADDCOLUMNS(SUMMARIZE(DimDate, DimDate[Year], DimDate[Month], DimDate[Month_Name]), "@d", CALCULATE(COUNTROWS(DimDate)), "@v", [Net Revenue] + 0),
+			        "<div style='flex:" & [@d] & ";min-width:0;padding:8px 0 0 10px;border-left:1px solid rgba(224,176,255,0.22)'>"
+			        & "<div style='font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A99BB8;white-space:nowrap'>" & LEFT(DimDate[Month_Name], 3) & " " & DimDate[Year] & "</div>"
+			        & "<div style='font-size:12px;font-weight:600;color:#E0B0FF;margin-top:2px;white-space:nowrap'>" & FORMAT([@v], "#,0.00", "en-US") & " TND</div></div>",
+			        "",
+			        DimDate[Year], ASC, DimDate[Month], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='display:flex;justify-content:space-between;align-items:flex-start'><div>" & "<div style='font-size:17px;font-weight:700'>Net Revenue Trend</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Daily net revenue &#183; dashed line = average per active day</div>" & "</div>"
+			& "<div style='display:flex;gap:18px;font-size:12px;color:#8E80A0;align-items:center'>"
+			& "<span><span style='display:inline-block;width:10px;height:10px;border-radius:3px;background:#FFFFFF;vertical-align:middle'></span> Peak " & IF(ISBLANK(_peakDate), "&#8212;", FORMAT(_peakDate, "mmm d", "en-US") & " &#183; " & FORMAT(MAXX(_peak, [@v]), "#,0.00", "en-US")) & "</span>"
+			& "<span><span style='display:inline-block;width:10px;height:10px;border-radius:3px;background:#F28DB2;vertical-align:middle'></span> Orders with 0 net</span></div></div>"
+			& "<div style='position:relative;height:160px;margin-top:10px;display:flex;border-bottom:1px solid rgba(224,176,255,0.22);background-image:repeating-linear-gradient(to top,rgba(224,176,255,0.06) 0 1px,transparent 1px 45px)'>" & _bars
+			& IF(ISBLANK(_avg), "", "<div style='position:absolute;left:0;right:0;bottom:" & FORMAT(DIVIDE(_avg, _max) * 150, "0", "en-US") & "px;border-top:1px dashed rgba(242,201,255,0.7)'>"
+			& "<span style='position:absolute;right:0;top:-20px;font-size:11px;font-weight:600;color:#F2C9FF;background:#16101F;padding:1px 8px;border-radius:999px'>avg " & FORMAT(_avg, "#,0.00", "en-US") & "</span></div>")
+			& "</div><div style='display:flex'>" & _months & "</div></div>"
+		displayFolder: 06 HTML
+		lineageTag: a4951180-adc6-499c-88b1-4a102e85222b
+
+	measure 'HTML Trend Orders Units' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimDate, DimDate[Year], DimDate[Month], DimDate[Month_Name]),
+			            "@o", [Order Count],
+			            "@u", [Units Sold] + 0,
+			            "@i", DimDate[Year] * 12 + DimDate[Month]
+			        ),
+			        NOT ISBLANK([@o])
+			    )
+			VAR _max = MAXX(_t, MAX([@o], [@u]))
+			VAR _groups =
+			    CONCATENATEX(
+			        _t,
+			        "<div style='flex:1;display:flex;flex-direction:column;align-items:center'>"
+			        & "<div style='height:240px;width:100%;display:flex;align-items:flex-end;justify-content:center;gap:12px'>"
+			        & "<div style='display:flex;flex-direction:column;align-items:center;gap:6px;width:30%;max-width:64px'><div style='font-size:14px;font-weight:700;color:#E0B0FF'>" & FORMAT([@o], "#,0", "en-US") & "</div>"
+			        & "<div style='width:100%;height:" & FORMAT(DIVIDE([@o], _max) * 200, "0", "en-US") & "px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#E0B0FF,#7B4FA8);box-shadow:0 0 22px rgba(224,176,255,0.22)'></div></div>"
+			        & "<div style='display:flex;flex-direction:column;align-items:center;gap:6px;width:30%;max-width:64px'><div style='font-size:14px;font-weight:700;color:#C7A6E8'>" & FORMAT([@u], "#,0", "en-US") & "</div>"
+			        & "<div style='width:100%;height:" & FORMAT(DIVIDE([@u], _max) * 200, "0", "en-US") & "px;border-radius:8px 8px 3px 3px;background:rgba(180,138,224,0.18);border:1px solid rgba(180,138,224,0.6);box-sizing:border-box'></div></div></div>"
+			        & "<div style='margin-top:10px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A99BB8'>" & LEFT(DimDate[Month_Name], 3) & " " & DimDate[Year] & "</div>"
+			        & "<div style='margin-top:2px;font-size:11px;color:#6F6380'>" & FORMAT(DIVIDE([@u], [@o]), "0.0", "en-US") & " units / order</div></div>",
+			        "",
+			        [@i], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='display:flex;justify-content:space-between;align-items:flex-start'><div>" & "<div style='font-size:17px;font-weight:700'>Orders and Units by Month</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Order count vs units sold</div>" & "</div>"
+			& "<div style='display:flex;gap:14px;font-size:11px;color:#8E80A0'><span><span style='display:inline-block;width:10px;height:10px;border-radius:3px;background:#E0B0FF;vertical-align:middle'></span> Orders</span>"
+			& "<span><span style='display:inline-block;width:10px;height:10px;border-radius:3px;border:1px solid rgba(180,138,224,0.6);background:rgba(180,138,224,0.18);vertical-align:middle'></span> Units</span></div></div>"
+			& "<div style='display:flex;gap:16px;margin-top:20px;padding-top:6px;border-bottom:0;background-image:repeating-linear-gradient(to top,rgba(224,176,255,0.06) 0 1px,transparent 1px 50px);background-size:100% 240px;background-repeat:no-repeat'>" & _groups & "</div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 21584993-82e0-4656-8713-a362615b7f03
+
+	measure 'HTML Trend Monthly Detail' =
+			VAR _t =
+			    FILTER(
+			        ADDCOLUMNS(
+			            SUMMARIZE(DimDate, DimDate[Year], DimDate[Month], DimDate[Month_Name]),
+			            "@g", [Gross Sales],
+			            "@n", [Net Revenue] + 0,
+			            "@o", [Order Count],
+			            "@u", [Units Sold] + 0,
+			            "@i", DimDate[Year] * 12 + DimDate[Month]
+			        ),
+			        NOT ISBLANK([@o])
+			    )
+			VAR _rows =
+			    CONCATENATEX(
+			        _t,
+			        VAR _i = [@i]
+			        VAR _prev = MAXX(FILTER(_t, [@i] = _i - 1), [@n])
+			        VAR _delta = DIVIDE([@n] - _prev, _prev)
+			        RETURN
+			            "<tr>" & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-weight:600;color:#F4ECFB'>" & DimDate[Month_Name] & " " & DimDate[Year] & "</span></td>"
+			            & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & FORMAT([@o], "#,0", "en-US") & "</td>"
+			            & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & FORMAT([@u], "#,0", "en-US") & "</td>"
+			            & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & FORMAT([@g], "#,0.00", "en-US") & "</span></td>"
+			            & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-weight:700;color:#E0B0FF'>" & FORMAT([@n], "#,0.00", "en-US") & "</span></td>"
+			            & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & FORMAT(DIVIDE([@n], [@o]), "#,0.00", "en-US") & "</td>"
+			            & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>"
+			            & IF(
+			                ISBLANK(_prev),
+			                "<span style='font-size:11px;color:#6F6380'>baseline</span>",
+			                "<span style='font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;"
+			                & IF(_delta >= 0, "color:#BDF0D6;background:rgba(189,240,214,0.10)'>&#9650; ", "color:#F28DB2;background:rgba(242,141,178,0.12)'>&#9660; ")
+			                & FORMAT(ABS(_delta), "0.0%", "en-US") & "</span>"
+			            )
+			            & "</td></tr>",
+			        "",
+			        [@i], ASC
+			    )
+			VAR _foot = "padding:10px 8px 0;font-size:13px;font-weight:700;border-top:1px solid rgba(224,176,255,0.25);text-align:right"
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Monthly Detail</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Orders, units, sales and order value per month</div>"
+			& "<div style='margin-top:12px;max-height:340px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'><table style='width:100%;border-collapse:collapse'>" & "<thead><tr>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Month</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Orders</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Units</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Gross</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Net Revenue</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>AOV</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>MoM Net</th>"
+			& "</tr></thead><tbody>" & _rows & "</tbody><tfoot><tr>"
+			& "<td style='" & _foot & ";text-align:left;color:#A99BB8;letter-spacing:1px;font-size:11px;text-transform:uppercase'>Total</td>"
+			& "<td style='" & _foot & "'>" & FORMAT([Order Count] + 0, "#,0", "en-US") & "</td>"
+			& "<td style='" & _foot & "'>" & FORMAT([Units Sold] + 0, "#,0", "en-US") & "</td>"
+			& "<td style='" & _foot & ";color:#A99BB8'>" & FORMAT([Gross Sales] + 0, "#,0.00", "en-US") & "</td>"
+			& "<td style='" & _foot & ";color:#E0B0FF'>" & FORMAT([Net Revenue] + 0, "#,0.00", "en-US") & "</td>"
+			& "<td style='" & _foot & "'>" & FORMAT([AOV], "#,0.00", "en-US") & "</td><td style='" & _foot & "'></td></tr></tfoot></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 2d88e737-69aa-4ff7-b547-5d7e1b737ad2
+
+	measure 'HTML Quality Header' =
+			VAR _flagged = [Data Quality Flagged Lines] + 0
+			VAR _exceptions = COUNTROWS(FILTER(FactPayments, NOT ISBLANK(FactPayments[Payment_Flag]) || ISBLANK(FactPayments[Payment_Amount_TND]))) + 0
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:0 4px;color:#F4ECFB'><div><div style='font-size:11px;line-height:14px;letter-spacing:4px;text-transform:uppercase;color:#E0B0FF;font-weight:600'>Data Governance</div><div style='display:flex;align-items:baseline;gap:16px;margin-top:2px'><span style='font-size:26px;line-height:32px;font-weight:700;letter-spacing:-0.5px'>Data Quality</span><span style='font-size:13px;color:#8E80A0'>Exceptions kept visible, not silently corrected</span></div></div>"
+			& "<div style='text-align:right'><div style='display:inline-block;padding:8px 16px;border:1px solid rgba(242,141,178,0.45);border-radius:999px;background:rgba(242,141,178,0.08);color:#F2B5CB;font-size:13px;font-weight:600'>"
+			& FORMAT(_flagged, "#,0", "en-US") & " flagged lines &#183; " & FORMAT(_exceptions, "#,0", "en-US") & " payment exceptions</div></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 3d5816e2-a1cb-4b57-bdff-c76778e80e44
+
+	measure 'HTML Quality KPIs' =
+			VAR _flag = [Data Quality Flagged Lines] + 0
+			VAR _unknown = [Unknown Member Lines] + 0
+			VAR _missing = [Missing Payment Amount Rows] + 0
+			VAR _noPay = [No Payment Orders] + 0
+			VAR _coverage = [Segment Coverage %] + 0
+			VAR _cards = {
+			    (1, "Flagged Lines", FORMAT(_flag, "#,0", "en-US"), "", "of " & FORMAT([Line Count] + 0, "#,0", "en-US") & " order lines", IF(_flag > 0, 2, 0)),
+			    (2, "Unknown Member Lines", FORMAT(_unknown, "#,0", "en-US"), "", "unmatched customer, product or store", IF(_unknown > 0, 2, 0)),
+			    (3, "Missing Pay Amount", FORMAT(_missing, "#,0", "en-US"), "", "payment rows without an amount", IF(_missing > 0, 2, 0)),
+			    (4, "No Payment Orders", FORMAT(_noPay, "#,0", "en-US"), "", "orders with no payment record", IF(_noPay > 0, 2, 0)),
+			    (5, "Segment Coverage", FORMAT(_coverage, "0.0%", "en-US"), "", FORMAT([Missing Segment Customers] + 0, "#,0", "en-US") & " customers missing a segment", IF(_coverage < 1, 2, 1))
+			}
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;display:flex;gap:20px'>" & CONCATENATEX(_cards, "<div style='flex:1;min-width:0;position:relative;overflow:hidden;padding:16px 22px 14px;border-radius:16px;border:1px solid " & SWITCH([Value6], 1, "rgba(224,176,255,0.55)", 2, "rgba(242,141,178,0.55)", "rgba(224,176,255,0.14)") & ";background:" & SWITCH([Value6], 1, "linear-gradient(135deg,#3B2652 0%,#1C1428 75%)", 2, "linear-gradient(135deg,#3A1F2E 0%,#1C1428 75%)", "linear-gradient(135deg,#1E1629 0%,#15101D 100%)") & "'>" & "<div style='position:absolute;top:0;left:24px;width:44px;height:3px;border-radius:0 0 3px 3px;background:" & IF([Value6] = 2, "#F28DB2", "#E0B0FF") & "'></div>" & "<div style='font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A99BB8;font-weight:600'>" & [Value2] & "</div>" & "<div style='margin-top:6px;display:flex;align-items:baseline;gap:8px;min-width:0'><span style='font-size:" & IF(LEN([Value3]) > 11, "24px", "36px") & ";line-height:38px;font-weight:700;letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:" & SWITCH([Value6], 1, "#E0B0FF", 2, "#F28DB2", "#F4ECFB") & "'>" & [Value3] & "</span>" & "<span style='font-size:14px;font-weight:600;color:#8E80A0'>" & [Value4] & "</span></div>" & "<div style='margin-top:4px;font-size:13px;color:#8E80A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & [Value5] & "</div></div>", "", [Value1], ASC) & "</div>"
+		displayFolder: 06 HTML
+		lineageTag: 2e29f07e-907b-4d27-aa8c-a1fd7115d90a
+
+	measure 'HTML Quality Payment Exceptions' =
+			VAR _t = FILTER(FactPayments, NOT ISBLANK(FactPayments[Payment_Flag]) || ISBLANK(FactPayments[Payment_Amount_TND]))
+			VAR _rows =
+			    CONCATENATEX(
+			        _t,
+			        VAR _order = FactPayments[Order_ID]
+			        VAR _gross = CALCULATE(SUM(FactSales[Gross_Sales_TND]), FactSales[Order_ID] = _order)
+			        VAR _amount = FactPayments[Payment_Amount_TND]
+			        VAR _variance = _amount - _gross
+			        RETURN
+			            "<tr>" & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-weight:600;color:#F4ECFB'>" & FactPayments[Payment_ID] & "</span></td>"
+			            & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & _order & "</span></td>"
+			            & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-size:12px;color:" & IF(FactPayments[Payment_Status] = "Refunded", "#F2B5CB", "#E6DAF2") & "'>" & FactPayments[Payment_Status] & "</span></td>"
+			            & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & IF(ISBLANK(_amount), "<span style='font-size:11px;color:#F28DB2;border:1px dashed rgba(242,141,178,0.5);padding:1px 8px;border-radius:999px;white-space:nowrap'>missing</span>", "<span style='font-weight:700;color:#E0B0FF'>" & FORMAT(_amount, "#,0.00", "en-US") & "</span>") & "</td>"
+			            & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & IF(ISBLANK(_gross), "&#8212;", FORMAT(_gross, "#,0.00", "en-US")) & "</span></td>"
+			            & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & IF(ISBLANK(_amount) || ISBLANK(_gross), "<span style='color:#6F6380'>&#8212;</span>",
+			                "<span style='font-weight:600;color:" & IF(ABS(_variance) < 0.005, "#BDF0D6", "#F28DB2") & "'>" & IF(_variance > 0, "+", "") & FORMAT(_variance, "#,0.00", "en-US") & "</span>") & "</td>"
+			            & "<td style='padding:6px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07)'>" & IF(ISBLANK(FactPayments[Payment_Flag]), "<span style='color:#6F6380'>&#8212;</span>", "<span style='display:inline-block;margin:1px 4px 1px 0;font-size:10px;letter-spacing:0.5px;padding:2px 7px;border-radius:5px;background:rgba(242,141,178,0.10);color:#F2B5CB;border:1px solid rgba(242,141,178,0.30)'>" & SUBSTITUTE(FactPayments[Payment_Flag], "; ", "</span><span style='display:inline-block;margin:1px 4px 1px 0;font-size:10px;letter-spacing:0.5px;padding:2px 7px;border-radius:5px;background:rgba(242,141,178,0.10);color:#F2B5CB;border:1px solid rgba(242,141,178,0.30)'>") & "</span>") & "</td></tr>",
+			        "",
+			        FactPayments[Payment_ID], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='display:flex;justify-content:space-between;align-items:baseline'><div>" & "<div style='font-size:17px;font-weight:700'>Payment Exceptions</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Payments flagged or missing an amount, against the order's gross sales</div>" & "</div>"
+			& "<div style='font-size:12px;color:#F28DB2'>" & FORMAT(COUNTROWS(_t) + 0, "#,0", "en-US") & " of " & FORMAT(COUNTROWS(FactPayments) + 0, "#,0", "en-US") & " payments</div></div>"
+			& "<div style='margin-top:12px;max-height:250px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'><table style='width:100%;border-collapse:collapse'>" & "<thead><tr>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Payment</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Order</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Status</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Amount</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Order Gross</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Variance</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Flag</th>"
+			& "</tr></thead><tbody>" & _rows & "</tbody></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 42fc8d23-2702-4fbc-a925-e13e8cc7df2e
+
+	measure 'HTML Quality Order Flags' =
+			VAR _t = FILTER(DimOrder, NOT ISBLANK(DimOrder[Data_Quality_Flag]))
+			VAR _rows =
+			    CONCATENATEX(
+			        _t,
+			        "<tr>" & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-weight:600;color:#F4ECFB'>" & DimOrder[Order_ID] & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & FORMAT(DimOrder[Order_Date], "mmm d", "en-US") & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px;white-space:nowrap;color:" & SWITCH(DimOrder[Order_Status], "Completed", "#E0B0FF", "Shipped", "#B48AE0", "Pending", "#8460B3", "Returned", "#5D4A78", "Cancelled", "#F28DB2", "#A99BB8") & ";border:1px solid " & SWITCH(DimOrder[Order_Status], "Completed", "#E0B0FF", "Shipped", "#B48AE0", "Pending", "#8460B3", "Returned", "#5D4A78", "Cancelled", "#F28DB2", "#A99BB8") & "'>" & DimOrder[Order_Status] & "</span>" & "</td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & IF(DimOrder[Payment_Status] = "No Payment", "<span style='font-size:11px;color:#F28DB2;border:1px dashed rgba(242,141,178,0.5);padding:1px 8px;border-radius:999px;white-space:nowrap'>no payment</span>", "<span style='font-size:12px;color:" & IF(DimOrder[Payment_Status] = "Refunded", "#F2B5CB", "#E6DAF2") & "'>" & DimOrder[Payment_Status] & "</span>") & "</td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & FORMAT(DimOrder[Line_Count], "#,0", "en-US") & "</td>"
+			        & "<td style='padding:6px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07)'>" & IF(ISBLANK(DimOrder[Data_Quality_Flag]), "<span style='color:#6F6380'>&#8212;</span>", "<span style='display:inline-block;margin:1px 4px 1px 0;font-size:10px;letter-spacing:0.5px;padding:2px 7px;border-radius:5px;background:rgba(242,141,178,0.10);color:#F2B5CB;border:1px solid rgba(242,141,178,0.30)'>" & SUBSTITUTE(DimOrder[Data_Quality_Flag], "; ", "</span><span style='display:inline-block;margin:1px 4px 1px 0;font-size:10px;letter-spacing:0.5px;padding:2px 7px;border-radius:5px;background:rgba(242,141,178,0.10);color:#F2B5CB;border:1px solid rgba(242,141,178,0.30)'>") & "</span>") & "</td></tr>",
+			        "",
+			        DimOrder[Order_ID], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='display:flex;justify-content:space-between;align-items:baseline'><div>" & "<div style='font-size:17px;font-weight:700'>Order Flags</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Orders touched by cleaning rules or quality checks</div>" & "</div>"
+			& "<div style='font-size:12px;color:#F28DB2'>" & FORMAT(COUNTROWS(_t) + 0, "#,0", "en-US") & " of " & FORMAT(COUNTROWS(DimOrder) + 0, "#,0", "en-US") & " orders</div></div>"
+			& "<div style='margin-top:12px;max-height:250px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'><table style='width:100%;border-collapse:collapse'>" & "<thead><tr>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Order</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Date</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Status</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Payment</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Lines</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Flags</th>"
+			& "</tr></thead><tbody>" & _rows & "</tbody></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: e5c2f323-c320-42b6-8c93-4f4819183b84
+
+	measure 'HTML Quality Customers' =
+			VAR _unknown = COUNTROWS(FILTER(DimCustomer, DimCustomer[Is_Unknown])) + 0
+			VAR _noSegment = COUNTROWS(FILTER(DimCustomer, ISBLANK(DimCustomer[Segment]))) + 0
+			VAR _rows =
+			    CONCATENATEX(
+			        DimCustomer,
+			        "<tr" & IF(DimCustomer[Is_Unknown], " style='background:rgba(242,141,178,0.06)'", "") & ">"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & DimCustomer[CustomerKey] & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<div style='display:flex;align-items:center;max-width:190px'><span style='color:#F4ECFB;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & SUBSTITUTE(SUBSTITUTE(DimCustomer[Customer_Name], "&", "&amp;"), "<", "&lt;") & "</span>" & IF(DimCustomer[Is_Unknown], "<span style='flex:none;margin-left:6px;font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:4px;border:1px solid #F28DB2;color:#F28DB2'>UNKNOWN</span>", "") & "</div></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & COALESCE(SUBSTITUTE(SUBSTITUTE(DimCustomer[City], "&", "&amp;"), "<", "&lt;"), "&#8212;") & "</td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & IF(ISBLANK(DimCustomer[Segment]), "<span style='font-size:11px;color:#F28DB2;border:1px dashed rgba(242,141,178,0.5);padding:1px 8px;border-radius:999px;white-space:nowrap'>missing</span>", SUBSTITUTE(SUBSTITUTE(DimCustomer[Segment], "&", "&amp;"), "<", "&lt;")) & "</td></tr>",
+			        "",
+			        DimCustomer[CustomerKey], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Customers</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Segment coverage and unknown members</div>"
+			& "<div style='margin-top:4px;font-size:12px;color:#8E80A0'>" & FORMAT(COUNTROWS(DimCustomer) + 0, "#,0", "en-US") & " customers &#183; <span style='color:#F28DB2'>" & FORMAT(_unknown, "#,0", "en-US") & " unknown &#183; " & FORMAT(_noSegment, "#,0", "en-US") & " missing segment</span></div>"
+			& "<div style='margin-top:12px;max-height:232px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'><table style='width:100%;border-collapse:collapse'>" & "<thead><tr>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Key</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Customer</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>City</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Segment</th>" & "</tr></thead><tbody>" & _rows & "</tbody></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 4c5a7002-9ace-4838-a3ad-b9f95c7bcc07
+
+	measure 'HTML Quality Products' =
+			VAR _unknown = COUNTROWS(FILTER(DimProduct, DimProduct[Is_Unknown])) + 0
+			VAR _noPrice = COUNTROWS(FILTER(DimProduct, ISBLANK(DimProduct[List_Price_TND]))) + 0
+			VAR _rows =
+			    CONCATENATEX(
+			        DimProduct,
+			        "<tr" & IF(DimProduct[Is_Unknown], " style='background:rgba(242,141,178,0.06)'", "") & ">"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & DimProduct[ProductKey] & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<div style='display:flex;align-items:center;max-width:140px'><span style='color:#F4ECFB;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & SUBSTITUTE(SUBSTITUTE(DimProduct[Product_Name], "&", "&amp;"), "<", "&lt;") & "</span>" & IF(DimProduct[Is_Unknown], "<span style='flex:none;margin-left:6px;font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:4px;border:1px solid #F28DB2;color:#F28DB2'>UNKNOWN</span>", "") & "</div></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#B48AE0'>" & COALESCE(SUBSTITUTE(SUBSTITUTE(DimProduct[Category], "&", "&amp;"), "<", "&lt;"), "&#8212;") & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:right;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & IF(ISBLANK(DimProduct[List_Price_TND]), "<span style='font-size:11px;color:#F28DB2;border:1px dashed rgba(242,141,178,0.5);padding:1px 8px;border-radius:999px;white-space:nowrap'>no price</span>", FORMAT(DimProduct[List_Price_TND], "#,0.00", "en-US")) & "</td></tr>",
+			        "",
+			        DimProduct[ProductKey], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Products</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Catalogue completeness and unknown members</div>"
+			& "<div style='margin-top:4px;font-size:12px;color:#8E80A0'>" & FORMAT(COUNTROWS(DimProduct) + 0, "#,0", "en-US") & " products &#183; <span style='color:#F28DB2'>" & FORMAT(_unknown, "#,0", "en-US") & " unknown &#183; " & FORMAT(_noPrice, "#,0", "en-US") & " without list price</span></div>"
+			& "<div style='margin-top:12px;max-height:232px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'><table style='width:100%;border-collapse:collapse'>" & "<thead><tr>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Key</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Product</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Category</th>" & "<th style='text-align:right;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>List Price</th>" & "</tr></thead><tbody>" & _rows & "</tbody></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 7c0be726-0706-425e-a698-e22fb0849932
+
+	measure 'HTML Quality Stores' =
+			VAR _unknown = COUNTROWS(FILTER(DimStore, DimStore[Is_Unknown])) + 0
+			VAR _rows =
+			    CONCATENATEX(
+			        DimStore,
+			        "<tr" & IF(DimStore[Is_Unknown], " style='background:rgba(242,141,178,0.06)'", "") & ">"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & DimStore[StoreKey] & "</span></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<div style='display:flex;align-items:center;max-width:210px'><span style='color:#F4ECFB;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>" & SUBSTITUTE(SUBSTITUTE(DimStore[Store_Name], "&", "&amp;"), "<", "&lt;") & "</span>" & IF(DimStore[Is_Unknown], "<span style='flex:none;margin-left:6px;font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:4px;border:1px solid #F28DB2;color:#F28DB2'>UNKNOWN</span>", "") & "</div></td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & COALESCE(SUBSTITUTE(SUBSTITUTE(DimStore[City], "&", "&amp;"), "<", "&lt;"), "&#8212;") & "</td>"
+			        & "<td style='padding:7px 8px;text-align:left;font-size:13px;color:#E6DAF2;border-bottom:1px solid rgba(224,176,255,0.07);white-space:nowrap'>" & "<span style='color:#A99BB8'>" & COALESCE(SUBSTITUTE(SUBSTITUTE(DimStore[Region], "&", "&amp;"), "<", "&lt;"), "&#8212;") & "</span></td></tr>",
+			        "",
+			        DimStore[StoreKey], ASC
+			    )
+			RETURN
+			"<div style='font-family:Segoe UI,Arial,sans-serif;padding:14px 22px;color:#F4ECFB'>" & "<div style='font-size:17px;font-weight:700'>Stores</div><div style='font-size:12px;color:#8E80A0;margin-top:2px'>Store master data and unknown members</div>"
+			& "<div style='margin-top:4px;font-size:12px;color:#8E80A0'>" & FORMAT(COUNTROWS(DimStore) + 0, "#,0", "en-US") & " stores &#183; <span style='color:#F28DB2'>" & FORMAT(_unknown, "#,0", "en-US") & " unknown</span></div>"
+			& "<div style='margin-top:12px;max-height:232px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#5D4A78 transparent'><table style='width:100%;border-collapse:collapse'>" & "<thead><tr>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Key</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Store</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>City</th>" & "<th style='text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E80A0;font-weight:600;padding:0 8px 8px;border-bottom:1px solid rgba(224,176,255,0.18);position:sticky;top:0;background:#16101F;white-space:nowrap'>Region</th>" & "</tr></thead><tbody>" & _rows & "</tbody></table></div></div>"
+		displayFolder: 06 HTML
+		lineageTag: 10322ceb-a1d6-4450-a169-ca991129ac32
+
+	measure 'HTML Page Sales Overview' =
+			"<div style='position:relative;width:1920px;height:1340px;font-family:Segoe UI,Arial,sans-serif'>"
+			& "<div style='position:absolute;left:40px;top:16px;width:1840px;height:105px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Header] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:131px;width:1840px;height:188px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML KPI Cards] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:456px;width:1180px;height:415px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Revenue by Month] & "</div></div>"
+			& "<div style='position:absolute;left:1240px;top:456px;width:640px;height:415px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Order Status] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:891px;width:900px;height:425px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Revenue by Store] & "</div></div>"
+			& "</div>"
+		displayFolder: 06 HTML
+		lineageTag: 86a0ac5f-a16a-4bee-a017-16484d221fed
+
+	measure 'HTML Page Product Performance' =
+			"<div style='position:relative;width:1920px;height:1340px;font-family:Segoe UI,Arial,sans-serif'>"
+			& "<div style='position:absolute;left:40px;top:16px;width:1200px;height:105px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Product Header] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:131px;width:1840px;height:188px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Product KPIs] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:338px;width:1180px;height:525px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Product Revenue Bars] & "</div></div>"
+			& "<div style='position:absolute;left:1240px;top:338px;width:640px;height:525px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Category Mix] & "</div></div>"
+			& "</div>"
+		displayFolder: 06 HTML
+		lineageTag: a388f7ad-8a38-4a95-8ff2-d699f7234c65
+
+	measure 'HTML Page Order Analysis' =
+			"<div style='position:relative;width:1920px;height:1340px;font-family:Segoe UI,Arial,sans-serif'>"
+			& "<div style='position:absolute;left:40px;top:16px;width:1840px;height:105px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Orders Header] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:131px;width:1840px;height:188px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Orders KPIs] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:338px;width:900px;height:475px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Orders Gross vs Net] & "</div></div>"
+			& "<div style='position:absolute;left:960px;top:338px;width:920px;height:475px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Orders Status Mix] & "</div></div>"
+			& "</div>"
+		displayFolder: 06 HTML
+		lineageTag: cbbe22f5-5a70-476d-af17-2e38c7af38f4
+
+	measure 'HTML Page Price Analysis' =
+			"<div style='position:relative;width:1920px;height:1340px;font-family:Segoe UI,Arial,sans-serif'>"
+			& "<div style='position:absolute;left:40px;top:16px;width:1840px;height:105px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Price Header] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:131px;width:1840px;height:188px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Price KPIs] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:338px;width:900px;height:500px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Price by Product] & "</div></div>"
+			& "<div style='position:absolute;left:960px;top:338px;width:920px;height:500px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Price Units Scatter] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:858px;width:1180px;height:458px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Price vs List] & "</div></div>"
+			& "</div>"
+		displayFolder: 06 HTML
+		lineageTag: d4692ccf-2d2a-468b-a388-03aca90bdbda
+
+	measure 'HTML Page Date Trends' =
+			"<div style='position:relative;width:1920px;height:1340px;font-family:Segoe UI,Arial,sans-serif'>"
+			& "<div style='position:absolute;left:40px;top:16px;width:1200px;height:105px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Trend Header] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:131px;width:1840px;height:188px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Trend KPIs] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:338px;width:1840px;height:412px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Trend Daily Revenue] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:771px;width:900px;height:545px;overflow:hidden;box-sizing:border-box;background:#16101F;border:1px solid #2E2340;border-radius:16px;'><div style='zoom:1.25'>" & [HTML Trend Orders Units] & "</div></div>"
+			& "</div>"
+		displayFolder: 06 HTML
+		lineageTag: 523273dd-9503-4198-963b-39919d50e9f0
+
+	measure 'HTML Page Data Quality' =
+			"<div style='position:relative;width:1920px;height:1340px;font-family:Segoe UI,Arial,sans-serif'>"
+			& "<div style='position:absolute;left:40px;top:16px;width:1840px;height:105px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Quality Header] & "</div></div>"
+			& "<div style='position:absolute;left:40px;top:131px;width:1840px;height:188px;overflow:hidden;box-sizing:border-box;'><div style='zoom:1.25'>" & [HTML Quality KPIs] & "</div></div>"
+			& "</div>"
+		displayFolder: 06 HTML
+		lineageTag: caa39c45-b45d-4307-96ac-fac5e435ba96
+
+	column 'Order_Line_ID'
+		dataType: string
+		lineageTag: c5e1f897-e26c-5dae-a51f-dc9f0d1ac8ce
+		summarizeBy: none
+		sourceColumn: Order_Line_ID
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order_ID'
+		dataType: string
+		lineageTag: 11b4fc11-5494-56e3-a36c-e0963645b4c4
+		summarizeBy: none
+		sourceColumn: Order_ID
+		annotation SummarizationSetBy = Automatic
+
+	column 'DateKey'
+		dataType: int64
+		isHidden
+		lineageTag: 723e49a9-eeba-598a-8b2d-73ca4993c16a
+		summarizeBy: none
+		sourceColumn: DateKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'CustomerKey'
+		dataType: string
+		isHidden
+		lineageTag: 98bcc60c-0237-5d89-8a53-fe7abc1bee44
+		summarizeBy: none
+		sourceColumn: CustomerKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'ProductKey'
+		dataType: string
+		isHidden
+		lineageTag: 22ef620a-c35a-5e55-9aaf-6ff58376b356
+		summarizeBy: none
+		sourceColumn: ProductKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'StoreKey'
+		dataType: string
+		isHidden
+		lineageTag: 42762403-9461-506a-9d63-bce8ffe6a944
+		summarizeBy: none
+		sourceColumn: StoreKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quantity'
+		dataType: int64
+		lineageTag: 8699a61d-32e0-5d00-97ac-fb33ef1dce61
+		summarizeBy: sum
+		sourceColumn: Quantity
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit_Price_TND'
+		dataType: double
+		lineageTag: 0799019d-5c72-5824-bdab-a050f5db6f85
+		formatString: #,0.00
+		summarizeBy: none
+		sourceColumn: Unit_Price_TND
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discount_Percent'
+		dataType: double
+		lineageTag: 41d11ba2-a1eb-519f-b80f-fef3c75948ef
+		formatString: 0.00
+		summarizeBy: none
+		sourceColumn: Discount_Percent
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gross_Sales_TND'
+		dataType: double
+		lineageTag: a350bbdd-bbc3-528d-a2db-bff2ebb8533b
+		formatString: #,0.00
+		summarizeBy: sum
+		sourceColumn: Gross_Sales_TND
+		annotation SummarizationSetBy = Automatic
+
+	column 'Net_Sales_TND'
+		dataType: double
+		lineageTag: a2731986-9817-5afa-a9c2-92a6bd04b4b4
+		formatString: #,0.00
+		summarizeBy: sum
+		sourceColumn: Net_Sales_TND
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order_Status'
+		dataType: string
+		lineageTag: 7150a774-5506-5218-8732-fb3e3dee94e8
+		summarizeBy: none
+		sourceColumn: Order_Status
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue_Eligible'
+		dataType: string
+		lineageTag: 82da329f-8260-5dd2-8a5e-857d889f6b03
+		summarizeBy: none
+		sourceColumn: Revenue_Eligible
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data_Quality_Flag'
+		dataType: string
+		lineageTag: e3f5003f-67d2-5d61-82f3-9fb5a3c40c52
+		summarizeBy: none
+		sourceColumn: Data_Quality_Flag
+		annotation SummarizationSetBy = Automatic
+
+	partition FactSales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\FactSales.csv"), [Delimiter = ",", Columns = 14, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"Order_Line_ID", type text}, {"Order_ID", type text}, {"DateKey", Int64.Type}, {"CustomerKey", type text}, {"ProductKey", type text}, {"StoreKey", type text}, {"Quantity", Int64.Type}, {"Unit_Price_TND", type number}, {"Discount_Percent", type number}, {"Gross_Sales_TND", type number}, {"Net_Sales_TND", type number}, {"Order_Status", type text}, {"Revenue_Eligible", type text}, {"Data_Quality_Flag", type text}}, "en-US"),
+				    Blanks = Table.ReplaceValue(Typed, "", null, Replacer.ReplaceValue, Table.ColumnsOfType(Typed, {type text, type nullable text}))
+				in
+				    Blanks

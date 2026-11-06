@@ -1,0 +1,49 @@
+table DimStore
+	lineageTag: e5d7e6d1-0cf3-5665-8912-f0dcfdc3e07e
+
+	column 'StoreKey'
+		dataType: string
+		isKey
+		lineageTag: 018858f2-bd08-5b35-a882-56fe50960b89
+		summarizeBy: none
+		sourceColumn: StoreKey
+		annotation SummarizationSetBy = Automatic
+
+	column 'Store_Name'
+		dataType: string
+		lineageTag: f2bc5c28-7f07-56b9-9f83-0a7a03ca31e3
+		summarizeBy: none
+		sourceColumn: Store_Name
+		annotation SummarizationSetBy = Automatic
+
+	column 'City'
+		dataType: string
+		lineageTag: 10d96b61-425a-5613-99e0-25af860f91e9
+		summarizeBy: none
+		sourceColumn: City
+		annotation SummarizationSetBy = Automatic
+
+	column 'Region'
+		dataType: string
+		lineageTag: ce3a20a6-a175-5581-b3c6-56fd36e9b77b
+		summarizeBy: none
+		sourceColumn: Region
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is_Unknown'
+		dataType: boolean
+		lineageTag: d4c1094a-7652-5ada-a3e0-30bee8202d98
+		summarizeBy: none
+		sourceColumn: Is_Unknown
+		annotation SummarizationSetBy = Automatic
+
+	partition DimStore = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\DimStore.csv"), [Delimiter = ",", Columns = 5, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"StoreKey", type text}, {"Store_Name", type text}, {"City", type text}, {"Region", type text}, {"Is_Unknown", type logical}}, "en-US"),
+				    Blanks = Table.ReplaceValue(Typed, "", null, Replacer.ReplaceValue, Table.ColumnsOfType(Typed, {type text, type nullable text}))
+				in
+				    Blanks

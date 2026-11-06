@@ -1,0 +1,52 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+expression DataFolder = "C:\Users\HediSouaeid\Downloads\biproject\output" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c93f1300-9192-534d-9f97-39960570696b
+	annotation PBI_ResultType = Text
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref cultureInfo fr-FR
+
+relationship 07d755e0-75ca-51f8-b9f1-4ba79eee4671
+	fromColumn: FactSales.Order_ID
+	toColumn: DimOrder.Order_ID
+
+relationship 4e2b3a40-9cf7-514e-af3b-cdf23f0cc6ac
+	fromColumn: FactPayments.Order_ID
+	toColumn: DimOrder.Order_ID
+
+relationship a15875b1-172b-59f6-b0ea-c9b156b1e012
+	fromColumn: FactSales.DateKey
+	toColumn: DimDate.DateKey
+
+relationship cdf85866-2fb6-50a0-a06c-0600b8637269
+	fromColumn: FactPayments.DateKey
+	toColumn: DimDate.DateKey
+
+relationship 19237784-899b-5e76-89fc-ba8853556be9
+	fromColumn: FactSales.CustomerKey
+	toColumn: DimCustomer.CustomerKey
+
+relationship cd9ff3d1-fac9-5b0f-966b-f8824b9e2e11
+	fromColumn: FactPayments.CustomerKey
+	toColumn: DimCustomer.CustomerKey
+
+relationship 9dfd2a07-e206-5025-a865-d32f2ea9c50a
+	fromColumn: FactSales.ProductKey
+	toColumn: DimProduct.ProductKey
+
+relationship 66374a6b-4359-51ca-bfec-95a4d9a2ae1d
+	fromColumn: FactSales.StoreKey
+	toColumn: DimStore.StoreKey
+
+relationship 0c4711ec-e679-59dc-b4e0-33138f0c5bff
+	fromColumn: FactPayments.StoreKey
+	toColumn: DimStore.StoreKey

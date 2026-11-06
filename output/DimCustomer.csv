@@ -1,0 +1,17 @@
+CustomerKey,Customer_Name,Email,Email_Is_Valid,City,Signup_Date,Segment,Is_Unknown
+C001,Amira Ben Salah,amira.bensalah@email.tn,True,Sousse,2025-03-12,,False
+C002,Youssef Trabelsi,y.trabelsi@email.tn,True,Tunis,2025-04-20,,False
+C003,Meriem Gharbi,meriem.g@email.tn,True,Monastir,2025-05-01,,False
+C004,Karim Mansour,karim.m@email.tn,True,Sfax,2025-06-15,,False
+C005,Salma Jaziri,salma.j@email.tn,True,Sousse,2025-07-09,,False
+C006,Nour Ben Amor,nour.ba@email.tn,True,Tunis,2025-08-22,,False
+C007,Fares Khelifi,fares.k@email.tn,True,Nabeul,2025-09-10,,False
+C008,Ines Mabrouk,ines.m@email.tn,True,Sfax,2025-10-05,,False
+C009,Omar Saidi,omar.s@email.tn,True,Sousse,2025-11-18,,False
+C010,Rania Chaabane,rania.c@email.tn,True,Tunis,2025-12-02,,False
+C011,Hatem Bouazizi,,False,Monastir,2025-12-11,,False
+C012,Lina Kammoun,lina.k@email.tn,True,Nabeul,2025-12-20,,False
+C013,Duplicate Example,dup@email.tn,True,Tunis,2025-12-21,,False
+C014,Sami Ben Ali,sami@email.tn,True,Sousse,2025-12-22,,False
+C015,Unknown City,unknown@email.tn,True,,2025-12-23,,False
+C999,Unknown Customer (C999),,False,Unknown,,,True
