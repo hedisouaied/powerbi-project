@@ -131,6 +131,88 @@ table FactSales
 		displayFolder: 05 Data Quality
 		lineageTag: f858bcfb-0b07-5d52-9452-59eb1ca66b31
 
+	/// Rows of FactPayments as a JSON array, read by the Data Quality page visual (one visual per page).
+	measure 'DQ Payments JSON' =
+			"[" & CONCATENATEX(
+			    FactPayments,
+			    "{""id"":" & IF(ISBLANK(FactPayments[Payment_ID]), "null", """" & SUBSTITUTE(SUBSTITUTE(FactPayments[Payment_ID], "\", "\\"), """", "\""") & """")
+			        & ",""order"":" & IF(ISBLANK(FactPayments[Order_ID]), "null", """" & SUBSTITUTE(SUBSTITUTE(FactPayments[Order_ID], "\", "\\"), """", "\""") & """")
+			        & ",""status"":" & IF(ISBLANK(FactPayments[Payment_Status]), "null", """" & SUBSTITUTE(SUBSTITUTE(FactPayments[Payment_Status], "\", "\\"), """", "\""") & """")
+			        & ",""amount"":" & IF(ISBLANK(FactPayments[Payment_Amount_TND]), "null", FORMAT(FactPayments[Payment_Amount_TND], "0.00", "en-US"))
+			        & ",""method"":" & IF(ISBLANK(FactPayments[Payment_Method]), "null", """" & SUBSTITUTE(SUBSTITUTE(FactPayments[Payment_Method], "\", "\\"), """", "\""") & """")
+			        & ",""flag"":" & IF(ISBLANK(FactPayments[Payment_Flag]), "null", """" & SUBSTITUTE(SUBSTITUTE(FactPayments[Payment_Flag], "\", "\\"), """", "\""") & """")
+			        & "}",
+			    ",",
+			    FactPayments[Payment_ID], ASC
+			) & "]"
+		displayFolder: 05 Data Quality
+		lineageTag: 4e0c1438-15c0-432f-a57c-49cccfb4312b
+
+	/// Rows of DimOrder as a JSON array, read by the Data Quality page visual.
+	measure 'DQ Orders JSON' =
+			"[" & CONCATENATEX(
+			    DimOrder,
+			    "{""id"":" & IF(ISBLANK(DimOrder[Order_ID]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimOrder[Order_ID], "\", "\\"), """", "\""") & """")
+			        & ",""date"":" & IF(ISBLANK(DimOrder[Order_Date]), "null", """" & FORMAT(DimOrder[Order_Date], "yyyy-mm-dd", "en-US") & """")
+			        & ",""status"":" & IF(ISBLANK(DimOrder[Order_Status]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimOrder[Order_Status], "\", "\\"), """", "\""") & """")
+			        & ",""payment"":" & IF(ISBLANK(DimOrder[Payment_Status]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimOrder[Payment_Status], "\", "\\"), """", "\""") & """")
+			        & ",""lines"":" & IF(ISBLANK(DimOrder[Line_Count]), "null", FORMAT(DimOrder[Line_Count], "0", "en-US"))
+			        & ",""flag"":" & IF(ISBLANK(DimOrder[Data_Quality_Flag]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimOrder[Data_Quality_Flag], "\", "\\"), """", "\""") & """")
+			        & "}",
+			    ",",
+			    DimOrder[Order_ID], ASC
+			) & "]"
+		displayFolder: 05 Data Quality
+		lineageTag: ddc6a3f0-d9ab-4211-a0a7-ba2c4c0375e9
+
+	/// Rows of DimCustomer as a JSON array, read by the Data Quality page visual.
+	measure 'DQ Customers JSON' =
+			"[" & CONCATENATEX(
+			    DimCustomer,
+			    "{""key"":" & IF(ISBLANK(DimCustomer[CustomerKey]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimCustomer[CustomerKey], "\", "\\"), """", "\""") & """")
+			        & ",""name"":" & IF(ISBLANK(DimCustomer[Customer_Name]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimCustomer[Customer_Name], "\", "\\"), """", "\""") & """")
+			        & ",""city"":" & IF(ISBLANK(DimCustomer[City]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimCustomer[City], "\", "\\"), """", "\""") & """")
+			        & ",""segment"":" & IF(ISBLANK(DimCustomer[Segment]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimCustomer[Segment], "\", "\\"), """", "\""") & """")
+			        & ",""unknown"":" & IF(DimCustomer[Is_Unknown], "true", "false")
+			        & "}",
+			    ",",
+			    DimCustomer[CustomerKey], ASC
+			) & "]"
+		displayFolder: 05 Data Quality
+		lineageTag: 0da7351f-1d63-4f19-9d81-e4b2affc1856
+
+	/// Rows of DimProduct (the whole catalogue) as a JSON array, read by the Data Quality page visual.
+	measure 'DQ Products JSON' =
+			"[" & CONCATENATEX(
+			    DimProduct,
+			    "{""key"":" & IF(ISBLANK(DimProduct[ProductKey]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimProduct[ProductKey], "\", "\\"), """", "\""") & """")
+			        & ",""name"":" & IF(ISBLANK(DimProduct[Product_Name]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimProduct[Product_Name], "\", "\\"), """", "\""") & """")
+			        & ",""category"":" & IF(ISBLANK(DimProduct[Category]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimProduct[Category], "\", "\\"), """", "\""") & """")
+			        & ",""listPrice"":" & IF(ISBLANK(DimProduct[List_Price_TND]), "null", FORMAT(DimProduct[List_Price_TND], "0.00", "en-US"))
+			        & ",""unknown"":" & IF(DimProduct[Is_Unknown], "true", "false")
+			        & "}",
+			    ",",
+			    DimProduct[ProductKey], ASC
+			) & "]"
+		displayFolder: 05 Data Quality
+		lineageTag: 83e63588-bced-4e97-8697-cb087f2efbb1
+
+	/// Rows of DimStore as a JSON array, read by the Data Quality page visual.
+	measure 'DQ Stores JSON' =
+			"[" & CONCATENATEX(
+			    DimStore,
+			    "{""key"":" & IF(ISBLANK(DimStore[StoreKey]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimStore[StoreKey], "\", "\\"), """", "\""") & """")
+			        & ",""name"":" & IF(ISBLANK(DimStore[Store_Name]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimStore[Store_Name], "\", "\\"), """", "\""") & """")
+			        & ",""city"":" & IF(ISBLANK(DimStore[City]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimStore[City], "\", "\\"), """", "\""") & """")
+			        & ",""region"":" & IF(ISBLANK(DimStore[Region]), "null", """" & SUBSTITUTE(SUBSTITUTE(DimStore[Region], "\", "\\"), """", "\""") & """")
+			        & ",""unknown"":" & IF(DimStore[Is_Unknown], "true", "false")
+			        & "}",
+			    ",",
+			    DimStore[StoreKey], ASC
+			) & "]"
+		displayFolder: 05 Data Quality
+		lineageTag: 08303a9a-7906-4116-afb1-dbecc7a7d840
+
 	measure 'Revenue Eligible %' = DIVIDE(CALCULATE([Gross Sales], FactSales[Revenue_Eligible] = "Yes"), [Gross Sales])
 		formatString: 0.00%
 		displayFolder: 05 Data Quality

@@ -1,8 +1,9 @@
 /*
  *  Mauve Report Page: the Product Performance, Order Analysis, Price Analysis, Date Trends and
  *  Data Quality pages. The "page.kind" setting chooses the page. Sales pages receive order lines and
- *  compute their totals here, using the same rules as the DAX measures; Data Quality reads measures.
- *  Filters are built in and apply to this visual only.
+ *  compute their totals here, using the same rules as the DAX measures; Data Quality reads measures,
+ *  including its five tables as JSON text ('DQ … JSON'). Filters and tables are built in and apply to
+ *  this visual only: each page is this one visual, with no other visuals on it.
  */
 
 "use strict";
@@ -28,6 +29,10 @@ type IconName = keyof typeof ICONS;
 interface SaleLine {
     day: string;
     orderId: string;
+    lineId: string;
+    store: string;
+    unitPrice: number;
+    flag: string;
     product: string;
     productUnknown: boolean;
     category: string;
@@ -43,6 +48,19 @@ interface FilterState {
     from: string;
     to: string;
     categories: string[];
+    /** Order picked by clicking a row of the Order Line Detail table. */
+    order: string;
+}
+
+/** One row of a Data Quality table, parsed from the JSON measures. */
+type JsonRow = Record<string, string | number | boolean | null>;
+
+interface QualityTables {
+    payments: JsonRow[];
+    orders: JsonRow[];
+    customers: JsonRow[];
+    products: JsonRow[];
+    stores: JsonRow[];
 }
 
 interface Totals {
@@ -128,6 +146,26 @@ interface TableColumn<T> {
     numeric?: boolean;
     sortValue: (row: T) => number | string;
     render: (cell: HTMLElement, row: T) => void;
+    /** Values offered by this column's dropdown filter; a column without it has no filter. */
+    filterValues?: (row: T) => string[];
+    /** Name of the dropdown filter when it differs from the column label. */
+    filterLabel?: string;
+}
+
+interface TableOptions<T> {
+    id: string;
+    title: string;
+    subtitle: string;
+    iconName?: IconName;
+    rows: T[];
+    columns: Array<TableColumn<T>>;
+    sort: { key: string; descending: boolean };
+    /** Text searched by the search box; no search box without it. */
+    searchText?: (row: T) => string;
+    footer?: string[];
+    emptyText?: string;
+    onRowClick?: (row: T) => void;
+    isRowActive?: (row: T) => boolean;
 }
 
 type PageKind = "products" | "orders" | "price" | "trends" | "quality";
@@ -152,7 +190,25 @@ const CATEGORY_COLORS = [NEON.cyan, NEON.violet, NEON.blue, NEON.magenta, NEON.o
 const KPI_TONES = ["", "nx-magenta", "nx-blue", "nx-violet", "nx-cyan2"];
 const KPI_COLORS = [NEON.cyan, NEON.magenta, NEON.blue, NEON.violet, NEON.cyan];
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const EMPTY_FILTERS: FilterState = { from: "", to: "", categories: [] };
+const EMPTY_FILTERS: FilterState = { from: "", to: "", categories: [], order: "" };
+const EMPTY_TABLES: QualityTables = { payments: [], orders: [], customers: [], products: [], stores: [] };
+const QUALITY_ROLES: Record<keyof QualityTables, string> = {
+    payments: "dqPayments",
+    orders: "dqOrders",
+    customers: "dqCustomers",
+    products: "dqProducts",
+    stores: "dqStores"
+};
+const PILL_COLORS: Record<string, string> = {
+    completed: NEON.cyan,
+    shipped: NEON.violet,
+    pending: NEON.blue,
+    returned: NEON.orange,
+    cancelled: NEON.pink,
+    refunded: NEON.pink,
+    paid: NEON.green,
+    "no payment": NEON.pink
+};
 
 export class Visual implements IVisual {
     private host: IVisualHost;
@@ -167,9 +223,13 @@ export class Visual implements IVisual {
 
     private lines: SaleLine[] = [];
     private measures: Record<string, number> = {};
+    private qualityTables: QualityTables = { ...EMPTY_TABLES };
+    private qualityKey = "";
+    private qualityError = "";
     private filters: FilterState = { ...EMPTY_FILTERS };
     private tableSorts: Record<string, { key: string; descending: boolean }> = {};
     private tableSearches: Record<string, string> = {};
+    private tableFilters: Record<string, Record<string, string>> = {};
 
     constructor(options: VisualConstructorOptions) {
         this.host = options.host;
@@ -219,7 +279,7 @@ export class Visual implements IVisual {
      */
     private dataKey(): string {
         const totals = this.totals(this.lines);
-        return JSON.stringify([this.kind, this.filters, totals.lines, totals.net, totals.gross, totals.units, this.measures]);
+        return JSON.stringify([this.kind, this.filters, totals.lines, totals.net, totals.gross, totals.units, this.measures, this.qualityKey]);
     }
 
     // ---------- Data ----------
@@ -227,6 +287,9 @@ export class Visual implements IVisual {
     private readData(table: DataViewTable | undefined): void {
         this.lines = [];
         this.measures = {};
+        this.qualityTables = { ...EMPTY_TABLES };
+        this.qualityKey = "";
+        this.qualityError = "";
         if (!table || !table.rows) {
             return;
         }
@@ -248,25 +311,55 @@ export class Visual implements IVisual {
             if (table.rows[0]) {
                 ["flaggedLines", "orderLines", "unknownLines", "missingPayments", "noPaymentOrders", "paymentExceptions", "segmentCoverage", "missingSegments"]
                     .forEach(role => { this.measures[role] = num(table.rows[0], role); });
+                const keys: string[] = [];
+                (Object.keys(QUALITY_ROLES) as Array<keyof QualityTables>).forEach(name => {
+                    const json = text(table.rows[0], QUALITY_ROLES[name], "");
+                    keys.push(json);
+                    this.qualityTables[name] = this.parseRows(json, name);
+                });
+                this.qualityKey = keys.join("|");
             }
             return;
         }
         this.lines = table.rows.map(row => {
             const list = raw(row, "listPrice");
+            const quantity = num(row, "quantity");
+            const price = raw(row, "unitPrice");
             return {
                 day: this.toDay(raw(row, "date")),
                 orderId: text(row, "order", ""),
+                lineId: text(row, "line", ""),
+                store: text(row, "store", ""),
+                // Without the Unit price field, fall back to gross / quantity (the same value in this data).
+                unitPrice: typeof price === "number" ? price : (quantity ? num(row, "gross") / quantity : 0),
+                flag: text(row, "lineFlag", ""),
                 product: text(row, "product", "(no product)"),
                 productUnknown: raw(row, "productUnknown") === true,
                 category: text(row, "category", "(no category)"),
                 listPrice: typeof list === "number" ? list : null,
                 status: text(row, "status", "(no status)"),
-                quantity: num(row, "quantity"),
+                quantity,
                 discount: num(row, "discount"),
                 gross: num(row, "gross"),
                 net: num(row, "net")
             };
         });
+    }
+
+    /**
+     * Parses a JSON measure (an array of row objects). A bad value is reported on the page, not swallowed.
+     */
+    private parseRows(json: string, name: string): JsonRow[] {
+        if (!json) {
+            return [];
+        }
+        try {
+            const parsed = JSON.parse(json);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            this.qualityError = `The ${name} rows could not be read: ${error instanceof Error ? error.message : String(error)}`;
+            return [];
+        }
     }
 
     private toDay(value: PrimitiveValue): string {
@@ -292,7 +385,8 @@ export class Visual implements IVisual {
             return {
                 from: typeof parsed.from === "string" ? parsed.from : "",
                 to: typeof parsed.to === "string" ? parsed.to : "",
-                categories: Array.isArray(parsed.categories) ? parsed.categories : []
+                categories: Array.isArray(parsed.categories) ? parsed.categories : [],
+                order: typeof parsed.order === "string" ? parsed.order : ""
             };
         } catch {
             return { ...EMPTY_FILTERS };
@@ -315,7 +409,8 @@ export class Visual implements IVisual {
         return this.lines.filter(line =>
             (!f.from || line.day >= f.from) &&
             (!f.to || line.day <= f.to) &&
-            (!f.categories.length || f.categories.includes(line.category)));
+            (!f.categories.length || f.categories.includes(line.category)) &&
+            (!f.order || line.orderId === f.order));
     }
 
     private totals(lines: SaleLine[]): Totals {
@@ -488,14 +583,14 @@ export class Visual implements IVisual {
         this.categoryMix(mixCard, categories, totals, lines);
 
         const tableCard = this.el("section", "sp-card sp-table-card", this.row("sp-row-fill"));
-        this.dataTable(tableCard, "products", "Product Metrics", "Sort by clicking a header · search by product or category", products, [
+        this.dataTable<ProductRow>(tableCard, { id: "products", title: "Product Metrics", subtitle: "Sort by clicking a header · search by product or category", rows: products, columns: [
             this.productColumn(),
             { key: "units", label: "Units", numeric: true, sortValue: r => r.units, render: (c, r) => { c.textContent = this.int(r.units); } },
             { key: "price", label: "Avg Price", numeric: true, sortValue: r => r.price, render: (c, r) => { c.textContent = this.money(r.price); } },
             { key: "gross", label: "Gross", numeric: true, sortValue: r => r.gross, render: (c, r) => { c.textContent = this.money(r.gross); c.classList.add("sp-muted"); } },
             this.netColumn(),
             this.shareColumn(totals.net)
-        ], { key: "net", descending: true }, row => `${row.product} ${row.category}`);
+        ], sort: { key: "net", descending: true }, searchText: row => `${row.product} ${row.category}` });
     }
 
     private renderOrders(lines: SaleLine[]): void {
@@ -509,6 +604,9 @@ export class Visual implements IVisual {
         const cancelled = named("Cancelled");
         const returned = named("Returned");
         this.renderHeader(lines, `${this.int(totals.orders)} orders · ${this.int(completed.orders)} completed`);
+        if (this.filters.order) {
+            this.orderChip(this.page.querySelector(".sp-header-right") as HTMLElement);
+        }
         this.renderKpis([
             { label: "Orders", value: this.int(totals.orders), note: `${this.int(completed.orders)} completed`, iconName: "ShoppingCart", spark: { label: "Orders", lines, metric: t => t.orders, money: false, delta: true } },
             { label: "Order Lines", value: this.int(totals.lines), note: `${(totals.orders ? totals.lines / totals.orders : 0).toFixed(2)} lines per order`, iconName: "ListChecks", spark: { label: "Order lines", lines, metric: t => t.lines, money: false, bars: true, delta: true } },
@@ -551,6 +649,43 @@ export class Visual implements IVisual {
                 { label: "Avg order value", value: `${this.money(status.totals.orders ? status.totals.net / status.totals.orders : 0)} TND` }
             ]
         })), "Orders", this.int(totals.orders));
+
+        // Every line stays listed; clicking one filters the KPIs and charts above to its order.
+        const picked = this.filters.order;
+        const tableCard = this.el("section", "sp-card sp-table-card", this.row("sp-row-fill"));
+        this.dataTable<SaleLine>(tableCard, {
+            id: "lines",
+            title: "Order Line Detail",
+            subtitle: picked ? `Showing ${picked} above · click it again, or the order chip, to show every order` : "Filter or sort any column · click a line to filter the page to its order",
+            iconName: "ListChecks",
+            rows: this.lines,
+            columns: [
+                { key: "line", label: "Line", sortValue: r => r.lineId, render: (c, r) => { c.textContent = r.lineId; c.classList.add("rp-strong"); } },
+                { key: "order", label: "Order", sortValue: r => r.orderId, render: (c, r) => { c.textContent = r.orderId; }, filterValues: r => [r.orderId] },
+                { key: "product", label: "Product", sortValue: r => r.product, render: (c, r) => this.productCell(c, r.product, r.productUnknown), filterValues: r => [r.product] },
+                { key: "store", label: "Store", sortValue: r => r.store, render: (c, r) => this.textCell(c, r.store), filterValues: r => [r.store] },
+                { key: "qty", label: "Qty", numeric: true, sortValue: r => r.quantity, render: (c, r) => { c.textContent = this.int(r.quantity); } },
+                { key: "price", label: "Unit Price", numeric: true, sortValue: r => r.unitPrice, render: (c, r) => { c.textContent = this.money(r.unitPrice); } },
+                { key: "gross", label: "Gross", numeric: true, sortValue: r => r.gross, render: (c, r) => { c.textContent = this.money(r.gross); c.classList.add("sp-muted"); } },
+                { key: "net", label: "Net", numeric: true, sortValue: r => r.net, render: (c, r) => { c.textContent = this.money(r.net); c.classList.add("sp-net"); c.classList.toggle("sp-zero", r.net === 0); } },
+                { key: "status", label: "Status", sortValue: r => r.status, render: (c, r) => this.pillCell(c, r.status), filterValues: r => [r.status] },
+                { key: "flag", label: "Flags", sortValue: r => r.flag, render: (c, r) => this.flagCell(c, r.flag), filterValues: r => this.splitFlags(r.flag) }
+            ],
+            sort: { key: "line", descending: false },
+            searchText: r => `${r.lineId} ${r.orderId} ${r.product} ${r.store} ${r.status} ${r.flag}`,
+            onRowClick: r => this.setFilters({ ...this.filters, order: picked === r.orderId ? "" : r.orderId }),
+            isRowActive: picked ? r => r.orderId === picked : undefined
+        });
+    }
+
+    /** Header chip naming the order picked in the line table; clicking it shows every order again. */
+    private orderChip(parent: HTMLElement): void {
+        const chip = this.el("button", "sp-pill rp-order-chip", parent) as HTMLButtonElement;
+        chip.title = "Show every order";
+        chip.appendChild(document.createTextNode(`Order ${this.filters.order}`));
+        chip.appendChild(icon("X", 14));
+        chip.addEventListener("click", () => this.setFilters({ ...this.filters, order: "" }));
+        parent.insertBefore(chip, parent.firstChild);
     }
 
     private renderPrice(lines: SaleLine[]): void {
@@ -610,6 +745,23 @@ export class Visual implements IVisual {
                 ]
             };
         }), "List price", "Selling price");
+
+        const tableCard = this.el("section", "sp-card sp-grow-1 sp-table-card", bottom);
+        this.dataTable<ProductRow>(tableCard, {
+            id: "price",
+            title: "Price Metrics",
+            subtitle: "List vs selling price, volume and gross sales · sold products",
+            rows: products,
+            columns: [
+                { ...this.productColumn(), filterValues: r => [r.category], filterLabel: "Category" },
+                { key: "list", label: "List", numeric: true, sortValue: r => (r.listPrice === null ? -1 : r.listPrice), render: (c, r) => this.numberCell(c, r.listPrice) },
+                { key: "price", label: "Avg Price", numeric: true, sortValue: r => r.price, render: (c, r) => { c.textContent = this.money(r.price); c.classList.add("sp-net"); } },
+                { key: "units", label: "Units", numeric: true, sortValue: r => r.units, render: (c, r) => { c.textContent = this.int(r.units); } },
+                { key: "gross", label: "Gross", numeric: true, sortValue: r => r.gross, render: (c, r) => { c.textContent = this.money(r.gross); c.classList.add("sp-muted"); } }
+            ],
+            sort: { key: "gross", descending: true },
+            searchText: r => `${r.product} ${r.category}`
+        });
     }
 
     private renderTrends(lines: SaleLine[]): void {
@@ -640,7 +792,7 @@ export class Visual implements IVisual {
 
         const tableCard = this.el("section", "sp-card sp-grow-1 sp-table-card", bottom);
         const rows = months.map((month, index) => ({ month, previous: index ? months[index - 1].totals.net : 0, position: index }));
-        this.dataTable(tableCard, "months", "Monthly Detail", "Orders, units, sales and order value per month", rows, [
+        this.dataTable(tableCard, { id: "months", title: "Monthly Detail", subtitle: "Orders, units, sales and order value per month", rows, columns: [
             { key: "month", label: "Month", sortValue: r => r.position, render: (c, r) => { c.textContent = r.month.label; c.classList.add("rp-strong"); } },
             { key: "orders", label: "Orders", numeric: true, sortValue: r => r.month.totals.orders, render: (c, r) => { c.textContent = this.int(r.month.totals.orders); } },
             { key: "units", label: "Units", numeric: true, sortValue: r => r.month.totals.units, render: (c, r) => { c.textContent = this.int(r.month.totals.units); } },
@@ -657,7 +809,7 @@ export class Visual implements IVisual {
                     this.el("span", delta >= 0 ? "sp-delta sp-delta-up" : "sp-delta sp-delta-down", c, `${delta >= 0 ? "▲" : "▼"} ${this.pct(Math.abs(delta))}`);
                 }
             }
-        ], { key: "month", descending: false }, undefined, ["Total", this.int(totals.orders), this.int(totals.units), this.money(totals.gross), this.money(totals.net), this.money(totals.orders ? totals.net / totals.orders : 0), ""]);
+        ], sort: { key: "month", descending: false }, footer: ["Total", this.int(totals.orders), this.int(totals.units), this.money(totals.gross), this.money(totals.net), this.money(totals.orders ? totals.net / totals.orders : 0), ""] });
     }
 
     private renderQuality(): void {
@@ -670,6 +822,70 @@ export class Visual implements IVisual {
             { label: "No Payment Orders", value: this.int(value("noPaymentOrders")), note: "orders with no payment record", iconName: "Ban", warning: value("noPaymentOrders") > 0 },
             { label: "Segment Coverage", value: this.pct(value("segmentCoverage")), note: `${this.int(value("missingSegments"))} customers missing a segment`, iconName: "Users", warning: value("segmentCoverage") < 1 }
         ]);
+        if (this.qualityError) {
+            this.el("div", "sp-error rp-inline-error", this.page, this.qualityError);
+        }
+
+        const t = this.qualityTables;
+        const str = (row: JsonRow, key: string): string => (row[key] === null || row[key] === undefined ? "" : String(row[key]));
+        const num = (row: JsonRow, key: string): number | null => (typeof row[key] === "number" ? row[key] as number : null);
+        const textColumn = (key: string, label: string, options: { filter?: boolean; strong?: boolean } = {}): TableColumn<JsonRow> => ({
+            key, label, sortValue: r => str(r, key),
+            render: (c, r) => { this.textCell(c, str(r, key)); if (options.strong) { c.classList.add("rp-strong"); } },
+            filterValues: options.filter ? r => [str(r, key)] : undefined
+        });
+        const pillColumn = (key: string, label: string): TableColumn<JsonRow> => ({ key, label, sortValue: r => str(r, key), render: (c, r) => this.pillCell(c, str(r, key)), filterValues: r => [str(r, key)] });
+        const flagColumn = (key: string, label: string): TableColumn<JsonRow> => ({ key, label, sortValue: r => str(r, key), render: (c, r) => this.flagCell(c, str(r, key)), filterValues: r => this.splitFlags(str(r, key)) });
+        const unknownColumn: TableColumn<JsonRow> = { key: "unknown", label: "Unknown", sortValue: r => (r.unknown ? 1 : 0), render: (c, r) => this.unknownCell(c, r.unknown === true), filterValues: r => [r.unknown ? "Yes" : "No"] };
+        const search = (keys: string[]) => (r: JsonRow): string => keys.map(key => str(r, key)).join(" ");
+        const flagsFirst = { key: "flag", descending: true };
+
+        const top = this.row("rp-row-quality");
+        this.dataTable<JsonRow>(this.el("section", "sp-card sp-grow-1 sp-table-card", top), {
+            id: "dq-payments", title: "Payments", subtitle: "All payments · pick a flag to see the exceptions", iconName: "CreditCard", rows: t.payments,
+            columns: [
+                textColumn("id", "Payment", { strong: true }),
+                textColumn("order", "Order"),
+                pillColumn("status", "Status"),
+                { key: "amount", label: "Amount", numeric: true, sortValue: r => (num(r, "amount") === null ? -Infinity : num(r, "amount")), render: (c, r) => this.numberCell(c, num(r, "amount")) },
+                textColumn("method", "Method", { filter: true }),
+                flagColumn("flag", "Flag")
+            ],
+            sort: flagsFirst, searchText: search(["id", "order", "status", "method", "flag"]), emptyText: "No payment rows."
+        });
+        this.dataTable<JsonRow>(this.el("section", "sp-card sp-grow-1 sp-table-card", top), {
+            id: "dq-orders", title: "Order Flags", subtitle: "All orders · pick a flag to see the ones it touched", iconName: "Receipt", rows: t.orders,
+            columns: [
+                textColumn("id", "Order", { strong: true }),
+                { key: "date", label: "Date", sortValue: r => str(r, "date"), render: (c, r) => this.textCell(c, str(r, "date") ? this.formatDay(str(r, "date")) : "") },
+                pillColumn("status", "Status"),
+                pillColumn("payment", "Payment"),
+                { key: "lines", label: "Lines", numeric: true, sortValue: r => num(r, "lines") || 0, render: (c, r) => { c.textContent = this.int(num(r, "lines") || 0); } },
+                flagColumn("flag", "Flags")
+            ],
+            sort: flagsFirst, searchText: search(["id", "date", "status", "payment", "flag"]), emptyText: "No order rows."
+        });
+
+        const bottom = this.row("sp-row-fill");
+        this.dataTable<JsonRow>(this.el("section", "sp-card sp-grow-1 sp-table-card", bottom), {
+            id: "dq-customers", title: "Customers", subtitle: "Segment coverage and unknown members", iconName: "Users", rows: t.customers,
+            columns: [textColumn("key", "Key", { strong: true }), textColumn("name", "Name"), textColumn("city", "City", { filter: true }), textColumn("segment", "Segment", { filter: true }), unknownColumn],
+            sort: { key: "key", descending: false }, searchText: search(["key", "name", "city", "segment"]), emptyText: "No customer rows."
+        });
+        this.dataTable<JsonRow>(this.el("section", "sp-card sp-grow-1 sp-table-card", bottom), {
+            id: "dq-products", title: "Products", subtitle: "Whole catalogue and unknown members", iconName: "Package", rows: t.products,
+            columns: [
+                textColumn("key", "Key", { strong: true }), textColumn("name", "Name"), textColumn("category", "Category", { filter: true }),
+                { key: "listPrice", label: "List", numeric: true, sortValue: r => (num(r, "listPrice") === null ? -Infinity : num(r, "listPrice")), render: (c, r) => this.numberCell(c, num(r, "listPrice")) },
+                unknownColumn
+            ],
+            sort: { key: "key", descending: false }, searchText: search(["key", "name", "category"]), emptyText: "No product rows."
+        });
+        this.dataTable<JsonRow>(this.el("section", "sp-card sp-grow-1 sp-table-card", bottom), {
+            id: "dq-stores", title: "Stores", subtitle: "Store master data and unknown members", iconName: "Store", rows: t.stores,
+            columns: [textColumn("key", "Key", { strong: true }), textColumn("name", "Name"), textColumn("city", "City", { filter: true }), textColumn("region", "Region", { filter: true }), unknownColumn],
+            sort: { key: "key", descending: false }, searchText: search(["key", "name", "city", "region"]), emptyText: "No store rows."
+        });
     }
 
     // ---------- Shared sections ----------
@@ -789,7 +1005,7 @@ export class Visual implements IVisual {
         const clear = this.el("button", "sp-clear", actions) as HTMLButtonElement;
         clear.appendChild(icon("X", 15));
         clear.appendChild(document.createTextNode("Clear all"));
-        clear.disabled = !(f.from || f.to || f.categories.length);
+        clear.disabled = !(f.from || f.to || f.categories.length || f.order);
         clear.addEventListener("click", () => this.setFilters({ ...EMPTY_FILTERS }));
     }
 
@@ -1040,11 +1256,39 @@ export class Visual implements IVisual {
     }
 
     /**
-     * Card with a sortable table, an optional search box (when searchText is given) and an optional total row.
+     * Card with a sortable table, plus optional search box, dropdown filters per column, clickable rows and total row.
+     * Search and filter changes only refill the rows; sorting redraws the page.
      */
-    private dataTable<T>(card: HTMLElement, id: string, title: string, subtitle: string, rows: T[], columns: Array<TableColumn<T>>, defaultSort: { key: string; descending: boolean }, searchText?: (row: T) => string, footer?: string[]): void {
-        const head = this.cardHead(card, title, subtitle, "PackageSearch");
-        const sort = this.tableSorts[id] || defaultSort;
+    private dataTable<T>(card: HTMLElement, options: TableOptions<T>): void {
+        const { id, rows, columns, searchText, footer, onRowClick, isRowActive } = options;
+        const head = this.cardHead(card, options.title, options.subtitle, options.iconName || "PackageSearch");
+        const sort = this.tableSorts[id] || options.sort;
+        const chosen = this.tableFilters[id] || (this.tableFilters[id] = {});
+        const filterable = columns.filter(column => column.filterValues);
+        const tools = filterable.length ? this.el("div", "rp-table-tools", card) : undefined;
+        filterable.forEach(column => {
+            const values = this.distinct(rows.reduce((all, row) => all.concat(column.filterValues(row)), [] as string[]).filter(value => value !== ""));
+            if (chosen[column.key] && !values.includes(chosen[column.key])) {
+                delete chosen[column.key];
+            }
+            const label = this.el("label", "rp-table-filter", tools);
+            this.el("span", "", label, column.filterLabel || column.label);
+            const select = this.el("select", "sp-select", label) as HTMLSelectElement;
+            [{ value: "", text: "All" }, ...values.map(value => ({ value, text: value.replace(/_/g, " ") }))].forEach(option => {
+                (this.el("option", "", select, option.text) as HTMLOptionElement).value = option.value;
+            });
+            select.value = chosen[column.key] || "";
+            select.classList.toggle("sp-select-active", select.value !== "");
+            select.addEventListener("change", () => {
+                if (select.value) {
+                    chosen[column.key] = select.value;
+                } else {
+                    delete chosen[column.key];
+                }
+                select.classList.toggle("sp-select-active", select.value !== "");
+                fill();
+            });
+        });
         const scroll = this.el("div", "sp-table-scroll", card);
         const table = this.el("table", "sp-table", scroll);
         const headRow = this.el("tr", "", this.el("thead", "", table));
@@ -1057,28 +1301,38 @@ export class Visual implements IVisual {
             });
         });
         const body = this.el("tbody", "", table);
-        const count = searchText ? this.el("div", "sp-table-count", card) : undefined;
+        const count = searchText || tools ? this.el("div", "sp-table-count", card) : undefined;
         const active = columns.find(column => column.key === sort.key) || columns[0];
         const fill = (): void => {
             body.replaceChildren();
             const term = (this.tableSearches[id] || "").trim().toLowerCase();
+            const filters = filterable.filter(column => chosen[column.key]);
             const visible = rows
                 .filter(row => !term || !searchText || searchText(row).toLowerCase().includes(term))
+                .filter(row => filters.every(column => column.filterValues(row).includes(chosen[column.key])))
                 .sort((a, b) => {
                     const left = active.sortValue(a);
                     const right = active.sortValue(b);
                     const order = typeof left === "number" && typeof right === "number" ? left - right : String(left).localeCompare(String(right));
                     return sort.descending ? -order : order;
                 });
+            const anyActive = Boolean(isRowActive);
             visible.forEach(row => {
                 const tr = this.el("tr", "", body);
+                if (anyActive) {
+                    tr.classList.add(isRowActive(row) ? "rp-row-active" : "rp-row-dimmed");
+                }
+                if (onRowClick) {
+                    tr.classList.add("rp-row-click");
+                    tr.addEventListener("click", () => onRowClick(row));
+                }
                 columns.forEach(column => column.render(this.el("td", column.numeric ? "sp-num" : "", tr), row));
             });
             if (!visible.length) {
-                this.el("td", "sp-empty", this.el("tr", "", body), rows.length ? "No row matches the search." : "No sales in this selection.").setAttribute("colspan", String(columns.length));
+                this.el("td", "sp-empty", this.el("tr", "", body), rows.length ? "No row matches the search or filters." : (options.emptyText || "No sales in this selection.")).setAttribute("colspan", String(columns.length));
             }
             if (count) {
-                count.textContent = term ? `${visible.length} of ${rows.length} rows` : `${rows.length} rows`;
+                count.textContent = term || filters.length ? `${visible.length} of ${rows.length} rows` : `${rows.length} rows`;
             }
         };
         if (searchText) {
@@ -1096,6 +1350,62 @@ export class Visual implements IVisual {
             const tr = this.el("tr", "rp-table-total", this.el("tfoot", "", table));
             footer.forEach((text, index) => this.el("td", columns[index].numeric ? "sp-num" : "", tr, text));
         }
+    }
+
+    // ---------- Table cells ----------
+
+    private textCell(cell: HTMLElement, text: string): void {
+        if (text) {
+            cell.textContent = text;
+        } else {
+            this.el("span", "rp-missing", cell, "—");
+        }
+    }
+
+    private numberCell(cell: HTMLElement, value: number | null): void {
+        if (value === null) {
+            this.el("span", "rp-missing", cell, "—");
+            return;
+        }
+        cell.textContent = this.money(value);
+        cell.classList.toggle("rp-negative", value < 0);
+    }
+
+    private productCell(cell: HTMLElement, product: string, unknown: boolean): void {
+        cell.textContent = product;
+        if (unknown) {
+            this.el("span", "rp-unknown", cell, "UNKNOWN");
+        }
+    }
+
+    /** Status pill coloured by the status palette (order and payment statuses). */
+    private pillCell(cell: HTMLElement, text: string): void {
+        if (!text) {
+            this.el("span", "rp-missing", cell, "—");
+            return;
+        }
+        const color = PILL_COLORS[text.toLowerCase()] || NEON.soft;
+        const pill = this.el("span", "rp-pill", cell, text);
+        pill.style.color = color;
+        pill.style.borderColor = color;
+    }
+
+    /** Data quality flags ("A; B") as chips. */
+    private flagCell(cell: HTMLElement, text: string): void {
+        const flags = this.splitFlags(text);
+        if (!flags.length) {
+            this.el("span", "rp-missing", cell, "—");
+            return;
+        }
+        flags.forEach(flag => this.el("span", "rp-chip", cell, flag.replace(/_/g, " ")));
+    }
+
+    private unknownCell(cell: HTMLElement, unknown: boolean): void {
+        this.el("span", unknown ? "rp-unknown" : "rp-missing", cell, unknown ? "UNKNOWN" : "—");
+    }
+
+    private splitFlags(text: string): string[] {
+        return text.split(";").map(flag => flag.trim()).filter(flag => flag);
     }
 
     private scatter(card: HTMLElement, products: ProductRow[], totalNet: number): void {

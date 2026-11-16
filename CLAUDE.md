@@ -41,6 +41,7 @@ Project skills in `.claude/skills/` hold the detailed instructions and scripts. 
 - **Don't send real emails when testing.** Use a dry run or the test page.
 - **Every `.json` under `biproject.Report` must stay valid JSON;** check after each edit.
 - The `HTML …` measures and the HTML Content approach are retired: no page uses them.
+- **One visual per page, always.** Each page is a single TypeScript custom visual (Sales Overview: Mauve Sales Page; the other 5: Mauve Report Page). Tables, filters and charts go inside that visual; never add a second visual to a page.
 
 ## Design palette
 

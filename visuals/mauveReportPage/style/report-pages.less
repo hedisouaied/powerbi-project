@@ -137,3 +137,107 @@
 .sp-table-scroll {
     flex: 1;
 }
+
+/* Tables drawn inside this visual: one visual per page, no separate Mauve Table visuals. */
+.rp-row-quality { flex: none; height: 475px; }
+
+.rp-table-tools {
+    display: flex;
+    flex-wrap: wrap;
+    flex: none;
+    gap: 8px 18px;
+    margin-top: 12px;
+}
+
+.rp-table-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8B93B8;
+
+    .sp-select {
+        height: 32px;
+        max-width: 210px;
+        padding: 0 10px;
+        border-radius: 9px;
+        font-size: 14px;
+        letter-spacing: 0;
+        text-transform: none;
+    }
+}
+
+.sp-table .rp-row-click {
+    cursor: pointer;
+
+    &:hover td {
+        background: rgba(34, 211, 238, 0.06);
+    }
+}
+
+.sp-table .rp-row-active td {
+    background: rgba(34, 211, 238, 0.10);
+    color: #EEF2FF;
+}
+
+.sp-table .rp-row-dimmed td {
+    opacity: 0.45;
+}
+
+.rp-pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.rp-chip {
+    display: inline-block;
+    margin: 1px 5px 1px 0;
+    padding: 2px 8px;
+    border: 1px solid rgba(244, 114, 182, 0.35);
+    border-radius: 6px;
+    background: rgba(244, 114, 182, 0.10);
+    color: #FBCFE8;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+}
+
+.rp-unknown {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 7px;
+    border-radius: 5px;
+    background: rgba(251, 146, 60, 0.14);
+    color: #FB923C;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+td > .rp-unknown:first-child { margin-left: 0; }
+
+.rp-missing { color: #8B93B8; }
+.rp-negative { color: #F472B6 !important; }
+
+.rp-order-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-color: rgba(34, 211, 238, 0.6);
+    background: rgba(34, 211, 238, 0.12);
+    color: #22D3EE;
+}
+
+.rp-inline-error {
+    position: static;
+    flex: none;
+}

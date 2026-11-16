@@ -7,7 +7,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-expression DataFolder = "C:\Users\HediSouaeid\Downloads\biproject\output" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+expression DataFolder = "C:\Users\DELL\Downloads\powerBiProject\output" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: c93f1300-9192-534d-9f97-39960570696b
 	annotation PBI_ResultType = Text
 
