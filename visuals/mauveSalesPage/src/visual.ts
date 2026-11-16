@@ -1063,6 +1063,10 @@ export class Visual implements IVisual {
      * Captures the page at its full 1920 × 1340 design size (buttons excluded) into a one-page PDF.
      */
     private async exportPdf(button: HTMLButtonElement): Promise<void> {
+        // Check Power BI's permission first, so the user isn't asked to confirm a download that can't happen.
+        if (!(await this.canDownload())) {
+            return;
+        }
         const fileName = `${this.fileStem("Sales Overview")}.pdf`;
         const confirmed = await this.confirmDialog(
             "Download this page as PDF?",
@@ -1070,7 +1074,7 @@ export class Visual implements IVisual {
             [...this.filterSummary(), `File: ${fileName}`],
             "Download PDF"
         );
-        if (!confirmed || !(await this.canDownload())) {
+        if (!confirmed) {
             return;
         }
         const transform = this.page.style.transform;
@@ -1127,10 +1131,10 @@ export class Visual implements IVisual {
      * In-visual confirmation dialog (the sandbox blocks window.confirm). Resolves true on confirm,
      * false on Cancel, Escape, a click outside the dialog, or if a redraw removes it.
      */
-    private confirmDialog(title: string, message: string, details: string[], confirmLabel: string, iconName: keyof typeof ICONS = "Download"): Promise<boolean> {
+    private confirmDialog(title: string, message: string, details: string[], confirmLabel: string, iconName: keyof typeof ICONS = "Download", showCancel = true): Promise<boolean> {
         return new Promise(resolve => {
             const backdrop = this.el("div", "sp-modal-backdrop sp-no-capture", this.page);
-            const dialog = this.el("div", "sp-modal", backdrop);
+            const dialog = this.el("div", showCancel ? "sp-modal" : "sp-modal sp-modal-help", backdrop);
             dialog.setAttribute("role", "dialog");
             dialog.setAttribute("aria-modal", "true");
             this.el("div", "sp-modal-icon", dialog).appendChild(icon(iconName, 28));
@@ -1145,6 +1149,7 @@ export class Visual implements IVisual {
             });
             const actions = this.el("div", "sp-modal-actions", dialog);
             const cancel = this.el("button", "sp-modal-cancel", actions, "Cancel") as HTMLButtonElement;
+            cancel.style.display = showCancel ? "" : "none";
             const confirm = this.el("button", "sp-modal-confirm", actions) as HTMLButtonElement;
             confirm.appendChild(icon(iconName, 16));
             confirm.appendChild(document.createTextNode(confirmLabel));
@@ -1190,11 +1195,11 @@ export class Visual implements IVisual {
             if (status === PRIVILEGE_ALLOWED) {
                 return true;
             }
-            this.toast(status === PRIVILEGE_DISABLED_BY_ADMIN
-                ? "Downloads from custom visuals are turned off by your Power BI admin."
-                : "Downloads aren't available in this environment.", true);
+            await this.downloadHelp(status === PRIVILEGE_DISABLED_BY_ADMIN
+                ? "Downloads from custom visuals are turned off in Power BI."
+                : "Power BI doesn't allow downloads from this visual here.");
         } catch {
-            this.toast("Couldn't check whether downloads are allowed.", true);
+            await this.downloadHelp("Power BI didn't say whether downloads are allowed.");
         }
         return false;
     }
@@ -1204,8 +1209,21 @@ export class Visual implements IVisual {
         if (result && result.downloadCompleted) {
             this.toast(`Saved ${result.fileName || fileName}`, false);
         } else {
-            this.toast("Download cancelled.", true);
+            // Power BI Desktop can report downloads as allowed, then refuse the file ("your administrator has restricted
+            // downloads") when the user isn't signed in or the tenant switch is off. Explain what works instead.
+            await this.downloadHelp("No file was saved. If Power BI said downloads are restricted, this is why:");
         }
+    }
+
+    /**
+     * Explains Power BI's rule for custom visual downloads and the built-in export that always works.
+     */
+    private downloadHelp(message: string): Promise<boolean> {
+        return this.confirmDialog("Download not available here", message, [
+            "Rule: Power BI only lets a custom visual save a file when you're signed in and your Power BI admin allows it",
+            "Admin setting: Tenant settings › Power BI visuals › Allow downloads from custom visuals",
+            "Works now: In Power BI Desktop, File › Export › Export to PDF (all pages)"
+        ], "OK", "TriangleAlert", false);
     }
 
     private buildWorkbook(rows: ProductRow[]): Uint8Array {
