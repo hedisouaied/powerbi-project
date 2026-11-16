@@ -273,6 +273,18 @@
     white-space: nowrap;
 }
 
+/* Help dialog (no Cancel): each detail is a short label above wrapped text. */
+.sp-modal-help .sp-modal-details li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+.sp-modal-help .sp-modal-value {
+    text-align: left;
+    white-space: normal;
+}
+
 .sp-modal-actions {
     margin-top: 26px;
     display: flex;

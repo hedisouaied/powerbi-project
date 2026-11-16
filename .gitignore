@@ -25,3 +25,11 @@ export_check/
 
 # Logs
 *.log
+
+# Demo scratch (large recordings, test copy)
+powerbi-demo/work/
+powerbi-demo/tmp/*.mkv
+powerbi-demo/tmp/clips/
+powerbi-demo/tmp/*.png
+powerbi-demo/tmp/ffmpeg.*
+powerbi-demo/tmp/rec*-start.txt
