@@ -35,6 +35,7 @@ $rows = foreach ($s in $sales) {
         listPrice = $(if ($p.List_Price_TND) { [double]::Parse($p.List_Price_TND, $inv) } else { $null })
         status = $s.Order_Status; quantity = [int]$s.Quantity; discount = [double]::Parse($s.Discount_Percent, $inv)
         gross = [double]::Parse($s.Gross_Sales_TND, $inv); net = [double]::Parse($s.Net_Sales_TND, $inv); flag = $s.Data_Quality_Flag
+        unitPrice = [double]::Parse($s.Unit_Price_TND, $inv); lineFlag = $s.Data_Quality_Flag
     }
 }
 $unknownLines = @($sales | Where-Object { $customerUnknown[$_.CustomerKey] }).Count + @($sales | Where-Object { $products[$_.ProductKey].Is_Unknown -eq 'True' }).Count + @($sales | Where-Object { $stores[$_.StoreKey].Is_Unknown -eq 'True' }).Count
@@ -46,6 +47,17 @@ $measures = [ordered]@{
     paymentExceptions = @($payments | Where-Object { $_.Payment_Flag }).Count
     segmentCoverage = (@($customers).Count - $missingSegments) / @($customers).Count; missingSegments = $missingSegments
 }
+# The Data Quality tables arrive as JSON text measures, the way the DAX 'DQ … JSON' measures build them.
+$num = { param($v) if ($v) { [double]::Parse($v, $inv) } else { $null } }
+$text = { param($v) if ($v) { $v } else { $null } }
+$dqTables = [ordered]@{
+    dqPayments = ConvertTo-Json -Compress -Depth 3 @($payments | Sort-Object Payment_ID | ForEach-Object { [ordered]@{ id = & $text $_.Payment_ID; order = & $text $_.Order_ID; status = & $text $_.Payment_Status; amount = & $num $_.Payment_Amount_TND; method = & $text $_.Payment_Method; flag = & $text $_.Payment_Flag } })
+    dqOrders = ConvertTo-Json -Compress -Depth 3 @($orders | Sort-Object Order_ID | ForEach-Object { [ordered]@{ id = & $text $_.Order_ID; date = & $text $_.Order_Date; status = & $text $_.Order_Status; payment = & $text $_.Payment_Status; lines = $(if ($_.Line_Count) { [int]$_.Line_Count } else { $null }); flag = & $text $_.Data_Quality_Flag } })
+    dqCustomers = ConvertTo-Json -Compress -Depth 3 @($customers | Sort-Object CustomerKey | ForEach-Object { [ordered]@{ key = & $text $_.CustomerKey; name = & $text $_.Customer_Name; city = & $text $_.City; segment = & $text $_.Segment; unknown = $_.Is_Unknown -eq 'True' } })
+    dqProducts = ConvertTo-Json -Compress -Depth 3 @($products.Values | Sort-Object ProductKey | ForEach-Object { [ordered]@{ key = & $text $_.ProductKey; name = & $text $_.Product_Name; category = & $text $_.Category; listPrice = & $num $_.List_Price_TND; unknown = $_.Is_Unknown -eq 'True' } })
+    dqStores = ConvertTo-Json -Compress -Depth 3 @($stores.Values | Sort-Object StoreKey | ForEach-Object { [ordered]@{ key = & $text $_.StoreKey; name = & $text $_.Store_Name; city = & $text $_.City; region = & $text $_.Region; unknown = $_.Is_Unknown -eq 'True' } })
+}
+foreach ($k in $dqTables.Keys) { $measures[$k] = $dqTables[$k] }
 
 $fullPage = "const size = () => { const width = document.documentElement.clientWidth; return { width, height: Math.round(width * 1340 / 1920) }; };"
 $setup = switch ($Which) {
@@ -59,7 +71,7 @@ $fullPage
     'report' { @"
 const kind = new URLSearchParams(location.search).get('kind') || 'products';
 const measures = $($measures | ConvertTo-Json -Compress);
-const lineRoles = ['date','order','line','product','productUnknown','category','listPrice','status','quantity','discount','gross','net'];
+const lineRoles = ['date','order','line','product','productUnknown','category','listPrice','status','quantity','discount','gross','net','store','unitPrice','lineFlag'];
 const roles = kind === 'quality' ? Object.keys(measures) : lineRoles;
 const rows = kind === 'quality' ? [roles.map(r => measures[r])] : raw.map(r => roles.map(role => role === 'date' ? new Date(r.date + 'T00:00:00') : r[role]));
 const columns = roles.map(role => ({ displayName: role, roles: { [role]: true }, type: {} }));

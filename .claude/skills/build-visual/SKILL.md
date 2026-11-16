@@ -30,7 +30,7 @@ After changing `visuals/shared/*`, build both `sales` and `report`. If `mauveSal
 
 | Visual | GUID | Used by |
 |---|---|---|
-| Mauve Table | `mauveTable206323CE31CC48B796ED1D3480CC2EE7` | `oa_lines_table`, `pa_metrics_table`, 5 `dq_*_table` |
+| Mauve Table | `mauveTable206323CE31CC48B796ED1D3480CC2EE7` | none (retired: one visual per page) |
 | Mauve Report Page | `mauveReportPage54F8CE52AF994908A86522ADBF64F28C` | `report_page_ts` on pages 2 to 6 |
 | Mauve Sales Page | `mauveSalesPage0BC9FF907287439685E99AB7EDABBCAC` | `sales_page_ts` on page 1 |
 

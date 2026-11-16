@@ -12,6 +12,9 @@
         { "displayName": "Discount percent", "name": "discount", "kind": "Grouping" },
         { "displayName": "Gross sales", "name": "gross", "kind": "Grouping" },
         { "displayName": "Net sales", "name": "net", "kind": "Grouping" },
+        { "displayName": "Store", "name": "store", "kind": "Grouping" },
+        { "displayName": "Unit price", "name": "unitPrice", "kind": "Grouping" },
+        { "displayName": "Line data quality flag", "name": "lineFlag", "kind": "Grouping" },
         { "displayName": "Flagged lines", "name": "flaggedLines", "kind": "Measure" },
         { "displayName": "Order lines", "name": "orderLines", "kind": "Measure" },
         { "displayName": "Unknown member lines", "name": "unknownLines", "kind": "Measure" },
@@ -19,7 +22,12 @@
         { "displayName": "Orders without payment", "name": "noPaymentOrders", "kind": "Measure" },
         { "displayName": "Payment exceptions", "name": "paymentExceptions", "kind": "Measure" },
         { "displayName": "Segment coverage", "name": "segmentCoverage", "kind": "Measure" },
-        { "displayName": "Customers missing a segment", "name": "missingSegments", "kind": "Measure" }
+        { "displayName": "Customers missing a segment", "name": "missingSegments", "kind": "Measure" },
+        { "displayName": "Payments rows (JSON)", "name": "dqPayments", "kind": "Measure" },
+        { "displayName": "Orders rows (JSON)", "name": "dqOrders", "kind": "Measure" },
+        { "displayName": "Customers rows (JSON)", "name": "dqCustomers", "kind": "Measure" },
+        { "displayName": "Products rows (JSON)", "name": "dqProducts", "kind": "Measure" },
+        { "displayName": "Stores rows (JSON)", "name": "dqStores", "kind": "Measure" }
     ],
     "objects": {
         "page": {
@@ -50,6 +58,9 @@
                         { "for": { "in": "discount" } },
                         { "for": { "in": "gross" } },
                         { "for": { "in": "net" } },
+                        { "for": { "in": "store" } },
+                        { "for": { "in": "unitPrice" } },
+                        { "for": { "in": "lineFlag" } },
                         { "for": { "in": "flaggedLines" } },
                         { "for": { "in": "orderLines" } },
                         { "for": { "in": "unknownLines" } },
@@ -57,7 +68,12 @@
                         { "for": { "in": "noPaymentOrders" } },
                         { "for": { "in": "paymentExceptions" } },
                         { "for": { "in": "segmentCoverage" } },
-                        { "for": { "in": "missingSegments" } }
+                        { "for": { "in": "missingSegments" } },
+                        { "for": { "in": "dqPayments" } },
+                        { "for": { "in": "dqOrders" } },
+                        { "for": { "in": "dqCustomers" } },
+                        { "for": { "in": "dqProducts" } },
+                        { "for": { "in": "dqStores" } }
                     ],
                     "dataReductionAlgorithm": { "top": { "count": 30000 } }
                 }

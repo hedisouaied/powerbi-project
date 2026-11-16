@@ -29,9 +29,11 @@
 - Each KPI sparkline shows weekly totals, and its tooltip names the metric it plots (`KpiSpark.label`), which can differ from the KPI's own title.
 - **Sales pages** receive order lines through grouping roles and compute totals in `src/visual.ts`, so they **duplicate the DAX rules**, like page 1. Keep the query at line grain and never add a filter-independent measure to it: multi-table grouping would cross-join.
 - **Product Performance and Date Trends** are entirely this visual, with built-in Category and date filters that apply to the visual only (saved through `persistProperties`).
-- **Order Analysis and Price Analysis** keep a Mauve Table (`oa_lines_table`, `pa_metrics_table`, y 814, h 506, z 500) over an empty area of the page; clicking a table row cross-filters this visual through Power BI. Change one layout and you must change the other.
-- **Data Quality** uses this visual for the header and KPIs only (measure roles, one row). It's 1340 high so its background runs behind the 5 Mauve Tables, which stay on top.
-- Because the query only returns products with sales, unsold products don't appear in this visual, and **Avg List Price (106.79) covers sold products only**, not the whole catalogue like the `Average List Price` measure (127.20). The Price Metrics and Products tables still list every product.
+- **Rule: one visual per page.** Every page is a single custom visual. Tables are drawn inside it by `dataTable()` (sort, search, dropdown filters per column, optional row click), never added as separate visuals.
+- **Order Analysis** draws Order Line Detail from the line data (extra roles `store`, `unitPrice`, `lineFlag`). Clicking a line filters the page to its order (`state.filters.order`); the header chip clears it.
+- **Price Analysis** draws Price Metrics next to the list-price chart, from the line data.
+- **Data Quality** reads one row of measures: the KPIs, plus its 5 tables as JSON text from the `DQ Payments JSON`, `DQ Orders JSON`, `DQ Customers JSON`, `DQ Products JSON` and `DQ Stores JSON` measures (roles `dqPayments` … `dqStores`). These tables come from unrelated tables, so they can't share one grouped query; JSON measures avoid the cross join. Numbers are formatted with `"en-US"` because the model culture is fr-FR.
+- Because the line query only returns products with sales, unsold products don't appear on the sales pages, and **Avg List Price (106.79) and Price Metrics cover sold products only**, not the whole catalogue like the `Average List Price` measure (127.20). The Data Quality Products table lists every product.
 
 | Page | Page id |
 |---|---|
@@ -44,8 +46,7 @@
 
 ## Mauve Table
 
-- The 7 standalone tables (Order Line Detail, Price Metrics, 5 on Data Quality) are this private visual in `visuals/mauveTable/` (source in `src/visual.ts`, styles in `style/visual.less`).
+- **No page uses it any more** (one visual per page); its tables were moved into Mauve Report Page. The source in `visuals/mauveTable/` is kept for reference, and old copies of the table visuals are in git history.
 - Filters are chosen per column: a dropdown for lists ≤ 30 values and flags, radio buttons for Yes/No and ≤ 3 short values, a `>100`/`<50` box for numbers, a "contains" box otherwise. It also has search, header sorting, row click to cross-filter, and status pills, flag chips and UNKNOWN badges detected from column names.
-- Table visuals (`<block>_table`) sit on top of the Mauve Report Page visual (z 500), which leaves their area empty.
 - Size the visual from `options.viewport`, never `height: 100%`: the host element has no fixed height and the table collapses to 0 px. Errors and layout problems are written inside the visual in pink, not swallowed.
 - Format pane (Table card): title, subtitle, text size, search box, column filters, default sort column and direction.
