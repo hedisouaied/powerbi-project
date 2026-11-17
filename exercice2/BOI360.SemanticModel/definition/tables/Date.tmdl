@@ -1,0 +1,97 @@
+table Date
+	lineageTag: cc4279e1-841d-9034-af42-aa002e63d9f4
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: yyyy-mm-dd
+		lineageTag: c32528c3-f2e0-1037-bcd9-ecedd50bb3ec
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = YEAR('Date'[Date])
+		dataType: int64
+		formatString: 0
+		lineageTag: 7738774e-5902-6e3a-b128-e48c2b713461
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter = "Q" & QUARTER('Date'[Date])
+		dataType: string
+		lineageTag: cc5109bc-afa2-ff3a-95dd-9073002a1d50
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number' = MONTH('Date'[Date])
+		dataType: int64
+		formatString: 0
+		lineageTag: b546d367-6b7e-e13b-aa00-6011acabd567
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month = FORMAT('Date'[Date], "mmm", "en-US")
+		dataType: string
+		lineageTag: ee3c60dd-ab5e-5b39-9705-b766ad874ef9
+		summarizeBy: none
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Number' = YEAR('Date'[Date]) * 100 + MONTH('Date'[Date])
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f994e8a-f33e-6e3f-81f2-d8ef0e5f5d9d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month' = FORMAT('Date'[Date], "mmm yyyy", "en-US")
+		dataType: string
+		lineageTag: ac220532-0f73-263d-9396-a3ec0436ad6e
+		summarizeBy: none
+		sortByColumn: 'Year Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Start' = DATE(YEAR('Date'[Date]), MONTH('Date'[Date]), 1)
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: e12d11ce-5835-1336-8d72-8dd10fd02f93
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekday Number' = WEEKDAY('Date'[Date], 2)
+		dataType: int64
+		formatString: 0
+		lineageTag: 641a2768-38da-b33f-9934-def5f924db23
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday = FORMAT('Date'[Date], "ddd", "en-US")
+		dataType: string
+		lineageTag: 64d25cc3-c2d3-6b3b-8f06-7eeef675f4c5
+		summarizeBy: none
+		sortByColumn: 'Weekday Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Weekend' = WEEKDAY('Date'[Date], 2) > 5
+		dataType: boolean
+		lineageTag: 42712a54-dfc4-bf36-a86a-92ecd5b8dff3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = calculated
+		mode: import
+		source = CALENDAR(DATE(2021, 1, 1), DATE(2027, 12, 31))
+

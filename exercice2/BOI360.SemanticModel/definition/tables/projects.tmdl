@@ -1,0 +1,112 @@
+table projects
+	lineageTag: fbb8d1cd-fe7e-2b35-88cd-6137dd893a09
+
+	column project_id
+		dataType: string
+		isKey
+		lineageTag: 53464377-2d61-9c36-9f29-570f33e472da
+		summarizeBy: none
+		sourceColumn: project_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column project_name
+		dataType: string
+		lineageTag: 6498caee-1888-373b-9906-0b6a39078a46
+		summarizeBy: none
+		sourceColumn: project_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column project_manager_id
+		dataType: string
+		isHidden
+		lineageTag: ba9e66bf-9cdb-7a3e-8ac2-2c63fbc75082
+		summarizeBy: none
+		sourceColumn: project_manager_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		isHidden
+		lineageTag: 9b89786a-afe0-9f33-b96e-35e31b5c8622
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 31e6d530-4c88-033a-a7c8-11c35f141036
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column deadline
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 99b16f2f-649e-ed3f-b3dc-524e3ad2c3c5
+		summarizeBy: none
+		sourceColumn: deadline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column budget_tnd
+		dataType: decimal
+		formatString: #,0.00" TND"
+		lineageTag: 5d0a0d5a-23a9-0b31-9eda-7b2efddec390
+		summarizeBy: sum
+		sourceColumn: budget_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_cost_tnd
+		dataType: decimal
+		formatString: #,0.00" TND"
+		lineageTag: c330b53e-0251-1f33-b0c1-dfa6ed92941b
+		summarizeBy: sum
+		sourceColumn: actual_cost_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column project_status
+		dataType: string
+		lineageTag: e0584b88-a6d6-fc35-889d-84d409223c04
+		summarizeBy: none
+		sourceColumn: project_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column priority
+		dataType: string
+		lineageTag: 95ce94a4-9aae-0232-bdf5-2ec165822c58
+		summarizeBy: none
+		sourceColumn: priority
+
+		annotation SummarizationSetBy = Automatic
+
+	partition projects = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\projects.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    CleanedText = fnCleanText(PromotedHeaders),
+				    ChangedType = Table.TransformColumnTypes(CleanedText, {
+				        {"project_id", type text}, {"project_name", type text}, {"project_manager_id", type text}, {"department_id", type text},
+				        {"start_date", type date}, {"deadline", type date},
+				        {"budget_tnd", Currency.Type}, {"actual_cost_tnd", Currency.Type},
+				        {"project_status", type text}, {"priority", type text}
+				    }, "en-US")
+				in
+				    ChangedType
+
+	annotation PBI_ResultType = Table
+

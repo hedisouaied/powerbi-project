@@ -1,0 +1,127 @@
+table employees
+	lineageTag: 8dbfd850-d7c2-0f36-9a72-b780e07026d2
+
+	column employee_id
+		dataType: string
+		isKey
+		lineageTag: 90db4c28-a2a4-163f-bbe7-478df1b123fb
+		summarizeBy: none
+		sourceColumn: employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		lineageTag: 1b9bf35d-583d-7137-8e14-d114cf85c3be
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		lineageTag: 73ebb00b-e761-8935-abae-7999c9d55916
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 68c898f5-846f-a630-bba6-f8ce2a7c3682
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		isHidden
+		lineageTag: 1f78863a-3f65-e134-aee3-9241d3721050
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column job_title
+		dataType: string
+		lineageTag: 40b34312-5a5d-103d-87a6-25e864baabcf
+		summarizeBy: none
+		sourceColumn: job_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 9a3a910e-7408-8b37-812d-dec39200b634
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column hire_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 4c5fe4c8-8716-6d3d-9fb4-5d164aa5b24e
+		summarizeBy: none
+		sourceColumn: hire_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column monthly_salary_tnd
+		dataType: decimal
+		isHidden
+		formatString: #,0.00" TND"
+		lineageTag: ac147501-62f4-a835-868a-f0e488d1984c
+		summarizeBy: none
+		sourceColumn: monthly_salary_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column employment_status
+		dataType: string
+		lineageTag: 88435160-c0b1-5f38-92f5-4f7c2da906e0
+		summarizeBy: none
+		sourceColumn: employment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_name
+		dataType: string
+		lineageTag: f352b991-c841-823b-ba54-a51fbf80753f
+		summarizeBy: none
+		sourceColumn: full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_shared_email
+		dataType: boolean
+		lineageTag: ba2e6137-ffd6-8835-8334-c2fed4357180
+		summarizeBy: none
+		sourceColumn: dq_shared_email
+
+		annotation SummarizationSetBy = Automatic
+
+	partition employees = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\employees.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    CleanedText = fnCleanText(PromotedHeaders),
+				    ChangedType = Table.TransformColumnTypes(CleanedText, {
+				        {"employee_id", type text}, {"first_name", type text}, {"last_name", type text}, {"email", type text},
+				        {"department_id", type text}, {"job_title", type text}, {"city", type text},
+				        {"hire_date", type date}, {"monthly_salary_tnd", Currency.Type}, {"employment_status", type text}
+				    }, "en-US"),
+				    AddedFullName = Table.AddColumn(ChangedType, "full_name", each [first_name] & " " & [last_name], type text),
+				    AllEmails = List.Buffer(AddedFullName[email]),
+				    AddedSharedEmailFlag = Table.AddColumn(AddedFullName, "dq_shared_email",
+				        each List.Count(List.Select(AllEmails, (e) => e = [email])) > 1, type logical)
+				in
+				    AddedSharedEmailFlag
+
+	annotation PBI_ResultType = Table
+

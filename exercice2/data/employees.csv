@@ -1,0 +1,49 @@
+employee_id,first_name,last_name,email,department_id,job_title,city,hire_date,monthly_salary_tnd,employment_status
+E001,Mariam,Khalil,mariam.khalil@example.com,D001,Sales Manager,Sousse,2023-10-27,1500,On Leave
+E002,Tarek,Ayari,tarek.ayari@example.com,D002,Marketing Manager,Ariana,2023-05-12,3200,Active
+E003,Ahmed,Mabrouk,ahmed.mabrouk@example.com,D003,Operations Officer,Nabeul,2021-06-15,1100,Active
+E004,Ahmed,Khemiri,ahmed.khemiri@example.com,D004,Finance Manager,Bizerte,2023-10-02,1500,Active
+E005,Amira,Khalil,amira.khalil@example.com,D005,Recruiter,Sousse,2023-01-01,2200,Active
+E006,Walid,Ayari,walid.ayari@example.com,D006,IT Support,Ariana,2022-08-22,1300,On Leave
+E007,Karim,Ben Ali,karim.benali@example.com,D001,Sales Manager,Bizerte,2025-10-03,2200,Active
+E008,Fares,Trabelsi,fares.trabelsi@example.com,D002,Marketing Manager,Ariana,2023-03-28,1100,Active
+E009,Salma,Mabrouk,salma.mabrouk@example.com,D003,Operations Analyst,Gabes,2025-11-28,3800,Active
+E010,Fares,Mabrouk,fares.mabrouk@example.com,D004,Financial Analyst,Tunis,2026-03-12,1500,Active
+E011,Sarah,Chaabane,sarah.chaabane@example.com,D005,HR Manager,Sousse,2023-12-08,2600,Active
+E012,Omar,Bouzid,omar.bouzid@example.com,D006,Software Developer,Sousse,2025-12-17,3200,Active
+E013,Dorra,Ayari,dorra.ayari@example.com,D001,Sales Manager,Gabes,2022-05-30,1800,Active
+E014,Amina,Ayari,amina.ayari@example.com,D002,Content Manager,Gabes,2024-12-01,2600,Active
+E015,Karim,Jebali,karim.jebali@example.com,D003,Operations Officer,Sfax,2021-01-19,3200,Active
+E016,Mehdi,Khalil,mehdi.khalil@example.com,D004,Accountant,Nabeul,2026-03-03,3200,Active
+E017,Salma,Bouzid,salma.bouzid@example.com,D005,Recruiter,Tunis,2025-07-13,1800,Active
+E018,Hana,Trabelsi,hana.trabelsi@example.com,D006,IT Manager,Nabeul,2023-06-17,3200,Active
+E019,Fares,Chaabane,fares.chaabane@example.com,D001,Sales Executive,Nabeul,2023-09-09,3200,Active
+E020,Mariam,Mansour,mariam.mansour@example.com,D002,Content Manager,Sfax,2025-03-11,3200,Active
+E021,Youssef,Ben Ali,youssef.benali@example.com,D003,Operations Manager,Sousse,2023-07-14,1500,Active
+E022,Mariam,Mabrouk,mariam.mabrouk@example.com,D004,Finance Manager,Nabeul,2021-04-02,2200,Active
+E023,Ahmed,Khalil,ahmed.khalil@example.com,D005,HR Manager,Ariana,2024-09-23,1300,Active
+E024,Nour,Bouzid,nour.bouzid@example.com,D006,Software Developer,Nabeul,2024-04-19,1100,Active
+E025,Bilel,Gharbi,bilel.gharbi@example.com,D001,Sales Manager,Nabeul,2021-10-05,3800,Active
+E026,Rania,Gharbi,rania.gharbi@example.com,D002,Marketing Specialist,Gabes,2023-12-02,900,Active
+E027,Rania,Trabelsi,rania.trabelsi@example.com,D003,Operations Analyst,Bizerte,2021-04-16,900,Active
+E028,Salma,Bouzid,salma.bouzid@example.com,D004,Finance Manager,Nabeul,2022-11-03,3200,Active
+E029,Mariam,Bouzid,mariam.bouzid@example.com,D005,HR Manager,Sfax,2023-08-14,1300,On Leave
+E030,Salma,Mansour,salma.mansour@example.com,D006,IT Manager,Bizerte,2023-06-08,3200,On Leave
+E031,Nour,Khemiri,nour.khemiri@example.com,D001,Sales Executive,Gabes,2024-12-26,900,Active
+E032,Amina,Gharbi,amina.gharbi@example.com,D002,Marketing Manager,Tunis,2021-04-03,3200,Active
+E033,Mehdi,Chaabane,mehdi.chaabane@example.com,D003,Operations Officer,Sfax,2024-10-21,3800,Active
+E034,Salma,Gharbi,salma.gharbi@example.com,D004,Finance Manager,Sfax,2021-11-25,2600,Active
+E035,Fares,Ayari,fares.ayari@example.com,D005,HR Specialist,Gabes,2023-04-29,1800,Active
+E036,Anis,Gharbi,anis.gharbi@example.com,D006,IT Support,Ariana,2022-06-24,2600,Active
+E037,Hana,Gharbi,hana.gharbi@example.com,D001,Sales Manager,Ariana,2022-10-30,3200,Active
+E038,Salma,Ayari,salma.ayari@example.com,D002,Content Manager,Sousse,2025-06-20,1500,Active
+E039,Ahmed,Trabelsi,ahmed.trabelsi@example.com,D003,Operations Analyst,Bizerte,2025-12-05,2600,Active
+E040,Bilel,Gharbi,bilel.gharbi@example.com,D004,Financial Analyst,Sfax,2021-02-25,2200,Active
+E041,Bilel,Mabrouk,bilel.mabrouk@example.com,D005,HR Manager,Monastir,2025-06-10,1100,On Leave
+E042,Dorra,Jebali,dorra.jebali@example.com,D006,IT Manager,Monastir,2024-02-13,1800,On Leave
+E043,Amira,Khemiri,amira.khemiri@example.com,D001,Sales Executive,Sousse,2024-02-13,1800,Active
+E044,Fares,Gharbi,fares.gharbi@example.com,D002,Marketing Manager,Tunis,2021-08-06,2200,Active
+E045,Amina,Khemiri,amina.khemiri@example.com,D003,Operations Manager,Bizerte,2021-08-06,1800,On Leave
+E046,Youssef,Jebali,youssef.jebali@example.com,D004,Accountant,Nabeul,2022-10-07,1800,Active
+E047,Ahmed,Saidi,ahmed.saidi@example.com,D005,Recruiter,Gabes,2025-11-10,900,Active
+E048,Mariam,Mansour,mariam.mansour@example.com,D006,IT Support,Sousse,2021-02-17,1100,Active

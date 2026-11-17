@@ -1,0 +1,90 @@
+table expenses
+	lineageTag: 76e95af7-ff5b-6e3a-8bba-697e3d5cc151
+
+	column expense_id
+		dataType: string
+		isKey
+		lineageTag: c65bbf40-75d5-753d-9855-f40b90f483f3
+		summarizeBy: none
+		sourceColumn: expense_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column expense_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 579fe2e6-5642-4e34-a34e-aff0bd3d06d0
+		summarizeBy: none
+		sourceColumn: expense_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column department_id
+		dataType: string
+		isHidden
+		lineageTag: fcb56f3a-42ad-f032-9001-1f4fc6403be0
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column project_id
+		dataType: string
+		isHidden
+		lineageTag: fd464a7a-4c0d-d73d-ae98-a75ba2f8c34f
+		summarizeBy: none
+		sourceColumn: project_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column expense_category
+		dataType: string
+		lineageTag: 461d7e01-c4f2-173d-b7d2-80db64db50cb
+		summarizeBy: none
+		sourceColumn: expense_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column approval_status
+		dataType: string
+		lineageTag: e9b57695-0522-e53e-80ca-dfc2b2fef0c5
+		summarizeBy: none
+		sourceColumn: approval_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount_tnd
+		dataType: decimal
+		formatString: #,0.00" TND"
+		lineageTag: aae43be8-4d53-243a-a2ec-879e7eacdd4f
+		summarizeBy: sum
+		sourceColumn: amount_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: e04c4e59-8add-9c3b-853d-fb0ad9739b79
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition expenses = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\expenses.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    CleanedText = fnCleanText(PromotedHeaders),
+				    ChangedType = Table.TransformColumnTypes(CleanedText, {
+				        {"expense_id", type text}, {"expense_date", type date}, {"department_id", type text}, {"project_id", type text},
+				        {"expense_category", type text}, {"approval_status", type text}, {"amount_tnd", Currency.Type}, {"description", type text}
+				    }, "en-US")
+				in
+				    ChangedType
+
+	annotation PBI_ResultType = Table
+

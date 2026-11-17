@@ -1,0 +1,51 @@
+table departments
+	lineageTag: bd92d054-4c7d-c53e-b654-3328232158cb
+
+	column department_id
+		dataType: string
+		isKey
+		lineageTag: 4789513a-3a9b-c930-8c6f-d433689c3f6d
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_name
+		dataType: string
+		lineageTag: 4a3a9df7-4978-d836-9571-8ce6ce6b78cb
+		summarizeBy: none
+		sourceColumn: department_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column division
+		dataType: string
+		lineageTag: 90b32d6a-0a14-303e-b795-869b699ffb36
+		summarizeBy: none
+		sourceColumn: division
+
+		annotation SummarizationSetBy = Automatic
+
+	column base_city
+		dataType: string
+		lineageTag: 58bd27c3-2e21-413b-b9e0-d71fc77aad5c
+		summarizeBy: none
+		sourceColumn: base_city
+
+		annotation SummarizationSetBy = Automatic
+
+	partition departments = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\departments.csv"), [Delimiter = ",", Columns = 4, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    CleanedText = fnCleanText(PromotedHeaders),
+				    ChangedType = Table.TransformColumnTypes(CleanedText, {
+				        {"department_id", type text}, {"department_name", type text}, {"division", type text}, {"base_city", type text}
+				    }, "en-US")
+				in
+				    ChangedType
+
+	annotation PBI_ResultType = Table
+

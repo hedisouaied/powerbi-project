@@ -1,0 +1,26 @@
+{
+    "visual": {
+        "name": "boi360Page",
+        "displayName": "BOI 360 Page",
+        "guid": "boi360Page7C3E9A51D2F84B6E9A0C5D11E8F4B2A7",
+        "visualClassName": "Visual",
+        "version": "1.0.0.11",
+        "description": "Business Operations Intelligence 360: one neon glass visual per report page (overview, sales, people, projects, tasks, finance, customers, action center).",
+        "supportUrl": "https://learn.microsoft.com/power-bi/developer/visuals/",
+        "gitHubUrl": ""
+    },
+    "apiVersion": "5.11.1",
+    "author": {
+        "name": "hedisouaied",
+        "email": "hedisouaied@users.noreply.github.com"
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": null,
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": [],
+    "version": "1.0.0.11"
+}

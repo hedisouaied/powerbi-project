@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "BOI360"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d05db40f-4392-4d67-a87b-4e755bd11a89"
+  }
+}

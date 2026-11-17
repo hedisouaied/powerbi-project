@@ -1,0 +1,94 @@
+relationship cf1c626e-edba-d330-b2ef-06ad663647ad
+	fromColumn: employees.department_id
+	toColumn: departments.department_id
+
+relationship a4f5cd42-9529-d334-9ae8-11e4b916de69
+	fromColumn: sales_transactions.seller_id
+	toColumn: employees.employee_id
+
+relationship d0cf7533-1cb7-9a36-ac3d-519aae35b487
+	fromColumn: targets.employee_id
+	toColumn: employees.employee_id
+
+relationship 36a94c34-7c7a-ce38-8383-574b51f14b39
+	fromColumn: tasks.assignee_id
+	toColumn: employees.employee_id
+
+relationship 4508e8f0-873c-c839-8d9a-952a070fc9a1
+	fromColumn: leave_requests.employee_id
+	toColumn: employees.employee_id
+
+relationship ed98c855-019f-0e3e-b51e-e4c25295fed7
+	fromColumn: sales_transactions.customer_id
+	toColumn: customers.customer_id
+
+relationship 3fa7a7fb-940e-0f37-8106-bfa7a6a11408
+	fromColumn: sales_transactions.product_id
+	toColumn: products.product_id
+
+relationship 650b5759-5fb6-2e36-97af-91dd06232320
+	fromColumn: projects.project_manager_id
+	toColumn: project_managers.project_manager_id
+
+relationship e566364e-b93b-903c-bbfc-6a7e9c104311
+	fromColumn: tasks.project_id
+	toColumn: projects.project_id
+
+relationship c6b80b7c-bdb3-6631-87f9-7221a95f236a
+	fromColumn: expenses.project_id
+	toColumn: projects.project_id
+
+relationship fad62379-8e64-8735-b962-4e32f390f8f8
+	fromColumn: expenses.department_id
+	toColumn: departments.department_id
+
+relationship 33bbc344-8982-cd32-adfd-15fd05f343de
+	isActive: false
+	fromColumn: projects.department_id
+	toColumn: departments.department_id
+
+relationship 1d28fc96-83ef-4535-ae98-65f0c6523b28
+	fromColumn: sales_transactions.transaction_date
+	toColumn: Date.Date
+
+relationship 225a9dcf-6066-853f-b907-909a7a901e60
+	fromColumn: targets.target_month
+	toColumn: Date.Date
+
+relationship 4cc472f5-f55e-6d3e-9c0e-abc5c7ae4d8c
+	fromColumn: expenses.expense_date
+	toColumn: Date.Date
+
+relationship 998c1287-a14a-523e-9ca2-155927422ac9
+	fromColumn: tasks.due_date
+	toColumn: Date.Date
+
+relationship 75bc66e0-2cd3-3c35-9c33-d693cb4c6b55
+	isActive: false
+	fromColumn: tasks.created_date
+	toColumn: Date.Date
+
+relationship 7e566a8d-85a2-3633-9887-03ae02b823de
+	fromColumn: leave_requests.start_date
+	toColumn: Date.Date
+
+relationship b4b5db95-6249-0a35-8659-a1b71c86ff49
+	isActive: false
+	fromColumn: leave_requests.end_date
+	toColumn: Date.Date
+
+relationship 2bd3ab16-0637-b733-ac5b-cde9e4ecf3eb
+	isActive: false
+	fromColumn: projects.start_date
+	toColumn: Date.Date
+
+relationship caa42908-970f-1834-8d20-d9ea456dc4e5
+	isActive: false
+	fromColumn: projects.deadline
+	toColumn: Date.Date
+
+relationship 574e93a3-42fe-a130-a619-9a92b2b26e87
+	isActive: false
+	fromColumn: employees.hire_date
+	toColumn: Date.Date
+

@@ -1,0 +1,7 @@
+department_id,department_name,division,base_city
+D001,Sales,Commercial,Tunis
+D002,Marketing,Commercial,Sousse
+D003,Operations,Operations,Sfax
+D004,Finance,Corporate,Tunis
+D005,Human Resources,Corporate,Sousse
+D006,IT,Technology,Tunis
