@@ -1,0 +1,51 @@
+table customers
+	lineageTag: af8ba47b-331e-ce36-97b0-8618271288f5
+
+	column customer_id
+		dataType: string
+		isKey
+		lineageTag: 5436f4fa-72d8-1c32-b938-233f7b450dd3
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_name
+		dataType: string
+		lineageTag: 6b9d1b0f-6b41-cd30-9fb4-acf5c3fd2876
+		summarizeBy: none
+		sourceColumn: customer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_segment
+		dataType: string
+		lineageTag: 82e4552f-939e-3337-8408-e2fb9e8368d5
+		summarizeBy: none
+		sourceColumn: customer_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: b68623c3-31e5-3638-a2bb-9422d4cde216
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\customers.csv"), [Delimiter = ",", Columns = 4, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    CleanedText = fnCleanText(PromotedHeaders),
+				    ChangedType = Table.TransformColumnTypes(CleanedText, {
+				        {"customer_id", type text}, {"customer_name", type text}, {"customer_segment", type text}, {"city", type text}
+				    }, "en-US")
+				in
+				    ChangedType
+
+	annotation PBI_ResultType = Table
+

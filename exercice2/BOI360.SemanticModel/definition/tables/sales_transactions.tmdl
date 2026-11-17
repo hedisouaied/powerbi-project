@@ -1,0 +1,139 @@
+table sales_transactions
+	lineageTag: 319a9419-ecb9-9b3a-9b52-46a10b8b429a
+
+	column transaction_id
+		dataType: string
+		isKey
+		lineageTag: 4be605b1-8b96-fb39-9d28-dc14cace6397
+		summarizeBy: none
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 95225489-fb8c-9837-b4c7-899920fd23c5
+		summarizeBy: none
+		sourceColumn: transaction_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column customer_id
+		dataType: string
+		isHidden
+		lineageTag: 7f639b2f-7d3d-c03d-af3f-c3bec8496da1
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		isHidden
+		lineageTag: 9fd8650a-5132-7a32-bd71-495b5f3b78db
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_id
+		dataType: string
+		isHidden
+		lineageTag: b23e46ca-27ad-de3d-a523-cb242d5b9d83
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: #,0
+		lineageTag: b6804d89-c48c-4d36-baaf-787d065ad81a
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price_tnd
+		dataType: decimal
+		formatString: #,0.00" TND"
+		lineageTag: ff9e9272-8533-7136-8e88-969f6d495211
+		summarizeBy: none
+		sourceColumn: unit_price_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_pct
+		dataType: double
+		formatString: 0.0%
+		lineageTag: eb60bb2f-90ad-2536-8f34-b7a2118b6b76
+		summarizeBy: none
+		sourceColumn: discount_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue_tnd
+		dataType: decimal
+		formatString: #,0.00" TND"
+		lineageTag: 189cdb36-aaaa-df31-be31-c9a7884c8dcc
+		summarizeBy: sum
+		sourceColumn: revenue_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_tnd
+		dataType: decimal
+		formatString: #,0.00" TND"
+		lineageTag: 23261fd5-25b4-c934-8efd-bca754aba087
+		summarizeBy: sum
+		sourceColumn: cost_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column profit_tnd
+		dataType: decimal
+		formatString: #,0.00" TND"
+		lineageTag: 37201d3c-da0a-633c-b190-9ec7495413b4
+		summarizeBy: sum
+		sourceColumn: profit_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_status
+		dataType: string
+		lineageTag: 185bd0ce-8b0d-073f-88d8-591b6efaa926
+		summarizeBy: none
+		sourceColumn: payment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column sales_region
+		dataType: string
+		lineageTag: a690b3d8-5014-9335-85dc-00657375a637
+		summarizeBy: none
+		sourceColumn: sales_region
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales_transactions = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\sales_transactions.csv"), [Delimiter = ",", Columns = 13, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    CleanedText = fnCleanText(PromotedHeaders),
+				    ChangedType = Table.TransformColumnTypes(CleanedText, {
+				        {"transaction_id", type text}, {"transaction_date", type date},
+				        {"customer_id", type text}, {"product_id", type text}, {"seller_id", type text},
+				        {"quantity", Int64.Type}, {"unit_price_tnd", Currency.Type}, {"discount_pct", Percentage.Type},
+				        {"revenue_tnd", Currency.Type}, {"cost_tnd", Currency.Type}, {"profit_tnd", Currency.Type},
+				        {"payment_status", type text}, {"sales_region", type text}
+				    }, "en-US")
+				in
+				    ChangedType
+
+	annotation PBI_ResultType = Table
+

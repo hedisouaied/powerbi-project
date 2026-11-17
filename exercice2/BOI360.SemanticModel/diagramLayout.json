@@ -1,0 +1,191 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1506.5553419201087,
+            "y": 687.59684788532445
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "bbbe18ec-c7ce-a73f-ab54-e0479df17038",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1272.5553419201087,
+            "y": 822.816841760864
+          },
+          "nodeIndex": "customers",
+          "nodeLineageTag": "af8ba47b-331e-ce36-97b0-8618271288f5",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 686.08742924971921,
+            "y": 719.17976919590978
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "cc4279e1-841d-9034-af42-aa002e63d9f4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 336.94437624475063,
+            "y": 272.8772284064778
+          },
+          "nodeIndex": "departments",
+          "nodeLineageTag": "bd92d054-4c7d-c53e-b654-3328232158cb",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 623.71403528205758,
+            "y": 368.87579437006343
+          },
+          "nodeIndex": "employees",
+          "nodeLineageTag": "8dbfd850-d7c2-0f36-9a72-b780e07026d2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 461.760216944983
+          },
+          "nodeIndex": "expenses",
+          "nodeLineageTag": "76e95af7-ff5b-6e3a-8bba-697e3d5cc151",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 314.42325862618759,
+            "y": -50
+          },
+          "nodeIndex": "leave_requests",
+          "nodeLineageTag": "fc7b3dcd-575a-b33b-a398-b908b4ee33b6",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1272.5532814713331,
+            "y": 522.998225941549
+          },
+          "nodeIndex": "products",
+          "nodeLineageTag": "3f01d305-aea9-3e37-9eba-ab4323e33efb",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 574.07333558064272,
+            "y": 1425.1936957706489
+          },
+          "nodeIndex": "project_managers",
+          "nodeLineageTag": "4c78b878-a2dd-7637-874b-a525ca28375f",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 400.90133391180348,
+            "y": 1072.8691650030203
+          },
+          "nodeIndex": "projects",
+          "nodeLineageTag": "fbb8d1cd-fe7e-2b35-88cd-6137dd893a09",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 985.46487911219219,
+            "y": 627.51550476865634
+          },
+          "nodeIndex": "sales_transactions",
+          "nodeLineageTag": "319a9419-ecb9-9b3a-9b52-46a10b8b429a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 641.47033556305246,
+            "y": 91.5732179450606
+          },
+          "nodeIndex": "targets",
+          "nodeLineageTag": "55cc76c3-a4b7-dd3a-b023-923d2db37939",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 822.57859191324314,
+            "y": 1072.8014915755525
+          },
+          "nodeIndex": "tasks",
+          "nodeLineageTag": "06cf923c-1761-2136-96cd-fce2ab9b9ef9",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

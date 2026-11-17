@@ -1,0 +1,9 @@
+product_id,product_name,category,list_price_tnd
+PR001,Consulting Package,Services,2500
+PR002,Software License,Software,850
+PR003,Training Session,Services,600
+PR004,Hardware Bundle,Hardware,1800
+PR005,Support Contract,Services,1200
+PR006,Cloud Subscription,Software,950
+PR007,Analytics Module,Software,1450
+PR008,Implementation Fee,Services,3200

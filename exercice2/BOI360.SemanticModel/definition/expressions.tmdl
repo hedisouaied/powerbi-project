@@ -1,0 +1,22 @@
+expression DataFolder = "C:\Users\DELL\Downloads\powerBiProject\exercice2\data" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: a0fd9d2d-2822-fe3b-a5fe-74c60c7910c0
+
+	annotation PBI_ResultType = Text
+
+expression fnCleanText =
+		(source as table) as table =>
+		    Table.TransformColumns(
+		        source,
+		        List.Transform(
+		            Table.ColumnNames(source),
+		            (col) => {
+		                col,
+		                (v) => (let t = if v = null then null else Text.Trim(Text.Clean(v)) in if t = "" then null else t),
+		                type nullable text
+		            }
+		        )
+		    )
+	lineageTag: 47ff7d50-7ee4-b935-8317-9fb7aadc8a4c
+
+	annotation PBI_ResultType = Function
+

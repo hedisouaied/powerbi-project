@@ -1,0 +1,17 @@
+# SDK (junctions to exercice1's installed packages) and build output
+node_modules/
+visuals/*/dist/
+visuals/*/.tmp/
+visuals/*/webpack.statistics*.html
+
+# Power BI local files
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/unappliedChanges.json
+
+# Secrets (none expected; kept as a safety net)
+.env
+.env.*
+
+# Logs
+*.log

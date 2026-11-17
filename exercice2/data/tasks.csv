@@ -1,0 +1,91 @@
+task_id,task_title,project_id,assignee_id,created_date,due_date,task_status,priority,source
+TSK001,Audit access permissions,P002,E028,2026-03-02,2026-03-26,Done,Critical,Dashboard
+TSK002,Review supplier invoices,P013,E041,2026-07-03,2026-08-03,Blocked,Critical,Email
+TSK003,Complete onboarding checklist,P001,E001,2026-09-11,2026-10-02,Blocked,High,Meeting
+TSK004,Prepare campaign performance summary,P014,E047,2026-08-10,2026-09-13,Blocked,Low,Management
+TSK005,Audit access permissions,P014,E039,2026-06-10,2026-06-23,In Progress,High,Meeting
+TSK006,Complete onboarding checklist,P009,E003,2026-06-29,2026-07-27,Done,High,Management
+TSK007,Validate project budget,P015,E004,2026-10-18,2026-10-28,Done,Medium,Email
+TSK008,Validate project budget,P015,E028,2026-06-13,2026-07-02,Done,High,Meeting
+TSK009,Update sales forecast,P010,E030,2026-04-30,2026-05-23,In Progress,Critical,Meeting
+TSK010,Resolve customer escalation,P010,E040,2026-05-31,2026-07-01,Done,Critical,Meeting
+TSK011,Audit access permissions,P018,E002,2026-07-29,2026-08-21,To Do,High,Management
+TSK012,Resolve customer escalation,P012,E037,2026-06-30,2026-07-23,To Do,High,Email
+TSK013,Prepare campaign performance summary,P004,E010,2026-05-17,2026-06-04,In Progress,Low,Management
+TSK014,Prepare monthly sales report,P002,E041,2026-09-05,2026-09-28,To Do,High,Email
+TSK015,Complete onboarding checklist,P009,E028,2026-05-18,2026-06-09,To Do,Low,Meeting
+TSK016,Update sales forecast,P018,E025,2026-07-09,2026-07-16,In Progress,Critical,Email
+TSK017,Audit access permissions,P016,E044,2026-03-21,2026-04-13,In Progress,High,Dashboard
+TSK018,Update sales forecast,P007,E040,2026-06-08,2026-06-15,Done,High,Email
+TSK019,Prepare monthly sales report,P006,E046,2026-01-15,2026-02-03,Done,High,Dashboard
+TSK020,Prepare campaign performance summary,P007,E031,2026-08-30,2026-09-22,Blocked,Medium,Management
+TSK021,Validate project budget,P008,E032,2026-05-11,2026-06-13,Blocked,Critical,Management
+TSK022,Prepare campaign performance summary,P003,E026,2026-03-10,2026-03-13,Done,Medium,Management
+TSK023,Update sales forecast,P010,E005,2026-04-12,2026-05-07,Blocked,Low,Meeting
+TSK024,Review supplier invoices,P011,E006,2026-04-22,2026-04-27,Done,Medium,Management
+TSK025,Audit access permissions,P001,E024,2026-02-16,2026-03-22,Blocked,Medium,Meeting
+TSK026,Update sales forecast,P005,E024,2026-07-04,2026-07-17,To Do,High,Meeting
+TSK027,Review supplier invoices,P016,E045,2026-09-28,2026-11-02,Done,High,Email
+TSK028,Resolve customer escalation,P011,E026,2026-08-26,2026-09-12,In Progress,High,Dashboard
+TSK029,Update sales forecast,P008,E026,2026-05-19,2026-06-21,In Progress,Medium,Meeting
+TSK030,Schedule team review,P014,E016,2026-07-20,2026-08-03,In Progress,High,Dashboard
+TSK031,Validate project budget,P003,E046,2026-03-09,2026-03-14,To Do,Medium,Dashboard
+TSK032,Update CRM records,P001,E031,2026-03-13,2026-04-01,Blocked,Low,Dashboard
+TSK033,Update CRM records,P010,E027,2026-04-06,2026-04-11,In Progress,Low,Management
+TSK034,Complete onboarding checklist,P014,E020,2026-10-07,2026-10-10,Blocked,Medium,Email
+TSK035,Prepare campaign performance summary,P016,E019,2026-08-27,2026-09-24,In Progress,High,Email
+TSK036,Review supplier invoices,P018,E020,2026-08-30,2026-09-01,To Do,Medium,Meeting
+TSK037,Update sales forecast,P004,E002,2026-06-18,2026-06-21,In Progress,High,Email
+TSK038,Update CRM records,P007,E035,2026-08-05,2026-09-03,In Progress,High,Dashboard
+TSK039,Update CRM records,P017,E004,2026-09-11,2026-09-26,Blocked,Low,Management
+TSK040,Validate project budget,P006,E032,2026-08-24,2026-09-18,In Progress,Low,Management
+TSK041,Review supplier invoices,P016,E017,2026-02-16,2026-03-03,In Progress,Critical,Meeting
+TSK042,Complete onboarding checklist,P015,E007,2026-03-22,2026-03-31,In Progress,Low,Dashboard
+TSK043,Validate project budget,P011,E006,2026-08-08,2026-08-11,In Progress,Medium,Meeting
+TSK044,Update sales forecast,P012,E002,2026-07-23,2026-07-25,Done,Low,Meeting
+TSK045,Review supplier invoices,P018,E048,2026-07-01,2026-08-03,In Progress,High,Dashboard
+TSK046,Schedule team review,P004,E027,2026-07-03,2026-08-03,Done,Critical,Meeting
+TSK047,Audit access permissions,P014,E009,2026-05-11,2026-05-18,Done,Medium,Email
+TSK048,Review supplier invoices,P005,E046,2026-05-22,2026-06-11,To Do,Critical,Email
+TSK049,Resolve customer escalation,P008,E033,2026-09-28,2026-10-28,To Do,Low,Management
+TSK050,Prepare campaign performance summary,P012,E008,2026-10-04,2026-10-07,In Progress,High,Email
+TSK051,Update CRM records,P014,E044,2026-02-23,2026-03-22,To Do,Medium,Email
+TSK052,Prepare campaign performance summary,P010,E014,2026-01-24,2026-01-30,To Do,High,Meeting
+TSK053,Audit access permissions,P010,E022,2026-08-30,2026-09-16,Blocked,High,Management
+TSK054,Resolve customer escalation,P017,E029,2026-05-03,2026-06-06,Blocked,Critical,Management
+TSK055,Complete onboarding checklist,P005,E007,2026-05-08,2026-05-21,Done,Critical,Management
+TSK056,Audit access permissions,P007,E023,2026-07-15,2026-08-16,To Do,High,Management
+TSK057,Update CRM records,P005,E028,2026-01-18,2026-02-22,Done,Medium,Dashboard
+TSK058,Resolve customer escalation,P002,E014,2026-09-24,2026-10-16,Blocked,Critical,Meeting
+TSK059,Schedule team review,P015,E019,2026-09-24,2026-10-06,To Do,Medium,Dashboard
+TSK060,Audit access permissions,P008,E019,2026-10-28,2026-11-03,In Progress,Low,Email
+TSK061,Prepare monthly sales report,P004,E017,2026-02-24,2026-03-24,Done,High,Dashboard
+TSK062,Update sales forecast,P004,E009,2026-01-27,2026-02-14,In Progress,Medium,Meeting
+TSK063,Prepare monthly sales report,P005,E005,2026-02-13,2026-03-03,In Progress,High,Email
+TSK064,Audit access permissions,P002,E038,2026-08-18,2026-08-22,Blocked,Critical,Dashboard
+TSK065,Review supplier invoices,P008,E020,2026-09-04,2026-09-09,Blocked,High,Email
+TSK066,Validate project budget,P009,E018,2026-05-23,2026-06-07,To Do,Critical,Management
+TSK067,Update sales forecast,P002,E025,2026-05-13,2026-05-19,In Progress,High,Management
+TSK068,Update sales forecast,P004,E040,2026-01-28,2026-02-21,In Progress,Low,Management
+TSK069,Prepare monthly sales report,P008,E019,2026-02-14,2026-03-03,To Do,Low,Management
+TSK070,Schedule team review,P016,E046,2026-10-12,2026-10-19,Done,High,Dashboard
+TSK071,Update sales forecast,P010,E009,2026-05-02,2026-05-14,In Progress,Medium,Management
+TSK072,Review supplier invoices,P003,E042,2026-05-23,2026-06-04,Done,Critical,Meeting
+TSK073,Audit access permissions,P009,E028,2026-02-08,2026-02-18,In Progress,High,Meeting
+TSK074,Update CRM records,P005,E037,2026-03-31,2026-05-03,To Do,Critical,Management
+TSK075,Schedule team review,P015,E028,2026-02-15,2026-03-20,Done,Medium,Meeting
+TSK076,Complete onboarding checklist,P014,E034,2026-02-12,2026-02-15,Blocked,Critical,Management
+TSK077,Validate project budget,P013,E042,2026-05-06,2026-05-27,In Progress,Critical,Email
+TSK078,Schedule team review,P010,E036,2026-06-25,2026-07-08,Done,Critical,Dashboard
+TSK079,Review supplier invoices,P002,E043,2026-08-30,2026-09-11,Done,Critical,Dashboard
+TSK080,Update CRM records,P008,E040,2026-01-03,2026-02-07,Blocked,Low,Meeting
+TSK081,Update CRM records,P002,E005,2026-01-11,2026-02-10,Blocked,Low,Email
+TSK082,Complete onboarding checklist,P011,E014,2026-08-16,2026-08-25,To Do,Medium,Management
+TSK083,Audit access permissions,P018,E011,2026-02-04,2026-03-02,Blocked,Low,Meeting
+TSK084,Audit access permissions,P014,E013,2026-05-09,2026-06-08,Done,Medium,Meeting
+TSK085,Complete onboarding checklist,P017,E036,2026-03-28,2026-04-05,To Do,High,Meeting
+TSK086,Update CRM records,P012,E035,2026-07-26,2026-08-11,Blocked,Critical,Dashboard
+TSK087,Update sales forecast,P004,E031,2026-07-17,2026-07-27,Blocked,Low,Dashboard
+TSK088,Validate project budget,P017,E030,2026-10-09,2026-10-30,Done,Medium,Management
+TSK089,Prepare monthly sales report,P018,E043,2026-05-05,2026-05-18,Blocked,High,Meeting
+TSK090,Audit access permissions,P009,E013,2026-03-28,2026-04-26,In Progress,Low,Management

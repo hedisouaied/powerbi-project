@@ -1,0 +1,101 @@
+table tasks
+	lineageTag: 06cf923c-1761-2136-96cd-fce2ab9b9ef9
+
+	column task_id
+		dataType: string
+		isKey
+		lineageTag: 0d831e78-1395-9d33-8695-12719e4aa010
+		summarizeBy: none
+		sourceColumn: task_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_title
+		dataType: string
+		lineageTag: d45858b1-5b98-6632-8488-a0b7faf6dd63
+		summarizeBy: none
+		sourceColumn: task_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column project_id
+		dataType: string
+		isHidden
+		lineageTag: 5c1d0338-798a-c538-9fe6-4b842f848dde
+		summarizeBy: none
+		sourceColumn: project_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column assignee_id
+		dataType: string
+		isHidden
+		lineageTag: cd853c97-4b64-e23b-acb5-7e8a983ce0f2
+		summarizeBy: none
+		sourceColumn: assignee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: cc2ecb6d-37e1-f731-a942-7b6f4e480d28
+		summarizeBy: none
+		sourceColumn: created_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column due_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: eeabac42-51e2-e630-9686-6b6531e102bc
+		summarizeBy: none
+		sourceColumn: due_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column task_status
+		dataType: string
+		lineageTag: ed5307b5-3f78-0e34-bd72-359dcb51b37c
+		summarizeBy: none
+		sourceColumn: task_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column priority
+		dataType: string
+		lineageTag: bbdd0d7b-d7aa-913f-ae89-fb5196a248ca
+		summarizeBy: none
+		sourceColumn: priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		lineageTag: 8fbaca42-6e64-043b-9eb0-2f53a0584197
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tasks = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\tasks.csv"), [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    CleanedText = fnCleanText(PromotedHeaders),
+				    ChangedType = Table.TransformColumnTypes(CleanedText, {
+				        {"task_id", type text}, {"task_title", type text}, {"project_id", type text}, {"assignee_id", type text},
+				        {"created_date", type date}, {"due_date", type date},
+				        {"task_status", type text}, {"priority", type text}, {"source", type text}
+				    }, "en-US")
+				in
+				    ChangedType
+
+	annotation PBI_ResultType = Table
+

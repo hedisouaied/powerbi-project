@@ -1,0 +1,61 @@
+leave_id,employee_id,leave_type,start_date,end_date,working_days,request_status,comment
+LV001,E013,Personal,2026-08-20,2026-08-25,6,Approved,Documentation required
+LV002,E009,Unpaid,2026-03-09,2026-03-10,2,Submitted,Planned absence
+LV003,E037,Sick,2026-05-12,2026-05-16,5,Submitted,Planned absence
+LV004,E040,Personal,2026-01-14,2026-01-19,6,Submitted,
+LV005,E030,Unpaid,2026-03-13,2026-03-19,7,Rejected,Manager review
+LV006,E019,Annual,2026-03-24,2026-03-27,4,Rejected,
+LV007,E019,Unpaid,2026-03-23,2026-03-24,2,Rejected,Documentation required
+LV008,E004,Sick,2026-10-03,2026-10-07,5,Rejected,Documentation required
+LV009,E032,Unpaid,2026-07-02,2026-07-04,3,Submitted,Planned absence
+LV010,E022,Unpaid,2026-03-13,2026-03-13,1,Submitted,Documentation required
+LV011,E018,Unpaid,2026-10-09,2026-10-15,7,Approved,Documentation required
+LV012,E030,Unpaid,2026-02-14,2026-02-20,7,Rejected,Manager review
+LV013,E035,Unpaid,2026-04-17,2026-04-22,6,Approved,Manager review
+LV014,E035,Annual,2026-02-08,2026-02-15,8,Approved,
+LV015,E020,Sick,2026-03-30,2026-03-30,1,Submitted,Documentation required
+LV016,E034,Annual,2026-01-03,2026-01-10,8,Approved,Planned absence
+LV017,E005,Annual,2026-10-20,2026-10-20,1,Submitted,Manager review
+LV018,E018,Annual,2026-02-01,2026-02-07,7,Submitted,
+LV019,E044,Sick,2026-06-17,2026-06-19,3,Rejected,Documentation required
+LV020,E029,Unpaid,2026-02-25,2026-03-03,7,Rejected,Planned absence
+LV021,E003,Annual,2026-09-29,2026-10-02,4,Submitted,Documentation required
+LV022,E020,Unpaid,2026-03-09,2026-03-13,5,Rejected,Planned absence
+LV023,E009,Personal,2026-01-07,2026-01-14,8,Approved,Planned absence
+LV024,E019,Personal,2026-03-12,2026-03-14,3,Approved,Documentation required
+LV025,E045,Unpaid,2026-03-03,2026-03-03,1,Submitted,Manager review
+LV026,E048,Personal,2026-09-30,2026-10-04,5,Submitted,Planned absence
+LV027,E004,Sick,2026-06-27,2026-06-30,4,Rejected,
+LV028,E021,Personal,2026-02-04,2026-02-08,5,Submitted,Planned absence
+LV029,E015,Annual,2026-06-28,2026-07-02,5,Rejected,Planned absence
+LV030,E001,Personal,2026-04-07,2026-04-13,7,Approved,
+LV031,E039,Personal,2026-04-01,2026-04-03,3,Submitted,
+LV032,E035,Sick,2026-10-17,2026-10-22,6,Approved,
+LV033,E001,Personal,2026-09-13,2026-09-19,7,Submitted,Documentation required
+LV034,E023,Sick,2026-05-31,2026-06-07,8,Approved,
+LV035,E005,Unpaid,2026-03-11,2026-03-16,6,Rejected,
+LV036,E018,Personal,2026-04-16,2026-04-16,1,Rejected,
+LV037,E031,Annual,2026-09-21,2026-09-25,5,Submitted,
+LV038,E019,Sick,2026-10-26,2026-10-26,1,Approved,
+LV039,E004,Sick,2026-03-26,2026-03-29,4,Approved,Documentation required
+LV040,E020,Personal,2026-08-31,2026-09-04,5,Rejected,
+LV041,E041,Unpaid,2026-07-01,2026-07-02,2,Submitted,Documentation required
+LV042,E034,Unpaid,2026-01-04,2026-01-08,5,Submitted,Manager review
+LV043,E037,Personal,2026-07-31,2026-08-04,5,Approved,Manager review
+LV044,E047,Personal,2026-05-01,2026-05-03,3,Rejected,Planned absence
+LV045,E047,Personal,2026-11-06,2026-11-11,6,Approved,
+LV046,E007,Annual,2026-08-15,2026-08-17,3,Submitted,Documentation required
+LV047,E016,Personal,2026-09-03,2026-09-05,3,Approved,
+LV048,E021,Personal,2026-06-21,2026-06-22,2,Submitted,Planned absence
+LV049,E037,Personal,2026-01-02,2026-01-04,3,Rejected,Manager review
+LV050,E001,Sick,2026-05-01,2026-05-02,2,Rejected,
+LV051,E042,Annual,2026-05-31,2026-06-07,8,Submitted,Documentation required
+LV052,E045,Sick,2026-07-10,2026-07-11,2,Submitted,
+LV053,E047,Sick,2026-08-07,2026-08-13,7,Submitted,Planned absence
+LV054,E025,Sick,2026-08-18,2026-08-19,2,Approved,Planned absence
+LV055,E001,Annual,2026-07-30,2026-08-06,8,Rejected,Documentation required
+LV056,E012,Sick,2026-05-27,2026-05-30,4,Approved,Documentation required
+LV057,E045,Personal,2026-10-16,2026-10-16,1,Submitted,Manager review
+LV058,E043,Sick,2026-05-03,2026-05-05,3,Submitted,Planned absence
+LV059,E037,Sick,2026-02-06,2026-02-13,8,Submitted,Manager review
+LV060,E022,Unpaid,2026-07-10,2026-07-14,5,Rejected,Planned absence

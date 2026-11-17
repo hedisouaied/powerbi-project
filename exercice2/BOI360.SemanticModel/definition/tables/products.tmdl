@@ -1,0 +1,52 @@
+table products
+	lineageTag: 3f01d305-aea9-3e37-9eba-ab4323e33efb
+
+	column product_id
+		dataType: string
+		isKey
+		lineageTag: ff690a14-8b50-4f30-8998-cb516244b414
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 1d1574ed-8263-5636-bc0c-d3c8ea673098
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: f8725805-4723-f53f-ac64-6a894977c453
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column list_price_tnd
+		dataType: decimal
+		formatString: #,0.00" TND"
+		lineageTag: 1962afd7-deba-ef34-858f-0c5d49d8308b
+		summarizeBy: none
+		sourceColumn: list_price_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	partition products = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\products.csv"), [Delimiter = ",", Columns = 4, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    CleanedText = fnCleanText(PromotedHeaders),
+				    ChangedType = Table.TransformColumnTypes(CleanedText, {
+				        {"product_id", type text}, {"product_name", type text}, {"category", type text}, {"list_price_tnd", Currency.Type}
+				    }, "en-US")
+				in
+				    ChangedType
+
+	annotation PBI_ResultType = Table
+

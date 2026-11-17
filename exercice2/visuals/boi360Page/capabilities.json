@@ -1,0 +1,58 @@
+{
+    "dataRoles": [
+        { "displayName": "Meta (JSON)", "name": "meta", "kind": "Measure" },
+        { "displayName": "Departments (JSON)", "name": "departments", "kind": "Measure" },
+        { "displayName": "Employees (JSON)", "name": "employees", "kind": "Measure" },
+        { "displayName": "Customers (JSON)", "name": "customers", "kind": "Measure" },
+        { "displayName": "Products (JSON)", "name": "products", "kind": "Measure" },
+        { "displayName": "Sales (JSON)", "name": "sales", "kind": "Measure" },
+        { "displayName": "Targets (JSON)", "name": "targets", "kind": "Measure" },
+        { "displayName": "Projects (JSON)", "name": "projects", "kind": "Measure" },
+        { "displayName": "Tasks (JSON)", "name": "tasks", "kind": "Measure" },
+        { "displayName": "Expenses (JSON)", "name": "expenses", "kind": "Measure" },
+        { "displayName": "Leave (JSON)", "name": "leave", "kind": "Measure" }
+    ],
+    "objects": {
+        "page": {
+            "properties": {
+                "kind": { "type": { "text": true } }
+            }
+        },
+        "state": {
+            "properties": {
+                "filters": { "type": { "text": true } }
+            }
+        },
+        "crud": {
+            "properties": {
+                "changes": { "type": { "text": true } }
+            }
+        }
+    },
+    "dataViewMappings": [
+        {
+            "conditions": [
+                { "meta": { "max": 1 }, "departments": { "max": 1 }, "employees": { "max": 1 }, "customers": { "max": 1 }, "products": { "max": 1 }, "sales": { "max": 1 },
+                  "targets": { "max": 1 }, "projects": { "max": 1 }, "tasks": { "max": 1 }, "expenses": { "max": 1 }, "leave": { "max": 1 } }
+            ],
+            "table": {
+                "rows": {
+                    "select": [
+                        { "for": { "in": "meta" } },
+                        { "for": { "in": "departments" } },
+                        { "for": { "in": "employees" } },
+                        { "for": { "in": "customers" } },
+                        { "for": { "in": "products" } },
+                        { "for": { "in": "sales" } },
+                        { "for": { "in": "targets" } },
+                        { "for": { "in": "projects" } },
+                        { "for": { "in": "tasks" } },
+                        { "for": { "in": "expenses" } },
+                        { "for": { "in": "leave" } }
+                    ]
+                }
+            }
+        }
+    ],
+    "privileges": [ { "name": "ExportContent", "essential": false } ]
+}

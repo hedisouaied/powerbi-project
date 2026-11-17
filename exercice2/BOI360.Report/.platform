@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "BOI360"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "317680f5-4992-42cc-bd76-2c1386c83909"
+  }
+}

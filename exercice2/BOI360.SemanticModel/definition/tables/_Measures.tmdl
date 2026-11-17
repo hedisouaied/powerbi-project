@@ -1,0 +1,787 @@
+table _Measures
+	lineageTag: bbbe18ec-c7ce-a73f-ab54-e0479df17038
+
+	/// The "as of" date of the dataset: the last day with a sales transaction (16 Nov 2026). Used instead of TODAY() so overdue and deadline figures stay stable.
+	measure 'Reference Date' = CALCULATE ( MAX ( sales_transactions[transaction_date] ), REMOVEFILTERS () )
+		formatString: yyyy-mm-dd
+		displayFolder: 00 Reference
+		lineageTag: da20cc28-2d1d-3638-93a1-9046effb4ac9
+
+	/// Revenue of every transaction, including Cancelled ones. Use it only to analyse payment statuses; headline revenue is [Revenue].
+	measure 'Gross Revenue' = SUM ( sales_transactions[revenue_tnd] )
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: 06b174de-390a-4137-9c6f-24a7416df00b
+
+	/// Headline revenue: every transaction except Cancelled (agreed rule). KEEPFILTERS means a visual filtered to "Cancelled" shows blank instead of being overridden.
+	measure Revenue =
+			CALCULATE (
+			    [Gross Revenue],
+			    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+			)
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: 353d1c44-1c01-5237-ad54-edee4a21d474
+
+	/// Revenue already paid (payment status Paid).
+	measure 'Collected Revenue' = CALCULATE ( [Gross Revenue], KEEPFILTERS ( sales_transactions[payment_status] = "Paid" ) )
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: b4c8040b-d61d-bf3e-95c5-2c21d8c4afe5
+
+	/// Revenue not yet paid: Pending + Overdue.
+	measure Receivables =
+			CALCULATE (
+			    [Gross Revenue],
+			    KEEPFILTERS ( sales_transactions[payment_status] IN { "Pending", "Overdue" } )
+			)
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: 1bec00e5-fd05-a23e-ac45-8b435ebca097
+
+	/// Revenue whose payment is overdue: the collection risk.
+	measure 'Overdue Revenue' = CALCULATE ( [Gross Revenue], KEEPFILTERS ( sales_transactions[payment_status] = "Overdue" ) )
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: 25f4aaea-d1bd-3031-ac3f-2c32d38d654e
+
+	/// Value of cancelled transactions. Never part of revenue, profit or AOV; reported on its own.
+	measure 'Cancelled Revenue' = CALCULATE ( [Gross Revenue], KEEPFILTERS ( sales_transactions[payment_status] = "Cancelled" ) )
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: 80704a45-1467-663d-b51e-074bae883bee
+
+	/// Share of gross revenue that was cancelled.
+	measure 'Cancellation Rate %' = DIVIDE ( [Cancelled Revenue], [Gross Revenue] )
+		formatString: 0.0%
+		displayFolder: 01 Sales
+		lineageTag: 38d0e8fa-77e5-103f-8864-32546a275f6c
+
+	/// Share of revenue already collected (Paid / Revenue).
+	measure 'Collection Rate %' = DIVIDE ( [Collected Revenue], [Revenue] )
+		formatString: 0.0%
+		displayFolder: 01 Sales
+		lineageTag: 2554c155-68bf-8e34-b530-f97cfdf2f48c
+
+	/// Cost of the non-cancelled transactions.
+	measure Cost =
+			CALCULATE (
+			    SUM ( sales_transactions[cost_tnd] ),
+			    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+			)
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: 533652a3-a43f-8f34-9294-0e4c5c2929e5
+
+	/// Profit of the non-cancelled transactions (revenue minus cost, as stored per transaction).
+	measure Profit =
+			CALCULATE (
+			    SUM ( sales_transactions[profit_tnd] ),
+			    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+			)
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: 4d389d1a-b8f1-383e-8262-6e5208506f18
+
+	/// Profit divided by revenue, recalculated for whatever is filtered. Never average the margins of individual rows.
+	measure 'Profit Margin %' = DIVIDE ( [Profit], [Revenue] )
+		formatString: 0.0%
+		displayFolder: 01 Sales
+		lineageTag: ad98740f-46a0-f73e-af90-16d0df6208a8
+
+	/// Number of non-cancelled transactions.
+	measure Transactions =
+			CALCULATE (
+			    COUNTROWS ( sales_transactions ),
+			    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+			)
+		formatString: #,0
+		displayFolder: 01 Sales
+		lineageTag: 1e88c597-605f-a332-bb43-05c3059ebc53
+
+	/// Revenue per non-cancelled transaction.
+	measure 'Average Order Value' = DIVIDE ( [Revenue], [Transactions] )
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: b1e5b5d8-ea28-d938-853f-5c36a9c07bd1
+
+	/// Quantity sold in non-cancelled transactions.
+	measure 'Units Sold' =
+			CALCULATE (
+			    SUM ( sales_transactions[quantity] ),
+			    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+			)
+		formatString: #,0
+		displayFolder: 01 Sales
+		lineageTag: 637418d0-ba57-5f3e-bc82-5e2cae013c7f
+
+	/// Discount weighted by value: 1 - revenue / (quantity x unit price). Big orders weigh more, unlike a plain average of discount_pct.
+	measure 'Average Discount %' =
+			VAR _beforeDiscount =
+			    CALCULATE (
+			        SUMX ( sales_transactions, sales_transactions[quantity] * sales_transactions[unit_price_tnd] ),
+			        KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+			    )
+			RETURN
+			    IF ( NOT ISBLANK ( _beforeDiscount ), 1 - DIVIDE ( [Revenue], _beforeDiscount ) )
+		formatString: 0.0%
+		displayFolder: 01 Sales
+		lineageTag: 871d9f86-b2ff-3136-b8da-4565c4bd8a9e
+
+	/// Revenue divided by the number of customers who bought.
+	measure 'Revenue per Customer' = DIVIDE ( [Revenue], [Customers with Sales] )
+		formatString: #,0.00" TND"
+		displayFolder: 01 Sales
+		lineageTag: 1e689b2f-393f-f13a-9699-fe2b2a94607c
+
+	/// Distinct customers with at least one non-cancelled transaction.
+	measure 'Customers with Sales' =
+			CALCULATE (
+			    DISTINCTCOUNT ( sales_transactions[customer_id] ),
+			    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+			)
+		formatString: #,0
+		displayFolder: 01 Sales
+		lineageTag: 5ceb1be2-1b3a-0036-8036-3d46cad15c4b
+
+	/// Revenue of the previous month (the selected dates shifted one month back). Blank when no dates are selected, because "previous month of everything" means nothing.
+	measure 'Revenue PM' = IF ( ISFILTERED ( 'Date' ), CALCULATE ( [Revenue], DATEADD ( 'Date'[Date], -1, MONTH ) ) )
+		formatString: #,0.00" TND"
+		displayFolder: 02 Time Intelligence
+		lineageTag: c8a0c85c-139d-8e3a-ac5f-8d7cdaca1cee
+
+	/// Change versus the previous month. November 2026 is a partial month (data ends 16 Nov), so its drop is not a real trend.
+	measure 'Revenue MoM %' =
+			VAR _current = [Revenue]
+			VAR _previous = [Revenue PM]
+			RETURN
+			    IF ( NOT ISBLANK ( _current ), DIVIDE ( _current - _previous, _previous ) )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 02 Time Intelligence
+		lineageTag: 0fb16c42-2089-0c34-87a1-7ee9418b60b9
+
+	/// Revenue of the same period last year. Blank here: the dataset only covers 2026. Blank too when no dates are selected.
+	measure 'Revenue PY' = IF ( ISFILTERED ( 'Date' ), CALCULATE ( [Revenue], SAMEPERIODLASTYEAR ( 'Date'[Date] ) ) )
+		formatString: #,0.00" TND"
+		displayFolder: 02 Time Intelligence
+		lineageTag: c6650063-c2f8-283d-b2c8-be9e4c4c85a6
+
+	/// Change versus the same period last year. Returns blank because there is no 2025 data; kept so the report works when history is added.
+	measure 'Revenue YoY %' =
+			VAR _current = [Revenue]
+			VAR _previous = [Revenue PY]
+			RETURN
+			    IF ( NOT ISBLANK ( _current ), DIVIDE ( _current - _previous, _previous ) )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 02 Time Intelligence
+		lineageTag: 74537c9c-2193-0b30-8efc-9d138559234c
+
+	/// Cumulative revenue from the first sale up to the end of the period shown. Stops at the reference date so the line does not run flat into the future.
+	measure 'Revenue Running Total' =
+			VAR _periodEnd = MAX ( 'Date'[Date] )
+			VAR _periodStart = MIN ( 'Date'[Date] )
+			RETURN
+			    IF (
+			        _periodStart <= [Reference Date],
+			        CALCULATE ( [Revenue], REMOVEFILTERS ( 'Date' ), 'Date'[Date] <= _periodEnd )
+			    )
+		formatString: #,0.00" TND"
+		displayFolder: 02 Time Intelligence
+		lineageTag: a254620b-c409-9e37-ad5b-facf983dc2b4
+
+	/// Revenue from 1 January up to the end of the period shown, never past the reference date. On a card with no date filter: 2026 to date.
+	measure 'Revenue YTD' =
+			VAR _asOf = [Reference Date]
+			VAR _end = MIN ( MAX ( 'Date'[Date] ), _asOf )
+			RETURN
+			    IF (
+			        MIN ( 'Date'[Date] ) <= _asOf,
+			        CALCULATE ( [Revenue], DATESBETWEEN ( 'Date'[Date], DATE ( YEAR ( _end ), 1, 1 ), _end ) )
+			    )
+		formatString: #,0.00" TND"
+		displayFolder: 02 Time Intelligence
+		lineageTag: c4b51e6a-0ada-503c-8a38-c658d5133bca
+
+	/// Revenue of the 3 months ending with the period shown, never past the reference date. Smooths out monthly noise. On a card with no date filter: the last 3 months up to 16 Nov 2026.
+	measure 'Revenue Rolling 3M' =
+			VAR _asOf = [Reference Date]
+			VAR _end = MIN ( MAX ( 'Date'[Date] ), _asOf )
+			RETURN
+			    IF (
+			        MIN ( 'Date'[Date] ) <= _asOf,
+			        CALCULATE ( [Revenue], DATESBETWEEN ( 'Date'[Date], EOMONTH ( _end, -3 ) + 1, _end ) )
+			    )
+		formatString: #,0.00" TND"
+		displayFolder: 02 Time Intelligence
+		lineageTag: d58a0497-4e0e-5e37-8ef2-5c9b225f8923
+
+	/// Sum of the monthly sales targets.
+	measure 'Target Amount' = SUM ( targets[target_amount_tnd] )
+		formatString: #,0.00" TND"
+		displayFolder: 03 Targets
+		lineageTag: d8c4d29c-9739-a539-b4a7-11830a27f416
+
+	/// Actual sales recorded in the targets table. A separate planning dataset: it does not reconcile with [Revenue].
+	measure 'Target Actual Sales' = SUM ( targets[actual_sales_tnd] )
+		formatString: #,0.00" TND"
+		displayFolder: 03 Targets
+		lineageTag: 10058ad6-edf6-0535-b469-e75966d1b914
+
+	/// Actual divided by target, recalculated from the sums. Never sum or average the stored achievement_pct.
+	measure 'Target Achievement %' = DIVIDE ( [Target Actual Sales], [Target Amount] )
+		formatString: 0.0%
+		displayFolder: 03 Targets
+		lineageTag: b18dd5a6-14d0-1d30-98f1-d269a7aa0c53
+
+	/// Actual minus target. Negative = below target.
+	measure 'Gap to Target' = IF ( NOT ISBLANK ( [Target Amount] ), [Target Actual Sales] - [Target Amount] )
+		formatString: +#,0.00" TND";-#,0.00" TND";0.00" TND"
+		displayFolder: 03 Targets
+		lineageTag: 963a7d95-8501-dd3f-9dfc-4dd10962f0fe
+
+	/// Number of sellers whose achievement over the selected period is under 100 %.
+	measure 'Sellers Below Target' =
+			VAR _sellers =
+			    ADDCOLUMNS (
+			        VALUES ( employees[employee_id] ),
+			        "@target", [Target Amount],
+			        "@actual", [Target Actual Sales]
+			    )
+			RETURN
+			    COUNTROWS ( FILTER ( _sellers, [@target] > 0 && [@actual] < [@target] ) )
+		formatString: #,0
+		displayFolder: 03 Targets
+		lineageTag: 1eb6881a-949f-1433-93ed-b82458796257
+
+	/// Headline expenses: Approved only (agreed rule).
+	measure 'Approved Expenses' = CALCULATE ( SUM ( expenses[amount_tnd] ), KEEPFILTERS ( expenses[approval_status] = "Approved" ) )
+		formatString: #,0.00" TND"
+		displayFolder: 04 Finance
+		lineageTag: 583822b0-3376-1037-8117-a36456d75732
+
+	/// Expenses waiting for approval: the pipeline that may still become cost.
+	measure 'Pending Expenses' = CALCULATE ( SUM ( expenses[amount_tnd] ), KEEPFILTERS ( expenses[approval_status] = "Pending" ) )
+		formatString: #,0.00" TND"
+		displayFolder: 04 Finance
+		lineageTag: 4c888daf-a590-e630-9b79-6c3069fd797f
+
+	/// Expenses that were refused. Excluded from every total; shown only in approval analysis.
+	measure 'Rejected Expenses' = CALCULATE ( SUM ( expenses[amount_tnd] ), KEEPFILTERS ( expenses[approval_status] = "Rejected" ) )
+		formatString: #,0.00" TND"
+		displayFolder: 04 Finance
+		lineageTag: 0ea453a8-4d6e-743a-895f-68e812c44673
+
+	/// Everything submitted, whatever the status. Use only for approval-funnel visuals.
+	measure 'Submitted Expenses' = SUM ( expenses[amount_tnd] )
+		formatString: #,0.00" TND"
+		displayFolder: 04 Finance
+		lineageTag: 4b397c2e-2bd7-1737-8a4b-308082dde898
+
+	/// Approved value divided by decided value (Approved + Rejected). Pending is not decided yet, so it is left out.
+	measure 'Expense Approval Rate %' = DIVIDE ( [Approved Expenses], [Approved Expenses] + [Rejected Expenses] )
+		formatString: 0.0%
+		displayFolder: 04 Finance
+		lineageTag: 26b8d108-0960-f93d-8ee0-f76fe1497744
+
+	/// Number of expense lines, all statuses.
+	measure 'Expense Claims' = COUNTROWS ( expenses )
+		formatString: #,0
+		displayFolder: 04 Finance
+		lineageTag: 83267a83-8375-d031-8a85-2cb68265704f
+
+	/// Total budget of the projects in context. Uses the project's owning department (USERELATIONSHIP), because the department-to-project relationship is inactive.
+	measure 'Project Budget' =
+			CALCULATE (
+			    SUM ( projects[budget_tnd] ),
+			    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+			)
+		formatString: #,0.00" TND"
+		displayFolder: 05 Projects
+		lineageTag: f1670ecd-c594-933b-9e24-153a45550d1d
+
+	/// Actual cost recorded on the projects. Comes from projects, not from expenses: the two sources do not reconcile.
+	measure 'Project Actual Cost' =
+			CALCULATE (
+			    SUM ( projects[actual_cost_tnd] ),
+			    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+			)
+		formatString: #,0.00" TND"
+		displayFolder: 05 Projects
+		lineageTag: 9a9f9bbd-2d63-e838-8a3c-ca40ed626041
+
+	/// Budget minus actual cost. Positive = under budget, negative = over budget.
+	measure 'Budget Variance' = IF ( NOT ISBLANK ( [Project Budget] ), [Project Budget] - [Project Actual Cost] )
+		formatString: +#,0.00" TND";-#,0.00" TND";0.00" TND"
+		displayFolder: 05 Projects
+		lineageTag: 16037875-cfc0-523a-b0a4-b8450afe68b6
+
+	/// Actual cost divided by budget. Above 100 % = over budget.
+	measure 'Budget Utilization %' = DIVIDE ( [Project Actual Cost], [Project Budget] )
+		formatString: 0.0%
+		displayFolder: 05 Projects
+		lineageTag: 65f02702-355e-fa3e-8918-2efb3cae37ed
+
+	/// Number of projects in context.
+	measure Projects =
+			CALCULATE (
+			    COUNTROWS ( projects ),
+			    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+			)
+		formatString: #,0
+		displayFolder: 05 Projects
+		lineageTag: bb0fb921-0d60-873a-b829-3ef74e3bbc73
+
+	/// Projects whose actual cost is higher than their budget.
+	measure 'Projects Over Budget' =
+			CALCULATE (
+			    COUNTROWS ( FILTER ( projects, projects[actual_cost_tnd] > projects[budget_tnd] ) ),
+			    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+			)
+		formatString: #,0
+		displayFolder: 05 Projects
+		lineageTag: ae10f5ba-48c0-6937-a780-efba7bf46308
+
+	/// Projects not Completed whose deadline is before the reference date.
+	measure 'Projects Past Deadline' =
+			VAR _asOf = [Reference Date]
+			RETURN
+			    CALCULATE (
+			        COUNTROWS ( projects ),
+			        USERELATIONSHIP ( projects[department_id], departments[department_id] ),
+			        KEEPFILTERS ( projects[project_status] <> "Completed" ),
+			        KEEPFILTERS ( projects[deadline] < _asOf )
+			    )
+		formatString: #,0
+		displayFolder: 05 Projects
+		lineageTag: 3875ec58-58bb-7238-826e-7e9c2ac1c41d
+
+	/// Projects whose deadline falls in the selected dates (activates the inactive deadline relationship).
+	measure 'Projects Due in Period' =
+			CALCULATE (
+			    COUNTROWS ( projects ),
+			    USERELATIONSHIP ( projects[deadline], 'Date'[Date] ),
+			    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+			)
+		formatString: #,0
+		displayFolder: 05 Projects
+		lineageTag: bb106a60-5eb6-9a3e-a756-a64e869d207b
+
+	/// Number of tasks (dated by due date).
+	measure Tasks = COUNTROWS ( tasks )
+		formatString: #,0
+		displayFolder: 06 Tasks
+		lineageTag: dd345026-eeaf-3934-91cb-bcf2c1e3e2b8
+
+	/// Tasks not Done (To Do, In Progress, Blocked).
+	measure 'Open Tasks' = CALCULATE ( [Tasks], KEEPFILTERS ( tasks[task_status] <> "Done" ) )
+		formatString: #,0
+		displayFolder: 06 Tasks
+		lineageTag: 55dd8549-7e89-bb3e-829c-5860f33091bc
+
+	/// Tasks with status Done.
+	measure 'Completed Tasks' = CALCULATE ( [Tasks], KEEPFILTERS ( tasks[task_status] = "Done" ) )
+		formatString: #,0
+		displayFolder: 06 Tasks
+		lineageTag: ac6e4f31-9c2a-ab3d-a852-b9ff9816ff53
+
+	/// Tasks with status Blocked.
+	measure 'Blocked Tasks' = CALCULATE ( [Tasks], KEEPFILTERS ( tasks[task_status] = "Blocked" ) )
+		formatString: #,0
+		displayFolder: 06 Tasks
+		lineageTag: 73116056-d4bf-8136-9eb2-3e9a49269ec2
+
+	/// Open tasks whose due date is before the reference date. In this dataset every open task is overdue (data quality finding #11).
+	measure 'Overdue Tasks' =
+			VAR _asOf = [Reference Date]
+			RETURN
+			    CALCULATE (
+			        [Tasks],
+			        KEEPFILTERS ( tasks[task_status] <> "Done" ),
+			        KEEPFILTERS ( tasks[due_date] < _asOf )
+			    )
+		formatString: #,0
+		displayFolder: 06 Tasks
+		lineageTag: 4d56bf32-858a-103a-b51e-e902bc90fa77
+
+	/// Completed tasks divided by all tasks.
+	measure 'Task Completion Rate %' = DIVIDE ( [Completed Tasks], [Tasks] )
+		formatString: 0.0%
+		displayFolder: 06 Tasks
+		lineageTag: 00d75fc9-fe06-bf30-af01-bebdd21f3754
+
+	/// Overdue tasks divided by open tasks.
+	measure 'Overdue Rate %' = DIVIDE ( [Overdue Tasks], [Open Tasks] )
+		formatString: 0.0%
+		displayFolder: 06 Tasks
+		lineageTag: bcc4e322-32b9-0730-875c-50a840622f5a
+
+	/// For overdue tasks: average number of days between the due date and the reference date.
+	measure 'Average Days Overdue' =
+			VAR _asOf = [Reference Date]
+			RETURN
+			    AVERAGEX (
+			        FILTER ( tasks, tasks[task_status] <> "Done" && tasks[due_date] < _asOf ),
+			        DATEDIFF ( tasks[due_date], _asOf, DAY )
+			    )
+		formatString: #,0.0
+		displayFolder: 06 Tasks
+		lineageTag: 015c3112-ad6c-e434-b774-6d9f1137db6d
+
+	/// Tasks dated by creation date instead of due date (activates the inactive created_date relationship).
+	measure 'Tasks Created' = CALCULATE ( [Tasks], USERELATIONSHIP ( tasks[created_date], 'Date'[Date] ) )
+		formatString: #,0
+		displayFolder: 06 Tasks
+		lineageTag: d551be19-8256-ce3a-ba44-28a058fa2569
+
+	/// Headcount: number of employees in context (all statuses). Not affected by date filters.
+	measure Employees = COUNTROWS ( employees )
+		formatString: #,0
+		displayFolder: 07 People
+		lineageTag: 44bf1214-93f4-3b3d-9cba-da87dbb20425
+
+	/// Employees with status Active.
+	measure 'Active Employees' = CALCULATE ( [Employees], KEEPFILTERS ( employees[employment_status] = "Active" ) )
+		formatString: #,0
+		displayFolder: 07 People
+		lineageTag: 935a8644-01fa-733c-8b0b-634ba5ba4a80
+
+	/// Employees with status On Leave.
+	measure 'Employees On Leave' = CALCULATE ( [Employees], KEEPFILTERS ( employees[employment_status] = "On Leave" ) )
+		formatString: #,0
+		displayFolder: 07 People
+		lineageTag: 49cc1a23-c55e-b43c-b5d1-0904a422c0c4
+
+	/// Employees hired in the selected dates (activates the inactive hire_date relationship).
+	measure Hires = CALCULATE ( [Employees], USERELATIONSHIP ( employees[hire_date], 'Date'[Date] ) )
+		formatString: #,0
+		displayFolder: 07 People
+		lineageTag: 703e3b48-a4b9-7a35-a129-527805b69d36
+
+	/// Number of leave requests, all statuses (dated by start date).
+	measure 'Leave Requests' = COUNTROWS ( leave_requests )
+		formatString: #,0
+		displayFolder: 07 People
+		lineageTag: 6114b239-be7c-f431-895d-f8a5968e9c22
+
+	/// Leave days requested, all statuses. Calendar days as supplied (weekends included, data quality finding #15).
+	measure 'Leave Days' = SUM ( leave_requests[working_days] )
+		formatString: #,0
+		displayFolder: 07 People
+		lineageTag: 2f06d504-6688-9138-b732-2255ef1308c6
+
+	/// Leave days of approved requests.
+	measure 'Approved Leave Days' = CALCULATE ( [Leave Days], KEEPFILTERS ( leave_requests[request_status] = "Approved" ) )
+		formatString: #,0
+		displayFolder: 07 People
+		lineageTag: 9ae2f6b9-7844-5430-969a-070002eebf94
+
+	/// Leave days of requests still Submitted (waiting for a decision).
+	measure 'Pending Leave Days' = CALCULATE ( [Leave Days], KEEPFILTERS ( leave_requests[request_status] = "Submitted" ) )
+		formatString: #,0
+		displayFolder: 07 People
+		lineageTag: ee9d6473-75f5-9931-87f0-aaa66a7e4e1e
+
+	/// Approved requests divided by decided requests (Approved + Rejected).
+	measure 'Leave Approval Rate %' =
+			VAR _approved = CALCULATE ( [Leave Requests], KEEPFILTERS ( leave_requests[request_status] = "Approved" ) )
+			VAR _rejected = CALCULATE ( [Leave Requests], KEEPFILTERS ( leave_requests[request_status] = "Rejected" ) )
+			RETURN
+			    DIVIDE ( _approved, _approved + _rejected )
+		formatString: 0.0%
+		displayFolder: 07 People
+		lineageTag: d7163e8f-d610-9c33-bb4f-29785a31c9ec
+
+	/// Employees whose email address is also used by another employee (data quality finding #1).
+	measure 'Employees with Shared Email' = CALCULATE ( [Employees], KEEPFILTERS ( employees[dq_shared_email] = TRUE () ) )
+		formatString: #,0
+		displayFolder: 09 Data Quality
+		lineageTag: 9452f3ff-1f7f-bb30-b62f-868f18c48b6e
+
+	/// Approved expenses with no project (department overhead).
+	measure 'Expenses Without Project' = CALCULATE ( [Approved Expenses], KEEPFILTERS ( ISBLANK ( expenses[project_id] ) ) )
+		formatString: #,0.00" TND"
+		displayFolder: 09 Data Quality
+		lineageTag: 749d66ac-8e1f-ff3a-b31b-f9e8e332aeec
+
+	/// Approved project expenses booked by a department other than the project's owner (data quality finding #3).
+	measure 'Cross-Department Project Expenses' =
+			CALCULATE (
+			    SUMX (
+			        FILTER (
+			            expenses,
+			            NOT ISBLANK ( expenses[project_id] )
+			                && RELATED ( projects[department_id] ) <> expenses[department_id]
+			        ),
+			        expenses[amount_tnd]
+			    ),
+			    KEEPFILTERS ( expenses[approval_status] = "Approved" )
+			)
+		formatString: #,0.00" TND"
+		displayFolder: 09 Data Quality
+		lineageTag: 4e53c64c-45cb-b33c-ab9a-2f30e6056e48
+
+	/// Text for titles: the departments selected in the slicer, or "All departments".
+	measure 'Selected Departments' =
+			IF (
+			    ISFILTERED ( departments[department_name] ),
+			    CONCATENATEX ( VALUES ( departments[department_name] ), departments[department_name], ", ", departments[department_name], ASC ),
+			    "All departments"
+			)
+		formatString: General
+		displayFolder: 10 Labels
+		lineageTag: a8330c7c-6dad-a936-b360-4f35c5be449d
+
+	/// Text for titles: the selected date range, or "Jan – Nov 2026" (the data coverage) when no dates are selected.
+	measure 'Selected Period' =
+			VAR _first = CALCULATE ( MIN ( sales_transactions[transaction_date] ), REMOVEFILTERS () )
+			VAR _start = IF ( ISFILTERED ( 'Date' ), MAX ( MIN ( 'Date'[Date] ), _first ), _first )
+			VAR _end = IF ( ISFILTERED ( 'Date' ), MIN ( MAX ( 'Date'[Date] ), [Reference Date] ), [Reference Date] )
+			RETURN
+			    IF (
+			        _start > _end,
+			        "No data in selected dates",
+			        FORMAT ( _start, "d mmm yyyy", "en-US" ) & " – " & FORMAT ( _end, "d mmm yyyy", "en-US" )
+			    )
+		formatString: General
+		displayFolder: 10 Labels
+		lineageTag: a78443a7-e561-7134-a20b-c8b5e9d4f083
+
+	/// Subtitle shown under every page title: data date, period and departments in view.
+	measure 'Page Subtitle' = "Data as of " & FORMAT ( [Reference Date], "d mmm yyyy", "en-US" ) & "   ·   " & [Selected Period] & "   ·   " & [Selected Departments]
+		formatString: General
+		displayFolder: 10 Labels
+		lineageTag: 375bf798-b002-0c34-9659-f28c92ee5388
+
+	/// Dynamic chart title.
+	measure 'Title Revenue Trend' = "Revenue & profit by month  ·  " & [Selected Period]
+		formatString: General
+		displayFolder: 10 Labels
+		lineageTag: aaedc52d-79cc-a63a-a95b-9d79ffc39035
+
+	/// Dynamic chart title.
+	measure 'Title Seller Ranking' = "Seller ranking by revenue  ·  colour = target achievement  ·  " & [Selected Period]
+		formatString: General
+		displayFolder: 10 Labels
+		lineageTag: ba3c0c78-085c-f83e-aa80-bae3d2b3db55
+
+	/// Dynamic chart title.
+	measure 'Title Expenses by Department' = "Approved expenses by spending department  ·  " & [Selected Period]
+		formatString: General
+		displayFolder: 10 Labels
+		lineageTag: f73a398b-c198-5836-94a8-5d4621ffb8ba
+
+	/// Dynamic table title.
+	measure 'Title Project Table' = "Project portfolio  ·  " & [Selected Departments]
+		formatString: General
+		displayFolder: 10 Labels
+		lineageTag: d10ce207-ef68-2739-9262-005f264922e5
+
+	/// Dynamic chart title.
+	measure 'Title Workload' = "Open tasks per assignee  ·  " & [Selected Departments]
+		formatString: General
+		displayFolder: 10 Labels
+		lineageTag: e640847d-a0e8-4035-ae1e-765f1035dae5
+
+	/// Colour rule for target achievement: pink under 90 %, amber 90–100 %, green from 100 %.
+	measure 'CF Achievement Color' =
+			VAR _a = [Target Achievement %]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( _a ), BLANK (), _a < 0.9, "#F472B6", _a < 1, "#FACC15", "#34D399" )
+		formatString: General
+		displayFolder: 11 Formatting
+		lineageTag: 68397dfc-a71f-d932-af13-2e0845ad9805
+
+	/// Colour rule for budget utilisation: pink above 100 % (over budget), amber above 90 %, green otherwise.
+	measure 'CF Budget Color' =
+			VAR _u = [Budget Utilization %]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( _u ), BLANK (), _u > 1, "#F472B6", _u > 0.9, "#FACC15", "#34D399" )
+		formatString: General
+		displayFolder: 11 Formatting
+		lineageTag: d1a66420-33fa-d437-a9e0-c51525e006ef
+
+	/// Colour rule for overdue tasks: pink when any task is overdue.
+	measure 'CF Overdue Color' = IF ( [Overdue Tasks] > 0, "#F472B6", "#34D399" )
+		formatString: General
+		displayFolder: 11 Formatting
+		lineageTag: 912bf823-6018-da3d-8236-b525ea97f331
+
+	/// Colour rule for budget variance: pink when negative (over budget).
+	measure 'CF Variance Color' = IF ( [Budget Variance] < 0, "#F472B6", "#34D399" )
+		formatString: General
+		displayFolder: 11 Formatting
+		lineageTag: da19968a-6350-9337-8094-84af7052ea15
+
+	/// Per project: "Over budget", "Past deadline" or both; blank when the project is on track. Feeds the Top risks table.
+	measure 'Project Risk' =
+			VAR _over = [Project Actual Cost] > [Project Budget]
+			VAR _past = [Projects Past Deadline] > 0
+			RETURN
+			    IF (
+			        HASONEVALUE ( projects[project_id] ),
+			        SWITCH ( TRUE (), _over && _past, "Over budget · Past deadline", _over, "Over budget", _past, "Past deadline" )
+			    )
+		formatString: General
+		displayFolder: 05 Projects
+		lineageTag: 35dc2a50-4006-8935-8377-21c4f02c6d05
+
+	/// Budget utilisation shown only for projects at risk (keeps the Top risks table to risky projects).
+	measure 'Risk Utilization %' = IF ( NOT ISBLANK ( [Project Risk] ), [Budget Utilization %] )
+		formatString: 0.0%
+		displayFolder: 05 Projects
+		lineageTag: ac0ef716-b5f8-6c34-8723-e29ee637bbe4
+
+	/// Per task: days past due at the reference date; blank when the task is not overdue.
+	measure 'Task Days Overdue' = IF ( HASONEVALUE ( tasks[task_id] ) && [Overdue Tasks] > 0, [Average Days Overdue] )
+		formatString: #,0
+		displayFolder: 06 Tasks
+		lineageTag: a297000a-d891-093d-b6fe-9ae1d0ed89df
+
+	/// Data feed for the BOI 360 custom visual: reference date and dataset facts.
+	measure 'JSON Meta' = "{""ref"":""" & FORMAT ( [Reference Date], "yyyy-mm-dd", "en-US" ) & """}"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: b6bcdd2a-210a-4a3c-a3b8-039950b706b4
+
+	/// Data feed for the BOI 360 custom visual: one object per department.
+	measure 'JSON Departments' =
+			"[" & CONCATENATEX (
+			    departments,
+			    "{""id"":""" & departments[department_id] & """,""n"":""" & departments[department_name] & """,""dv"":""" & departments[division] & """,""c"":""" & departments[base_city] & """}",
+			    ",", departments[department_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: 1c3f3994-378e-0a30-b762-eed64f1e29a7
+
+	/// Data feed for the BOI 360 custom visual: employees without salary (data minimisation).
+	measure 'JSON Employees' =
+			"[" & CONCATENATEX (
+			    employees,
+			    "{""id"":""" & employees[employee_id] & """,""n"":""" & SUBSTITUTE ( employees[full_name], """", "'" ) & """,""d"":""" & employees[department_id]
+			        & """,""j"":""" & employees[job_title] & """,""c"":""" & employees[city] & """,""h"":""" & FORMAT ( employees[hire_date], "yyyy-mm-dd", "en-US" )
+			        & """,""s"":""" & employees[employment_status] & """,""e"":""" & employees[email] & """,""x"":" & IF ( employees[dq_shared_email], "true", "false" ) & "}",
+			    ",", employees[employee_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: 98ff08f1-270a-e835-a2a3-3f2afaf555ef
+
+	/// Data feed for the BOI 360 custom visual: one object per customer.
+	measure 'JSON Customers' =
+			"[" & CONCATENATEX (
+			    customers,
+			    "{""id"":""" & customers[customer_id] & """,""n"":""" & SUBSTITUTE ( customers[customer_name], """", "'" ) & """,""g"":""" & customers[customer_segment] & """,""c"":""" & customers[city] & """}",
+			    ",", customers[customer_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: a40966cd-c10a-6538-bd62-2edfe4d29ea5
+
+	/// Data feed for the BOI 360 custom visual: one object per product.
+	measure 'JSON Products' =
+			"[" & CONCATENATEX (
+			    products,
+			    "{""id"":""" & products[product_id] & """,""n"":""" & products[product_name] & """,""c"":""" & products[category] & """,""l"":" & FORMAT ( products[list_price_tnd], "0.00", "en-US" ) & "}",
+			    ",", products[product_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: 28b0bedd-1e51-0839-853a-0c19aaa33f53
+
+	/// Data feed for the BOI 360 custom visual: every sales transaction (all statuses; the visual applies the revenue rule).
+	measure 'JSON Sales' =
+			"[" & CONCATENATEX (
+			    sales_transactions,
+			    "{""id"":""" & sales_transactions[transaction_id] & """,""d"":""" & FORMAT ( sales_transactions[transaction_date], "yyyy-mm-dd", "en-US" )
+			        & """,""c"":""" & sales_transactions[customer_id] & """,""p"":""" & sales_transactions[product_id] & """,""s"":""" & sales_transactions[seller_id]
+			        & """,""q"":" & FORMAT ( sales_transactions[quantity], "0", "en-US" ) & ",""u"":" & FORMAT ( sales_transactions[unit_price_tnd], "0.00", "en-US" )
+			        & ",""dc"":" & FORMAT ( sales_transactions[discount_pct], "0.0000", "en-US" ) & ",""r"":" & FORMAT ( sales_transactions[revenue_tnd], "0.00", "en-US" )
+			        & ",""k"":" & FORMAT ( sales_transactions[cost_tnd], "0.00", "en-US" ) & ",""pf"":" & FORMAT ( sales_transactions[profit_tnd], "0.00", "en-US" )
+			        & ",""st"":""" & sales_transactions[payment_status] & """,""rg"":""" & sales_transactions[sales_region] & """}",
+			    ",", sales_transactions[transaction_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: 4f30bf4a-73e0-163e-a4f8-3a5a8d68ef8a
+
+	/// Data feed for the BOI 360 custom visual: monthly seller targets.
+	measure 'JSON Targets' =
+			"[" & CONCATENATEX (
+			    targets,
+			    "{""id"":""" & targets[target_id] & """,""e"":""" & targets[employee_id] & """,""m"":""" & FORMAT ( targets[target_month], "yyyy-mm-dd", "en-US" )
+			        & """,""t"":" & FORMAT ( targets[target_amount_tnd], "0.00", "en-US" ) & ",""a"":" & FORMAT ( targets[actual_sales_tnd], "0.00", "en-US" ) & "}",
+			    ",", targets[target_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: 155c0375-ae52-1e33-b5c0-8f0bc23411b7
+
+	/// Data feed for the BOI 360 custom visual: projects with owning department and manager.
+	measure 'JSON Projects' =
+			"[" & CONCATENATEX (
+			    projects,
+			    "{""id"":""" & projects[project_id] & """,""n"":""" & SUBSTITUTE ( projects[project_name], """", "'" ) & """,""pm"":""" & projects[project_manager_id]
+			        & """,""d"":""" & projects[department_id] & """,""sd"":""" & FORMAT ( projects[start_date], "yyyy-mm-dd", "en-US" )
+			        & """,""dl"":""" & FORMAT ( projects[deadline], "yyyy-mm-dd", "en-US" ) & """,""b"":" & FORMAT ( projects[budget_tnd], "0.00", "en-US" )
+			        & ",""ac"":" & FORMAT ( projects[actual_cost_tnd], "0.00", "en-US" ) & ",""st"":""" & projects[project_status] & """,""pr"":""" & projects[priority] & """}",
+			    ",", projects[project_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: b71a1725-5319-1a3e-a75b-f2712c23979f
+
+	/// Data feed for the BOI 360 custom visual: every task.
+	measure 'JSON Tasks' =
+			"[" & CONCATENATEX (
+			    tasks,
+			    "{""id"":""" & tasks[task_id] & """,""t"":""" & SUBSTITUTE ( tasks[task_title], """", "'" ) & """,""p"":""" & tasks[project_id] & """,""a"":""" & tasks[assignee_id]
+			        & """,""cd"":""" & FORMAT ( tasks[created_date], "yyyy-mm-dd", "en-US" ) & """,""dd"":""" & FORMAT ( tasks[due_date], "yyyy-mm-dd", "en-US" )
+			        & """,""st"":""" & tasks[task_status] & """,""pr"":""" & tasks[priority] & """,""so"":""" & tasks[source] & """}",
+			    ",", tasks[task_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: 72c42f68-b46c-1438-9708-cc2a7464b17f
+
+	/// Data feed for the BOI 360 custom visual: every expense line (all approval statuses; the visual applies the Approved-only rule).
+	measure 'JSON Expenses' =
+			"[" & CONCATENATEX (
+			    expenses,
+			    "{""id"":""" & expenses[expense_id] & """,""dt"":""" & FORMAT ( expenses[expense_date], "yyyy-mm-dd", "en-US" ) & """,""d"":""" & expenses[department_id]
+			        & """,""p"":""" & expenses[project_id] & """,""c"":""" & expenses[expense_category] & """,""st"":""" & expenses[approval_status]
+			        & """,""a"":" & FORMAT ( expenses[amount_tnd], "0.00", "en-US" ) & ",""ds"":""" & SUBSTITUTE ( expenses[description], """", "'" ) & """}",
+			    ",", expenses[expense_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: 5595ff8d-f509-d035-8db4-0ca1c21ea860
+
+	/// Data feed for the BOI 360 custom visual: every leave request.
+	measure 'JSON Leave' =
+			"[" & CONCATENATEX (
+			    leave_requests,
+			    "{""id"":""" & leave_requests[leave_id] & """,""e"":""" & leave_requests[employee_id] & """,""t"":""" & leave_requests[leave_type]
+			        & """,""sd"":""" & FORMAT ( leave_requests[start_date], "yyyy-mm-dd", "en-US" ) & """,""ed"":""" & FORMAT ( leave_requests[end_date], "yyyy-mm-dd", "en-US" )
+			        & """,""w"":" & FORMAT ( leave_requests[working_days], "0", "en-US" ) & ",""st"":""" & leave_requests[request_status]
+			        & """,""cm"":""" & SUBSTITUTE ( leave_requests[comment], """", "'" ) & """}",
+			    ",", leave_requests[leave_id], ASC
+			) & "]"
+		formatString: General
+		displayFolder: 12 Visual Data
+		lineageTag: 6899087e-df12-dc35-a6e3-0daadd12af40
+
+	column Value
+		dataType: int64
+		isHidden
+		lineageTag: 8838185f-19ee-2631-9a18-86b652babee7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = ROW("Value", 0)
+

@@ -1,0 +1,61 @@
+table project_managers
+	lineageTag: 4c78b878-a2dd-7637-874b-a525ca28375f
+
+	column project_manager_id
+		dataType: string
+		isKey
+		lineageTag: d47cba40-10e8-9039-bee5-435c40fe00be
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [project_manager_id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column project_manager
+		dataType: string
+		lineageTag: c0ba14fd-b897-d43d-b33e-00fc6ef1b5cf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [project_manager]
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_department
+		dataType: string
+		lineageTag: 6cf79fa1-0a65-dd32-a045-297e7e1aa0f4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [pm_department]
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_job_title
+		dataType: string
+		lineageTag: ce8d1dd5-d0b3-9633-b43b-2a24361c48d2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [pm_job_title]
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_city
+		dataType: string
+		lineageTag: d8f4d1ea-8887-973e-b924-b7ec2b84dba9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [pm_city]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition project_managers = calculated
+		mode: import
+		source =
+				SELECTCOLUMNS(
+				    FILTER(employees, employees[employee_id] IN DISTINCT(projects[project_manager_id])),
+				    "project_manager_id", employees[employee_id],
+				    "project_manager", employees[full_name],
+				    "pm_department", RELATED(departments[department_name]),
+				    "pm_job_title", employees[job_title],
+				    "pm_city", employees[city]
+				)
+

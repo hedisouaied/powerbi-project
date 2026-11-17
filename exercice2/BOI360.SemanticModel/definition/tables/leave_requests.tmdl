@@ -1,0 +1,93 @@
+table leave_requests
+	lineageTag: fc7b3dcd-575a-b33b-a398-b908b4ee33b6
+
+	column leave_id
+		dataType: string
+		isKey
+		lineageTag: 8ea02db2-3a7e-b930-8eb5-5c1d28007eb6
+		summarizeBy: none
+		sourceColumn: leave_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column employee_id
+		dataType: string
+		isHidden
+		lineageTag: 0ee61c67-5d6d-5a33-88c5-fb1bd3493f7d
+		summarizeBy: none
+		sourceColumn: employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column leave_type
+		dataType: string
+		lineageTag: 5d1f73a9-595d-7f35-aa67-1eb9c694a888
+		summarizeBy: none
+		sourceColumn: leave_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 5b9ed5d3-e86a-f23d-8e09-f77a0af4b1cc
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column end_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 4206a38b-10c0-4d39-b99f-672e7bf5f7e4
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column working_days
+		dataType: int64
+		formatString: #,0
+		lineageTag: 72740ef1-de5b-c43f-a593-308488eb63cc
+		summarizeBy: sum
+		sourceColumn: working_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_status
+		dataType: string
+		lineageTag: bdae44af-be52-b930-89f1-a6cbd473df1f
+		summarizeBy: none
+		sourceColumn: request_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment
+		dataType: string
+		lineageTag: 82dffae9-5ee5-6a31-9e99-3bd7b1980adb
+		summarizeBy: none
+		sourceColumn: comment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition leave_requests = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\leave_requests.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    CleanedText = fnCleanText(PromotedHeaders),
+				    ChangedType = Table.TransformColumnTypes(CleanedText, {
+				        {"leave_id", type text}, {"employee_id", type text}, {"leave_type", type text},
+				        {"start_date", type date}, {"end_date", type date}, {"working_days", Int64.Type},
+				        {"request_status", type text}, {"comment", type text}
+				    }, "en-US")
+				in
+				    ChangedType
+
+	annotation PBI_ResultType = Table
+

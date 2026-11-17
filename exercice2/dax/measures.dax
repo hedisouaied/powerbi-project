@@ -1,0 +1,557 @@
+// Business Operations Intelligence 360 - all measures (Phase 3).
+// Format of this file (read by tools/build-pbip.ps1):
+//   -- measure: <Name> | <format string> | <display folder>
+//   -- <plain-language explanation, becomes the measure description in Power BI>
+//   <DAX expression>
+// Rules agreed in Phase 1:
+//   Revenue  = every payment status except Cancelled. Collected = Paid. Receivables = Pending + Overdue.
+//   Expenses = Approved only. Pending is shown as pipeline. Rejected is excluded from totals.
+//   "Today" for overdue / past-deadline = Reference Date (last sales date), so numbers do not drift daily.
+
+-- measure: Reference Date | yyyy-mm-dd | 00 Reference
+-- The "as of" date of the dataset: the last day with a sales transaction (16 Nov 2026). Used instead of TODAY() so overdue and deadline figures stay stable.
+CALCULATE ( MAX ( sales_transactions[transaction_date] ), REMOVEFILTERS () )
+
+-- measure: Gross Revenue | #,0.00" TND" | 01 Sales
+-- Revenue of every transaction, including Cancelled ones. Use it only to analyse payment statuses; headline revenue is [Revenue].
+SUM ( sales_transactions[revenue_tnd] )
+
+-- measure: Revenue | #,0.00" TND" | 01 Sales
+-- Headline revenue: every transaction except Cancelled (agreed rule). KEEPFILTERS means a visual filtered to "Cancelled" shows blank instead of being overridden.
+CALCULATE (
+    [Gross Revenue],
+    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+)
+
+-- measure: Collected Revenue | #,0.00" TND" | 01 Sales
+-- Revenue already paid (payment status Paid).
+CALCULATE ( [Gross Revenue], KEEPFILTERS ( sales_transactions[payment_status] = "Paid" ) )
+
+-- measure: Receivables | #,0.00" TND" | 01 Sales
+-- Revenue not yet paid: Pending + Overdue.
+CALCULATE (
+    [Gross Revenue],
+    KEEPFILTERS ( sales_transactions[payment_status] IN { "Pending", "Overdue" } )
+)
+
+-- measure: Overdue Revenue | #,0.00" TND" | 01 Sales
+-- Revenue whose payment is overdue: the collection risk.
+CALCULATE ( [Gross Revenue], KEEPFILTERS ( sales_transactions[payment_status] = "Overdue" ) )
+
+-- measure: Cancelled Revenue | #,0.00" TND" | 01 Sales
+-- Value of cancelled transactions. Never part of revenue, profit or AOV; reported on its own.
+CALCULATE ( [Gross Revenue], KEEPFILTERS ( sales_transactions[payment_status] = "Cancelled" ) )
+
+-- measure: Cancellation Rate % | 0.0% | 01 Sales
+-- Share of gross revenue that was cancelled.
+DIVIDE ( [Cancelled Revenue], [Gross Revenue] )
+
+-- measure: Collection Rate % | 0.0% | 01 Sales
+-- Share of revenue already collected (Paid / Revenue).
+DIVIDE ( [Collected Revenue], [Revenue] )
+
+-- measure: Cost | #,0.00" TND" | 01 Sales
+-- Cost of the non-cancelled transactions.
+CALCULATE (
+    SUM ( sales_transactions[cost_tnd] ),
+    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+)
+
+-- measure: Profit | #,0.00" TND" | 01 Sales
+-- Profit of the non-cancelled transactions (revenue minus cost, as stored per transaction).
+CALCULATE (
+    SUM ( sales_transactions[profit_tnd] ),
+    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+)
+
+-- measure: Profit Margin % | 0.0% | 01 Sales
+-- Profit divided by revenue, recalculated for whatever is filtered. Never average the margins of individual rows.
+DIVIDE ( [Profit], [Revenue] )
+
+-- measure: Transactions | #,0 | 01 Sales
+-- Number of non-cancelled transactions.
+CALCULATE (
+    COUNTROWS ( sales_transactions ),
+    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+)
+
+-- measure: Average Order Value | #,0.00" TND" | 01 Sales
+-- Revenue per non-cancelled transaction.
+DIVIDE ( [Revenue], [Transactions] )
+
+-- measure: Units Sold | #,0 | 01 Sales
+-- Quantity sold in non-cancelled transactions.
+CALCULATE (
+    SUM ( sales_transactions[quantity] ),
+    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+)
+
+-- measure: Average Discount % | 0.0% | 01 Sales
+-- Discount weighted by value: 1 - revenue / (quantity x unit price). Big orders weigh more, unlike a plain average of discount_pct.
+VAR _beforeDiscount =
+    CALCULATE (
+        SUMX ( sales_transactions, sales_transactions[quantity] * sales_transactions[unit_price_tnd] ),
+        KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+    )
+RETURN
+    IF ( NOT ISBLANK ( _beforeDiscount ), 1 - DIVIDE ( [Revenue], _beforeDiscount ) )
+
+-- measure: Revenue per Customer | #,0.00" TND" | 01 Sales
+-- Revenue divided by the number of customers who bought.
+DIVIDE ( [Revenue], [Customers with Sales] )
+
+-- measure: Customers with Sales | #,0 | 01 Sales
+-- Distinct customers with at least one non-cancelled transaction.
+CALCULATE (
+    DISTINCTCOUNT ( sales_transactions[customer_id] ),
+    KEEPFILTERS ( sales_transactions[payment_status] <> "Cancelled" )
+)
+
+-- measure: Revenue PM | #,0.00" TND" | 02 Time Intelligence
+-- Revenue of the previous month (the selected dates shifted one month back). Blank when no dates are selected, because "previous month of everything" means nothing.
+IF ( ISFILTERED ( 'Date' ), CALCULATE ( [Revenue], DATEADD ( 'Date'[Date], -1, MONTH ) ) )
+
+-- measure: Revenue MoM % | +0.0%;-0.0%;0.0% | 02 Time Intelligence
+-- Change versus the previous month. November 2026 is a partial month (data ends 16 Nov), so its drop is not a real trend.
+VAR _current = [Revenue]
+VAR _previous = [Revenue PM]
+RETURN
+    IF ( NOT ISBLANK ( _current ), DIVIDE ( _current - _previous, _previous ) )
+
+-- measure: Revenue PY | #,0.00" TND" | 02 Time Intelligence
+-- Revenue of the same period last year. Blank here: the dataset only covers 2026. Blank too when no dates are selected.
+IF ( ISFILTERED ( 'Date' ), CALCULATE ( [Revenue], SAMEPERIODLASTYEAR ( 'Date'[Date] ) ) )
+
+-- measure: Revenue YoY % | +0.0%;-0.0%;0.0% | 02 Time Intelligence
+-- Change versus the same period last year. Returns blank because there is no 2025 data; kept so the report works when history is added.
+VAR _current = [Revenue]
+VAR _previous = [Revenue PY]
+RETURN
+    IF ( NOT ISBLANK ( _current ), DIVIDE ( _current - _previous, _previous ) )
+
+-- measure: Revenue Running Total | #,0.00" TND" | 02 Time Intelligence
+-- Cumulative revenue from the first sale up to the end of the period shown. Stops at the reference date so the line does not run flat into the future.
+VAR _periodEnd = MAX ( 'Date'[Date] )
+VAR _periodStart = MIN ( 'Date'[Date] )
+RETURN
+    IF (
+        _periodStart <= [Reference Date],
+        CALCULATE ( [Revenue], REMOVEFILTERS ( 'Date' ), 'Date'[Date] <= _periodEnd )
+    )
+
+-- measure: Revenue YTD | #,0.00" TND" | 02 Time Intelligence
+-- Revenue from 1 January up to the end of the period shown, never past the reference date. On a card with no date filter: 2026 to date.
+VAR _asOf = [Reference Date]
+VAR _end = MIN ( MAX ( 'Date'[Date] ), _asOf )
+RETURN
+    IF (
+        MIN ( 'Date'[Date] ) <= _asOf,
+        CALCULATE ( [Revenue], DATESBETWEEN ( 'Date'[Date], DATE ( YEAR ( _end ), 1, 1 ), _end ) )
+    )
+
+-- measure: Revenue Rolling 3M | #,0.00" TND" | 02 Time Intelligence
+-- Revenue of the 3 months ending with the period shown, never past the reference date. Smooths out monthly noise. On a card with no date filter: the last 3 months up to 16 Nov 2026.
+VAR _asOf = [Reference Date]
+VAR _end = MIN ( MAX ( 'Date'[Date] ), _asOf )
+RETURN
+    IF (
+        MIN ( 'Date'[Date] ) <= _asOf,
+        CALCULATE ( [Revenue], DATESBETWEEN ( 'Date'[Date], EOMONTH ( _end, -3 ) + 1, _end ) )
+    )
+
+-- measure: Target Amount | #,0.00" TND" | 03 Targets
+-- Sum of the monthly sales targets.
+SUM ( targets[target_amount_tnd] )
+
+-- measure: Target Actual Sales | #,0.00" TND" | 03 Targets
+-- Actual sales recorded in the targets table. A separate planning dataset: it does not reconcile with [Revenue].
+SUM ( targets[actual_sales_tnd] )
+
+-- measure: Target Achievement % | 0.0% | 03 Targets
+-- Actual divided by target, recalculated from the sums. Never sum or average the stored achievement_pct.
+DIVIDE ( [Target Actual Sales], [Target Amount] )
+
+-- measure: Gap to Target | +#,0.00" TND";-#,0.00" TND";0.00" TND" | 03 Targets
+-- Actual minus target. Negative = below target.
+IF ( NOT ISBLANK ( [Target Amount] ), [Target Actual Sales] - [Target Amount] )
+
+-- measure: Sellers Below Target | #,0 | 03 Targets
+-- Number of sellers whose achievement over the selected period is under 100 %.
+VAR _sellers =
+    ADDCOLUMNS (
+        VALUES ( employees[employee_id] ),
+        "@target", [Target Amount],
+        "@actual", [Target Actual Sales]
+    )
+RETURN
+    COUNTROWS ( FILTER ( _sellers, [@target] > 0 && [@actual] < [@target] ) )
+
+-- measure: Approved Expenses | #,0.00" TND" | 04 Finance
+-- Headline expenses: Approved only (agreed rule).
+CALCULATE ( SUM ( expenses[amount_tnd] ), KEEPFILTERS ( expenses[approval_status] = "Approved" ) )
+
+-- measure: Pending Expenses | #,0.00" TND" | 04 Finance
+-- Expenses waiting for approval: the pipeline that may still become cost.
+CALCULATE ( SUM ( expenses[amount_tnd] ), KEEPFILTERS ( expenses[approval_status] = "Pending" ) )
+
+-- measure: Rejected Expenses | #,0.00" TND" | 04 Finance
+-- Expenses that were refused. Excluded from every total; shown only in approval analysis.
+CALCULATE ( SUM ( expenses[amount_tnd] ), KEEPFILTERS ( expenses[approval_status] = "Rejected" ) )
+
+-- measure: Submitted Expenses | #,0.00" TND" | 04 Finance
+-- Everything submitted, whatever the status. Use only for approval-funnel visuals.
+SUM ( expenses[amount_tnd] )
+
+-- measure: Expense Approval Rate % | 0.0% | 04 Finance
+-- Approved value divided by decided value (Approved + Rejected). Pending is not decided yet, so it is left out.
+DIVIDE ( [Approved Expenses], [Approved Expenses] + [Rejected Expenses] )
+
+-- measure: Expense Claims | #,0 | 04 Finance
+-- Number of expense lines, all statuses.
+COUNTROWS ( expenses )
+
+-- measure: Project Budget | #,0.00" TND" | 05 Projects
+-- Total budget of the projects in context. Uses the project's owning department (USERELATIONSHIP), because the department-to-project relationship is inactive.
+CALCULATE (
+    SUM ( projects[budget_tnd] ),
+    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+)
+
+-- measure: Project Actual Cost | #,0.00" TND" | 05 Projects
+-- Actual cost recorded on the projects. Comes from projects, not from expenses: the two sources do not reconcile.
+CALCULATE (
+    SUM ( projects[actual_cost_tnd] ),
+    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+)
+
+-- measure: Budget Variance | +#,0.00" TND";-#,0.00" TND";0.00" TND" | 05 Projects
+-- Budget minus actual cost. Positive = under budget, negative = over budget.
+IF ( NOT ISBLANK ( [Project Budget] ), [Project Budget] - [Project Actual Cost] )
+
+-- measure: Budget Utilization % | 0.0% | 05 Projects
+-- Actual cost divided by budget. Above 100 % = over budget.
+DIVIDE ( [Project Actual Cost], [Project Budget] )
+
+-- measure: Projects | #,0 | 05 Projects
+-- Number of projects in context.
+CALCULATE (
+    COUNTROWS ( projects ),
+    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+)
+
+-- measure: Projects Over Budget | #,0 | 05 Projects
+-- Projects whose actual cost is higher than their budget.
+CALCULATE (
+    COUNTROWS ( FILTER ( projects, projects[actual_cost_tnd] > projects[budget_tnd] ) ),
+    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+)
+
+-- measure: Projects Past Deadline | #,0 | 05 Projects
+-- Projects not Completed whose deadline is before the reference date.
+VAR _asOf = [Reference Date]
+RETURN
+    CALCULATE (
+        COUNTROWS ( projects ),
+        USERELATIONSHIP ( projects[department_id], departments[department_id] ),
+        KEEPFILTERS ( projects[project_status] <> "Completed" ),
+        KEEPFILTERS ( projects[deadline] < _asOf )
+    )
+
+-- measure: Projects Due in Period | #,0 | 05 Projects
+-- Projects whose deadline falls in the selected dates (activates the inactive deadline relationship).
+CALCULATE (
+    COUNTROWS ( projects ),
+    USERELATIONSHIP ( projects[deadline], 'Date'[Date] ),
+    USERELATIONSHIP ( projects[department_id], departments[department_id] )
+)
+
+-- measure: Tasks | #,0 | 06 Tasks
+-- Number of tasks (dated by due date).
+COUNTROWS ( tasks )
+
+-- measure: Open Tasks | #,0 | 06 Tasks
+-- Tasks not Done (To Do, In Progress, Blocked).
+CALCULATE ( [Tasks], KEEPFILTERS ( tasks[task_status] <> "Done" ) )
+
+-- measure: Completed Tasks | #,0 | 06 Tasks
+-- Tasks with status Done.
+CALCULATE ( [Tasks], KEEPFILTERS ( tasks[task_status] = "Done" ) )
+
+-- measure: Blocked Tasks | #,0 | 06 Tasks
+-- Tasks with status Blocked.
+CALCULATE ( [Tasks], KEEPFILTERS ( tasks[task_status] = "Blocked" ) )
+
+-- measure: Overdue Tasks | #,0 | 06 Tasks
+-- Open tasks whose due date is before the reference date. In this dataset every open task is overdue (data quality finding #11).
+VAR _asOf = [Reference Date]
+RETURN
+    CALCULATE (
+        [Tasks],
+        KEEPFILTERS ( tasks[task_status] <> "Done" ),
+        KEEPFILTERS ( tasks[due_date] < _asOf )
+    )
+
+-- measure: Task Completion Rate % | 0.0% | 06 Tasks
+-- Completed tasks divided by all tasks.
+DIVIDE ( [Completed Tasks], [Tasks] )
+
+-- measure: Overdue Rate % | 0.0% | 06 Tasks
+-- Overdue tasks divided by open tasks.
+DIVIDE ( [Overdue Tasks], [Open Tasks] )
+
+-- measure: Average Days Overdue | #,0.0 | 06 Tasks
+-- For overdue tasks: average number of days between the due date and the reference date.
+VAR _asOf = [Reference Date]
+RETURN
+    AVERAGEX (
+        FILTER ( tasks, tasks[task_status] <> "Done" && tasks[due_date] < _asOf ),
+        DATEDIFF ( tasks[due_date], _asOf, DAY )
+    )
+
+-- measure: Tasks Created | #,0 | 06 Tasks
+-- Tasks dated by creation date instead of due date (activates the inactive created_date relationship).
+CALCULATE ( [Tasks], USERELATIONSHIP ( tasks[created_date], 'Date'[Date] ) )
+
+-- measure: Employees | #,0 | 07 People
+-- Headcount: number of employees in context (all statuses). Not affected by date filters.
+COUNTROWS ( employees )
+
+-- measure: Active Employees | #,0 | 07 People
+-- Employees with status Active.
+CALCULATE ( [Employees], KEEPFILTERS ( employees[employment_status] = "Active" ) )
+
+-- measure: Employees On Leave | #,0 | 07 People
+-- Employees with status On Leave.
+CALCULATE ( [Employees], KEEPFILTERS ( employees[employment_status] = "On Leave" ) )
+
+-- measure: Hires | #,0 | 07 People
+-- Employees hired in the selected dates (activates the inactive hire_date relationship).
+CALCULATE ( [Employees], USERELATIONSHIP ( employees[hire_date], 'Date'[Date] ) )
+
+-- measure: Leave Requests | #,0 | 07 People
+-- Number of leave requests, all statuses (dated by start date).
+COUNTROWS ( leave_requests )
+
+-- measure: Leave Days | #,0 | 07 People
+-- Leave days requested, all statuses. Calendar days as supplied (weekends included, data quality finding #15).
+SUM ( leave_requests[working_days] )
+
+-- measure: Approved Leave Days | #,0 | 07 People
+-- Leave days of approved requests.
+CALCULATE ( [Leave Days], KEEPFILTERS ( leave_requests[request_status] = "Approved" ) )
+
+-- measure: Pending Leave Days | #,0 | 07 People
+-- Leave days of requests still Submitted (waiting for a decision).
+CALCULATE ( [Leave Days], KEEPFILTERS ( leave_requests[request_status] = "Submitted" ) )
+
+-- measure: Leave Approval Rate % | 0.0% | 07 People
+-- Approved requests divided by decided requests (Approved + Rejected).
+VAR _approved = CALCULATE ( [Leave Requests], KEEPFILTERS ( leave_requests[request_status] = "Approved" ) )
+VAR _rejected = CALCULATE ( [Leave Requests], KEEPFILTERS ( leave_requests[request_status] = "Rejected" ) )
+RETURN
+    DIVIDE ( _approved, _approved + _rejected )
+
+-- measure: Employees with Shared Email | #,0 | 09 Data Quality
+-- Employees whose email address is also used by another employee (data quality finding #1).
+CALCULATE ( [Employees], KEEPFILTERS ( employees[dq_shared_email] = TRUE () ) )
+
+-- measure: Expenses Without Project | #,0.00" TND" | 09 Data Quality
+-- Approved expenses with no project (department overhead).
+CALCULATE ( [Approved Expenses], KEEPFILTERS ( ISBLANK ( expenses[project_id] ) ) )
+
+-- measure: Cross-Department Project Expenses | #,0.00" TND" | 09 Data Quality
+-- Approved project expenses booked by a department other than the project's owner (data quality finding #3).
+CALCULATE (
+    SUMX (
+        FILTER (
+            expenses,
+            NOT ISBLANK ( expenses[project_id] )
+                && RELATED ( projects[department_id] ) <> expenses[department_id]
+        ),
+        expenses[amount_tnd]
+    ),
+    KEEPFILTERS ( expenses[approval_status] = "Approved" )
+)
+
+-- measure: Selected Departments | General | 10 Labels
+-- Text for titles: the departments selected in the slicer, or "All departments".
+IF (
+    ISFILTERED ( departments[department_name] ),
+    CONCATENATEX ( VALUES ( departments[department_name] ), departments[department_name], ", ", departments[department_name], ASC ),
+    "All departments"
+)
+
+-- measure: Selected Period | General | 10 Labels
+-- Text for titles: the selected date range, or "Jan – Nov 2026" (the data coverage) when no dates are selected.
+VAR _first = CALCULATE ( MIN ( sales_transactions[transaction_date] ), REMOVEFILTERS () )
+VAR _start = IF ( ISFILTERED ( 'Date' ), MAX ( MIN ( 'Date'[Date] ), _first ), _first )
+VAR _end = IF ( ISFILTERED ( 'Date' ), MIN ( MAX ( 'Date'[Date] ), [Reference Date] ), [Reference Date] )
+RETURN
+    IF (
+        _start > _end,
+        "No data in selected dates",
+        FORMAT ( _start, "d mmm yyyy", "en-US" ) & " – " & FORMAT ( _end, "d mmm yyyy", "en-US" )
+    )
+
+-- measure: Page Subtitle | General | 10 Labels
+-- Subtitle shown under every page title: data date, period and departments in view.
+"Data as of " & FORMAT ( [Reference Date], "d mmm yyyy", "en-US" ) & "   ·   " & [Selected Period] & "   ·   " & [Selected Departments]
+
+-- measure: Title Revenue Trend | General | 10 Labels
+-- Dynamic chart title.
+"Revenue & profit by month  ·  " & [Selected Period]
+
+-- measure: Title Seller Ranking | General | 10 Labels
+-- Dynamic chart title.
+"Seller ranking by revenue  ·  colour = target achievement  ·  " & [Selected Period]
+
+-- measure: Title Expenses by Department | General | 10 Labels
+-- Dynamic chart title.
+"Approved expenses by spending department  ·  " & [Selected Period]
+
+-- measure: Title Project Table | General | 10 Labels
+-- Dynamic table title.
+"Project portfolio  ·  " & [Selected Departments]
+
+-- measure: Title Workload | General | 10 Labels
+-- Dynamic chart title.
+"Open tasks per assignee  ·  " & [Selected Departments]
+
+-- measure: CF Achievement Color | General | 11 Formatting
+-- Colour rule for target achievement: pink under 90 %, amber 90–100 %, green from 100 %.
+VAR _a = [Target Achievement %]
+RETURN
+    SWITCH ( TRUE (), ISBLANK ( _a ), BLANK (), _a < 0.9, "#F472B6", _a < 1, "#FACC15", "#34D399" )
+
+-- measure: CF Budget Color | General | 11 Formatting
+-- Colour rule for budget utilisation: pink above 100 % (over budget), amber above 90 %, green otherwise.
+VAR _u = [Budget Utilization %]
+RETURN
+    SWITCH ( TRUE (), ISBLANK ( _u ), BLANK (), _u > 1, "#F472B6", _u > 0.9, "#FACC15", "#34D399" )
+
+-- measure: CF Overdue Color | General | 11 Formatting
+-- Colour rule for overdue tasks: pink when any task is overdue.
+IF ( [Overdue Tasks] > 0, "#F472B6", "#34D399" )
+
+-- measure: CF Variance Color | General | 11 Formatting
+-- Colour rule for budget variance: pink when negative (over budget).
+IF ( [Budget Variance] < 0, "#F472B6", "#34D399" )
+
+-- measure: Project Risk | General | 05 Projects
+-- Per project: "Over budget", "Past deadline" or both; blank when the project is on track. Feeds the Top risks table.
+VAR _over = [Project Actual Cost] > [Project Budget]
+VAR _past = [Projects Past Deadline] > 0
+RETURN
+    IF (
+        HASONEVALUE ( projects[project_id] ),
+        SWITCH ( TRUE (), _over && _past, "Over budget · Past deadline", _over, "Over budget", _past, "Past deadline" )
+    )
+
+-- measure: Risk Utilization % | 0.0% | 05 Projects
+-- Budget utilisation shown only for projects at risk (keeps the Top risks table to risky projects).
+IF ( NOT ISBLANK ( [Project Risk] ), [Budget Utilization %] )
+
+-- measure: Task Days Overdue | #,0 | 06 Tasks
+-- Per task: days past due at the reference date; blank when the task is not overdue.
+IF ( HASONEVALUE ( tasks[task_id] ) && [Overdue Tasks] > 0, [Average Days Overdue] )
+-- measure: JSON Meta | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: reference date and dataset facts.
+"{""ref"":""" & FORMAT ( [Reference Date], "yyyy-mm-dd", "en-US" ) & """}"
+
+-- measure: JSON Departments | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: one object per department.
+"[" & CONCATENATEX (
+    departments,
+    "{""id"":""" & departments[department_id] & """,""n"":""" & departments[department_name] & """,""dv"":""" & departments[division] & """,""c"":""" & departments[base_city] & """}",
+    ",", departments[department_id], ASC
+) & "]"
+
+-- measure: JSON Employees | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: employees without salary (data minimisation).
+"[" & CONCATENATEX (
+    employees,
+    "{""id"":""" & employees[employee_id] & """,""n"":""" & SUBSTITUTE ( employees[full_name], """", "'" ) & """,""d"":""" & employees[department_id]
+        & """,""j"":""" & employees[job_title] & """,""c"":""" & employees[city] & """,""h"":""" & FORMAT ( employees[hire_date], "yyyy-mm-dd", "en-US" )
+        & """,""s"":""" & employees[employment_status] & """,""e"":""" & employees[email] & """,""x"":" & IF ( employees[dq_shared_email], "true", "false" ) & "}",
+    ",", employees[employee_id], ASC
+) & "]"
+
+-- measure: JSON Customers | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: one object per customer.
+"[" & CONCATENATEX (
+    customers,
+    "{""id"":""" & customers[customer_id] & """,""n"":""" & SUBSTITUTE ( customers[customer_name], """", "'" ) & """,""g"":""" & customers[customer_segment] & """,""c"":""" & customers[city] & """}",
+    ",", customers[customer_id], ASC
+) & "]"
+
+-- measure: JSON Products | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: one object per product.
+"[" & CONCATENATEX (
+    products,
+    "{""id"":""" & products[product_id] & """,""n"":""" & products[product_name] & """,""c"":""" & products[category] & """,""l"":" & FORMAT ( products[list_price_tnd], "0.00", "en-US" ) & "}",
+    ",", products[product_id], ASC
+) & "]"
+
+-- measure: JSON Sales | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: every sales transaction (all statuses; the visual applies the revenue rule).
+"[" & CONCATENATEX (
+    sales_transactions,
+    "{""id"":""" & sales_transactions[transaction_id] & """,""d"":""" & FORMAT ( sales_transactions[transaction_date], "yyyy-mm-dd", "en-US" )
+        & """,""c"":""" & sales_transactions[customer_id] & """,""p"":""" & sales_transactions[product_id] & """,""s"":""" & sales_transactions[seller_id]
+        & """,""q"":" & FORMAT ( sales_transactions[quantity], "0", "en-US" ) & ",""u"":" & FORMAT ( sales_transactions[unit_price_tnd], "0.00", "en-US" )
+        & ",""dc"":" & FORMAT ( sales_transactions[discount_pct], "0.0000", "en-US" ) & ",""r"":" & FORMAT ( sales_transactions[revenue_tnd], "0.00", "en-US" )
+        & ",""k"":" & FORMAT ( sales_transactions[cost_tnd], "0.00", "en-US" ) & ",""pf"":" & FORMAT ( sales_transactions[profit_tnd], "0.00", "en-US" )
+        & ",""st"":""" & sales_transactions[payment_status] & """,""rg"":""" & sales_transactions[sales_region] & """}",
+    ",", sales_transactions[transaction_id], ASC
+) & "]"
+
+-- measure: JSON Targets | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: monthly seller targets.
+"[" & CONCATENATEX (
+    targets,
+    "{""id"":""" & targets[target_id] & """,""e"":""" & targets[employee_id] & """,""m"":""" & FORMAT ( targets[target_month], "yyyy-mm-dd", "en-US" )
+        & """,""t"":" & FORMAT ( targets[target_amount_tnd], "0.00", "en-US" ) & ",""a"":" & FORMAT ( targets[actual_sales_tnd], "0.00", "en-US" ) & "}",
+    ",", targets[target_id], ASC
+) & "]"
+
+-- measure: JSON Projects | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: projects with owning department and manager.
+"[" & CONCATENATEX (
+    projects,
+    "{""id"":""" & projects[project_id] & """,""n"":""" & SUBSTITUTE ( projects[project_name], """", "'" ) & """,""pm"":""" & projects[project_manager_id]
+        & """,""d"":""" & projects[department_id] & """,""sd"":""" & FORMAT ( projects[start_date], "yyyy-mm-dd", "en-US" )
+        & """,""dl"":""" & FORMAT ( projects[deadline], "yyyy-mm-dd", "en-US" ) & """,""b"":" & FORMAT ( projects[budget_tnd], "0.00", "en-US" )
+        & ",""ac"":" & FORMAT ( projects[actual_cost_tnd], "0.00", "en-US" ) & ",""st"":""" & projects[project_status] & """,""pr"":""" & projects[priority] & """}",
+    ",", projects[project_id], ASC
+) & "]"
+
+-- measure: JSON Tasks | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: every task.
+"[" & CONCATENATEX (
+    tasks,
+    "{""id"":""" & tasks[task_id] & """,""t"":""" & SUBSTITUTE ( tasks[task_title], """", "'" ) & """,""p"":""" & tasks[project_id] & """,""a"":""" & tasks[assignee_id]
+        & """,""cd"":""" & FORMAT ( tasks[created_date], "yyyy-mm-dd", "en-US" ) & """,""dd"":""" & FORMAT ( tasks[due_date], "yyyy-mm-dd", "en-US" )
+        & """,""st"":""" & tasks[task_status] & """,""pr"":""" & tasks[priority] & """,""so"":""" & tasks[source] & """}",
+    ",", tasks[task_id], ASC
+) & "]"
+
+-- measure: JSON Expenses | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: every expense line (all approval statuses; the visual applies the Approved-only rule).
+"[" & CONCATENATEX (
+    expenses,
+    "{""id"":""" & expenses[expense_id] & """,""dt"":""" & FORMAT ( expenses[expense_date], "yyyy-mm-dd", "en-US" ) & """,""d"":""" & expenses[department_id]
+        & """,""p"":""" & expenses[project_id] & """,""c"":""" & expenses[expense_category] & """,""st"":""" & expenses[approval_status]
+        & """,""a"":" & FORMAT ( expenses[amount_tnd], "0.00", "en-US" ) & ",""ds"":""" & SUBSTITUTE ( expenses[description], """", "'" ) & """}",
+    ",", expenses[expense_id], ASC
+) & "]"
+
+-- measure: JSON Leave | General | 12 Visual Data
+-- Data feed for the BOI 360 custom visual: every leave request.
+"[" & CONCATENATEX (
+    leave_requests,
+    "{""id"":""" & leave_requests[leave_id] & """,""e"":""" & leave_requests[employee_id] & """,""t"":""" & leave_requests[leave_type]
+        & """,""sd"":""" & FORMAT ( leave_requests[start_date], "yyyy-mm-dd", "en-US" ) & """,""ed"":""" & FORMAT ( leave_requests[end_date], "yyyy-mm-dd", "en-US" )
+        & """,""w"":" & FORMAT ( leave_requests[working_days], "0", "en-US" ) & ",""st"":""" & leave_requests[request_status]
+        & """,""cm"":""" & SUBSTITUTE ( leave_requests[comment], """", "'" ) & """}",
+    ",", leave_requests[leave_id], ASC
+) & "]"
