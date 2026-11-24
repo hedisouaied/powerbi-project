@@ -1,0 +1,313 @@
+// Mission Control — DAX measure catalogue (master prompt §6).
+// Format read by tools/build-pbip.ps1:
+//   -- measure: <Name> | <format string> | <display folder>
+//   -- <plain-language explanation (becomes the measure description)>
+//   <DAX>
+// Rules (documented in docs/02_model_and_measures.md):
+//   Revenue = orders with status Completed or Processing (Cancelled and Returned excluded).
+//   Order-level amounts come from sales_orders; quantities and cost from sales_order_items (never sum order amounts after joining lines).
+//   Money received = payments Paid + Partial; outstanding = Pending + Overdue; Voided/Refunded excluded.
+//   Expenses = every approval status except Rejected.
+//   "Today" = Reference Date = last order date (2026-11-22), so overdue / late rules are reproducible.
+
+-- measure: Reference Date | yyyy-mm-dd | 00 Reference
+-- The dataset's "as of" date: the last order date. Used instead of TODAY() for overdue and late rules.
+CALCULATE ( MAX ( sales_orders[order_date] ), REMOVEFILTERS () )
+
+-- measure: Net Revenue | #,0" TND" | 01 Sales
+-- Order net amount (before tax) of Completed and Processing orders. Cancelled and Returned orders are excluded.
+CALCULATE (
+    SUM ( sales_orders[net_amount_tnd] ),
+    KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } )
+)
+
+-- measure: Gross Revenue | #,0" TND" | 01 Sales
+-- Order gross amount (net + tax) of revenue orders. Includes the planted anomaly O00004 (gross 99,999 vs net+tax 28,566) — see Data Doctor.
+CALCULATE (
+    SUM ( sales_orders[gross_amount_tnd] ),
+    KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } )
+)
+
+-- measure: Tax | #,0" TND" | 01 Sales
+-- Tax amount of revenue orders.
+CALCULATE (
+    SUM ( sales_orders[tax_amount_tnd] ),
+    KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } )
+)
+
+-- measure: Orders | #,0 | 01 Sales
+-- Number of orders, every status.
+COUNTROWS ( sales_orders )
+
+-- measure: Revenue Orders | #,0 | 01 Sales
+-- Orders that count as revenue (Completed + Processing).
+CALCULATE ( COUNTROWS ( sales_orders ), KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } ) )
+
+-- measure: Completed Orders | #,0 | 01 Sales
+-- Orders with status Completed.
+CALCULATE ( COUNTROWS ( sales_orders ), KEEPFILTERS ( sales_orders[order_status] = "Completed" ) )
+
+-- measure: Cancelled Orders | #,0 | 01 Sales
+-- Orders with status Cancelled.
+CALCULATE ( COUNTROWS ( sales_orders ), KEEPFILTERS ( sales_orders[order_status] = "Cancelled" ) )
+
+-- measure: Returned Orders | #,0 | 01 Sales
+-- Orders with status Returned.
+CALCULATE ( COUNTROWS ( sales_orders ), KEEPFILTERS ( sales_orders[order_status] = "Returned" ) )
+
+-- measure: Units Sold | #,0 | 01 Sales
+-- Quantity on the lines of revenue orders (line grain; the order-status filter flows from orders to lines).
+CALCULATE ( SUM ( sales_order_items[quantity] ), KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } ) )
+
+-- measure: Average Order Value | #,0" TND" | 01 Sales
+-- Net revenue per revenue order.
+DIVIDE ( [Net Revenue], [Revenue Orders] )
+
+-- measure: List Amount | #,0" TND" | 01 Sales
+-- Quantity × unit price before discount, on revenue orders.
+CALCULATE (
+    SUMX ( sales_order_items, sales_order_items[quantity] * sales_order_items[unit_price_tnd] ),
+    KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } )
+)
+
+-- measure: Discount Amount | #,0" TND" | 01 Sales
+-- List amount minus net line amount on revenue orders.
+[List Amount]
+    - CALCULATE ( SUM ( sales_order_items[net_line_amount_tnd] ), KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } ) )
+
+-- measure: Product Cost | #,0" TND" | 01 Sales
+-- Line cost of revenue orders.
+CALCULATE ( SUM ( sales_order_items[line_cost_tnd] ), KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } ) )
+
+-- measure: Gross Profit | #,0" TND" | 01 Sales
+-- Net revenue minus product cost.
+[Net Revenue] - [Product Cost]
+
+-- measure: Gross Margin % | 0.0% | 01 Sales
+-- Gross profit ÷ net revenue, recalculated for any filter (never averaged).
+DIVIDE ( [Gross Profit], [Net Revenue] )
+
+-- measure: Paid Amount | #,0" TND" | 02 Collections
+-- Money received: payments with status Paid or Partial.
+CALCULATE ( SUM ( payments[amount_tnd] ), KEEPFILTERS ( payments[payment_status] IN { "Paid", "Partial" } ) )
+
+-- measure: Outstanding Amount | #,0" TND" | 02 Collections
+-- Money still expected: payments with status Pending or Overdue.
+CALCULATE ( SUM ( payments[amount_tnd] ), KEEPFILTERS ( payments[payment_status] IN { "Pending", "Overdue" } ) )
+
+-- measure: Collection Rate % | 0.0% | 02 Collections
+-- Received ÷ (received + outstanding). Voided and refunded payments are left out.
+DIVIDE ( [Paid Amount], [Paid Amount] + [Outstanding Amount] )
+
+-- measure: Overdue Payments | #,0" TND" | 02 Collections
+-- Amount of payments with status Overdue.
+CALCULATE ( SUM ( payments[amount_tnd] ), KEEPFILTERS ( payments[payment_status] = "Overdue" ) )
+
+-- measure: Overdue Payment Count | #,0 | 02 Collections
+-- Number of payments with status Overdue.
+CALCULATE ( COUNTROWS ( payments ), KEEPFILTERS ( payments[payment_status] = "Overdue" ) )
+
+-- measure: Total Expenses | #,0" TND" | 03 Expenses
+-- Expenses of every approval status except Rejected.
+CALCULATE ( SUM ( expenses[amount_tnd] ), KEEPFILTERS ( expenses[approval_status] <> "Rejected" ) )
+
+-- measure: Department Spend | #,0" TND" | 03 Expenses
+-- Same rule as Total Expenses, meant to be shown by department.
+[Total Expenses]
+
+-- measure: Expense Ratio % | 0.0% | 03 Expenses
+-- Total expenses ÷ net revenue. The dataset has no expense target, so expenses are compared with revenue instead.
+DIVIDE ( [Total Expenses], [Net Revenue] )
+
+-- measure: Operating Profit | #,0" TND" | 03 Expenses
+-- Gross profit minus total expenses (a simple proxy: payroll is inside expenses).
+[Gross Profit] - [Total Expenses]
+
+-- measure: Inventory On Hand | #,0 | 04 Inventory
+-- Quantity on hand at the LATEST snapshot of each product × warehouse in context (snapshots are not additive over time).
+VAR _pairs = SUMMARIZE ( inventory_snapshots, inventory_snapshots[product_id], inventory_snapshots[warehouse] )
+RETURN
+    SUMX (
+        _pairs,
+        VAR _last = CALCULATE ( MAX ( inventory_snapshots[snapshot_date] ) )
+        RETURN CALCULATE ( SUM ( inventory_snapshots[quantity_on_hand] ), inventory_snapshots[snapshot_date] = _last )
+    )
+
+-- measure: Low Stock Items | #,0 | 04 Inventory
+-- Product × warehouse pairs whose latest snapshot is below the reorder point.
+VAR _pairs = SUMMARIZE ( inventory_snapshots, inventory_snapshots[product_id], inventory_snapshots[warehouse] )
+RETURN
+    COUNTROWS (
+        FILTER (
+            _pairs,
+            VAR _last = CALCULATE ( MAX ( inventory_snapshots[snapshot_date] ) )
+            RETURN
+                CALCULATE (
+                    SUM ( inventory_snapshots[quantity_on_hand] ) < SUM ( inventory_snapshots[reorder_point] ),
+                    inventory_snapshots[snapshot_date] = _last
+                )
+        )
+    ) + 0
+
+-- measure: Stock Coverage % | 0.0% | 04 Inventory
+-- Proxy: latest quantity on hand ÷ latest target stock.
+VAR _pairs = SUMMARIZE ( inventory_snapshots, inventory_snapshots[product_id], inventory_snapshots[warehouse] )
+VAR _target =
+    SUMX (
+        _pairs,
+        VAR _last = CALCULATE ( MAX ( inventory_snapshots[snapshot_date] ) )
+        RETURN CALCULATE ( SUM ( inventory_snapshots[target_stock] ), inventory_snapshots[snapshot_date] = _last )
+    )
+RETURN
+    DIVIDE ( [Inventory On Hand], _target )
+
+-- measure: Open Incidents | #,0 | 05 Operations
+-- Incidents with status Open or Investigating.
+CALCULATE ( COUNTROWS ( incidents ), KEEPFILTERS ( incidents[incident_status] IN { "Open", "Investigating" } ) )
+
+-- measure: Critical Incidents | #,0 | 05 Operations
+-- Open incidents with severity Critical.
+CALCULATE ( [Open Incidents], KEEPFILTERS ( incidents[severity] = "Critical" ) )
+
+-- measure: Estimated Incident Impact | #,0" TND" | 05 Operations
+-- Estimated financial impact of open incidents (an estimate recorded in the data, not a loss).
+CALCULATE ( SUM ( incidents[estimated_impact_tnd] ), KEEPFILTERS ( incidents[incident_status] IN { "Open", "Investigating" } ) )
+
+-- measure: Open Alerts | #,0 | 05 Operations
+-- Alerts with status New, In Progress or Acknowledged.
+CALCULATE ( COUNTROWS ( alerts ), KEEPFILTERS ( alerts[alert_status] IN { "New", "In Progress", "Acknowledged" } ) )
+
+-- measure: Critical Alerts | #,0 | 05 Operations
+-- Open alerts with severity Critical.
+CALCULATE ( [Open Alerts], KEEPFILTERS ( alerts[severity] = "Critical" ) )
+
+-- measure: At-Risk Customers | #,0 | 05 Operations
+-- Customers whose status is At Risk.
+CALCULATE ( COUNTROWS ( customers ), KEEPFILTERS ( customers[customer_status] = "At Risk" ) )
+
+-- measure: Project Completion % | 0.0% | 05 Operations
+-- Budget-weighted completion of the projects in context.
+DIVIDE ( SUMX ( projects, projects[approved_budget_tnd] * projects[completion_percent] ), SUM ( projects[approved_budget_tnd] ) )
+
+-- measure: At-Risk Projects | #,0 | 05 Operations
+-- Projects with status At Risk, or not Completed and past their planned end at the reference date.
+VAR _ref = [Reference Date]
+RETURN
+    COUNTROWS ( FILTER ( projects, projects[project_status] = "At Risk" || ( projects[planned_end_date] < _ref && projects[project_status] <> "Completed" ) ) ) + 0
+
+-- measure: Open Tasks | #,0 | 05 Operations
+-- Tasks not Done.
+CALCULATE ( COUNTROWS ( tasks ), KEEPFILTERS ( tasks[task_status] <> "Done" ) )
+
+-- measure: Overdue Tasks | #,0 | 05 Operations
+-- Tasks not Done whose due date is before the reference date.
+VAR _ref = [Reference Date]
+RETURN
+    CALCULATE ( COUNTROWS ( tasks ), KEEPFILTERS ( tasks[task_status] <> "Done" ), KEEPFILTERS ( tasks[due_date] < _ref ) ) + 0
+
+-- measure: Revenue Target | #,0" TND" | 06 Targets
+-- Sum of the monthly department revenue targets in context.
+SUM ( kpi_targets[revenue_target_tnd] )
+
+-- measure: Revenue vs Target % | 0.0% | 06 Targets
+-- Net revenue ÷ revenue target (company level: orders carry no department).
+DIVIDE ( [Net Revenue], [Revenue Target] )
+
+-- measure: Margin Target % | 0.0% | 06 Targets
+-- Average of the monthly gross-margin targets in context.
+AVERAGE ( kpi_targets[gross_margin_target_pct] )
+
+-- measure: Margin vs Target pts | +0.0;-0.0;0.0 | 06 Targets
+-- Gross margin minus margin target, in percentage points.
+IF ( NOT ISBLANK ( [Margin Target %] ), ( [Gross Margin %] - [Margin Target %] ) * 100 )
+
+-- measure: Net Revenue PM | #,0" TND" | 07 Time Intelligence
+-- Net revenue of the previous month (blank when no dates are selected).
+IF ( ISFILTERED ( dim_date ), CALCULATE ( [Net Revenue], DATEADD ( dim_date[date], -1, MONTH ) ) )
+
+-- measure: Revenue MoM % | +0.0%;-0.0%;0.0% | 07 Time Intelligence
+-- Period-over-period growth vs previous month.
+VAR _cur = [Net Revenue]
+VAR _prev = [Net Revenue PM]
+RETURN IF ( NOT ISBLANK ( _cur ), DIVIDE ( _cur - _prev, _prev ) )
+
+-- measure: Net Revenue PY | #,0" TND" | 07 Time Intelligence
+-- Net revenue of the same period last year (2025 data exists, so 2026 comparisons work).
+IF ( ISFILTERED ( dim_date ), CALCULATE ( [Net Revenue], SAMEPERIODLASTYEAR ( dim_date[date] ) ) )
+
+-- measure: Revenue YoY % | +0.0%;-0.0%;0.0% | 07 Time Intelligence
+-- Growth vs the same period last year.
+VAR _cur = [Net Revenue]
+VAR _prev = [Net Revenue PY]
+RETURN IF ( NOT ISBLANK ( _cur ), DIVIDE ( _cur - _prev, _prev ) )
+
+-- measure: Scenario Revenue Change | 0.0% | 08 Scenarios
+-- Revenue change of the scenario selected in the disconnected scenarios table (0 when none).
+SELECTEDVALUE ( scenarios[revenue_change_pct], 0 )
+
+-- measure: Scenario Cost Change | 0.0% | 08 Scenarios
+-- Cost change of the selected scenario (0 when none).
+SELECTEDVALUE ( scenarios[cost_change_pct], 0 )
+
+-- measure: Scenario Revenue | #,0" TND" | 08 Scenarios
+-- Modeled revenue: net revenue × (1 + scenario revenue change). A model, not a prediction.
+[Net Revenue] * ( 1 + [Scenario Revenue Change] )
+
+-- measure: Scenario Cost | #,0" TND" | 08 Scenarios
+-- Modeled cost: (product cost + expenses) × (1 + scenario cost change).
+( [Product Cost] + [Total Expenses] ) * ( 1 + [Scenario Cost Change] )
+
+-- measure: Scenario Profit | #,0" TND" | 08 Scenarios
+-- Scenario revenue minus scenario cost.
+[Scenario Revenue] - [Scenario Cost]
+
+-- measure: Scenario Margin % | 0.0% | 08 Scenarios
+-- Scenario profit ÷ scenario revenue.
+DIVIDE ( [Scenario Profit], [Scenario Revenue] )
+
+-- measure: Revenue Shock Value | +0%;-0%;0% | 08 Scenarios
+-- What-if parameter: revenue shock selected in the 'Revenue Shock' table (0 when none).
+SELECTEDVALUE ( 'Revenue Shock'[Revenue Shock], 0 )
+
+-- measure: Crisis Revenue Exposure | #,0" TND" | 08 Scenarios
+-- First-order revenue lost under the selected negative revenue shock (modeled estimate).
+[Net Revenue] * MAX ( 0, - [Revenue Shock Value] )
+
+-- measure: Data Quality Issues | #,0 | 09 Data Quality
+-- Rows in the data-quality issue register (a sample register, not ground truth).
+COUNTROWS ( data_quality_issues )
+
+-- measure: Open Quality Issues | #,0 | 09 Data Quality
+-- Register issues with status Open or Under Review.
+CALCULATE ( COUNTROWS ( data_quality_issues ), KEEPFILTERS ( data_quality_issues[issue_status] IN { "Open", "Under Review" } ) )
+
+-- measure: Quality Score | 0.0 | 09 Data Quality
+-- 100 × (1 − weighted open issues ÷ weighted all issues). Weights: Critical 5, High 3, Medium 1.5, Low 0.5. Transparent, not a certification.
+VAR _w = SUMX ( data_quality_issues, SWITCH ( data_quality_issues[severity], "Critical", 5, "High", 3, "Medium", 1.5, 0.5 ) )
+VAR _open = SUMX ( FILTER ( data_quality_issues, data_quality_issues[issue_status] IN { "Open", "Under Review" } ), SWITCH ( data_quality_issues[severity], "Critical", 5, "High", 3, "Medium", 1.5, 0.5 ) )
+RETURN IF ( _w > 0, 100 * ( 1 - DIVIDE ( _open, _w ) ) )
+
+-- measure: Gross Amount Mismatch Orders | #,0 | 09 Data Quality
+-- Orders whose gross amount differs from net + tax by more than 0.05 TND (planted anomaly O00004).
+COUNTROWS ( FILTER ( sales_orders, ABS ( sales_orders[net_amount_tnd] + sales_orders[tax_amount_tnd] - sales_orders[gross_amount_tnd] ) > 0.05 ) ) + 0
+
+-- measure: Promise Before Order | #,0 | 09 Data Quality
+-- Orders whose promised delivery date is before the order date (planted anomaly O00008).
+COUNTROWS ( FILTER ( sales_orders, sales_orders[promised_delivery_date] < sales_orders[order_date] ) ) + 0
+
+-- measure: Revenue Forecast (3M MA) | #,0" TND" | 10 Forecast
+-- Transparent baseline: the average net revenue of the 3 months before the month in context (moving average, not AI).
+VAR _monthStart = DATE ( YEAR ( MIN ( dim_date[date] ) ), MONTH ( MIN ( dim_date[date] ) ), 1 )
+VAR _prior = CALCULATE ( [Net Revenue], DATESBETWEEN ( dim_date[date], EDATE ( _monthStart, -3 ), _monthStart - 1 ) )
+RETURN IF ( HASONEVALUE ( dim_date[month_year] ), DIVIDE ( _prior, 3 ) )
+
+-- measure: Forecast Error % | 0.0% | 10 Forecast
+-- Absolute error of the 3-month moving average vs actual, for one month (backtest).
+VAR _a = [Net Revenue]
+VAR _f = [Revenue Forecast (3M MA)]
+RETURN IF ( NOT ISBLANK ( _a ) && NOT ISBLANK ( _f ), DIVIDE ( ABS ( _a - _f ), _a ) )
+
+-- measure: Forecast MAPE % | 0.0% | 10 Forecast
+-- Mean absolute percentage error of the moving-average forecast over the complete months in context that have 3 prior months.
+VAR _months = FILTER ( VALUES ( dim_date[month_year] ), NOT ISBLANK ( [Forecast Error %] ) )
+RETURN AVERAGEX ( _months, [Forecast Error %] )

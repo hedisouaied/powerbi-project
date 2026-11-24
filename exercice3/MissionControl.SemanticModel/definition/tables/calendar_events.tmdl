@@ -1,0 +1,173 @@
+table calendar_events
+	lineageTag: 0b0876cd-4a8f-4365-88f1-19ace6015535
+
+	column event_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: fb9b700f-8ba5-47c7-9fc5-894c92aac87e
+		summarizeBy: none
+		sourceColumn: event_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_title
+		dataType: string
+		formatString:  type text
+		lineageTag: 1d70fe9c-c095-438f-bcba-87f8950f27be
+		summarizeBy: none
+		sourceColumn: event_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 40941ca6-1e4b-4148-ad45-196d821dd187
+		summarizeBy: none
+		sourceColumn: event_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column priority
+		dataType: string
+		formatString:  type text
+		lineageTag: c693497e-fcd3-48b4-8f76-21101664ded0
+		summarizeBy: none
+		sourceColumn: priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_datetime
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn type datetime
+		lineageTag: c74b50f2-91f3-4673-b498-0663a2732108
+		summarizeBy: none
+		sourceColumn: start_datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_datetime
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn type datetime
+		lineageTag: 42083c9d-8317-4757-99ce-2e4eca78e986
+		summarizeBy: none
+		sourceColumn: end_datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	column owner_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 0baa2045-e2a4-4e8f-b815-51cf7aa31554
+		summarizeBy: none
+		sourceColumn: owner_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: e4d01535-05b9-4e3e-a2d3-04f5cdf21085
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column related_project_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 3a65ae04-92c8-4ddf-bdd5-d6216f7d8576
+		summarizeBy: none
+		sourceColumn: related_project_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column related_task_id
+		dataType: string
+		formatString:  type text
+		lineageTag: fbdd2318-0627-424d-b570-a2835c6aabc2
+		summarizeBy: none
+		sourceColumn: related_task_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_or_meeting_link
+		dataType: string
+		formatString:  type text
+		lineageTag: 14126791-05bc-4bb8-a4ee-5db8f5007749
+		summarizeBy: none
+		sourceColumn: location_or_meeting_link
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 0e335bf7-c6cf-4654-94e3-80a856d93a7f
+		summarizeBy: none
+		sourceColumn: event_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column recurrence_pattern
+		dataType: string
+		formatString:  type text
+		lineageTag: 93b6d3fa-9a77-4ade-97e7-8e5a5de36064
+		summarizeBy: none
+		sourceColumn: recurrence_pattern
+
+		annotation SummarizationSetBy = Automatic
+
+	column reminder_setting
+		dataType: string
+		formatString:  type text
+		lineageTag: bdb0c7d3-ca88-45a3-806b-a9c8d75a0830
+		summarizeBy: none
+		sourceColumn: reminder_setting
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_description
+		dataType: string
+		formatString:  type text
+		lineageTag: 5d2e36ed-bd1a-430f-a551-8209c48441e7
+		summarizeBy: none
+		sourceColumn: event_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_origin
+		dataType: string
+		formatString:  type text
+		lineageTag: 327a74a8-ffbe-4621-bcef-8435fd7d16cf
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: b7095a07-d0b2-4776-a549-cb386986404b
+		summarizeBy: none
+		sourceColumn: event_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition calendar_events = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\calendar_events.csv"), [Delimiter = ",", Columns = 16, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"event_id", type text}, {"event_title", type text}, {"event_type", type text}, {"priority", type text}, {"start_datetime", type datetime}, {"end_datetime", type datetime}, {"owner_employee_id", type text}, {"department_id", type text}, {"related_project_id", type text}, {"related_task_id", type text}, {"location_or_meeting_link", type text}, {"event_status", type text}, {"recurrence_pattern", type text}, {"reminder_setting", type text}, {"event_description", type text}, {"data_origin", type text}}, "en-US"),
+				    EventDate = Table.AddColumn(Typed, "event_date", each Date.From([start_datetime]), type date),
+				    Result = EventDate
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,301 @@
+evidence_id,case_id,evidence_type,source_table,source_record_reference,relevance_level,evidence_date,evidence_summary,evidence_status
+EVD0001,CASE0033,Supplier Record,customer_interactions,REF-82739,Low,2025-08-08,Synthetic evidence item 001,Unreviewed
+EVD0002,CASE0028,Incident,suppliers,REF-68067,Low,2025-09-26,Synthetic evidence item 002,Unreviewed
+EVD0003,CASE0073,Activity Event,payments,REF-73351,Medium,2025-09-28,Synthetic evidence item 003,Unreviewed
+EVD0004,CASE0091,Supplier Record,activity_log,REF-90352,Medium,2026-10-10,Synthetic evidence item 004,Reviewed
+EVD0005,CASE0073,Activity Event,payments,REF-14679,Low,2025-09-09,Synthetic evidence item 005,Unreviewed
+EVD0006,CASE0007,Customer Interaction,sales_orders,REF-82888,Low,2025-04-24,Synthetic evidence item 006,Flagged
+EVD0007,CASE0014,Activity Event,activity_log,REF-98896,Medium,2025-08-09,Synthetic evidence item 007,Flagged
+EVD0008,CASE0096,Alert,suppliers,REF-54890,High,2025-09-26,Synthetic evidence item 008,Reviewed
+EVD0009,CASE0064,Supplier Record,sales_orders,REF-16761,High,2025-05-12,Synthetic evidence item 009,Reviewed
+EVD0010,CASE0004,Alert,alerts,REF-18665,Medium,2025-08-31,Synthetic evidence item 010,Unreviewed
+EVD0011,CASE0056,Supplier Record,sales_orders,REF-91792,High,2025-08-01,Synthetic evidence item 011,Unreviewed
+EVD0012,CASE0052,Activity Event,alerts,REF-26110,Medium,2026-10-08,Synthetic evidence item 012,Reviewed
+EVD0013,CASE0054,Activity Event,customer_interactions,REF-79486,Low,2025-03-20,Synthetic evidence item 013,Flagged
+EVD0014,CASE0089,Order Record,alerts,REF-78063,Medium,2025-05-22,Synthetic evidence item 014,Reviewed
+EVD0015,CASE0001,Order Record,customer_interactions,REF-46402,Low,2026-01-10,Synthetic evidence item 015,Unreviewed
+EVD0016,CASE0038,Payment Record,activity_log,REF-30504,Low,2025-10-09,Synthetic evidence item 016,Reviewed
+EVD0017,CASE0025,Incident,customer_interactions,REF-20574,Low,2026-10-19,Synthetic evidence item 017,Flagged
+EVD0018,CASE0093,Supplier Record,customer_interactions,REF-35826,Medium,2025-10-03,Synthetic evidence item 018,Unreviewed
+EVD0019,CASE0086,Payment Record,customer_interactions,REF-67242,Medium,2025-05-10,Synthetic evidence item 019,Reviewed
+EVD0020,CASE0087,Supplier Record,customer_interactions,REF-84715,Medium,2026-10-16,Synthetic evidence item 020,Reviewed
+EVD0021,CASE0003,Payment Record,incidents,REF-53430,Low,2025-04-02,Synthetic evidence item 021,Unreviewed
+EVD0022,CASE0093,Alert,incidents,REF-20670,Medium,2025-08-30,Synthetic evidence item 022,Reviewed
+EVD0023,CASE0035,Incident,suppliers,REF-84018,High,2025-01-21,Synthetic evidence item 023,Unreviewed
+EVD0024,CASE0037,Payment Record,alerts,REF-55255,Medium,2026-03-14,Synthetic evidence item 024,Reviewed
+EVD0025,CASE0055,Incident,suppliers,REF-49980,Low,2026-01-24,Synthetic evidence item 025,Unreviewed
+EVD0026,CASE0093,Supplier Record,incidents,REF-76623,Low,2026-05-07,Synthetic evidence item 026,Flagged
+EVD0027,CASE0041,Supplier Record,sales_orders,REF-13378,High,2026-06-14,Synthetic evidence item 027,Reviewed
+EVD0028,CASE0078,Customer Interaction,customer_interactions,REF-26288,High,2026-08-08,Synthetic evidence item 028,Unreviewed
+EVD0029,CASE0050,Payment Record,customer_interactions,REF-13011,High,2026-03-13,Synthetic evidence item 029,Reviewed
+EVD0030,CASE0100,Alert,activity_log,REF-32909,Medium,2025-06-12,Synthetic evidence item 030,Reviewed
+EVD0031,CASE0043,Payment Record,alerts,REF-51884,Medium,2025-01-01,Synthetic evidence item 031,Reviewed
+EVD0032,CASE0090,Incident,sales_orders,REF-26634,Medium,2025-11-11,Synthetic evidence item 032,Reviewed
+EVD0033,CASE0072,Order Record,suppliers,REF-13159,Low,2025-04-18,Synthetic evidence item 033,Unreviewed
+EVD0034,CASE0047,Customer Interaction,sales_orders,REF-17163,Low,2025-08-08,Synthetic evidence item 034,Reviewed
+EVD0035,CASE0008,Order Record,incidents,REF-41825,Low,2026-06-18,Synthetic evidence item 035,Flagged
+EVD0036,CASE0006,Payment Record,payments,REF-49818,High,2025-05-13,Synthetic evidence item 036,Flagged
+EVD0037,CASE0089,Alert,alerts,REF-25944,Medium,2026-07-12,Synthetic evidence item 037,Flagged
+EVD0038,CASE0052,Supplier Record,incidents,REF-54011,Medium,2025-06-24,Synthetic evidence item 038,Reviewed
+EVD0039,CASE0078,Alert,sales_orders,REF-67206,Medium,2025-07-11,Synthetic evidence item 039,Unreviewed
+EVD0040,CASE0030,Activity Event,alerts,REF-41087,Low,2025-03-20,Synthetic evidence item 040,Flagged
+EVD0041,CASE0094,Alert,customer_interactions,REF-56890,Low,2026-03-08,Synthetic evidence item 041,Flagged
+EVD0042,CASE0087,Payment Record,sales_orders,REF-27022,Low,2026-09-13,Synthetic evidence item 042,Unreviewed
+EVD0043,CASE0061,Supplier Record,alerts,REF-42862,High,2026-10-26,Synthetic evidence item 043,Flagged
+EVD0044,CASE0050,Alert,activity_log,REF-44264,High,2025-10-21,Synthetic evidence item 044,Reviewed
+EVD0045,CASE0074,Payment Record,activity_log,REF-70672,Low,2026-01-22,Synthetic evidence item 045,Unreviewed
+EVD0046,CASE0097,Customer Interaction,sales_orders,REF-79953,High,2025-03-21,Synthetic evidence item 046,Reviewed
+EVD0047,CASE0043,Incident,suppliers,REF-38725,Medium,2025-03-22,Synthetic evidence item 047,Flagged
+EVD0048,CASE0022,Incident,alerts,REF-70496,Medium,2025-06-23,Synthetic evidence item 048,Unreviewed
+EVD0049,CASE0063,Incident,alerts,REF-44760,High,2026-08-31,Synthetic evidence item 049,Flagged
+EVD0050,CASE0037,Alert,incidents,REF-98217,Medium,2025-03-29,Synthetic evidence item 050,Flagged
+EVD0051,CASE0011,Order Record,sales_orders,REF-56304,Low,2026-02-18,Synthetic evidence item 051,Unreviewed
+EVD0052,CASE0061,Order Record,activity_log,REF-14295,Medium,2025-06-11,Synthetic evidence item 052,Flagged
+EVD0053,CASE0083,Supplier Record,suppliers,REF-25372,Medium,2025-08-10,Synthetic evidence item 053,Flagged
+EVD0054,CASE0027,Customer Interaction,activity_log,REF-49196,Medium,2025-09-21,Synthetic evidence item 054,Reviewed
+EVD0055,CASE0091,Payment Record,payments,REF-45247,Medium,2025-05-12,Synthetic evidence item 055,Unreviewed
+EVD0056,CASE0030,Order Record,activity_log,REF-73364,Low,2025-12-29,Synthetic evidence item 056,Flagged
+EVD0057,CASE0051,Incident,alerts,REF-28682,High,2026-09-12,Synthetic evidence item 057,Reviewed
+EVD0058,CASE0007,Activity Event,customer_interactions,REF-44144,Low,2026-11-05,Synthetic evidence item 058,Flagged
+EVD0059,CASE0002,Payment Record,alerts,REF-14656,High,2025-03-14,Synthetic evidence item 059,Flagged
+EVD0060,CASE0053,Order Record,alerts,REF-60062,Medium,2025-02-26,Synthetic evidence item 060,Reviewed
+EVD0061,CASE0082,Customer Interaction,activity_log,REF-62320,High,2025-09-24,Synthetic evidence item 061,Reviewed
+EVD0062,CASE0090,Activity Event,activity_log,REF-15677,Medium,2026-10-19,Synthetic evidence item 062,Unreviewed
+EVD0063,CASE0098,Alert,sales_orders,REF-29514,Medium,2026-05-18,Synthetic evidence item 063,Flagged
+EVD0064,CASE0056,Supplier Record,alerts,REF-41527,High,2025-08-31,Synthetic evidence item 064,Reviewed
+EVD0065,CASE0021,Customer Interaction,payments,REF-20803,High,2026-10-23,Synthetic evidence item 065,Reviewed
+EVD0066,CASE0037,Incident,payments,REF-86219,Low,2026-09-06,Synthetic evidence item 066,Unreviewed
+EVD0067,CASE0006,Supplier Record,activity_log,REF-75407,Low,2025-10-06,Synthetic evidence item 067,Flagged
+EVD0068,CASE0041,Payment Record,payments,REF-32650,High,2026-10-19,Synthetic evidence item 068,Reviewed
+EVD0069,CASE0008,Payment Record,customer_interactions,REF-32953,Medium,2026-07-17,Synthetic evidence item 069,Unreviewed
+EVD0070,CASE0070,Payment Record,sales_orders,REF-58499,Medium,2026-04-30,Synthetic evidence item 070,Unreviewed
+EVD0071,CASE0087,Order Record,payments,REF-18734,Low,2026-06-13,Synthetic evidence item 071,Reviewed
+EVD0072,CASE0100,Order Record,alerts,REF-94921,High,2026-10-10,Synthetic evidence item 072,Unreviewed
+EVD0073,CASE0002,Supplier Record,customer_interactions,REF-71764,Medium,2026-05-13,Synthetic evidence item 073,Unreviewed
+EVD0074,CASE0045,Order Record,incidents,REF-31838,High,2026-04-07,Synthetic evidence item 074,Reviewed
+EVD0075,CASE0035,Supplier Record,suppliers,REF-20382,High,2025-11-16,Synthetic evidence item 075,Reviewed
+EVD0076,CASE0080,Customer Interaction,customer_interactions,REF-61085,High,2026-10-25,Synthetic evidence item 076,Reviewed
+EVD0077,CASE0065,Activity Event,customer_interactions,REF-37940,Low,2025-07-09,Synthetic evidence item 077,Flagged
+EVD0078,CASE0089,Supplier Record,payments,REF-51604,High,2026-08-27,Synthetic evidence item 078,Flagged
+EVD0079,CASE0012,Payment Record,incidents,REF-67361,Medium,2025-06-14,Synthetic evidence item 079,Reviewed
+EVD0080,CASE0088,Customer Interaction,suppliers,REF-47554,Medium,2025-06-08,Synthetic evidence item 080,Reviewed
+EVD0081,CASE0085,Incident,incidents,REF-91071,Low,2025-06-06,Synthetic evidence item 081,Unreviewed
+EVD0082,CASE0069,Payment Record,payments,REF-78415,High,2025-03-19,Synthetic evidence item 082,Unreviewed
+EVD0083,CASE0016,Activity Event,sales_orders,REF-75983,High,2025-02-07,Synthetic evidence item 083,Flagged
+EVD0084,CASE0038,Incident,sales_orders,REF-33014,Low,2025-03-16,Synthetic evidence item 084,Unreviewed
+EVD0085,CASE0094,Order Record,incidents,REF-24479,Medium,2025-05-09,Synthetic evidence item 085,Unreviewed
+EVD0086,CASE0089,Incident,sales_orders,REF-73221,Medium,2026-08-06,Synthetic evidence item 086,Flagged
+EVD0087,CASE0050,Supplier Record,activity_log,REF-22807,Low,2026-02-18,Synthetic evidence item 087,Reviewed
+EVD0088,CASE0053,Order Record,customer_interactions,REF-92581,High,2026-04-08,Synthetic evidence item 088,Flagged
+EVD0089,CASE0093,Customer Interaction,activity_log,REF-21170,High,2026-08-17,Synthetic evidence item 089,Flagged
+EVD0090,CASE0004,Incident,incidents,REF-70188,High,2026-01-08,Synthetic evidence item 090,Reviewed
+EVD0091,CASE0091,Alert,alerts,REF-29240,Low,2025-02-17,Synthetic evidence item 091,Reviewed
+EVD0092,CASE0054,Payment Record,customer_interactions,REF-67947,Low,2025-12-04,Synthetic evidence item 092,Unreviewed
+EVD0093,CASE0047,Order Record,alerts,REF-92487,High,2026-09-20,Synthetic evidence item 093,Flagged
+EVD0094,CASE0078,Supplier Record,incidents,REF-85202,High,2026-06-28,Synthetic evidence item 094,Flagged
+EVD0095,CASE0014,Customer Interaction,alerts,REF-65339,Low,2025-11-21,Synthetic evidence item 095,Reviewed
+EVD0096,CASE0024,Supplier Record,incidents,REF-54537,High,2026-09-10,Synthetic evidence item 096,Unreviewed
+EVD0097,CASE0088,Payment Record,payments,REF-48538,Medium,2026-10-29,Synthetic evidence item 097,Unreviewed
+EVD0098,CASE0064,Incident,payments,REF-73328,Low,2025-04-01,Synthetic evidence item 098,Unreviewed
+EVD0099,CASE0046,Supplier Record,alerts,REF-78632,Low,2025-09-03,Synthetic evidence item 099,Flagged
+EVD0100,CASE0011,Order Record,activity_log,REF-68777,Low,2025-08-27,Synthetic evidence item 100,Flagged
+EVD0101,CASE0090,Customer Interaction,sales_orders,REF-52894,Low,2025-02-21,Synthetic evidence item 101,Flagged
+EVD0102,CASE0049,Activity Event,suppliers,REF-76561,High,2025-09-15,Synthetic evidence item 102,Unreviewed
+EVD0103,CASE0013,Payment Record,activity_log,REF-41264,Medium,2026-02-09,Synthetic evidence item 103,Unreviewed
+EVD0104,CASE0090,Supplier Record,payments,REF-33339,Low,2025-07-28,Synthetic evidence item 104,Unreviewed
+EVD0105,CASE0071,Order Record,suppliers,REF-14407,Low,2025-06-10,Synthetic evidence item 105,Flagged
+EVD0106,CASE0074,Incident,incidents,REF-27704,Medium,2026-11-03,Synthetic evidence item 106,Flagged
+EVD0107,CASE0096,Customer Interaction,customer_interactions,REF-97354,Low,2025-07-19,Synthetic evidence item 107,Reviewed
+EVD0108,CASE0080,Customer Interaction,payments,REF-66987,High,2026-11-15,Synthetic evidence item 108,Reviewed
+EVD0109,CASE0044,Customer Interaction,customer_interactions,REF-43759,Medium,2025-09-25,Synthetic evidence item 109,Unreviewed
+EVD0110,CASE0038,Order Record,customer_interactions,REF-95989,Medium,2026-03-21,Synthetic evidence item 110,Unreviewed
+EVD0111,CASE0088,Activity Event,suppliers,REF-16124,Medium,2025-06-27,Synthetic evidence item 111,Flagged
+EVD0112,CASE0032,Customer Interaction,customer_interactions,REF-39013,Low,2025-05-25,Synthetic evidence item 112,Unreviewed
+EVD0113,CASE0056,Order Record,sales_orders,REF-47741,High,2025-01-22,Synthetic evidence item 113,Unreviewed
+EVD0114,CASE0085,Supplier Record,activity_log,REF-32074,High,2025-03-10,Synthetic evidence item 114,Unreviewed
+EVD0115,CASE0023,Alert,incidents,REF-83240,Low,2026-04-01,Synthetic evidence item 115,Unreviewed
+EVD0116,CASE0043,Activity Event,suppliers,REF-33809,High,2025-08-04,Synthetic evidence item 116,Flagged
+EVD0117,CASE0003,Alert,suppliers,REF-53794,High,2026-04-24,Synthetic evidence item 117,Reviewed
+EVD0118,CASE0003,Order Record,suppliers,REF-97270,High,2025-11-18,Synthetic evidence item 118,Unreviewed
+EVD0119,CASE0071,Order Record,activity_log,REF-54221,Low,2025-01-01,Synthetic evidence item 119,Flagged
+EVD0120,CASE0040,Order Record,incidents,REF-31328,Low,2025-02-19,Synthetic evidence item 120,Flagged
+EVD0121,CASE0073,Payment Record,alerts,REF-63611,Medium,2025-03-30,Synthetic evidence item 121,Flagged
+EVD0122,CASE0001,Incident,activity_log,REF-87204,Low,2025-11-03,Synthetic evidence item 122,Reviewed
+EVD0123,CASE0020,Customer Interaction,activity_log,REF-42002,Medium,2025-07-30,Synthetic evidence item 123,Flagged
+EVD0124,CASE0014,Customer Interaction,payments,REF-16797,High,2025-11-17,Synthetic evidence item 124,Reviewed
+EVD0125,CASE0068,Alert,customer_interactions,REF-47893,High,2025-01-25,Synthetic evidence item 125,Reviewed
+EVD0126,CASE0037,Order Record,activity_log,REF-82365,Medium,2025-02-16,Synthetic evidence item 126,Unreviewed
+EVD0127,CASE0090,Incident,suppliers,REF-23867,Medium,2026-10-29,Synthetic evidence item 127,Unreviewed
+EVD0128,CASE0028,Alert,activity_log,REF-37302,Medium,2025-01-20,Synthetic evidence item 128,Reviewed
+EVD0129,CASE0031,Order Record,sales_orders,REF-27746,Medium,2026-02-20,Synthetic evidence item 129,Reviewed
+EVD0130,CASE0004,Customer Interaction,payments,REF-91259,High,2025-10-19,Synthetic evidence item 130,Unreviewed
+EVD0131,CASE0054,Activity Event,alerts,REF-85336,Low,2026-06-05,Synthetic evidence item 131,Flagged
+EVD0132,CASE0098,Order Record,suppliers,REF-22362,Low,2025-07-17,Synthetic evidence item 132,Flagged
+EVD0133,CASE0089,Alert,activity_log,REF-21371,Medium,2025-08-01,Synthetic evidence item 133,Flagged
+EVD0134,CASE0023,Supplier Record,payments,REF-30735,Medium,2025-03-28,Synthetic evidence item 134,Unreviewed
+EVD0135,CASE0037,Payment Record,sales_orders,REF-78736,Low,2026-08-13,Synthetic evidence item 135,Reviewed
+EVD0136,CASE0081,Activity Event,activity_log,REF-17830,Medium,2025-09-28,Synthetic evidence item 136,Unreviewed
+EVD0137,CASE0055,Payment Record,customer_interactions,REF-60870,Medium,2025-03-13,Synthetic evidence item 137,Flagged
+EVD0138,CASE0100,Payment Record,activity_log,REF-73383,Medium,2026-05-30,Synthetic evidence item 138,Reviewed
+EVD0139,CASE0047,Activity Event,sales_orders,REF-92621,High,2026-01-13,Synthetic evidence item 139,Unreviewed
+EVD0140,CASE0032,Customer Interaction,sales_orders,REF-97115,High,2026-09-08,Synthetic evidence item 140,Reviewed
+EVD0141,CASE0061,Payment Record,sales_orders,REF-49022,Low,2025-06-26,Synthetic evidence item 141,Reviewed
+EVD0142,CASE0064,Order Record,sales_orders,REF-86834,Low,2025-01-24,Synthetic evidence item 142,Reviewed
+EVD0143,CASE0035,Incident,sales_orders,REF-98847,Medium,2025-11-06,Synthetic evidence item 143,Flagged
+EVD0144,CASE0052,Activity Event,payments,REF-99314,Low,2025-09-07,Synthetic evidence item 144,Unreviewed
+EVD0145,CASE0026,Customer Interaction,customer_interactions,REF-86069,Low,2025-03-10,Synthetic evidence item 145,Flagged
+EVD0146,CASE0023,Supplier Record,sales_orders,REF-65405,High,2026-08-02,Synthetic evidence item 146,Flagged
+EVD0147,CASE0001,Customer Interaction,customer_interactions,REF-19304,Medium,2026-11-20,Synthetic evidence item 147,Unreviewed
+EVD0148,CASE0053,Incident,sales_orders,REF-59701,High,2025-03-08,Synthetic evidence item 148,Reviewed
+EVD0149,CASE0042,Payment Record,customer_interactions,REF-10930,Medium,2025-12-13,Synthetic evidence item 149,Flagged
+EVD0150,CASE0064,Alert,alerts,REF-81754,High,2025-07-25,Synthetic evidence item 150,Unreviewed
+EVD0151,CASE0031,Supplier Record,sales_orders,REF-27015,Medium,2026-01-20,Synthetic evidence item 151,Unreviewed
+EVD0152,CASE0085,Incident,incidents,REF-52829,Low,2025-08-22,Synthetic evidence item 152,Reviewed
+EVD0153,CASE0085,Incident,incidents,REF-21819,High,2026-09-06,Synthetic evidence item 153,Flagged
+EVD0154,CASE0075,Supplier Record,suppliers,REF-82497,Medium,2026-01-11,Synthetic evidence item 154,Flagged
+EVD0155,CASE0059,Incident,suppliers,REF-50073,Medium,2026-07-16,Synthetic evidence item 155,Flagged
+EVD0156,CASE0038,Payment Record,sales_orders,REF-44364,High,2026-09-26,Synthetic evidence item 156,Unreviewed
+EVD0157,CASE0090,Order Record,customer_interactions,REF-14670,Low,2025-01-01,Synthetic evidence item 157,Reviewed
+EVD0158,CASE0072,Order Record,alerts,REF-72833,High,2026-01-04,Synthetic evidence item 158,Reviewed
+EVD0159,CASE0059,Order Record,suppliers,REF-12694,High,2025-08-24,Synthetic evidence item 159,Unreviewed
+EVD0160,CASE0040,Customer Interaction,incidents,REF-36865,High,2026-03-26,Synthetic evidence item 160,Flagged
+EVD0161,CASE0029,Activity Event,alerts,REF-84089,High,2026-06-14,Synthetic evidence item 161,Reviewed
+EVD0162,CASE0008,Activity Event,alerts,REF-51628,Low,2025-05-11,Synthetic evidence item 162,Reviewed
+EVD0163,CASE0075,Order Record,sales_orders,REF-36327,Medium,2025-06-04,Synthetic evidence item 163,Reviewed
+EVD0164,CASE0099,Incident,suppliers,REF-86858,Low,2026-11-22,Synthetic evidence item 164,Flagged
+EVD0165,CASE0017,Supplier Record,incidents,REF-30350,High,2026-08-01,Synthetic evidence item 165,Flagged
+EVD0166,CASE0032,Incident,customer_interactions,REF-98604,Low,2026-11-08,Synthetic evidence item 166,Reviewed
+EVD0167,CASE0085,Alert,customer_interactions,REF-36135,Low,2025-06-12,Synthetic evidence item 167,Reviewed
+EVD0168,CASE0006,Payment Record,customer_interactions,REF-30859,Medium,2026-02-05,Synthetic evidence item 168,Unreviewed
+EVD0169,CASE0002,Customer Interaction,incidents,REF-90628,Medium,2026-03-27,Synthetic evidence item 169,Reviewed
+EVD0170,CASE0064,Alert,incidents,REF-11655,High,2025-10-25,Synthetic evidence item 170,Reviewed
+EVD0171,CASE0088,Incident,customer_interactions,REF-89227,Low,2025-05-24,Synthetic evidence item 171,Unreviewed
+EVD0172,CASE0041,Customer Interaction,suppliers,REF-60295,High,2026-02-04,Synthetic evidence item 172,Reviewed
+EVD0173,CASE0079,Payment Record,sales_orders,REF-82425,High,2026-08-23,Synthetic evidence item 173,Unreviewed
+EVD0174,CASE0079,Alert,payments,REF-47948,Medium,2025-04-24,Synthetic evidence item 174,Reviewed
+EVD0175,CASE0039,Supplier Record,suppliers,REF-32792,Low,2025-10-09,Synthetic evidence item 175,Flagged
+EVD0176,CASE0006,Activity Event,suppliers,REF-49898,Medium,2025-03-22,Synthetic evidence item 176,Reviewed
+EVD0177,CASE0088,Supplier Record,activity_log,REF-27225,Low,2025-08-19,Synthetic evidence item 177,Flagged
+EVD0178,CASE0007,Customer Interaction,activity_log,REF-13269,Medium,2026-07-20,Synthetic evidence item 178,Reviewed
+EVD0179,CASE0034,Order Record,activity_log,REF-40607,Medium,2025-05-10,Synthetic evidence item 179,Flagged
+EVD0180,CASE0027,Customer Interaction,alerts,REF-67239,Medium,2025-04-22,Synthetic evidence item 180,Reviewed
+EVD0181,CASE0021,Activity Event,payments,REF-31088,High,2025-10-13,Synthetic evidence item 181,Flagged
+EVD0182,CASE0079,Alert,activity_log,REF-19653,Medium,2026-08-30,Synthetic evidence item 182,Unreviewed
+EVD0183,CASE0069,Activity Event,sales_orders,REF-75719,Low,2025-11-07,Synthetic evidence item 183,Reviewed
+EVD0184,CASE0078,Incident,sales_orders,REF-11349,Medium,2025-07-02,Synthetic evidence item 184,Flagged
+EVD0185,CASE0028,Order Record,customer_interactions,REF-87523,High,2026-04-24,Synthetic evidence item 185,Flagged
+EVD0186,CASE0043,Customer Interaction,suppliers,REF-11130,Medium,2026-08-14,Synthetic evidence item 186,Flagged
+EVD0187,CASE0053,Order Record,activity_log,REF-31119,High,2025-04-28,Synthetic evidence item 187,Unreviewed
+EVD0188,CASE0097,Supplier Record,incidents,REF-49811,High,2025-06-27,Synthetic evidence item 188,Unreviewed
+EVD0189,CASE0094,Customer Interaction,suppliers,REF-69766,Medium,2025-12-29,Synthetic evidence item 189,Reviewed
+EVD0190,CASE0094,Supplier Record,suppliers,REF-89746,Medium,2026-06-18,Synthetic evidence item 190,Unreviewed
+EVD0191,CASE0093,Supplier Record,sales_orders,REF-47438,High,2025-12-08,Synthetic evidence item 191,Flagged
+EVD0192,CASE0001,Activity Event,customer_interactions,REF-28363,Medium,2025-11-20,Synthetic evidence item 192,Flagged
+EVD0193,CASE0074,Incident,incidents,REF-12837,High,2026-03-01,Synthetic evidence item 193,Reviewed
+EVD0194,CASE0033,Activity Event,activity_log,REF-23597,Low,2025-08-15,Synthetic evidence item 194,Unreviewed
+EVD0195,CASE0002,Customer Interaction,suppliers,REF-74206,High,2025-10-13,Synthetic evidence item 195,Reviewed
+EVD0196,CASE0044,Activity Event,alerts,REF-13835,Medium,2025-10-07,Synthetic evidence item 196,Flagged
+EVD0197,CASE0024,Alert,alerts,REF-23059,High,2025-07-03,Synthetic evidence item 197,Unreviewed
+EVD0198,CASE0025,Customer Interaction,alerts,REF-94817,High,2026-01-05,Synthetic evidence item 198,Unreviewed
+EVD0199,CASE0095,Payment Record,incidents,REF-76503,Medium,2026-11-16,Synthetic evidence item 199,Unreviewed
+EVD0200,CASE0092,Supplier Record,payments,REF-38731,Low,2026-03-05,Synthetic evidence item 200,Reviewed
+EVD0201,CASE0017,Customer Interaction,activity_log,REF-47120,High,2025-03-08,Synthetic evidence item 201,Reviewed
+EVD0202,CASE0005,Incident,incidents,REF-71357,Low,2025-06-25,Synthetic evidence item 202,Unreviewed
+EVD0203,CASE0019,Order Record,activity_log,REF-23449,Medium,2025-12-10,Synthetic evidence item 203,Flagged
+EVD0204,CASE0031,Supplier Record,customer_interactions,REF-59557,High,2025-03-20,Synthetic evidence item 204,Unreviewed
+EVD0205,CASE0020,Incident,sales_orders,REF-95948,Medium,2026-03-21,Synthetic evidence item 205,Unreviewed
+EVD0206,CASE0022,Order Record,customer_interactions,REF-30983,Medium,2026-04-22,Synthetic evidence item 206,Flagged
+EVD0207,CASE0061,Alert,sales_orders,REF-49346,High,2026-03-05,Synthetic evidence item 207,Reviewed
+EVD0208,CASE0030,Activity Event,customer_interactions,REF-43211,Low,2026-01-15,Synthetic evidence item 208,Flagged
+EVD0209,CASE0073,Order Record,activity_log,REF-31040,High,2025-07-01,Synthetic evidence item 209,Reviewed
+EVD0210,CASE0050,Order Record,payments,REF-41914,Medium,2025-09-13,Synthetic evidence item 210,Reviewed
+EVD0211,CASE0054,Payment Record,customer_interactions,REF-21525,High,2025-06-25,Synthetic evidence item 211,Reviewed
+EVD0212,CASE0016,Activity Event,alerts,REF-63560,Medium,2025-12-04,Synthetic evidence item 212,Flagged
+EVD0213,CASE0081,Incident,incidents,REF-26747,Low,2026-08-24,Synthetic evidence item 213,Unreviewed
+EVD0214,CASE0051,Incident,activity_log,REF-29854,High,2025-09-01,Synthetic evidence item 214,Reviewed
+EVD0215,CASE0067,Customer Interaction,payments,REF-10418,Low,2026-05-07,Synthetic evidence item 215,Flagged
+EVD0216,CASE0046,Activity Event,payments,REF-85291,Low,2025-10-19,Synthetic evidence item 216,Reviewed
+EVD0217,CASE0029,Alert,sales_orders,REF-84769,High,2025-11-19,Synthetic evidence item 217,Flagged
+EVD0218,CASE0092,Payment Record,activity_log,REF-33582,Low,2026-10-05,Synthetic evidence item 218,Flagged
+EVD0219,CASE0090,Supplier Record,alerts,REF-77188,Low,2025-07-09,Synthetic evidence item 219,Unreviewed
+EVD0220,CASE0078,Activity Event,alerts,REF-44187,High,2026-09-04,Synthetic evidence item 220,Reviewed
+EVD0221,CASE0051,Customer Interaction,customer_interactions,REF-91293,High,2025-03-09,Synthetic evidence item 221,Unreviewed
+EVD0222,CASE0063,Incident,customer_interactions,REF-68179,Medium,2026-05-31,Synthetic evidence item 222,Unreviewed
+EVD0223,CASE0027,Alert,customer_interactions,REF-56424,High,2025-09-08,Synthetic evidence item 223,Reviewed
+EVD0224,CASE0070,Activity Event,payments,REF-78890,High,2026-08-24,Synthetic evidence item 224,Reviewed
+EVD0225,CASE0076,Alert,incidents,REF-80913,High,2025-03-05,Synthetic evidence item 225,Unreviewed
+EVD0226,CASE0074,Customer Interaction,customer_interactions,REF-66157,High,2026-07-15,Synthetic evidence item 226,Reviewed
+EVD0227,CASE0061,Customer Interaction,payments,REF-79167,Low,2026-07-28,Synthetic evidence item 227,Unreviewed
+EVD0228,CASE0003,Incident,incidents,REF-85955,Medium,2026-11-07,Synthetic evidence item 228,Flagged
+EVD0229,CASE0053,Supplier Record,alerts,REF-44445,High,2026-05-20,Synthetic evidence item 229,Reviewed
+EVD0230,CASE0014,Supplier Record,alerts,REF-47033,High,2025-05-12,Synthetic evidence item 230,Reviewed
+EVD0231,CASE0021,Alert,customer_interactions,REF-47852,Medium,2026-04-25,Synthetic evidence item 231,Reviewed
+EVD0232,CASE0023,Customer Interaction,alerts,REF-52474,High,2025-08-04,Synthetic evidence item 232,Reviewed
+EVD0233,CASE0049,Payment Record,payments,REF-77981,High,2026-11-12,Synthetic evidence item 233,Reviewed
+EVD0234,CASE0099,Incident,customer_interactions,REF-23758,Medium,2026-07-20,Synthetic evidence item 234,Flagged
+EVD0235,CASE0080,Incident,suppliers,REF-65729,High,2026-01-26,Synthetic evidence item 235,Flagged
+EVD0236,CASE0047,Supplier Record,activity_log,REF-98515,Low,2025-03-04,Synthetic evidence item 236,Reviewed
+EVD0237,CASE0070,Order Record,customer_interactions,REF-51059,High,2025-09-15,Synthetic evidence item 237,Flagged
+EVD0238,CASE0040,Activity Event,activity_log,REF-45324,Medium,2026-02-20,Synthetic evidence item 238,Unreviewed
+EVD0239,CASE0077,Customer Interaction,payments,REF-49495,Low,2026-10-15,Synthetic evidence item 239,Reviewed
+EVD0240,CASE0009,Customer Interaction,activity_log,REF-98989,High,2025-04-16,Synthetic evidence item 240,Reviewed
+EVD0241,CASE0018,Supplier Record,activity_log,REF-43941,Low,2025-07-26,Synthetic evidence item 241,Flagged
+EVD0242,CASE0021,Incident,alerts,REF-86868,High,2026-06-01,Synthetic evidence item 242,Flagged
+EVD0243,CASE0017,Supplier Record,sales_orders,REF-43000,High,2026-11-11,Synthetic evidence item 243,Flagged
+EVD0244,CASE0073,Order Record,customer_interactions,REF-49910,High,2026-11-17,Synthetic evidence item 244,Unreviewed
+EVD0245,CASE0009,Supplier Record,alerts,REF-85640,Low,2025-07-14,Synthetic evidence item 245,Reviewed
+EVD0246,CASE0015,Activity Event,payments,REF-81541,Medium,2026-05-21,Synthetic evidence item 246,Reviewed
+EVD0247,CASE0026,Supplier Record,activity_log,REF-14487,High,2025-04-23,Synthetic evidence item 247,Unreviewed
+EVD0248,CASE0085,Payment Record,activity_log,REF-58315,Medium,2025-02-14,Synthetic evidence item 248,Reviewed
+EVD0249,CASE0027,Customer Interaction,incidents,REF-51475,High,2026-02-28,Synthetic evidence item 249,Reviewed
+EVD0250,CASE0071,Customer Interaction,payments,REF-40918,Medium,2025-10-04,Synthetic evidence item 250,Flagged
+EVD0251,CASE0080,Payment Record,alerts,REF-56789,Low,2026-02-13,Synthetic evidence item 251,Unreviewed
+EVD0252,CASE0088,Incident,customer_interactions,REF-13192,High,2025-08-30,Synthetic evidence item 252,Flagged
+EVD0253,CASE0001,Customer Interaction,suppliers,REF-95659,Low,2025-01-06,Synthetic evidence item 253,Unreviewed
+EVD0254,CASE0077,Supplier Record,incidents,REF-35349,Medium,2025-05-20,Synthetic evidence item 254,Reviewed
+EVD0255,CASE0088,Alert,alerts,REF-98339,Medium,2025-01-22,Synthetic evidence item 255,Unreviewed
+EVD0256,CASE0031,Customer Interaction,suppliers,REF-34559,Medium,2026-07-16,Synthetic evidence item 256,Flagged
+EVD0257,CASE0012,Order Record,sales_orders,REF-12700,High,2025-02-27,Synthetic evidence item 257,Reviewed
+EVD0258,CASE0001,Payment Record,sales_orders,REF-70204,Medium,2025-04-18,Synthetic evidence item 258,Flagged
+EVD0259,CASE0019,Payment Record,suppliers,REF-68016,High,2025-02-14,Synthetic evidence item 259,Reviewed
+EVD0260,CASE0059,Alert,payments,REF-26984,Medium,2026-07-19,Synthetic evidence item 260,Flagged
+EVD0261,CASE0094,Order Record,payments,REF-40504,Low,2026-02-22,Synthetic evidence item 261,Reviewed
+EVD0262,CASE0096,Activity Event,payments,REF-71877,Low,2025-05-12,Synthetic evidence item 262,Flagged
+EVD0263,CASE0025,Supplier Record,incidents,REF-96408,Medium,2025-05-23,Synthetic evidence item 263,Reviewed
+EVD0264,CASE0006,Payment Record,suppliers,REF-18858,High,2025-05-16,Synthetic evidence item 264,Flagged
+EVD0265,CASE0091,Incident,customer_interactions,REF-85945,High,2025-04-18,Synthetic evidence item 265,Flagged
+EVD0266,CASE0034,Activity Event,activity_log,REF-44440,Medium,2025-10-26,Synthetic evidence item 266,Unreviewed
+EVD0267,CASE0091,Incident,suppliers,REF-77595,Low,2026-10-02,Synthetic evidence item 267,Reviewed
+EVD0268,CASE0048,Supplier Record,incidents,REF-50339,Low,2026-10-19,Synthetic evidence item 268,Unreviewed
+EVD0269,CASE0066,Alert,incidents,REF-65695,Medium,2026-10-31,Synthetic evidence item 269,Flagged
+EVD0270,CASE0020,Customer Interaction,customer_interactions,REF-25333,High,2025-03-13,Synthetic evidence item 270,Flagged
+EVD0271,CASE0042,Payment Record,activity_log,REF-55202,High,2026-06-18,Synthetic evidence item 271,Unreviewed
+EVD0272,CASE0099,Supplier Record,payments,REF-50444,Low,2025-08-29,Synthetic evidence item 272,Reviewed
+EVD0273,CASE0066,Order Record,incidents,REF-89678,Low,2026-01-05,Synthetic evidence item 273,Flagged
+EVD0274,CASE0070,Activity Event,suppliers,REF-59307,Medium,2025-07-31,Synthetic evidence item 274,Reviewed
+EVD0275,CASE0017,Payment Record,alerts,REF-10445,Medium,2026-04-23,Synthetic evidence item 275,Reviewed
+EVD0276,CASE0043,Activity Event,customer_interactions,REF-49478,Medium,2025-08-15,Synthetic evidence item 276,Flagged
+EVD0277,CASE0088,Payment Record,suppliers,REF-79334,Low,2026-08-30,Synthetic evidence item 277,Reviewed
+EVD0278,CASE0086,Activity Event,customer_interactions,REF-24858,Medium,2025-05-27,Synthetic evidence item 278,Reviewed
+EVD0279,CASE0004,Customer Interaction,incidents,REF-86290,Medium,2025-09-14,Synthetic evidence item 279,Unreviewed
+EVD0280,CASE0025,Alert,activity_log,REF-39933,Medium,2026-06-02,Synthetic evidence item 280,Unreviewed
+EVD0281,CASE0046,Payment Record,customer_interactions,REF-34784,Low,2025-03-23,Synthetic evidence item 281,Flagged
+EVD0282,CASE0039,Supplier Record,customer_interactions,REF-79172,Low,2025-02-11,Synthetic evidence item 282,Unreviewed
+EVD0283,CASE0098,Activity Event,alerts,REF-39718,High,2025-03-14,Synthetic evidence item 283,Unreviewed
+EVD0284,CASE0097,Supplier Record,alerts,REF-68196,Medium,2026-04-22,Synthetic evidence item 284,Reviewed
+EVD0285,CASE0061,Payment Record,incidents,REF-67541,Low,2026-10-27,Synthetic evidence item 285,Unreviewed
+EVD0286,CASE0068,Supplier Record,sales_orders,REF-80746,High,2025-11-17,Synthetic evidence item 286,Unreviewed
+EVD0287,CASE0043,Supplier Record,alerts,REF-29342,High,2025-10-26,Synthetic evidence item 287,Unreviewed
+EVD0288,CASE0047,Incident,alerts,REF-48801,High,2025-03-04,Synthetic evidence item 288,Flagged
+EVD0289,CASE0096,Supplier Record,alerts,REF-84729,Low,2025-03-11,Synthetic evidence item 289,Flagged
+EVD0290,CASE0066,Activity Event,activity_log,REF-95854,High,2025-05-22,Synthetic evidence item 290,Unreviewed
+EVD0291,CASE0029,Alert,payments,REF-65218,Medium,2025-12-19,Synthetic evidence item 291,Reviewed
+EVD0292,CASE0079,Order Record,customer_interactions,REF-37644,Medium,2025-07-28,Synthetic evidence item 292,Flagged
+EVD0293,CASE0091,Payment Record,incidents,REF-92725,Medium,2025-08-25,Synthetic evidence item 293,Reviewed
+EVD0294,CASE0031,Order Record,suppliers,REF-42538,Medium,2026-02-18,Synthetic evidence item 294,Reviewed
+EVD0295,CASE0098,Order Record,suppliers,REF-48933,High,2026-09-08,Synthetic evidence item 295,Unreviewed
+EVD0296,CASE0058,Customer Interaction,activity_log,REF-87854,High,2025-03-07,Synthetic evidence item 296,Flagged
+EVD0297,CASE0035,Activity Event,alerts,REF-54663,Low,2025-03-30,Synthetic evidence item 297,Flagged
+EVD0298,CASE0028,Order Record,payments,REF-58314,Low,2025-05-13,Synthetic evidence item 298,Reviewed
+EVD0299,CASE0065,Payment Record,alerts,REF-55024,Medium,2026-07-22,Synthetic evidence item 299,Unreviewed
+EVD0300,CASE0082,Supplier Record,incidents,REF-59324,Low,2025-10-08,Synthetic evidence item 300,Unreviewed

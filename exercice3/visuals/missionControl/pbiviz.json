@@ -1,0 +1,26 @@
+{
+    "visual": {
+        "name": "missionControl",
+        "displayName": "Mission Control",
+        "guid": "missionControlE31E5821391CAD1AD2C5311A5640F4BE",
+        "visualClassName": "Visual",
+        "version": "1.0.0.10",
+        "description": "MISSION CONTROL — Enterprise Intelligence Terminal: the whole report in one TypeScript visual (command center, operations, intelligence, simulation, digital twin, data).",
+        "supportUrl": "https://learn.microsoft.com/power-bi/developer/visuals/",
+        "gitHubUrl": ""
+    },
+    "apiVersion": "5.11.1",
+    "author": {
+        "name": "hedisouaied",
+        "email": "hedisouaied@users.noreply.github.com"
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": null,
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": [],
+    "version": "1.0.0.10"
+}

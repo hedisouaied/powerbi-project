@@ -1,0 +1,17 @@
+{
+		"version": "1.0.0.10",
+		"author": {"name":"hedisouaied","email":"hedisouaied@users.noreply.github.com"},
+		"resources": [
+			{
+				"resourceId": "rId0",
+				"sourceType": 5,
+				"file": "resources/missionControlE31E5821391CAD1AD2C5311A5640F4BE.pbiviz.json"
+			}
+		],
+		"visual": {"name":"missionControl","displayName":"Mission Control","guid":"missionControlE31E5821391CAD1AD2C5311A5640F4BE","visualClassName":"Visual","version":"1.0.0.10","description":"MISSION CONTROL — Enterprise Intelligence Terminal: the whole report in one TypeScript visual (command center, operations, intelligence, simulation, digital twin, data).","supportUrl":"https://learn.microsoft.com/power-bi/developer/visuals/","gitHubUrl":""},
+		"metadata": {
+			"pbivizjson": {
+				"resourceId": "rId0"
+			}
+		}
+	}

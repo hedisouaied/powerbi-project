@@ -1,0 +1,82 @@
+table data_quality_issues
+	lineageTag: 6462725c-2dcd-4611-a243-70aef3e2b94f
+
+	column issue_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 14133d93-5784-4f66-a29f-b221848066ed
+		summarizeBy: none
+		sourceColumn: issue_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_table
+		dataType: string
+		formatString:  type text
+		lineageTag: 00019560-cac0-436a-947c-31c57a5247fd
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	column issue_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 11774627-5cc2-47e5-a33e-83a34af86e6a
+		summarizeBy: none
+		sourceColumn: issue_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity
+		dataType: string
+		formatString:  type text
+		lineageTag: 955a56f5-e02d-4322-a910-bc503e340593
+		summarizeBy: none
+		sourceColumn: severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column issue_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 8cc65923-a1f5-453e-bee0-807623e386ba
+		summarizeBy: none
+		sourceColumn: issue_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column issue_description
+		dataType: string
+		formatString:  type text
+		lineageTag: a00cd081-759e-4acc-ba62-75a595a7812a
+		summarizeBy: none
+		sourceColumn: issue_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column detected_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 41650384-30bd-48b7-9f63-3f2c804c7fde
+		summarizeBy: none
+		sourceColumn: detected_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition data_quality_issues = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\data_quality_issues.csv"), [Delimiter = ",", Columns = 7, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"issue_id", type text}, {"source_table", type text}, {"issue_type", type text}, {"severity", type text}, {"issue_status", type text}, {"issue_description", type text}, {"detected_date", type date}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

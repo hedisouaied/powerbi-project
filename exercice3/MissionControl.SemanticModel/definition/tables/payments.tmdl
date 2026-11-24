@@ -1,0 +1,93 @@
+table payments
+	lineageTag: 717a5b47-78f2-4394-afdb-fb9700998065
+
+	column payment_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 63f4029e-d355-4fb8-acac-bb28fd46361c
+		summarizeBy: none
+		sourceColumn: payment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 818be3e2-e4e2-4dda-8027-3e19ab30456e
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 28031040-08b8-419a-8781-788ffd89aab4
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: aff39c40-2096-460e-b2d1-cb8ded23cf1c
+		summarizeBy: none
+		sourceColumn: payment_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column payment_method
+		dataType: string
+		formatString:  type text
+		lineageTag: 3f159294-3c3e-4768-b0f0-ad0eb829aa5e
+		summarizeBy: none
+		sourceColumn: payment_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: 62179b58-42ab-46f6-a867-5de9c5624789
+		summarizeBy: sum
+		sourceColumn: amount_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 417c62b1-5f94-4bdd-a738-f2292f6602c4
+		summarizeBy: none
+		sourceColumn: payment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column settlement_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: b653560a-14b7-4b7e-ada5-2a3c9610ab5c
+		summarizeBy: none
+		sourceColumn: settlement_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition payments = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\payments.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"payment_id", type text}, {"order_id", type text}, {"customer_id", type text}, {"payment_date", type date}, {"payment_method", type text}, {"amount_tnd", Currency.Type}, {"payment_status", type text}, {"settlement_date", type date}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

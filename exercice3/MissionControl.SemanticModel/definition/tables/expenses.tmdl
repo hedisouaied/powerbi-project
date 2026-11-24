@@ -1,0 +1,91 @@
+table expenses
+	lineageTag: 40306715-244c-4c36-902d-76c44d24e4ce
+
+	column expense_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 3fefd375-23ff-4125-b6e1-be9109412833
+		summarizeBy: none
+		sourceColumn: expense_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column expense_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 42a5218c-4822-4fd2-9324-7cdc495add47
+		summarizeBy: none
+		sourceColumn: expense_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: c80a84d3-4721-4998-9e50-60540e8f3c82
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column expense_category
+		dataType: string
+		formatString:  type text
+		lineageTag: 23d8be63-de1f-495e-bb24-1d8e3f99b23b
+		summarizeBy: none
+		sourceColumn: expense_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: dd97c6e0-7caf-46ac-b452-60c3ea105397
+		summarizeBy: sum
+		sourceColumn: amount_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column approval_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 4a7d1068-eafe-4d12-afaa-18e8a5c052be
+		summarizeBy: none
+		sourceColumn: approval_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column submitted_by_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 177659aa-0ed2-4d03-b6bd-69793fcb0659
+		summarizeBy: none
+		sourceColumn: submitted_by_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column reference_code
+		dataType: string
+		formatString:  type text
+		lineageTag: dfbc6b76-a457-4a0a-8a6e-13e9313b39f4
+		summarizeBy: none
+		sourceColumn: reference_code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition expenses = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\expenses.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"expense_id", type text}, {"expense_date", type date}, {"department_id", type text}, {"expense_category", type text}, {"amount_tnd", Currency.Type}, {"approval_status", type text}, {"submitted_by_employee_id", type text}, {"reference_code", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

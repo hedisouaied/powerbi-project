@@ -1,0 +1,100 @@
+table incidents
+	lineageTag: 137d2d1e-c00c-4158-b896-a8aa387f3f52
+
+	column incident_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 9cd9175f-754a-4ec0-b21e-2ba33c9ec655
+		summarizeBy: none
+		sourceColumn: incident_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 9234af29-c0a9-4e88-b1e7-c8c022d7e55b
+		summarizeBy: none
+		sourceColumn: incident_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column incident_type
+		dataType: string
+		formatString:  type text
+		lineageTag: ae1989af-30d6-446b-aa9c-18e14ecb5f70
+		summarizeBy: none
+		sourceColumn: incident_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity
+		dataType: string
+		formatString:  type text
+		lineageTag: efacf8ca-d369-4f33-827c-12f2b8e76b3e
+		summarizeBy: none
+		sourceColumn: severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: fc96ce73-ff82-4410-9b79-84587cf3fd62
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_owner_id
+		dataType: string
+		formatString:  type text
+		lineageTag: a0e7eaf2-4173-41ec-a404-7e0657e88709
+		summarizeBy: none
+		sourceColumn: incident_owner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 6be5c727-dd9c-4f2b-b1bb-69a7a13273a8
+		summarizeBy: none
+		sourceColumn: incident_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column estimated_impact_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: cecdb94e-ba10-41e7-86bd-0375fcd137e0
+		summarizeBy: sum
+		sourceColumn: estimated_impact_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column impact_domain
+		dataType: string
+		formatString:  type text
+		lineageTag: 07ee1128-d68b-4d9a-acec-b9c464a9f6a1
+		summarizeBy: none
+		sourceColumn: impact_domain
+
+		annotation SummarizationSetBy = Automatic
+
+	partition incidents = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\incidents.csv"), [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"incident_id", type text}, {"incident_date", type date}, {"incident_type", type text}, {"severity", type text}, {"department_id", type text}, {"incident_owner_id", type text}, {"incident_status", type text}, {"estimated_impact_tnd", Currency.Type}, {"impact_domain", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

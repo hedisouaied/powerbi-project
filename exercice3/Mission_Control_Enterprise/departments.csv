@@ -1,0 +1,9 @@
+department_id,department_name,division,primary_location,mission
+D01,Executive,Executive Office,Tunis,Executive leadership
+D02,Sales,Commercial,Tunis,Revenue generation
+D03,Operations,Operations,Sousse,Service delivery
+D04,Finance,Finance,Tunis,Financial planning and control
+D05,Technology,Technology,Sfax,Technology and data
+D06,Customer Success,Customer Experience,Sousse,Retention and customer support
+D07,Supply Chain,Operations,Sfax,Procurement and inventory
+D08,People,Human Resources,Tunis,People operations

@@ -1,0 +1,80 @@
+table suppliers
+	lineageTag: b715dd8d-b5a6-4088-9c20-e0b86088d31b
+
+	column supplier_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 30bb2391-3a72-452a-9dbe-4431f4f75f8a
+		summarizeBy: none
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_name
+		dataType: string
+		formatString:  type text
+		lineageTag: 55d7ac95-0d90-4dd8-85f2-4b1e2572ff24
+		summarizeBy: none
+		sourceColumn: supplier_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_category
+		dataType: string
+		formatString:  type text
+		lineageTag: f2afed8b-18b3-4569-8c1a-1d49ebdb7c4b
+		summarizeBy: none
+		sourceColumn: supplier_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		formatString:  type text
+		lineageTag: 831a11c8-4d8a-4204-9602-5231c723a525
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_level
+		dataType: string
+		formatString:  type text
+		lineageTag: 49b32e6a-c2a0-4708-a3d7-5ac6a8122b90
+		summarizeBy: none
+		sourceColumn: risk_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column quality_rating
+		dataType: double
+		formatString: #,0.## type number
+		lineageTag: f88e1131-32b8-4b6f-9fc8-668603918a19
+		summarizeBy: none
+		sourceColumn: quality_rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_status
+		dataType: string
+		formatString:  type text
+		lineageTag: a121ef0c-41ab-473b-b51f-c282349dfdac
+		summarizeBy: none
+		sourceColumn: supplier_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition suppliers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\suppliers.csv"), [Delimiter = ",", Columns = 7, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"supplier_id", type text}, {"supplier_name", type text}, {"supplier_category", type text}, {"country", type text}, {"risk_level", type text}, {"quality_rating", type number}, {"supplier_status", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,82 @@
+table kpi_targets
+	lineageTag: edd54a57-1088-4c4e-a3ea-0b2204bc614b
+
+	column target_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 533cde21-35dd-461b-bcfa-56987442c180
+		summarizeBy: none
+		sourceColumn: target_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 8320c428-c54c-467f-8c63-6878e80cf850
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_start
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: faa66a84-8193-4a28-ae99-3ca9ef202d0d
+		summarizeBy: none
+		sourceColumn: month_start
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column revenue_target_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: b3ceedc8-0593-4c82-8862-d5d3d64b2cb2
+		summarizeBy: sum
+		sourceColumn: revenue_target_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column gross_margin_target_pct
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 8b5c4fb8-883c-48fa-8f1d-e1e5c8116019
+		summarizeBy: none
+		sourceColumn: gross_margin_target_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_satisfaction_target
+		dataType: double
+		formatString: #,0.## type number
+		lineageTag: 6e502f07-a977-45a3-be87-99c1ee9856cc
+		summarizeBy: none
+		sourceColumn: customer_satisfaction_target
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_rate_target_pct
+		dataType: double
+		formatString: #,0.## type number
+		lineageTag: a18a8ec2-aad8-46d3-99a1-814210aa89ea
+		summarizeBy: none
+		sourceColumn: incident_rate_target_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	partition kpi_targets = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\kpi_targets.csv"), [Delimiter = ",", Columns = 7, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"target_id", type text}, {"department_id", type text}, {"month_start", type date}, {"revenue_target_tnd", Currency.Type}, {"gross_margin_target_pct", type number}, {"customer_satisfaction_target", type number}, {"incident_rate_target_pct", type number}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,301 @@
+customer_id,customer_name,customer_segment,industry,region,acquisition_date,customer_status,annual_contract_value_tnd
+C0001,Customer 0001,SMB,Healthcare,Monastir,2024-02-11,Active,78331.75
+C0002,Customer 0002,Public Sector,Telecom,Gabes,2024-05-08,At Risk,50481.08
+C0003,Customer 0003,Enterprise,Logistics,Bizerte,2021-06-14,Churned,5952.09
+C0004,Customer 0004,Public Sector,Healthcare,Sousse,2021-12-16,Active,40253.48
+C0005,Customer 0005,Mid-Market,Retail,Nabeul,2023-08-20,Churned,18198.38
+C0006,Customer 0006,SMB,Financial Services,Tunis,2024-08-11,Active,70929.7
+C0007,Customer 0007,Public Sector,Healthcare,Tunis,2021-07-21,Churned,21300.56
+C0008,Customer 0008,SMB,Healthcare,Tunis,2022-08-07,Churned,70146.28
+C0009,Customer 0009,SMB,Education,Monastir,2023-05-20,Active,71318.94
+C0010,Customer 0010,Mid-Market,Retail,Nabeul,2022-11-07,Active,3713.66
+C0011,Customer 0011,Public Sector,Financial Services,Sfax,2021-10-22,Active,58394.11
+C0012,Customer 0012,Enterprise,Education,Sfax,2026-02-09,At Risk,94145.49
+C0013,Customer 0013,Mid-Market,Telecom,Monastir,2021-05-07,Active,58912.34
+C0014,Customer 0014,SMB,Retail,Monastir,2021-06-10,Churned,59394.13
+C0015,Customer 0015,SMB,Manufacturing,Nabeul,2023-05-09,Active,69035.64
+C0016,Customer 0016,Enterprise,Healthcare,Sfax,2025-12-31,Active,57345.24
+C0017,Customer 0017,Mid-Market,Financial Services,Sfax,2025-04-21,Active,40456.71
+C0018,Customer 0018,Public Sector,Telecom,Nabeul,2022-06-04,Churned,62960.02
+C0019,Customer 0019,SMB,Telecom,Bizerte,2025-07-12,Active,3571.84
+C0020,Customer 0020,Mid-Market,Telecom,Tunis,2023-05-05,Active,99328.74
+C0021,Customer 0021,Mid-Market,Telecom,Sfax,2021-01-20,Churned,17689.64
+C0022,Customer 0022,Mid-Market,Financial Services,Sousse,2025-10-10,Active,66930.3
+C0023,Customer 0023,Public Sector,Telecom,Gabes,2022-09-07,Active,80996.57
+C0024,Customer 0024,SMB,Logistics,Gabes,2021-07-31,Active,34466.82
+C0025,Customer 0025,SMB,Retail,Sfax,2022-04-20,Active,87512.36
+C0026,Customer 0026,Enterprise,Healthcare,Bizerte,2026-01-01,At Risk,13821.17
+C0027,Customer 0027,Public Sector,Retail,Tunis,2025-02-04,Active,110005.41
+C0028,Customer 0028,Mid-Market,Retail,Gabes,2026-03-13,Active,5452.09
+C0029,Customer 0029,Mid-Market,Logistics,Sousse,2022-03-24,Active,67027.44
+C0030,Customer 0030,Enterprise,Financial Services,Gabes,2023-12-01,Active,99744.98
+C0031,Customer 0031,Enterprise,Education,Bizerte,2022-12-23,Active,97181.93
+C0032,Customer 0032,SMB,Financial Services,Gabes,2026-02-18,Churned,114395.03
+C0033,Customer 0033,Public Sector,Healthcare,Sousse,2022-09-10,Active,35619.22
+C0034,Customer 0034,Mid-Market,Logistics,Tunis,2024-04-25,Active,31459.85
+C0035,Customer 0035,Enterprise,Logistics,Gabes,2023-09-30,Active,112389.18
+C0036,Customer 0036,Enterprise,Healthcare,Gabes,2021-12-18,Active,6344.36
+C0037,Customer 0037,Public Sector,Retail,Gabes,2021-11-17,At Risk,52776.55
+C0038,Customer 0038,Mid-Market,Education,Gabes,2026-03-02,At Risk,107109.59
+C0039,Customer 0039,Enterprise,Telecom,Gabes,2026-04-16,Active,90084.35
+C0040,Customer 0040,Mid-Market,Retail,Bizerte,2025-07-04,Active,107320.15
+C0041,Customer 0041,Public Sector,Financial Services,Sfax,2025-09-30,Active,62744.14
+C0042,Customer 0042,Enterprise,Financial Services,Bizerte,2023-07-03,Churned,92869.48
+C0043,Customer 0043,Public Sector,Financial Services,Tunis,2022-09-07,Active,79737.69
+C0044,Customer 0044,Enterprise,Healthcare,Nabeul,2023-03-10,Active,12241.53
+C0045,Customer 0045,SMB,Manufacturing,Nabeul,2022-12-29,At Risk,89867.96
+C0046,Customer 0046,Enterprise,Financial Services,Monastir,2023-01-10,Churned,112480.76
+C0047,Customer 0047,SMB,Logistics,Nabeul,2022-05-26,Active,29675.5
+C0048,Customer 0048,Enterprise,Retail,Bizerte,2021-03-04,At Risk,99902.41
+C0049,Customer 0049,SMB,Education,Sfax,2021-08-27,At Risk,19240.83
+C0050,Customer 0050,SMB,Financial Services,Nabeul,2024-12-24,Active,72326.55
+C0051,Customer 0051,SMB,Telecom,Nabeul,2021-12-15,Active,105072.88
+C0052,Customer 0052,Public Sector,Financial Services,Monastir,2021-03-29,Active,37928.52
+C0053,Customer 0053,Mid-Market,Education,Monastir,2022-01-18,At Risk,93511.18
+C0054,Customer 0054,Mid-Market,Telecom,Monastir,2022-09-16,Churned,60588.2
+C0055,Customer 0055,SMB,Telecom,Sfax,2026-03-07,Active,18123.8
+C0056,Customer 0056,Public Sector,Financial Services,Monastir,2025-12-24,At Risk,28329.07
+C0057,Customer 0057,Public Sector,Education,Nabeul,2021-01-28,At Risk,16686.84
+C0058,Customer 0058,Mid-Market,Manufacturing,Sfax,2021-02-04,Churned,15498.07
+C0059,Customer 0059,Enterprise,Manufacturing,Gabes,2024-08-11,Active,61253.26
+C0060,Customer 0060,Enterprise,Education,Gabes,2025-12-10,Active,70152.88
+C0061,Customer 0061,Mid-Market,Retail,Tunis,2024-09-13,Active,24773.3
+C0062,Customer 0062,Public Sector,Manufacturing,Monastir,2025-08-09,At Risk,86133.45
+C0063,Customer 0063,Mid-Market,Logistics,Monastir,2025-04-14,At Risk,88939.1
+C0064,Customer 0064,Mid-Market,Healthcare,Bizerte,2025-05-27,Active,15726.7
+C0065,Customer 0065,SMB,Logistics,Sousse,2021-09-13,Active,111379.94
+C0066,Customer 0066,Public Sector,Retail,Nabeul,2021-06-07,Active,36812.89
+C0067,Customer 0067,SMB,Technology,Sousse,2023-02-13,At Risk,59141.5
+C0068,Customer 0068,Enterprise,Technology,Nabeul,2023-09-17,Churned,114719.17
+C0069,Customer 0069,Public Sector,Technology,Sousse,2024-07-13,At Risk,35087.1
+C0070,Customer 0070,Public Sector,Telecom,Gabes,2026-02-12,Active,3958.28
+C0071,Customer 0071,Enterprise,Technology,Bizerte,2025-12-05,Active,67068.57
+C0072,Customer 0072,Enterprise,Technology,Tunis,2021-10-16,Active,13601.79
+C0073,Customer 0073,Mid-Market,Telecom,Sfax,2024-11-08,Active,50874.6
+C0074,Customer 0074,SMB,Healthcare,Sousse,2021-10-01,Active,115981.6
+C0075,Customer 0075,Public Sector,Healthcare,Bizerte,2021-11-19,Active,112029.76
+C0076,Customer 0076,SMB,Logistics,Monastir,2024-03-05,Active,96718.95
+C0077,Customer 0077,Public Sector,Logistics,Tunis,2023-04-21,Active,94386.85
+C0078,Customer 0078,Public Sector,Logistics,Gabes,2023-06-29,Churned,3122.58
+C0079,Customer 0079,SMB,Logistics,Monastir,2024-07-15,Active,99702.01
+C0080,Customer 0080,Enterprise,Telecom,Gabes,2021-08-01,At Risk,95821.23
+C0081,Customer 0081,Public Sector,Education,Monastir,2023-06-21,Active,64161.58
+C0082,Customer 0082,Enterprise,Logistics,Monastir,2022-03-29,Active,73115.88
+C0083,Customer 0083,Public Sector,Financial Services,Bizerte,2025-12-22,At Risk,72769.75
+C0084,Customer 0084,Mid-Market,Technology,Sousse,2025-08-16,Churned,50096.02
+C0085,Customer 0085,SMB,Logistics,Nabeul,2021-08-20,Churned,51679.97
+C0086,Customer 0086,SMB,Manufacturing,Bizerte,2022-12-30,At Risk,78579.79
+C0087,Customer 0087,Mid-Market,Technology,Sousse,2026-02-17,Active,55013.73
+C0088,Customer 0088,Enterprise,Logistics,Sfax,2025-08-16,Active,30492.91
+C0089,Customer 0089,Public Sector,Financial Services,Sfax,2022-06-07,At Risk,89775.7
+C0090,Customer 0090,Enterprise,Logistics,Sfax,2022-04-06,Active,98171.68
+C0091,Customer 0091,Public Sector,Retail,Bizerte,2026-02-10,Churned,8920.5
+C0092,Customer 0092,SMB,Financial Services,Sousse,2021-07-24,Active,71737.61
+C0093,Customer 0093,SMB,Retail,Sousse,2022-11-28,Active,99135.04
+C0094,Customer 0094,SMB,Healthcare,Sousse,2021-10-12,Active,37929.83
+C0095,Customer 0095,Public Sector,Manufacturing,Nabeul,2025-12-02,Active,110595.49
+C0096,Customer 0096,Public Sector,Telecom,Gabes,2021-10-07,Active,20698.28
+C0097,Customer 0097,Mid-Market,Manufacturing,Gabes,2021-10-31,Active,19279.99
+C0098,Customer 0098,Enterprise,Manufacturing,Nabeul,2022-07-09,Active,14743.32
+C0099,Customer 0099,Enterprise,Logistics,Monastir,2023-11-18,Active,7592.05
+C0100,Customer 0100,SMB,Education,Tunis,2022-01-15,Active,7352.45
+C0101,Customer 0101,SMB,Retail,Sfax,2021-12-06,Churned,71346.11
+C0102,Customer 0102,Public Sector,Financial Services,Tunis,2023-10-02,Churned,47842.02
+C0103,Customer 0103,Enterprise,Retail,Gabes,2024-08-17,At Risk,38840.94
+C0104,Customer 0104,Public Sector,Manufacturing,Monastir,2026-03-31,Active,105125.59
+C0105,Customer 0105,Public Sector,Healthcare,Monastir,2023-09-09,Active,102284.66
+C0106,Customer 0106,Enterprise,Technology,Monastir,2023-11-11,At Risk,22598.31
+C0107,Customer 0107,Enterprise,Financial Services,Gabes,2021-03-26,Active,29172.64
+C0108,Customer 0108,SMB,Telecom,Monastir,2022-03-20,Active,68976.69
+C0109,Customer 0109,Public Sector,Logistics,Sfax,2022-05-01,Active,50535.23
+C0110,Customer 0110,Public Sector,Financial Services,Sousse,2022-07-04,At Risk,45460.08
+C0111,Customer 0111,Mid-Market,Financial Services,Gabes,2021-04-06,Active,63326.6
+C0112,Customer 0112,Enterprise,Telecom,Nabeul,2025-10-05,Active,100181.57
+C0113,Customer 0113,SMB,Education,Tunis,2021-07-17,Active,7183.46
+C0114,Customer 0114,Public Sector,Technology,Nabeul,2023-02-26,Active,12794.46
+C0115,Customer 0115,Public Sector,Technology,Monastir,2025-12-05,Active,101385.42
+C0116,Customer 0116,SMB,Telecom,Sousse,2025-04-08,At Risk,117568.91
+C0117,Customer 0117,Mid-Market,Telecom,Bizerte,2025-10-23,Churned,96441.08
+C0118,Customer 0118,Enterprise,Technology,Nabeul,2024-02-02,Churned,77455.51
+C0119,Customer 0119,Enterprise,Logistics,Bizerte,2025-02-25,Churned,93700.57
+C0120,Customer 0120,Enterprise,Financial Services,Bizerte,2024-12-09,At Risk,64792.1
+C0121,Customer 0121,Enterprise,Telecom,Sfax,2021-09-19,Active,62192.52
+C0122,Customer 0122,SMB,Education,Sfax,2026-02-25,Active,56073.12
+C0123,Customer 0123,Mid-Market,Education,Sousse,2025-07-27,At Risk,46825.65
+C0124,Customer 0124,Enterprise,Telecom,Tunis,2024-08-28,Active,32709.13
+C0125,Customer 0125,Enterprise,Education,Sfax,2024-05-29,Active,17632.44
+C0126,Customer 0126,Enterprise,Retail,Bizerte,2023-04-24,Churned,50609.83
+C0127,Customer 0127,Mid-Market,Telecom,Tunis,2023-07-19,Active,28675.82
+C0128,Customer 0128,Enterprise,Healthcare,Bizerte,2022-10-21,At Risk,44600.7
+C0129,Customer 0129,SMB,Retail,Nabeul,2022-12-17,Active,39971.97
+C0130,Customer 0130,Public Sector,Technology,Monastir,2023-04-25,Active,82603.46
+C0131,Customer 0131,Mid-Market,Retail,Sfax,2023-01-09,At Risk,36328.3
+C0132,Customer 0132,SMB,Manufacturing,Monastir,2025-03-23,At Risk,110045.41
+C0133,Customer 0133,SMB,Retail,Sousse,2026-01-21,Active,58228.34
+C0134,Customer 0134,Enterprise,Manufacturing,Sousse,2025-02-07,Active,64716.74
+C0135,Customer 0135,Public Sector,Education,Gabes,2022-10-01,Churned,101978.7
+C0136,Customer 0136,Public Sector,Technology,Monastir,2023-08-11,Active,96722.63
+C0137,Customer 0137,Public Sector,Telecom,Nabeul,2024-06-23,Churned,64393.95
+C0138,Customer 0138,SMB,Manufacturing,Gabes,2025-01-31,Active,35290.52
+C0139,Customer 0139,Mid-Market,Telecom,Bizerte,2024-05-16,Active,88452.29
+C0140,Customer 0140,Mid-Market,Education,Sousse,2021-03-10,Churned,83680.98
+C0141,Customer 0141,SMB,Healthcare,Tunis,2022-01-29,At Risk,103425.57
+C0142,Customer 0142,Public Sector,Technology,Sfax,2025-11-24,Active,74111.19
+C0143,Customer 0143,Mid-Market,Telecom,Bizerte,2021-09-15,Active,12316.39
+C0144,Customer 0144,Public Sector,Manufacturing,Bizerte,2024-04-25,Active,11054.69
+C0145,Customer 0145,Enterprise,Education,Monastir,2024-11-13,Active,112376.84
+C0146,Customer 0146,Mid-Market,Healthcare,Sfax,2024-11-08,Active,115106.75
+C0147,Customer 0147,SMB,Retail,Sousse,2021-09-25,Active,96305.22
+C0148,Customer 0148,Enterprise,Technology,Tunis,2023-03-03,At Risk,94132.27
+C0149,Customer 0149,Enterprise,Logistics,Sfax,2024-03-01,Churned,95618.67
+C0150,Customer 0150,Public Sector,Technology,Tunis,2025-12-18,Churned,31152.62
+C0151,Customer 0151,SMB,Logistics,Bizerte,2026-01-15,Active,71219.03
+C0152,Customer 0152,Enterprise,Retail,Tunis,2021-04-08,Active,74323.72
+C0153,Customer 0153,SMB,Telecom,Nabeul,2021-07-04,Active,21383.67
+C0154,Customer 0154,Mid-Market,Technology,Nabeul,2021-09-09,At Risk,69119.23
+C0155,Customer 0155,Enterprise,Healthcare,Nabeul,2024-01-05,At Risk,56452.23
+C0156,Customer 0156,Public Sector,Manufacturing,Monastir,2024-08-14,Active,91906.88
+C0157,Customer 0157,Public Sector,Financial Services,Sfax,2023-10-15,Active,96110.12
+C0158,Customer 0158,Mid-Market,Financial Services,Monastir,2023-10-05,At Risk,72351.62
+C0159,Customer 0159,Enterprise,Logistics,Gabes,2023-08-16,Churned,111817.11
+C0160,Customer 0160,SMB,Technology,Tunis,2025-07-03,Active,14935.32
+C0161,Customer 0161,Enterprise,Financial Services,Tunis,2021-08-22,At Risk,11437.37
+C0162,Customer 0162,SMB,Technology,Monastir,2023-08-09,Active,50814.39
+C0163,Customer 0163,Mid-Market,Financial Services,Nabeul,2024-07-04,At Risk,93144.25
+C0164,Customer 0164,Public Sector,Retail,Sousse,2022-02-10,Active,40702.89
+C0165,Customer 0165,Mid-Market,Telecom,Monastir,2024-07-30,At Risk,107905.62
+C0166,Customer 0166,SMB,Retail,Bizerte,2025-05-10,Churned,33193.66
+C0167,Customer 0167,Mid-Market,Healthcare,Sfax,2025-01-23,Churned,44338.85
+C0168,Customer 0168,SMB,Logistics,Tunis,2023-11-02,Active,19755.79
+C0169,Customer 0169,SMB,Technology,Tunis,2022-09-04,Active,18586.22
+C0170,Customer 0170,Public Sector,Telecom,Nabeul,2021-06-17,Active,53110.58
+C0171,Customer 0171,Public Sector,Technology,Monastir,2025-12-27,Active,46615.06
+C0172,Customer 0172,Public Sector,Healthcare,Monastir,2021-09-06,Active,66806.17
+C0173,Customer 0173,Mid-Market,Manufacturing,Sfax,2024-11-20,At Risk,112400.66
+C0174,Customer 0174,Enterprise,Telecom,Gabes,2022-12-04,Active,58044.98
+C0175,Customer 0175,Enterprise,Telecom,Gabes,2025-02-27,Churned,45786.78
+C0176,Customer 0176,Public Sector,Healthcare,Monastir,2024-06-22,Churned,86413.47
+C0177,Customer 0177,Public Sector,Financial Services,Sfax,2026-04-04,Churned,114192.16
+C0178,Customer 0178,Public Sector,Technology,Sfax,2023-04-05,Active,102213.51
+C0179,Customer 0179,Mid-Market,Logistics,Sousse,2021-08-19,At Risk,76811.79
+C0180,Customer 0180,SMB,Financial Services,Bizerte,2021-08-27,At Risk,71002.7
+C0181,Customer 0181,Public Sector,Logistics,Bizerte,2021-08-26,Active,82645.47
+C0182,Customer 0182,Public Sector,Retail,Sousse,2023-11-26,Churned,55063.84
+C0183,Customer 0183,Enterprise,Manufacturing,Gabes,2021-01-24,At Risk,99222.54
+C0184,Customer 0184,SMB,Technology,Tunis,2023-04-20,Active,55567.22
+C0185,Customer 0185,Public Sector,Healthcare,Tunis,2022-07-29,At Risk,53635.38
+C0186,Customer 0186,Enterprise,Financial Services,Nabeul,2021-01-24,At Risk,110294.59
+C0187,Customer 0187,SMB,Financial Services,Gabes,2022-08-11,Churned,93973.99
+C0188,Customer 0188,Public Sector,Financial Services,Bizerte,2023-11-27,At Risk,119647.12
+C0189,Customer 0189,SMB,Manufacturing,Sousse,2021-08-04,Active,105624.8
+C0190,Customer 0190,Mid-Market,Manufacturing,Monastir,2024-08-25,Active,100590.69
+C0191,Customer 0191,SMB,Technology,Sousse,2022-07-07,Active,13663.92
+C0192,Customer 0192,SMB,Retail,Sfax,2024-07-19,Active,80216.48
+C0193,Customer 0193,Enterprise,Financial Services,Sfax,2026-04-29,At Risk,78364.88
+C0194,Customer 0194,Mid-Market,Education,Nabeul,2024-04-27,At Risk,107746.97
+C0195,Customer 0195,Mid-Market,Healthcare,Sousse,2021-06-25,Active,4450.94
+C0196,Customer 0196,Public Sector,Education,Monastir,2022-04-24,Churned,18019.6
+C0197,Customer 0197,Mid-Market,Education,Monastir,2022-04-14,Active,93435.38
+C0198,Customer 0198,Public Sector,Telecom,Bizerte,2025-04-23,Active,109365.95
+C0199,Customer 0199,Public Sector,Telecom,Bizerte,2022-01-21,Churned,79096.02
+C0200,Customer 0200,Mid-Market,Manufacturing,Monastir,2025-11-05,Active,1646.15
+C0201,Customer 0201,Enterprise,Logistics,Bizerte,2021-03-12,Active,7147.29
+C0202,Customer 0202,Public Sector,Telecom,Sousse,2025-05-15,At Risk,96376.34
+C0203,Customer 0203,Public Sector,Manufacturing,Sousse,2024-03-25,At Risk,29387.79
+C0204,Customer 0204,Enterprise,Telecom,Bizerte,2022-07-15,Active,7810.6
+C0205,Customer 0205,SMB,Logistics,Sfax,2025-07-11,Active,96314.7
+C0206,Customer 0206,SMB,Technology,Gabes,2026-02-28,Active,92880.9
+C0207,Customer 0207,Mid-Market,Financial Services,Sousse,2025-12-11,Active,84076.37
+C0208,Customer 0208,Enterprise,Healthcare,Bizerte,2025-05-15,Active,5778.0
+C0209,Customer 0209,SMB,Telecom,Gabes,2025-06-19,At Risk,25012.07
+C0210,Customer 0210,SMB,Financial Services,Bizerte,2021-08-10,Active,61039.19
+C0211,Customer 0211,SMB,Telecom,Sfax,2021-09-01,At Risk,89677.39
+C0212,Customer 0212,Mid-Market,Education,Sousse,2023-12-03,Churned,102284.6
+C0213,Customer 0213,Enterprise,Telecom,Gabes,2024-05-11,Active,19470.35
+C0214,Customer 0214,Enterprise,Technology,Gabes,2025-05-02,Active,23971.94
+C0215,Customer 0215,Enterprise,Manufacturing,Monastir,2024-11-30,Active,33220.29
+C0216,Customer 0216,Mid-Market,Education,Gabes,2021-07-14,At Risk,117644.37
+C0217,Customer 0217,Enterprise,Manufacturing,Gabes,2024-10-13,At Risk,73773.69
+C0218,Customer 0218,SMB,Telecom,Nabeul,2023-09-19,Active,74340.77
+C0219,Customer 0219,Public Sector,Financial Services,Bizerte,2021-04-17,Active,6039.72
+C0220,Customer 0220,Public Sector,Financial Services,Tunis,2022-03-03,Active,85439.82
+C0221,Customer 0221,Public Sector,Retail,Nabeul,2025-09-17,Churned,21602.21
+C0222,Customer 0222,Enterprise,Education,Bizerte,2022-12-24,Active,22840.45
+C0223,Customer 0223,Public Sector,Telecom,Bizerte,2021-06-28,At Risk,117623.23
+C0224,Customer 0224,SMB,Healthcare,Tunis,2024-02-26,Active,94305.63
+C0225,Customer 0225,Enterprise,Technology,Tunis,2023-06-12,Active,76732.59
+C0226,Customer 0226,Mid-Market,Healthcare,Monastir,2025-08-26,At Risk,18270.5
+C0227,Customer 0227,Enterprise,Logistics,Nabeul,2024-01-19,Active,113576.91
+C0228,Customer 0228,Public Sector,Manufacturing,Gabes,2023-11-20,At Risk,69784.05
+C0229,Customer 0229,Public Sector,Telecom,Tunis,2022-08-10,Active,84273.34
+C0230,Customer 0230,Mid-Market,Technology,Monastir,2022-05-17,Active,112930.73
+C0231,Customer 0231,Enterprise,Manufacturing,Bizerte,2021-11-04,Active,61493.98
+C0232,Customer 0232,Enterprise,Retail,Monastir,2021-10-16,Active,49080.09
+C0233,Customer 0233,Mid-Market,Manufacturing,Gabes,2025-11-14,At Risk,15186.89
+C0234,Customer 0234,SMB,Education,Bizerte,2023-07-12,Churned,16957.26
+C0235,Customer 0235,SMB,Retail,Gabes,2026-01-19,Active,37259.85
+C0236,Customer 0236,Mid-Market,Healthcare,Gabes,2024-04-11,Churned,73707.52
+C0237,Customer 0237,Mid-Market,Manufacturing,Gabes,2023-04-13,Churned,76520.86
+C0238,Customer 0238,Mid-Market,Education,Gabes,2026-03-06,Active,49645.19
+C0239,Customer 0239,Enterprise,Healthcare,Gabes,2023-03-13,Churned,26897.79
+C0240,Customer 0240,SMB,Telecom,Gabes,2026-01-22,Active,38727.87
+C0241,Customer 0241,Mid-Market,Telecom,Gabes,2024-02-19,Active,5291.12
+C0242,Customer 0242,SMB,Retail,Sousse,2022-08-05,Active,57421.79
+C0243,Customer 0243,Enterprise,Education,Nabeul,2023-03-26,Active,27845.55
+C0244,Customer 0244,SMB,Healthcare,Sfax,2021-07-05,Active,68326.86
+C0245,Customer 0245,Mid-Market,Logistics,Nabeul,2024-01-20,Active,84538.26
+C0246,Customer 0246,SMB,Technology,Monastir,2023-12-01,Active,78639.53
+C0247,Customer 0247,SMB,Technology,Nabeul,2024-06-14,Active,38629.48
+C0248,Customer 0248,SMB,Telecom,Monastir,2022-04-25,Active,66348.18
+C0249,Customer 0249,SMB,Technology,Gabes,2025-03-13,At Risk,52338.77
+C0250,Customer 0250,Public Sector,Manufacturing,Monastir,2023-10-28,At Risk,43918.22
+C0251,Customer 0251,SMB,Manufacturing,Sfax,2024-05-03,Churned,62015.97
+C0252,Customer 0252,Mid-Market,Manufacturing,Sousse,2025-04-22,Active,106481.94
+C0253,Customer 0253,Enterprise,Logistics,Nabeul,2024-12-04,Churned,110605.81
+C0254,Customer 0254,Enterprise,Technology,Nabeul,2025-07-13,Churned,62912.74
+C0255,Customer 0255,Public Sector,Manufacturing,Gabes,2023-09-08,Active,96184.58
+C0256,Customer 0256,Mid-Market,Logistics,Monastir,2022-04-24,Active,100648.5
+C0257,Customer 0257,Public Sector,Financial Services,Gabes,2022-09-04,At Risk,59802.86
+C0258,Customer 0258,Public Sector,Logistics,Bizerte,2021-03-23,Active,9575.04
+C0259,Customer 0259,Enterprise,Logistics,Sfax,2021-08-14,Active,101197.19
+C0260,Customer 0260,Enterprise,Healthcare,Bizerte,2025-05-19,At Risk,34392.76
+C0261,Customer 0261,SMB,Manufacturing,Gabes,2021-04-19,Active,40761.47
+C0262,Customer 0262,SMB,Logistics,Tunis,2023-08-07,Active,38353.31
+C0263,Customer 0263,Mid-Market,Retail,Nabeul,2021-12-03,Churned,89380.42
+C0264,Customer 0264,Enterprise,Manufacturing,Monastir,2025-10-23,Active,99433.64
+C0265,Customer 0265,Public Sector,Retail,Sfax,2021-01-29,Churned,102929.21
+C0266,Customer 0266,Enterprise,Financial Services,Tunis,2023-03-19,Churned,19279.93
+C0267,Customer 0267,Mid-Market,Healthcare,Bizerte,2022-12-26,At Risk,72500.01
+C0268,Customer 0268,Mid-Market,Manufacturing,Sfax,2024-07-24,Churned,44425.4
+C0269,Customer 0269,Enterprise,Manufacturing,Gabes,2021-08-21,Active,115053.07
+C0270,Customer 0270,Mid-Market,Logistics,Gabes,2021-05-30,Churned,92880.48
+C0271,Customer 0271,SMB,Telecom,Tunis,2026-04-22,Active,38004.42
+C0272,Customer 0272,Enterprise,Telecom,Sfax,2025-02-08,Active,84943.36
+C0273,Customer 0273,SMB,Healthcare,Gabes,2024-08-31,Active,47153.16
+C0274,Customer 0274,Public Sector,Manufacturing,Sousse,2025-12-07,Active,2276.59
+C0275,Customer 0275,SMB,Education,Monastir,2024-08-06,At Risk,63485.51
+C0276,Customer 0276,Public Sector,Financial Services,Sousse,2022-02-11,Active,20486.41
+C0277,Customer 0277,Enterprise,Financial Services,Gabes,2024-10-16,Churned,100520.21
+C0278,Customer 0278,SMB,Retail,Sousse,2021-11-19,Active,118706.83
+C0279,Customer 0279,SMB,Manufacturing,Sfax,2026-02-08,At Risk,100849.3
+C0280,Customer 0280,Public Sector,Technology,Nabeul,2023-12-18,At Risk,118848.28
+C0281,Customer 0281,Public Sector,Telecom,Sousse,2024-06-20,Churned,54341.23
+C0282,Customer 0282,SMB,Financial Services,Monastir,2021-10-03,Active,47716.15
+C0283,Customer 0283,Enterprise,Technology,Nabeul,2022-10-02,Active,90884.29
+C0284,Customer 0284,SMB,Education,Monastir,2021-06-05,Churned,52619.7
+C0285,Customer 0285,SMB,Retail,Sousse,2023-07-23,Active,18930.08
+C0286,Customer 0286,Mid-Market,Healthcare,Gabes,2023-07-03,Active,22530.27
+C0287,Customer 0287,Enterprise,Financial Services,Tunis,2022-04-20,Active,6313.24
+C0288,Customer 0288,Public Sector,Logistics,Sousse,2025-11-01,Active,28709.42
+C0289,Customer 0289,Public Sector,Education,Nabeul,2022-01-10,Churned,59333.51
+C0290,Customer 0290,Enterprise,Manufacturing,Monastir,2022-07-23,Active,70786.98
+C0291,Customer 0291,Public Sector,Retail,Monastir,2024-11-08,Active,11009.72
+C0292,Customer 0292,Enterprise,Logistics,Nabeul,2023-08-18,At Risk,29996.43
+C0293,Customer 0293,Public Sector,Telecom,Tunis,2025-06-24,At Risk,76873.06
+C0294,Customer 0294,SMB,Financial Services,Sousse,2025-06-30,Churned,78248.74
+C0295,Customer 0295,Public Sector,Financial Services,Tunis,2023-03-03,At Risk,91785.46
+C0296,Customer 0296,SMB,Education,Monastir,2024-07-28,Churned,7914.91
+C0297,Customer 0297,Public Sector,Manufacturing,Monastir,2024-11-11,Active,65203.76
+C0298,Customer 0298,Enterprise,Education,Sfax,2022-12-15,Active,41276.32
+C0299,Customer 0299,SMB,Manufacturing,Nabeul,2025-12-18,Churned,58426.13
+C0300,Customer 0300,Mid-Market,Financial Services,Sfax,2025-07-02,Active,92466.68

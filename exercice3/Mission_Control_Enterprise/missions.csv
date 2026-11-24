@@ -1,0 +1,61 @@
+mission_id,mission_title,mission_category,priority,mission_status,department_id,target_value_tnd,progress_pct,completion_threshold_pct,start_date,target_date
+MIS001,Mission Objective 01,Risk,Medium,Blocked,D08,236447.8,0.36,0.92,2025-10-03,2026-05-04
+MIS002,Mission Objective 02,Growth,Medium,Active,D05,231454.16,0.87,0.78,2025-07-23,2025-06-17
+MIS003,Mission Objective 03,Quality,Medium,Blocked,D08,63885.84,0.81,0.89,2025-03-11,2026-02-03
+MIS004,Mission Objective 04,Growth,High,Active,D03,224751.57,0.57,0.79,2025-01-22,2025-12-05
+MIS005,Mission Objective 05,Growth,Critical,Blocked,D04,166473.52,0.35,0.83,2025-02-11,2025-11-04
+MIS006,Mission Objective 06,Quality,High,Active,D07,70098.21,0.84,0.94,2025-02-08,2026-02-16
+MIS007,Mission Objective 07,Quality,Medium,Not Started,D07,122941.02,0.97,0.94,2025-10-02,2025-10-02
+MIS008,Mission Objective 08,Quality,High,Active,D02,239428.3,0.79,0.78,2026-01-28,2026-10-03
+MIS009,Mission Objective 09,Innovation,High,Blocked,D07,134278.44,0.9,0.9,2026-06-29,2025-11-10
+MIS010,Mission Objective 10,Quality,Medium,Completed,D02,32154.35,0.49,0.73,2025-11-16,2025-08-05
+MIS011,Mission Objective 11,Quality,Critical,Not Started,D08,31906.44,0.22,0.89,2025-01-19,2025-06-28
+MIS012,Mission Objective 12,Efficiency,Low,Blocked,D01,154628.57,0.97,0.81,2026-01-28,2026-01-10
+MIS013,Mission Objective 13,Customer,High,Not Started,D05,18374.64,0.64,0.99,2026-03-09,2025-05-25
+MIS014,Mission Objective 14,Risk,Medium,Not Started,D07,47386.81,0.68,0.66,2026-09-20,2025-09-05
+MIS015,Mission Objective 15,Efficiency,High,Not Started,D03,42327.2,0.9,0.92,2025-03-02,2026-07-24
+MIS016,Mission Objective 16,Quality,High,Completed,D03,80502.63,0.53,0.82,2026-03-25,2026-04-17
+MIS017,Mission Objective 17,Quality,High,Active,D01,119008.98,0.75,0.78,2025-04-06,2026-11-09
+MIS018,Mission Objective 18,Growth,Low,Not Started,D06,248052.57,0.23,0.95,2026-08-12,2025-10-25
+MIS019,Mission Objective 19,Risk,Critical,Not Started,D08,132251.71,0.54,0.68,2026-03-19,2026-11-01
+MIS020,Mission Objective 20,Innovation,Medium,Active,D04,35273.56,0.74,0.69,2026-02-22,2025-09-09
+MIS021,Mission Objective 21,Innovation,Critical,Active,D02,170686.4,0.47,0.67,2026-09-29,2026-05-13
+MIS022,Mission Objective 22,Efficiency,High,Blocked,D07,101521.35,0.16,0.71,2025-09-11,2027-02-10
+MIS023,Mission Objective 23,Growth,Low,Blocked,D08,155066.91,0.59,0.92,2025-02-05,2025-10-12
+MIS024,Mission Objective 24,Growth,Medium,Blocked,D06,155719.83,0.4,0.79,2025-04-17,2025-03-06
+MIS025,Mission Objective 25,Growth,High,Active,D05,111017.22,0.05,0.97,2025-04-12,2025-11-02
+MIS026,Mission Objective 26,Quality,Medium,Completed,D02,151199.17,0.44,0.77,2026-05-10,2026-04-17
+MIS027,Mission Objective 27,Risk,High,Active,D02,167102.4,0.1,0.73,2025-12-08,2026-11-28
+MIS028,Mission Objective 28,Customer,Medium,Not Started,D01,96999.08,0.69,0.74,2025-09-17,2026-08-22
+MIS029,Mission Objective 29,Innovation,Critical,Completed,D01,83794.66,0.7,0.68,2026-07-21,2026-01-11
+MIS030,Mission Objective 30,Customer,Medium,Blocked,D08,163828.43,0.48,0.75,2026-11-21,2026-05-18
+MIS031,Mission Objective 31,Innovation,Medium,Blocked,D06,228278.49,0.92,0.99,2025-11-25,2025-12-22
+MIS032,Mission Objective 32,Growth,Medium,Blocked,D06,79359.33,0.83,0.85,2026-02-14,2026-03-16
+MIS033,Mission Objective 33,Innovation,High,Completed,D07,80814.19,0.36,0.88,2026-09-15,2026-09-26
+MIS034,Mission Objective 34,Innovation,Low,Active,D02,232932.57,0.75,0.93,2025-03-13,2026-03-12
+MIS035,Mission Objective 35,Efficiency,Medium,Not Started,D03,44289.73,0.73,0.98,2025-02-28,2025-12-01
+MIS036,Mission Objective 36,Customer,Low,Blocked,D01,88371.72,0.84,0.94,2025-03-11,2026-05-07
+MIS037,Mission Objective 37,Quality,Medium,Blocked,D04,47174.86,0.5,0.76,2026-05-04,2026-09-08
+MIS038,Mission Objective 38,Efficiency,Critical,Blocked,D05,64424.31,0.43,0.73,2025-11-18,2025-06-17
+MIS039,Mission Objective 39,Innovation,High,Blocked,D04,243286.23,0.61,0.73,2025-10-15,2026-11-09
+MIS040,Mission Objective 40,Quality,Medium,Completed,D05,31156.78,0.15,0.78,2025-09-10,2026-11-12
+MIS041,Mission Objective 41,Growth,Medium,Not Started,D06,197795.48,0.08,0.94,2025-06-06,2026-12-27
+MIS042,Mission Objective 42,Innovation,Critical,Completed,D01,31184.67,0.04,0.74,2025-12-03,2025-08-22
+MIS043,Mission Objective 43,Customer,Medium,Not Started,D08,123049.44,0.57,0.75,2026-03-24,2026-04-09
+MIS044,Mission Objective 44,Risk,Low,Not Started,D07,34509.89,0.66,0.84,2025-11-02,2027-02-21
+MIS045,Mission Objective 45,Quality,High,Active,D08,125109.99,0.45,0.77,2026-10-22,2025-02-14
+MIS046,Mission Objective 46,Innovation,Low,Not Started,D05,173642.35,0.89,0.82,2025-07-04,2026-12-26
+MIS047,Mission Objective 47,Risk,Low,Not Started,D08,74099.56,0.96,0.97,2025-06-19,2025-07-27
+MIS048,Mission Objective 48,Customer,Low,Active,D08,142188.07,0.35,0.66,2025-07-01,2025-10-24
+MIS049,Mission Objective 49,Innovation,Critical,Not Started,D05,131960.76,0.81,0.71,2026-11-12,2026-01-24
+MIS050,Mission Objective 50,Growth,Medium,Blocked,D04,151670.46,0.99,0.76,2026-08-26,2026-02-24
+MIS051,Mission Objective 51,Innovation,Low,Active,D04,186970.96,0.07,0.91,2025-07-07,2025-11-08
+MIS052,Mission Objective 52,Innovation,Medium,Active,D04,69550.4,0.36,0.77,2026-06-17,2026-12-02
+MIS053,Mission Objective 53,Quality,Medium,Not Started,D04,229434.78,0.09,0.66,2025-04-18,2027-01-30
+MIS054,Mission Objective 54,Risk,Medium,Not Started,D01,25685.14,0.57,0.83,2025-03-09,2026-11-29
+MIS055,Mission Objective 55,Customer,Medium,Completed,D03,245704.39,0.68,0.77,2026-04-11,2026-01-20
+MIS056,Mission Objective 56,Growth,Low,Not Started,D08,28980.01,0.68,0.69,2025-02-25,2025-07-28
+MIS057,Mission Objective 57,Risk,Low,Blocked,D07,129923.2,0.05,0.79,2025-09-24,2026-07-24
+MIS058,Mission Objective 58,Efficiency,Low,Not Started,D05,76942.09,0.41,0.92,2026-01-15,2025-06-11
+MIS059,Mission Objective 59,Innovation,Low,Not Started,D05,76261.94,0.25,0.66,2025-08-02,2025-12-28
+MIS060,Mission Objective 60,Customer,Medium,Active,D07,132066.58,0.33,0.96,2025-06-12,2025-03-06

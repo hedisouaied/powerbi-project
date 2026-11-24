@@ -1,0 +1,120 @@
+table missions
+	lineageTag: c9736659-d445-4273-9a19-b76d6b4d8acc
+
+	column mission_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: bdd98285-3a2b-41eb-8b21-5f4ff014ee54
+		summarizeBy: none
+		sourceColumn: mission_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column mission_title
+		dataType: string
+		formatString:  type text
+		lineageTag: f107253f-77e2-4010-bcb1-f537775800c6
+		summarizeBy: none
+		sourceColumn: mission_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column mission_category
+		dataType: string
+		formatString:  type text
+		lineageTag: 7bce47b7-ce67-4586-ac9f-912628f59fae
+		summarizeBy: none
+		sourceColumn: mission_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column priority
+		dataType: string
+		formatString:  type text
+		lineageTag: 3eba353c-4b34-49c9-8d76-94e1c4ed625d
+		summarizeBy: none
+		sourceColumn: priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column mission_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 85b66686-7830-4589-ad97-27c2aedbfe71
+		summarizeBy: none
+		sourceColumn: mission_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 8c8a9b3a-030a-440d-8ad4-69a91abef73e
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_value_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: b5ba038d-6263-43b9-8018-791aca2f7f31
+		summarizeBy: sum
+		sourceColumn: target_value_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column progress_pct
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: f72f679b-b3e0-445f-9aa3-89bfcf2aba50
+		summarizeBy: none
+		sourceColumn: progress_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column completion_threshold_pct
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 0238faff-7ad1-4904-b259-4dfa7d01a398
+		summarizeBy: none
+		sourceColumn: completion_threshold_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 076c7725-d709-4e83-bcc9-9dff4b54dbd8
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column target_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 77910161-bfdc-4794-b3fc-7f74ed8a51f6
+		summarizeBy: none
+		sourceColumn: target_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition missions = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\missions.csv"), [Delimiter = ",", Columns = 11, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"mission_id", type text}, {"mission_title", type text}, {"mission_category", type text}, {"priority", type text}, {"mission_status", type text}, {"department_id", type text}, {"target_value_tnd", Currency.Type}, {"progress_pct", type number}, {"completion_threshold_pct", type number}, {"start_date", type date}, {"target_date", type date}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

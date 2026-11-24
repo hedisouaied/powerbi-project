@@ -1,0 +1,82 @@
+table activity_log
+	lineageTag: 4dd01f48-8d27-4fc4-9973-e5ee17d7b45c
+
+	column activity_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 78b86b6a-215a-4137-b0a5-124588c70c24
+		summarizeBy: none
+		sourceColumn: activity_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 0e41aee2-705e-4f80-ba4f-4d997bb50494
+		summarizeBy: none
+		sourceColumn: activity_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 68a19df4-5036-45b7-84ed-a798f8277f28
+		summarizeBy: none
+		sourceColumn: employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_type
+		dataType: string
+		formatString:  type text
+		lineageTag: d14def9d-cc08-4643-8e1d-9c6f4c0728a2
+		summarizeBy: none
+		sourceColumn: action_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column module_name
+		dataType: string
+		formatString:  type text
+		lineageTag: 73b2f521-16bd-481a-98dc-7a6396b005a0
+		summarizeBy: none
+		sourceColumn: module_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column result
+		dataType: string
+		formatString:  type text
+		lineageTag: 167a29c4-ae2d-4a55-ac42-16289d6a9018
+		summarizeBy: none
+		sourceColumn: result
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_details
+		dataType: string
+		formatString:  type text
+		lineageTag: 094c39f9-4f46-4cbc-a7c9-448502376a2a
+		summarizeBy: none
+		sourceColumn: event_details
+
+		annotation SummarizationSetBy = Automatic
+
+	partition activity_log = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\activity_log.csv"), [Delimiter = ",", Columns = 7, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"activity_id", type text}, {"activity_date", type date}, {"employee_id", type text}, {"action_type", type text}, {"module_name", type text}, {"result", type text}, {"event_details", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

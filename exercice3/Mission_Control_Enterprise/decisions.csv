@@ -1,0 +1,101 @@
+decision_id,decision_date,decision_type,department_id,decision_owner_id,decision_status,expected_impact_tnd,expected_kpi_change_pct,actual_kpi_change_pct,decision_notes
+DEC0001,2025-03-23,Hiring Plan,D06,E009,Proposed,31677.68,0.326,0.192,Decision review and impact tracking
+DEC0002,2026-04-23,Customer Retention Campaign,D03,E028,Proposed,65252.67,-0.195,-0.196,Decision review and impact tracking
+DEC0003,2026-11-02,Customer Retention Campaign,D07,E076,Approved,14671.55,0.287,-0.174,Decision review and impact tracking
+DEC0004,2026-02-09,Adjust Pricing,D02,E052,Approved,178641.0,-0.169,-0.099,Decision review and impact tracking
+DEC0005,2026-08-16,Adjust Pricing,D08,E058,Proposed,71785.68,0.044,-0.083,Decision review and impact tracking
+DEC0006,2026-06-09,Adjust Pricing,D08,E078,Measuring,11007.4,-0.005,-0.117,Decision review and impact tracking
+DEC0007,2025-04-30,Supplier Replacement,D05,E043,Approved,28504.77,0.165,0.021,Decision review and impact tracking
+DEC0008,2026-04-02,Adjust Pricing,D01,E029,Measuring,67219.98,-0.007,-0.19,Decision review and impact tracking
+DEC0009,2026-08-26,Adjust Pricing,D04,E048,Rejected,129976.0,0.19,0.273,Decision review and impact tracking
+DEC0010,2025-05-24,Increase Marketing,D02,E047,Measuring,-1393.34,-0.04,0.107,Decision review and impact tracking
+DEC0011,2026-11-03,Customer Retention Campaign,D04,E001,Implemented,51763.15,-0.083,0.249,Decision review and impact tracking
+DEC0012,2025-12-08,Hiring Plan,D07,E060,Implemented,46987.59,-0.014,0.296,Decision review and impact tracking
+DEC0013,2026-03-02,Adjust Pricing,D05,E041,Approved,64187.36,-0.132,-0.069,Decision review and impact tracking
+DEC0014,2025-08-29,Customer Retention Campaign,D03,E038,Rejected,144412.33,0.396,0.056,Decision review and impact tracking
+DEC0015,2026-04-28,Hiring Plan,D07,E037,Approved,126193.92,-0.007,0.124,Decision review and impact tracking
+DEC0016,2026-04-26,Increase Marketing,D06,E014,Approved,14305.69,0.014,0.147,Decision review and impact tracking
+DEC0017,2025-06-13,Supplier Replacement,D01,E022,Rejected,-2121.41,-0.11,0.286,Decision review and impact tracking
+DEC0018,2026-10-09,Customer Retention Campaign,D08,E071,Measuring,138975.74,-0.118,-0.141,Decision review and impact tracking
+DEC0019,2026-09-18,Supplier Replacement,D03,E040,Proposed,69928.2,0.24,-0.066,Decision review and impact tracking
+DEC0020,2025-06-30,Adjust Pricing,D08,E078,Approved,82896.06,0.319,0.114,Decision review and impact tracking
+DEC0021,2025-08-03,Cost Reduction,D02,E061,Measuring,122276.03,0.274,0.287,Decision review and impact tracking
+DEC0022,2026-03-09,Hiring Plan,D04,E027,Rejected,134804.56,0.148,0.165,Decision review and impact tracking
+DEC0023,2025-09-09,Inventory Reallocation,D07,E033,Approved,-3628.63,0.074,0.382,Decision review and impact tracking
+DEC0024,2026-08-18,Increase Marketing,D03,E076,Rejected,-19919.64,0.089,-0.027,Decision review and impact tracking
+DEC0025,2025-07-07,Customer Retention Campaign,D08,E055,Proposed,-18921.35,-0.052,-0.163,Decision review and impact tracking
+DEC0026,2025-06-22,Increase Marketing,D01,E052,Approved,158351.96,0.258,0.319,Decision review and impact tracking
+DEC0027,2026-07-17,Supplier Replacement,D06,E007,Implemented,156570.88,0.08,0.261,Decision review and impact tracking
+DEC0028,2025-01-19,Increase Marketing,D05,E074,Proposed,10903.78,-0.129,0.048,Decision review and impact tracking
+DEC0029,2025-08-30,Customer Retention Campaign,D06,E040,Implemented,176116.47,-0.178,0.154,Decision review and impact tracking
+DEC0030,2026-06-04,Hiring Plan,D05,E047,Rejected,25840.74,0.054,0.097,Decision review and impact tracking
+DEC0031,2025-01-16,Adjust Pricing,D04,E019,Approved,-42156.95,-0.024,0.302,Decision review and impact tracking
+DEC0032,2025-11-13,Supplier Replacement,D07,E017,Proposed,98649.04,0.354,-0.097,Decision review and impact tracking
+DEC0033,2025-05-05,Increase Marketing,D08,E011,Proposed,-44906.36,-0.097,0.288,Decision review and impact tracking
+DEC0034,2025-07-10,Cost Reduction,D07,E072,Rejected,26719.83,0.284,-0.083,Decision review and impact tracking
+DEC0035,2026-01-09,Hiring Plan,D06,E012,Measuring,-29481.65,0.311,0.229,Decision review and impact tracking
+DEC0036,2026-02-04,Adjust Pricing,D05,E008,Implemented,-16999.9,0.031,0.288,Decision review and impact tracking
+DEC0037,2026-05-18,Inventory Reallocation,D03,E074,Approved,68012.0,-0.127,0.387,Decision review and impact tracking
+DEC0038,2025-06-29,Hiring Plan,D04,E069,Proposed,-22402.09,-0.192,0.162,Decision review and impact tracking
+DEC0039,2025-08-09,Adjust Pricing,D01,E049,Proposed,3875.46,-0.103,0.117,Decision review and impact tracking
+DEC0040,2026-10-06,Cost Reduction,D04,E051,Rejected,193.56,0.316,0.39,Decision review and impact tracking
+DEC0041,2025-07-29,Inventory Reallocation,D06,E029,Approved,110570.08,0.319,-0.184,Decision review and impact tracking
+DEC0042,2025-09-18,Cost Reduction,D08,E017,Measuring,78052.33,0.124,-0.054,Decision review and impact tracking
+DEC0043,2025-12-11,Increase Marketing,D06,E063,Approved,118437.83,-0.143,0.138,Decision review and impact tracking
+DEC0044,2026-05-26,Inventory Reallocation,D08,E015,Proposed,93958.01,-0.081,0.008,Decision review and impact tracking
+DEC0045,2026-08-25,Adjust Pricing,D01,E013,Rejected,139044.04,0.267,0.346,Decision review and impact tracking
+DEC0046,2025-03-10,Inventory Reallocation,D01,E056,Rejected,172278.29,0.205,0.329,Decision review and impact tracking
+DEC0047,2026-10-29,Hiring Plan,D06,E036,Implemented,22082.99,-0.107,-0.181,Decision review and impact tracking
+DEC0048,2025-11-22,Customer Retention Campaign,D01,E013,Rejected,27412.17,-0.168,-0.133,Decision review and impact tracking
+DEC0049,2026-04-23,Cost Reduction,D01,E054,Rejected,165896.45,0.045,0.267,Decision review and impact tracking
+DEC0050,2025-10-18,Customer Retention Campaign,D08,E043,Implemented,116291.48,0.17,0.387,Decision review and impact tracking
+DEC0051,2026-05-05,Supplier Replacement,D06,E024,Rejected,130087.34,0.049,-0.107,Decision review and impact tracking
+DEC0052,2025-01-26,Hiring Plan,D06,E074,Proposed,148627.8,0.353,0.247,Decision review and impact tracking
+DEC0053,2026-07-28,Inventory Reallocation,D01,E043,Rejected,165899.95,-0.074,-0.154,Decision review and impact tracking
+DEC0054,2025-03-29,Supplier Replacement,D04,E051,Rejected,106397.56,0.289,-0.184,Decision review and impact tracking
+DEC0055,2026-02-07,Cost Reduction,D05,E065,Measuring,88029.6,0.372,0.009,Decision review and impact tracking
+DEC0056,2026-06-06,Hiring Plan,D05,E064,Proposed,68770.95,-0.106,-0.17,Decision review and impact tracking
+DEC0057,2026-06-14,Supplier Replacement,D02,E009,Measuring,63828.05,0.184,0.142,Decision review and impact tracking
+DEC0058,2026-05-08,Customer Retention Campaign,D07,E004,Proposed,-18641.63,0.257,0.269,Decision review and impact tracking
+DEC0059,2026-02-03,Increase Marketing,D06,E023,Implemented,171591.22,0.367,0.187,Decision review and impact tracking
+DEC0060,2026-05-31,Inventory Reallocation,D02,E026,Approved,-46754.73,0.179,0.059,Decision review and impact tracking
+DEC0061,2025-03-02,Customer Retention Campaign,D02,E072,Approved,165401.74,-0.16,0.272,Decision review and impact tracking
+DEC0062,2025-05-29,Supplier Replacement,D06,E073,Implemented,108319.93,-0.163,0.308,Decision review and impact tracking
+DEC0063,2026-04-26,Adjust Pricing,D06,E058,Approved,94820.74,-0.118,0.225,Decision review and impact tracking
+DEC0064,2025-07-11,Cost Reduction,D04,E073,Implemented,69986.69,0.371,0.063,Decision review and impact tracking
+DEC0065,2026-03-11,Supplier Replacement,D07,E064,Approved,-29661.21,0.348,0.346,Decision review and impact tracking
+DEC0066,2026-06-19,Customer Retention Campaign,D03,E029,Proposed,132490.94,-0.065,-0.182,Decision review and impact tracking
+DEC0067,2026-06-17,Increase Marketing,D02,E063,Implemented,-36713.47,-0.104,0.37,Decision review and impact tracking
+DEC0068,2025-12-01,Customer Retention Campaign,D08,E040,Proposed,139313.12,-0.076,-0.147,Decision review and impact tracking
+DEC0069,2025-12-27,Supplier Replacement,D07,E046,Measuring,55755.02,0.395,-0.01,Decision review and impact tracking
+DEC0070,2025-08-30,Hiring Plan,D01,E038,Measuring,96006.61,-0.147,0.23,Decision review and impact tracking
+DEC0071,2026-04-08,Increase Marketing,D04,E027,Rejected,49024.63,0.076,0.184,Decision review and impact tracking
+DEC0072,2025-05-01,Customer Retention Campaign,D03,E075,Rejected,125965.09,0.029,0.382,Decision review and impact tracking
+DEC0073,2026-06-28,Supplier Replacement,D07,E076,Implemented,-23185.12,-0.069,-0.15,Decision review and impact tracking
+DEC0074,2025-01-20,Cost Reduction,D02,E039,Implemented,28365.15,0.384,0.084,Decision review and impact tracking
+DEC0075,2025-04-09,Supplier Replacement,D02,E019,Rejected,68192.81,-0.156,-0.151,Decision review and impact tracking
+DEC0076,2026-11-02,Increase Marketing,D02,E055,Proposed,63803.05,0.175,0.31,Decision review and impact tracking
+DEC0077,2025-04-30,Cost Reduction,D06,E020,Measuring,120818.35,0.205,-0.119,Decision review and impact tracking
+DEC0078,2026-08-19,Customer Retention Campaign,D08,E039,Rejected,49611.32,0.124,0.035,Decision review and impact tracking
+DEC0079,2025-11-03,Inventory Reallocation,D05,E067,Measuring,78252.11,0.037,0.341,Decision review and impact tracking
+DEC0080,2025-09-29,Adjust Pricing,D04,E030,Implemented,118114.48,0.168,0.031,Decision review and impact tracking
+DEC0081,2025-05-30,Inventory Reallocation,D07,E037,Implemented,124911.4,0.369,0.062,Decision review and impact tracking
+DEC0082,2026-10-03,Cost Reduction,D03,E074,Rejected,151531.28,0.257,0.301,Decision review and impact tracking
+DEC0083,2026-08-01,Supplier Replacement,D06,E080,Proposed,77056.4,0.051,0.199,Decision review and impact tracking
+DEC0084,2025-12-21,Adjust Pricing,D02,E026,Implemented,120121.68,0.103,0.012,Decision review and impact tracking
+DEC0085,2026-06-03,Customer Retention Campaign,D02,E035,Approved,97246.08,0.022,-0.18,Decision review and impact tracking
+DEC0086,2025-06-26,Hiring Plan,D07,E027,Approved,34262.27,-0.059,-0.028,Decision review and impact tracking
+DEC0087,2025-07-24,Cost Reduction,D06,E042,Rejected,170546.76,-0.129,-0.013,Decision review and impact tracking
+DEC0088,2026-05-31,Cost Reduction,D04,E007,Measuring,91059.86,-0.19,-0.077,Decision review and impact tracking
+DEC0089,2025-10-30,Customer Retention Campaign,D05,E017,Approved,75206.54,0.184,0.303,Decision review and impact tracking
+DEC0090,2025-09-05,Supplier Replacement,D08,E032,Implemented,14146.29,0.123,-0.158,Decision review and impact tracking
+DEC0091,2026-11-22,Supplier Replacement,D01,E033,Proposed,158.11,-0.196,0.208,Decision review and impact tracking
+DEC0092,2025-11-09,Inventory Reallocation,D07,E066,Rejected,-15987.93,0.138,0.39,Decision review and impact tracking
+DEC0093,2026-07-15,Adjust Pricing,D03,E072,Implemented,-12716.41,0.359,-0.2,Decision review and impact tracking
+DEC0094,2026-05-20,Adjust Pricing,D02,E024,Approved,174579.48,0.202,-0.073,Decision review and impact tracking
+DEC0095,2025-02-26,Supplier Replacement,D07,E018,Measuring,62072.37,-0.106,-0.045,Decision review and impact tracking
+DEC0096,2026-09-13,Adjust Pricing,D02,E076,Proposed,-12946.36,-0.013,-0.113,Decision review and impact tracking
+DEC0097,2026-05-28,Hiring Plan,D01,E027,Rejected,41243.14,-0.172,-0.113,Decision review and impact tracking
+DEC0098,2025-12-27,Adjust Pricing,D06,E004,Implemented,-44344.31,-0.093,0.246,Decision review and impact tracking
+DEC0099,2025-10-18,Supplier Replacement,D01,E012,Proposed,79901.26,0.246,0.207,Decision review and impact tracking
+DEC0100,2025-03-11,Adjust Pricing,D08,E079,Rejected,-49968.09,-0.177,-0.141,Decision review and impact tracking

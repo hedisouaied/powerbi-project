@@ -1,0 +1,100 @@
+table approval_requests
+	lineageTag: 499e0636-763e-4d6c-a3f3-0e12e8ac6267
+
+	column approval_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 727a8bff-bf93-46e0-aa75-7c7230acd66f
+		summarizeBy: none
+		sourceColumn: approval_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 7844c1b5-4979-4cad-999b-b206b93c99fe
+		summarizeBy: none
+		sourceColumn: request_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column priority
+		dataType: string
+		formatString:  type text
+		lineageTag: 31f0c01a-fd2a-4891-a6c7-a5738b708323
+		summarizeBy: none
+		sourceColumn: priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column requested_amount_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: 3292d19f-220d-4873-abe3-e8a3e168c384
+		summarizeBy: sum
+		sourceColumn: requested_amount_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column requester_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 415f1b13-7049-4983-956a-c376d0e4d39c
+		summarizeBy: none
+		sourceColumn: requester_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column approver_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 8f093955-3427-4cd9-a6bf-7c0e93be6417
+		summarizeBy: none
+		sourceColumn: approver_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column approval_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 2de28eab-973a-4268-819e-c0b4c0899e1c
+		summarizeBy: none
+		sourceColumn: approval_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: e0e8b639-4a57-4cb4-ae28-9908d743ab21
+		summarizeBy: none
+		sourceColumn: request_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column request_description
+		dataType: string
+		formatString:  type text
+		lineageTag: 5e1e1b34-a447-49c0-90c9-0087c6573f33
+		summarizeBy: none
+		sourceColumn: request_description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition approval_requests = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\approval_requests.csv"), [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"approval_id", type text}, {"request_type", type text}, {"priority", type text}, {"requested_amount_tnd", Currency.Type}, {"requester_employee_id", type text}, {"approver_employee_id", type text}, {"approval_status", type text}, {"request_date", type date}, {"request_description", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

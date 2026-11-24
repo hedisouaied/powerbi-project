@@ -1,0 +1,109 @@
+table investigation_cases
+	lineageTag: b9a04d76-23e5-4fe1-84bb-128799618c7c
+
+	column case_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: f4964ac3-126d-4b24-bab9-444f4fe66dcc
+		summarizeBy: none
+		sourceColumn: case_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_title
+		dataType: string
+		formatString:  type text
+		lineageTag: 620706a4-fa08-4428-9cad-adbdb5560cb1
+		summarizeBy: none
+		sourceColumn: case_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 098673f3-1b74-4cde-ab04-2629babe778c
+		summarizeBy: none
+		sourceColumn: case_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity
+		dataType: string
+		formatString:  type text
+		lineageTag: cda1e91c-59e4-4ffa-81fc-4b3288881a98
+		summarizeBy: none
+		sourceColumn: severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_status
+		dataType: string
+		formatString:  type text
+		lineageTag: a2b6ac58-1089-4a0c-8301-9dea2c800358
+		summarizeBy: none
+		sourceColumn: case_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_owner_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 2793636f-312b-4483-8698-ad57f73c58d1
+		summarizeBy: none
+		sourceColumn: case_owner_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: fbdb262e-e58e-4bba-b1cc-49063680c079
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column opened_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: bdb36a11-e3ee-4df2-aff6-414310702c28
+		summarizeBy: none
+		sourceColumn: opened_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column case_summary
+		dataType: string
+		formatString:  type text
+		lineageTag: eea60778-7da2-4c57-9b83-1da4b53e7c20
+		summarizeBy: none
+		sourceColumn: case_summary
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 93664d9c-731f-480a-9dac-6246d561ef70
+		summarizeBy: none
+		sourceColumn: review_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition investigation_cases = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\investigation_cases.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"case_id", type text}, {"case_title", type text}, {"case_type", type text}, {"severity", type text}, {"case_status", type text}, {"case_owner_employee_id", type text}, {"department_id", type text}, {"opened_date", type date}, {"case_summary", type text}, {"review_status", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

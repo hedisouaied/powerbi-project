@@ -1,0 +1,7 @@
+scenario_id,scenario_name,scenario_description,revenue_change_pct,cost_change_pct,retention_change_pct,margin_change_pct
+SC01,Base Case,Reference operating plan,0.0,0.0,0.0,0.0
+SC02,Demand Surge,Demand rises by 20%,0.2,0.02,0.05,0.03
+SC03,Cost Pressure,Operating costs rise by 15%,0.0,0.15,0.0,-0.04
+SC04,Customer Churn,Customer churn increases by 12%,-0.12,0.0,-0.08,-0.06
+SC05,Supplier Shock,Supplier costs rise by 25%,-0.03,0.25,-0.02,-0.05
+SC06,Growth Strategy,"Revenue rises by 15%, marketing spend by 8%",0.15,0.08,0.05,0.08

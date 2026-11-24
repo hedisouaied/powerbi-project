@@ -1,0 +1,80 @@
+table scenarios
+	lineageTag: 785dde0d-0864-4742-8858-288787252356
+
+	column scenario_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 50cedb57-9cf4-4477-affb-db42f31473e4
+		summarizeBy: none
+		sourceColumn: scenario_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column scenario_name
+		dataType: string
+		formatString:  type text
+		lineageTag: 11a58ff2-9af8-4615-8fa3-aa7107cffadf
+		summarizeBy: none
+		sourceColumn: scenario_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column scenario_description
+		dataType: string
+		formatString:  type text
+		lineageTag: 97c639f7-856c-4d84-93b0-507d3a87e3fb
+		summarizeBy: none
+		sourceColumn: scenario_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue_change_pct
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 7acbbcf9-3cb0-4c22-9256-8e622021bd1a
+		summarizeBy: none
+		sourceColumn: revenue_change_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_change_pct
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 32358bfd-ee10-4667-835f-b2086c96748e
+		summarizeBy: none
+		sourceColumn: cost_change_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column retention_change_pct
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: fc85ae25-11c0-4ce1-82b3-c4be8fef0951
+		summarizeBy: none
+		sourceColumn: retention_change_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column margin_change_pct
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 6a999948-d0f7-4ebe-a8c8-540966468285
+		summarizeBy: none
+		sourceColumn: margin_change_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	partition scenarios = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\scenarios.csv"), [Delimiter = ",", Columns = 7, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"scenario_id", type text}, {"scenario_name", type text}, {"scenario_description", type text}, {"revenue_change_pct", type number}, {"cost_change_pct", type number}, {"retention_change_pct", type number}, {"margin_change_pct", type number}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

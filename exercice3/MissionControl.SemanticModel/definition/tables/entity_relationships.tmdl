@@ -1,0 +1,89 @@
+table entity_relationships
+	lineageTag: f9bace67-f1f4-44a3-8f84-8150c102f249
+
+	column relationship_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 05756cc6-2dfe-4d88-a850-b911bb96413d
+		summarizeBy: none
+		sourceColumn: relationship_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_entity_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 2552a5cf-08fd-453e-967f-fc72f9ed4684
+		summarizeBy: none
+		sourceColumn: source_entity_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_entity_id
+		dataType: string
+		formatString:  type text
+		lineageTag: b6908267-116f-4aa5-8305-77a0004438df
+		summarizeBy: none
+		sourceColumn: source_entity_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column relationship_type
+		dataType: string
+		formatString:  type text
+		lineageTag: ef1e6db7-7ceb-428f-b266-90ea6c2b0f6b
+		summarizeBy: none
+		sourceColumn: relationship_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_entity_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 8a376d47-c0a5-476b-96a9-9cf1d4787df6
+		summarizeBy: none
+		sourceColumn: target_entity_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_entity_id
+		dataType: string
+		formatString:  type text
+		lineageTag: e8614a08-6083-46f8-a64c-453cdce19bae
+		summarizeBy: none
+		sourceColumn: target_entity_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column relationship_strength
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 7e00e856-1525-409f-a463-bedc6bdea520
+		summarizeBy: none
+		sourceColumn: relationship_strength
+
+		annotation SummarizationSetBy = Automatic
+
+	column relationship_basis
+		dataType: string
+		formatString:  type text
+		lineageTag: caba466d-42ce-4cbe-a481-396f253b5229
+		summarizeBy: none
+		sourceColumn: relationship_basis
+
+		annotation SummarizationSetBy = Automatic
+
+	partition entity_relationships = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\entity_relationships.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"relationship_id", type text}, {"source_entity_type", type text}, {"source_entity_id", type text}, {"relationship_type", type text}, {"target_entity_type", type text}, {"target_entity_id", type text}, {"relationship_strength", type number}, {"relationship_basis", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
