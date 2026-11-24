@@ -1,0 +1,100 @@
+table notifications
+	lineageTag: 0c4b5de1-1963-45f1-8d13-cd4672df56fb
+
+	column notification_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: e0fc553b-bc0d-45e8-975c-c6858861b088
+		summarizeBy: none
+		sourceColumn: notification_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column notification_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: e0eccf6b-1458-4d7b-8bf6-232b2932916d
+		summarizeBy: none
+		sourceColumn: notification_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column notification_category
+		dataType: string
+		formatString:  type text
+		lineageTag: 70496b6f-013d-4196-bd11-dd5cacf5efb2
+		summarizeBy: none
+		sourceColumn: notification_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity
+		dataType: string
+		formatString:  type text
+		lineageTag: 935a1857-3475-4e25-a90a-26b1eb5efb0c
+		summarizeBy: none
+		sourceColumn: severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column notification_message
+		dataType: string
+		formatString:  type text
+		lineageTag: d9c2699c-7e16-44f9-96e3-53b8b4c6af1c
+		summarizeBy: none
+		sourceColumn: notification_message
+
+		annotation SummarizationSetBy = Automatic
+
+	column read_status
+		dataType: string
+		formatString:  type text
+		lineageTag: e0265725-5447-493c-bfe3-e3e5bfeb2e6d
+		summarizeBy: none
+		sourceColumn: read_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column recipient_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 6083c133-c2ca-4860-b200-66b15ac501e8
+		summarizeBy: none
+		sourceColumn: recipient_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_module
+		dataType: string
+		formatString:  type text
+		lineageTag: da4fc1d7-0d01-408a-9fab-7a8572ac47c3
+		summarizeBy: none
+		sourceColumn: source_module
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_type
+		dataType: string
+		formatString:  type text
+		lineageTag: cc203b57-d906-4228-a098-5ebd62f43308
+		summarizeBy: none
+		sourceColumn: action_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition notifications = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\notifications.csv"), [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"notification_id", type text}, {"notification_date", type date}, {"notification_category", type text}, {"severity", type text}, {"notification_message", type text}, {"read_status", type text}, {"recipient_employee_id", type text}, {"source_module", type text}, {"action_type", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

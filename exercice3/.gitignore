@@ -1,0 +1,19 @@
+# SDK (junctions to exercice1's installed packages) and build output
+node_modules/
+visuals/*/dist/
+visuals/*/.tmp/
+visuals/*/webpack.statistics*.html
+
+# Power BI local files
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/unappliedChanges.json
+
+# Secrets (none expected: API keys are fake placeholders; real keys belong in a backend proxy, never here)
+.env
+.env.*
+*.key
+
+# Logs / temp
+*.log
+media/*.mp4

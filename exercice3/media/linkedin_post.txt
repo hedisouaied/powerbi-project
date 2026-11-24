@@ -1,0 +1,27 @@
+🚀 I built a full "Mission Control" business intelligence terminal… inside ONE Power BI page.
+
+No stack of native charts and slicers. The whole experience is a single custom visual I wrote in TypeScript, sitting on a clean semantic model.
+
+🎥 In the video (3 min), I walk through it live: switching from dark to light mode, searching with Ctrl+K, creating a task, asking the assistant questions, running what-if and crisis simulations, replaying history, and rotating a 3D model of the company.
+
+What it does:
+🎛️ Command Center: KPI cards with sparklines, business health gauge, a drag-and-drop dashboard builder
+🌗 Dark and light themes in one click, saved inside the report
+✅ Operations: Kanban task manager, Gantt projects, approvals, a calendar with conflict detection, decision tracking
+🔎 Intelligence: anomaly detection, root-cause analysis, network graph, forecasts with backtested error bands
+🧪 Simulation: what-if levers, crisis simulator, time machine replay, business sandbox
+🏙️ A 3D digital twin of the company and a geo view of Tunisian regions
+🗂️ A data explorer and a "Data Doctor" that scores data quality with a transparent formula
+
+Under the hood:
+• 31 tables modeled in Power Query + DAX (62 measures, star schema, no ambiguous relationships)
+• Every KPI computed in TypeScript is verified against DAX: 46/46 match
+• 43 automated UI tests, accessibility and reduced-motion support
+
+What I care about most is honesty in the UI. The AI assistant is rule-based and says so. Every answer cites its data. Simulations are labelled as estimates. Findings say "requires review", never more than the data proves.
+
+All 29 planned features are delivered. The data is synthetic, built for the exercise.
+
+What would you add to an executive command center? 👇
+
+#PowerBI #DataAnalytics #BusinessIntelligence #TypeScript #DAX #DataVisualization #DataViz

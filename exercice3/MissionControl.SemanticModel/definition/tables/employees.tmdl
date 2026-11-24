@@ -1,0 +1,92 @@
+table employees
+	lineageTag: 6248a74a-b692-45a3-a0b7-36ff10755676
+
+	column employee_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 2adb0e79-253d-4224-8b2d-836adcdeed0c
+		summarizeBy: none
+		sourceColumn: employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column employee_name
+		dataType: string
+		formatString:  type text
+		lineageTag: 57e12f2a-3e74-492e-a32e-795422fc5f0d
+		summarizeBy: none
+		sourceColumn: employee_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 1b9d87ba-508c-49b8-8f16-51260e988398
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column job_title
+		dataType: string
+		formatString:  type text
+		lineageTag: c1e929ea-6713-48dc-a263-3cd3788cf375
+		summarizeBy: none
+		sourceColumn: job_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column employment_status
+		dataType: string
+		formatString:  type text
+		lineageTag: c9ddbe23-0216-44ec-8634-35e6a933b746
+		summarizeBy: none
+		sourceColumn: employment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column location
+		dataType: string
+		formatString:  type text
+		lineageTag: 51365bbb-2e4c-4dd6-a449-9ddf45f14261
+		summarizeBy: none
+		sourceColumn: location
+
+		annotation SummarizationSetBy = Automatic
+
+	column monthly_salary_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		isHidden
+		lineageTag: 56f35231-9178-490f-a7fd-34a9081048be
+		summarizeBy: sum
+		sourceColumn: monthly_salary_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column hire_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 48b7cd49-c5af-468f-b3d6-832cf0be5bbf
+		summarizeBy: none
+		sourceColumn: hire_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition employees = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\employees.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"employee_id", type text}, {"employee_name", type text}, {"department_id", type text}, {"job_title", type text}, {"employment_status", type text}, {"location", type text}, {"monthly_salary_tnd", Currency.Type}, {"hire_date", type date}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

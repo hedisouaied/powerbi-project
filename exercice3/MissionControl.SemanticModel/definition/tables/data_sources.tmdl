@@ -1,0 +1,80 @@
+table data_sources
+	lineageTag: 9212c650-b667-45e5-9863-3cab381a67c8
+
+	column source_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 7908ec39-3618-40cf-9193-d17c0ebec028
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_name
+		dataType: string
+		formatString:  type text
+		lineageTag: 995e63fb-598a-4a06-b6e8-76a268e5629a
+		summarizeBy: none
+		sourceColumn: source_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_type
+		dataType: string
+		formatString:  type text
+		lineageTag: baf8020d-2e45-4b4e-be8f-081a69468947
+		summarizeBy: none
+		sourceColumn: source_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column connection_location
+		dataType: string
+		formatString:  type text
+		lineageTag: 68d4d0f6-37e7-48bb-b093-317bdb344348
+		summarizeBy: none
+		sourceColumn: connection_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column refresh_frequency_label
+		dataType: string
+		formatString:  type text
+		lineageTag: b8b2bba9-2040-4be0-a462-c78d724ca371
+		summarizeBy: none
+		sourceColumn: refresh_frequency_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_files
+		dataType: string
+		formatString:  type text
+		lineageTag: 9f6fea64-9d0a-46f9-952e-b3128e229f3f
+		summarizeBy: none
+		sourceColumn: source_files
+
+		annotation SummarizationSetBy = Automatic
+
+	column connection_status
+		dataType: string
+		formatString:  type text
+		lineageTag: cf3345eb-c9a3-41d7-acc4-271423ce5fd9
+		summarizeBy: none
+		sourceColumn: connection_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition data_sources = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\data_sources.csv"), [Delimiter = ",", Columns = 7, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"source_id", type text}, {"source_name", type text}, {"source_type", type text}, {"connection_location", type text}, {"refresh_frequency_label", type text}, {"source_files", type text}, {"connection_status", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,91 @@
+table alerts
+	lineageTag: 501c6db1-7a54-40ab-9830-702533c299fd
+
+	column alert_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: d2ec4646-b9fe-4093-a444-e088be56db4f
+		summarizeBy: none
+		sourceColumn: alert_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column alert_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 00aee870-d058-4688-935d-5b7ec9679a60
+		summarizeBy: none
+		sourceColumn: alert_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column alert_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 5f78a99c-e565-4497-8c69-ce309e323fb4
+		summarizeBy: none
+		sourceColumn: alert_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity
+		dataType: string
+		formatString:  type text
+		lineageTag: ec579bac-4d71-4b2b-9a96-03e48ee322c7
+		summarizeBy: none
+		sourceColumn: severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column alert_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 70c532ca-4b1c-4461-9424-9944759c11c1
+		summarizeBy: none
+		sourceColumn: alert_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column affected_area
+		dataType: string
+		formatString:  type text
+		lineageTag: f6cf5556-53ba-44e8-8535-dcb6e3d5857c
+		summarizeBy: none
+		sourceColumn: affected_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column alert_description
+		dataType: string
+		formatString:  type text
+		lineageTag: 84180019-304c-42ab-ab44-e5b8ee8a67e3
+		summarizeBy: none
+		sourceColumn: alert_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column confidence_score
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 022a750f-8f74-45ba-8342-f6b5174af405
+		summarizeBy: none
+		sourceColumn: confidence_score
+
+		annotation SummarizationSetBy = Automatic
+
+	partition alerts = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\alerts.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"alert_id", type text}, {"alert_date", type date}, {"alert_type", type text}, {"severity", type text}, {"alert_status", type text}, {"affected_area", type text}, {"alert_description", type text}, {"confidence_score", type number}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

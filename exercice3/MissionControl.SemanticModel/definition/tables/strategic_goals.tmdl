@@ -1,0 +1,102 @@
+table strategic_goals
+	lineageTag: ca542e35-1e26-45e7-b920-87aae695d284
+
+	column goal_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: add093c9-abee-4ecf-bbba-4680f7b54f19
+		summarizeBy: none
+		sourceColumn: goal_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal_name
+		dataType: string
+		formatString:  type text
+		lineageTag: 9da55272-335f-4478-9b9e-d07b483495bf
+		summarizeBy: none
+		sourceColumn: goal_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal_metric
+		dataType: string
+		formatString:  type text
+		lineageTag: fe047c1b-16d9-4e9d-a227-fb0bc9e144d2
+		summarizeBy: none
+		sourceColumn: goal_metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 274dcf13-4e39-4cea-9d9f-674d0acf1329
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_value
+		dataType: double
+		formatString: #,0.## type number
+		lineageTag: 96b5d07b-2abe-46c9-b6f6-8a732e56cbf8
+		summarizeBy: none
+		sourceColumn: target_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_value
+		dataType: double
+		formatString: #,0.## type number
+		lineageTag: f96f006c-40ef-49fd-a438-6da8139218eb
+		summarizeBy: none
+		sourceColumn: current_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 79afdc87-35d4-4746-a2b3-5c34af88d925
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column target_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 55ebcfba-950f-4423-a66b-68ab14ac1017
+		summarizeBy: none
+		sourceColumn: target_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column goal_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 08b653c5-4f69-4db4-9f23-3ebc9e1d9e29
+		summarizeBy: none
+		sourceColumn: goal_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition strategic_goals = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\strategic_goals.csv"), [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"goal_id", type text}, {"goal_name", type text}, {"goal_metric", type text}, {"department_id", type text}, {"target_value", type number}, {"current_value", type number}, {"start_date", type date}, {"target_date", type date}, {"goal_status", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

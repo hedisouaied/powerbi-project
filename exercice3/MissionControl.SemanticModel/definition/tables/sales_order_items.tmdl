@@ -1,0 +1,89 @@
+table sales_order_items
+	lineageTag: fab4bce1-42dc-488a-aec7-ce1712580228
+
+	column order_line_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: ba83dc24-ce0a-4f4c-88fd-321d2f45f544
+		summarizeBy: none
+		sourceColumn: order_line_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 09e78635-a883-45df-931d-d05d8922a31e
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 9343ea02-729c-40f4-b819-87357fe4a1b1
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: #,0 Int64.Type
+		lineageTag: 704a2fcf-145c-4d14-ba12-1e0099d170ad
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: 23172fe7-1cb3-4abb-94e9-8276e58851c9
+		summarizeBy: sum
+		sourceColumn: unit_price_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_rate
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 96c00542-56aa-4329-b61c-56da7cb07990
+		summarizeBy: none
+		sourceColumn: discount_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column net_line_amount_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: 22b09a2c-fb33-4c64-8638-05c57960df24
+		summarizeBy: sum
+		sourceColumn: net_line_amount_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_cost_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: d97ac9cc-08bb-466b-9f92-edfdda3aedeb
+		summarizeBy: sum
+		sourceColumn: line_cost_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales_order_items = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\sales_order_items.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"order_line_id", type text}, {"order_id", type text}, {"product_id", type text}, {"quantity", Int64.Type}, {"unit_price_tnd", Currency.Type}, {"discount_rate", type number}, {"net_line_amount_tnd", Currency.Type}, {"line_cost_tnd", Currency.Type}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

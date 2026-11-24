@@ -1,0 +1,100 @@
+table investigation_evidence
+	lineageTag: 1ab3fdec-cfa1-4735-a929-9e9db1a0f6da
+
+	column evidence_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 144bf105-ddb7-4385-933e-707db4745170
+		summarizeBy: none
+		sourceColumn: evidence_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_id
+		dataType: string
+		formatString:  type text
+		lineageTag: b1b0d166-0856-448e-b2e1-15c1aad31b0a
+		summarizeBy: none
+		sourceColumn: case_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column evidence_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 9cb89b0f-efce-43c8-905d-94c2fe13b527
+		summarizeBy: none
+		sourceColumn: evidence_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_table
+		dataType: string
+		formatString:  type text
+		lineageTag: fdbc2d89-c05a-4449-b266-e9407738b26d
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_record_reference
+		dataType: string
+		formatString:  type text
+		lineageTag: 8556ed07-60dd-4d0d-8c3d-26f83230129e
+		summarizeBy: none
+		sourceColumn: source_record_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column relevance_level
+		dataType: string
+		formatString:  type text
+		lineageTag: 7ad4bb12-ea78-441a-b6cd-f3f03cb764d2
+		summarizeBy: none
+		sourceColumn: relevance_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column evidence_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: c22c1504-3857-4868-a637-424cecf4b247
+		summarizeBy: none
+		sourceColumn: evidence_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column evidence_summary
+		dataType: string
+		formatString:  type text
+		lineageTag: d0894941-3b0e-4774-bc85-9510c0ed4975
+		summarizeBy: none
+		sourceColumn: evidence_summary
+
+		annotation SummarizationSetBy = Automatic
+
+	column evidence_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 94f8c76a-10a3-41ef-af75-89098c8d79d2
+		summarizeBy: none
+		sourceColumn: evidence_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition investigation_evidence = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\investigation_evidence.csv"), [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"evidence_id", type text}, {"case_id", type text}, {"evidence_type", type text}, {"source_table", type text}, {"source_record_reference", type text}, {"relevance_level", type text}, {"evidence_date", type date}, {"evidence_summary", type text}, {"evidence_status", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

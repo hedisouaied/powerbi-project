@@ -1,0 +1,91 @@
+table customers
+	lineageTag: 0b24f6ae-c488-4fbf-a987-7c5c96b52584
+
+	column customer_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: d9c89337-7b53-46aa-b1ca-337f7bb3f75c
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_name
+		dataType: string
+		formatString:  type text
+		lineageTag: 5f1e32e8-22a2-4a06-bea0-b47ce4e96f4c
+		summarizeBy: none
+		sourceColumn: customer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_segment
+		dataType: string
+		formatString:  type text
+		lineageTag: af889ac5-1320-428a-9f07-e084863e92ae
+		summarizeBy: none
+		sourceColumn: customer_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column industry
+		dataType: string
+		formatString:  type text
+		lineageTag: d40bba2b-e571-4984-88c8-07e81e7104ae
+		summarizeBy: none
+		sourceColumn: industry
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		formatString:  type text
+		lineageTag: 8566346b-0fd9-47b7-81e5-6884dea598ab
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column acquisition_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 39aa6de1-1cd9-48fb-ba0a-007f2fc6085d
+		summarizeBy: none
+		sourceColumn: acquisition_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column customer_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 3a91acba-339c-4fd1-92be-34af65a6e017
+		summarizeBy: none
+		sourceColumn: customer_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column annual_contract_value_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: d5d93634-8902-4fa6-8e36-4da9a30c1d28
+		summarizeBy: sum
+		sourceColumn: annual_contract_value_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\customers.csv"), [Delimiter = ",", Columns = 8, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"customer_id", type text}, {"customer_name", type text}, {"customer_segment", type text}, {"industry", type text}, {"region", type text}, {"acquisition_date", type date}, {"customer_status", type text}, {"annual_contract_value_tnd", Currency.Type}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

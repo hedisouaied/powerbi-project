@@ -1,0 +1,17 @@
+table 'Revenue Shock'
+	lineageTag: 6e5c0510-ba26-4f41-bec4-0a5b49e15a16
+
+	column 'Revenue Shock'
+		dataType: double
+		formatString: +0%;-0%;0%
+		lineageTag: fba6bd51-36e6-4151-a274-4bc20a99a8f0
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Revenue Shock' = calculated
+		mode: import
+		source = GENERATESERIES(-0.4, 0.4, 0.05)
+
+	annotation PBI_Id = f3d89e94-9385-4f64-bdd4-f15d330f97f5

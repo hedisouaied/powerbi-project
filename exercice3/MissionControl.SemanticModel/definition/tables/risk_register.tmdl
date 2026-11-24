@@ -1,0 +1,109 @@
+table risk_register
+	lineageTag: 212aa802-66a1-4b27-8b6a-83947fc55b5a
+
+	column risk_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 73eaa233-72cc-45ec-a2cd-550e09ba2c48
+		summarizeBy: none
+		sourceColumn: risk_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_category
+		dataType: string
+		formatString:  type text
+		lineageTag: 54be7206-bb65-464f-b239-4af1422a278a
+		summarizeBy: none
+		sourceColumn: risk_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity
+		dataType: string
+		formatString:  type text
+		lineageTag: aeef8972-97ec-4cae-b33e-627d1338f647
+		summarizeBy: none
+		sourceColumn: severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column confidence_score
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: ad9aef07-5631-447b-9e3e-9d9e8baaf317
+		summarizeBy: none
+		sourceColumn: confidence_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column estimated_exposure_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: e957912a-f5a7-427b-8c0d-7e5b2610e0e4
+		summarizeBy: sum
+		sourceColumn: estimated_exposure_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: ee638d9f-2027-483e-92b0-621e35b6f743
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_owner_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: b9786d4a-ae6f-4462-ae88-df9a52eb416d
+		summarizeBy: none
+		sourceColumn: risk_owner_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column mitigation_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 45c66558-59b0-4839-a31f-a92f63e5f5b9
+		summarizeBy: none
+		sourceColumn: mitigation_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column identified_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 94e5bf40-b749-45cf-99a9-433786f17526
+		summarizeBy: none
+		sourceColumn: identified_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column risk_description
+		dataType: string
+		formatString:  type text
+		lineageTag: 4cdf60fb-29fa-4314-b948-c3caeea457c3
+		summarizeBy: none
+		sourceColumn: risk_description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition risk_register = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\risk_register.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"risk_id", type text}, {"risk_category", type text}, {"severity", type text}, {"confidence_score", type number}, {"estimated_exposure_tnd", Currency.Type}, {"department_id", type text}, {"risk_owner_employee_id", type text}, {"mitigation_status", type text}, {"identified_date", type date}, {"risk_description", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

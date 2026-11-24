@@ -1,0 +1,82 @@
+table collaboration_comments
+	lineageTag: 4e072248-6745-4f5d-8df9-a3644e6c7129
+
+	column comment_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 88c2027a-ec6f-4e4b-96cb-1352e1325e14
+		summarizeBy: none
+		sourceColumn: comment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 90da899c-802b-4fad-a453-c80e55ffc2dd
+		summarizeBy: none
+		sourceColumn: comment_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column author_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 17009a54-4ce2-4983-8261-8b8db0651e31
+		summarizeBy: none
+		sourceColumn: author_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column linked_item_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 5498f75b-19cf-46f2-be8f-dcc3f4303a0b
+		summarizeBy: none
+		sourceColumn: linked_item_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column linked_item_reference
+		dataType: string
+		formatString:  type text
+		lineageTag: 1f42c63c-0ebf-4eb7-ab09-e4c9eb6482e2
+		summarizeBy: none
+		sourceColumn: linked_item_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_text
+		dataType: string
+		formatString:  type text
+		lineageTag: 82d37560-a552-4514-a7fa-149b920e1cc2
+		summarizeBy: none
+		sourceColumn: comment_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 43ce42c4-a837-40d4-8193-6c1b123bf903
+		summarizeBy: none
+		sourceColumn: comment_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition collaboration_comments = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\collaboration_comments.csv"), [Delimiter = ",", Columns = 7, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"comment_id", type text}, {"comment_date", type date}, {"author_employee_id", type text}, {"linked_item_type", type text}, {"linked_item_reference", type text}, {"comment_text", type text}, {"comment_type", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

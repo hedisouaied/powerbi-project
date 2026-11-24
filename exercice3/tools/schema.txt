@@ -1,0 +1,32 @@
+﻿activity_log               activity_id:S activity_date:D employee_id:S action_type:S module_name:S result:S event_details:S
+alerts                     alert_id:S alert_date:D alert_type:S severity:S alert_status:S affected_area:S alert_description:S confidence_score:P
+approval_requests          approval_id:S request_type:S priority:S requested_amount_tnd:C requester_employee_id:S approver_employee_id:S approval_status:S request_date:D request_description:S
+calendar_events            event_id:S event_title:S event_type:S priority:S start_datetime:T end_datetime:T owner_employee_id:S department_id:S related_project_id:S related_task_id:S location_or_meeting_link:S event_status:S recurrence_pattern:S reminder_setting:S event_description:S data_origin:S
+collaboration_comments     comment_id:S comment_date:D author_employee_id:S linked_item_type:S linked_item_reference:S comment_text:S comment_type:S
+customer_interactions      interaction_id:S customer_id:S interaction_date:D channel:S interaction_type:S priority:S interaction_status:S resolution_hours:I owner_employee_id:S
+customers                  customer_id:S customer_name:S customer_segment:S industry:S region:S acquisition_date:D customer_status:S annual_contract_value_tnd:C
+data_quality_issues        issue_id:S source_table:S issue_type:S severity:S issue_status:S issue_description:S detected_date:D
+data_sources               source_id:S source_name:S source_type:S connection_location:S refresh_frequency_label:S source_files:S connection_status:S
+decisions                  decision_id:S decision_date:D decision_type:S department_id:S decision_owner_id:S decision_status:S expected_impact_tnd:C expected_kpi_change_pct:P actual_kpi_change_pct:P decision_notes:S
+departments                department_id:S department_name:S division:S primary_location:S mission:S
+dim_date                   date:D date_key:I year:I quarter:S month_number:I month_name:S month_year:S week_number:I day_name:S is_weekend:B is_month_end:B
+employees                  employee_id:S employee_name:S department_id:S job_title:S employment_status:S location:S monthly_salary_tnd:C hire_date:D
+entity_relationships       relationship_id:S source_entity_type:S source_entity_id:S relationship_type:S target_entity_type:S target_entity_id:S relationship_strength:P relationship_basis:S
+expenses                   expense_id:S expense_date:D department_id:S expense_category:S amount_tnd:C approval_status:S submitted_by_employee_id:S reference_code:S
+incidents                  incident_id:S incident_date:D incident_type:S severity:S department_id:S incident_owner_id:S incident_status:S estimated_impact_tnd:C impact_domain:S
+inventory_snapshots        inventory_snapshot_id:S product_id:S warehouse:S snapshot_date:D quantity_on_hand:I reorder_point:I target_stock:I supplier_id:S
+investigation_cases        case_id:S case_title:S case_type:S severity:S case_status:S case_owner_employee_id:S department_id:S opened_date:D case_summary:S review_status:S
+investigation_evidence     evidence_id:S case_id:S evidence_type:S source_table:S source_record_reference:S relevance_level:S evidence_date:D evidence_summary:S evidence_status:S
+kpi_targets                target_id:S department_id:S month_start:D revenue_target_tnd:C gross_margin_target_pct:P customer_satisfaction_target:N incident_rate_target_pct:N
+missions                   mission_id:S mission_title:S mission_category:S priority:S mission_status:S department_id:S target_value_tnd:C progress_pct:P completion_threshold_pct:P start_date:D target_date:D
+notifications              notification_id:S notification_date:D notification_category:S severity:S notification_message:S read_status:S recipient_employee_id:S source_module:S action_type:S
+payments                   payment_id:S order_id:S customer_id:S payment_date:D payment_method:S amount_tnd:C payment_status:S settlement_date:D
+products                   product_id:S product_name:S category:S product_tier:S list_price_tnd:C unit_cost_tnd:C product_status:S
+projects                   project_id:S project_name:S strategic_theme:S department_id:S project_owner_id:S start_date:D planned_end_date:D project_status:S approved_budget_tnd:C completion_percent:P
+risk_register              risk_id:S risk_category:S severity:S confidence_score:P estimated_exposure_tnd:C department_id:S risk_owner_employee_id:S mitigation_status:S identified_date:D risk_description:S
+sales_order_items          order_line_id:S order_id:S product_id:S quantity:I unit_price_tnd:C discount_rate:P net_line_amount_tnd:C line_cost_tnd:C
+sales_orders               order_id:S customer_id:S order_date:D sales_owner_id:S sales_channel:S order_status:S net_amount_tnd:C tax_amount_tnd:C gross_amount_tnd:C promised_delivery_date:D
+scenarios                  scenario_id:S scenario_name:S scenario_description:S revenue_change_pct:P cost_change_pct:P retention_change_pct:P margin_change_pct:P
+strategic_goals            goal_id:S goal_name:S goal_metric:S department_id:S target_value:N current_value:N start_date:D target_date:D goal_status:S
+suppliers                  supplier_id:S supplier_name:S supplier_category:S country:S risk_level:S quality_rating:N supplier_status:S
+tasks                      task_id:S project_id:S department_id:S assignee_employee_id:S task_title:S task_status:S priority:S created_date:D due_date:D task_type:S

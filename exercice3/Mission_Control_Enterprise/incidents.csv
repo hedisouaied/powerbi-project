@@ -1,0 +1,221 @@
+incident_id,incident_date,incident_type,severity,department_id,incident_owner_id,incident_status,estimated_impact_tnd,impact_domain
+INC0001,2025-08-25,System Outage,High,D06,E034,Resolved,83190.64,Customer Impact
+INC0002,2025-05-10,Customer Escalation,Medium,D08,E005,Mitigated,82770.24,Supplier
+INC0003,2025-05-14,System Outage,High,D01,E017,Open,21308.93,Supplier
+INC0004,2025-08-08,Security Alert,Medium,D03,E021,Open,84546.91,Customer Impact
+INC0005,2025-02-27,System Outage,Low,D04,E050,Mitigated,83493.8,Customer Impact
+INC0006,2025-03-24,Supplier Disruption,Critical,D03,E020,Investigating,6166.5,Internal
+INC0007,2025-04-12,System Outage,Medium,D01,E043,Mitigated,78058.25,Supplier
+INC0008,2025-11-17,Customer Escalation,Medium,D03,E002,Investigating,61640.0,Supplier
+INC0009,2026-01-04,Delivery Delay,Low,D03,E020,Investigating,59822.13,Supplier
+INC0010,2025-06-01,Supplier Disruption,High,D06,E060,Investigating,47516.3,Regulatory
+INC0011,2026-06-13,Customer Escalation,Low,D02,E047,Resolved,62668.61,Regulatory
+INC0012,2025-01-05,System Outage,Medium,D05,E048,Mitigated,35916.43,Regulatory
+INC0013,2026-10-31,Delivery Delay,Medium,D02,E065,Open,6026.1,Customer Impact
+INC0014,2026-06-11,Supplier Disruption,Medium,D04,E052,Resolved,58513.87,Regulatory
+INC0015,2026-03-15,Delivery Delay,Critical,D02,E067,Open,44216.95,Internal
+INC0016,2025-11-30,Security Alert,Low,D05,E048,Investigating,76600.98,Internal
+INC0017,2026-02-09,Supplier Disruption,Medium,D05,E005,Investigating,29322.61,Customer Impact
+INC0018,2025-02-16,System Outage,Medium,D04,E051,Investigating,28316.96,Customer Impact
+INC0019,2025-01-30,Data Issue,Low,D07,E041,Resolved,12155.43,Supplier
+INC0020,2025-05-12,Customer Escalation,Medium,D07,E019,Investigating,74467.23,Customer Impact
+INC0021,2026-05-29,Security Alert,Medium,D06,E049,Investigating,25528.67,Regulatory
+INC0022,2025-12-26,Customer Escalation,Critical,D08,E074,Investigating,75545.99,Regulatory
+INC0023,2026-07-10,Security Alert,Low,D04,E058,Mitigated,77652.93,Supplier
+INC0024,2026-06-05,Security Alert,Medium,D04,E026,Resolved,27941.06,Supplier
+INC0025,2025-08-18,Security Alert,Critical,D05,E080,Investigating,64725.76,Supplier
+INC0026,2025-10-10,System Outage,Critical,D03,E043,Resolved,18007.71,Internal
+INC0027,2025-09-04,Customer Escalation,Medium,D08,E054,Investigating,4541.91,Regulatory
+INC0028,2025-01-08,Security Alert,Critical,D03,E072,Mitigated,69773.69,Supplier
+INC0029,2025-01-12,Customer Escalation,Critical,D03,E010,Resolved,6562.4,Internal
+INC0030,2026-08-06,Customer Escalation,Medium,D07,E054,Resolved,58162.32,Customer Impact
+INC0031,2025-03-03,Delivery Delay,Medium,D07,E031,Open,69844.45,Internal
+INC0032,2025-02-05,Data Issue,High,D02,E013,Resolved,19414.63,Supplier
+INC0033,2025-02-28,Security Alert,Critical,D08,E075,Mitigated,70475.28,Supplier
+INC0034,2025-01-28,Security Alert,High,D03,E053,Open,13331.56,Supplier
+INC0035,2025-05-23,System Outage,Low,D06,E018,Resolved,17428.74,Customer Impact
+INC0036,2026-09-02,Delivery Delay,Critical,D08,E065,Mitigated,74810.41,Regulatory
+INC0037,2025-01-14,Data Issue,Critical,D05,E004,Mitigated,70280.96,Internal
+INC0038,2026-08-31,Supplier Disruption,Critical,D04,E013,Resolved,67915.44,Customer Impact
+INC0039,2025-02-23,Delivery Delay,Critical,D07,E021,Open,74632.38,Regulatory
+INC0040,2026-11-14,Supplier Disruption,Low,D07,E046,Investigating,70709.2,Regulatory
+INC0041,2026-11-10,Data Issue,Critical,D04,E020,Investigating,34783.29,Regulatory
+INC0042,2025-08-31,Delivery Delay,Medium,D06,E049,Open,46452.81,Internal
+INC0043,2025-08-07,System Outage,Critical,D03,E020,Resolved,56350.82,Internal
+INC0044,2025-10-14,Data Issue,Medium,D03,E010,Resolved,82260.8,Customer Impact
+INC0045,2025-02-08,Security Alert,High,D03,E068,Mitigated,25815.93,Supplier
+INC0046,2026-01-27,Data Issue,High,D02,E028,Resolved,18757.19,Internal
+INC0047,2026-05-24,System Outage,High,D08,E049,Investigating,66221.73,Regulatory
+INC0048,2026-09-01,Supplier Disruption,Medium,D03,E009,Resolved,5237.08,Regulatory
+INC0049,2025-07-16,System Outage,Medium,D03,E026,Resolved,50783.34,Internal
+INC0050,2026-07-11,System Outage,Low,D02,E071,Resolved,61405.34,Supplier
+INC0051,2026-10-21,Supplier Disruption,High,D04,E017,Resolved,45102.42,Customer Impact
+INC0052,2025-11-09,Delivery Delay,High,D04,E018,Investigating,47599.0,Customer Impact
+INC0053,2025-09-22,Delivery Delay,Critical,D04,E009,Investigating,18301.66,Internal
+INC0054,2025-10-02,Security Alert,Medium,D02,E076,Investigating,55693.48,Customer Impact
+INC0055,2025-05-01,System Outage,Medium,D03,E080,Investigating,55344.02,Regulatory
+INC0056,2026-07-31,Security Alert,Critical,D08,E065,Open,24081.23,Customer Impact
+INC0057,2026-02-03,System Outage,High,D07,E070,Open,5711.24,Supplier
+INC0058,2026-04-19,System Outage,High,D01,E002,Open,55265.74,Regulatory
+INC0059,2026-10-17,System Outage,Medium,D08,E075,Resolved,11295.35,Supplier
+INC0060,2025-08-12,Supplier Disruption,Low,D07,E003,Open,29185.11,Internal
+INC0061,2025-06-12,Customer Escalation,Low,D02,E072,Open,34956.7,Internal
+INC0062,2026-03-31,Delivery Delay,Low,D06,E040,Resolved,74024.28,Regulatory
+INC0063,2026-09-06,Security Alert,Critical,D07,E001,Mitigated,13448.3,Supplier
+INC0064,2025-12-02,Customer Escalation,High,D08,E016,Mitigated,40817.0,Regulatory
+INC0065,2026-01-24,Delivery Delay,High,D01,E006,Resolved,2129.44,Supplier
+INC0066,2025-01-11,Data Issue,Low,D08,E043,Mitigated,66845.47,Regulatory
+INC0067,2025-11-24,System Outage,Low,D05,E018,Resolved,20151.12,Supplier
+INC0068,2025-12-14,Supplier Disruption,Medium,D05,E023,Open,24529.29,Internal
+INC0069,2026-08-29,Data Issue,High,D02,E027,Investigating,46803.41,Regulatory
+INC0070,2025-10-04,Security Alert,Critical,D01,E055,Resolved,47284.05,Customer Impact
+INC0071,2025-09-19,System Outage,High,D07,E001,Open,54230.3,Regulatory
+INC0072,2026-01-13,System Outage,High,D01,E057,Resolved,68142.67,Customer Impact
+INC0073,2026-05-13,Data Issue,Critical,D07,E068,Resolved,57237.99,Internal
+INC0074,2025-02-09,Customer Escalation,Critical,D05,E012,Resolved,36092.17,Internal
+INC0075,2025-08-01,Supplier Disruption,Critical,D07,E007,Mitigated,60103.63,Customer Impact
+INC0076,2025-10-25,Supplier Disruption,Medium,D01,E004,Open,43027.91,Customer Impact
+INC0077,2025-10-13,Security Alert,Low,D03,E053,Mitigated,29171.91,Supplier
+INC0078,2025-08-13,Delivery Delay,Critical,D04,E060,Open,78469.86,Supplier
+INC0079,2026-02-10,Supplier Disruption,Medium,D02,E054,Investigating,21626.92,Customer Impact
+INC0080,2026-01-26,Delivery Delay,Low,D07,E046,Open,23145.42,Supplier
+INC0081,2025-02-08,Supplier Disruption,Low,D03,E009,Investigating,37998.28,Regulatory
+INC0082,2025-06-01,Security Alert,High,D06,E016,Investigating,68957.29,Regulatory
+INC0083,2026-01-02,Supplier Disruption,Critical,D06,E046,Open,19776.69,Customer Impact
+INC0084,2026-02-04,Data Issue,Critical,D05,E043,Open,42751.04,Regulatory
+INC0085,2026-05-24,Delivery Delay,Low,D02,E036,Mitigated,44973.28,Supplier
+INC0086,2026-02-12,Supplier Disruption,Critical,D05,E047,Resolved,72609.24,Customer Impact
+INC0087,2025-08-03,Delivery Delay,High,D04,E017,Open,2790.73,Regulatory
+INC0088,2025-08-28,System Outage,Low,D06,E033,Open,54632.58,Regulatory
+INC0089,2026-08-06,Supplier Disruption,Medium,D04,E038,Open,82892.46,Regulatory
+INC0090,2026-06-10,Delivery Delay,High,D03,E034,Resolved,50244.58,Internal
+INC0091,2025-10-08,Customer Escalation,Low,D05,E035,Investigating,47200.36,Supplier
+INC0092,2026-07-29,Security Alert,High,D08,E005,Mitigated,12627.85,Customer Impact
+INC0093,2025-06-14,Data Issue,Medium,D05,E034,Open,42839.88,Supplier
+INC0094,2025-12-18,System Outage,Critical,D06,E067,Mitigated,58536.98,Customer Impact
+INC0095,2026-10-23,Customer Escalation,Medium,D07,E079,Resolved,20938.79,Supplier
+INC0096,2025-08-25,Delivery Delay,High,D02,E016,Investigating,66905.53,Internal
+INC0097,2025-07-31,Data Issue,High,D03,E015,Mitigated,16676.15,Internal
+INC0098,2025-10-27,Customer Escalation,Critical,D04,E032,Investigating,54950.64,Supplier
+INC0099,2025-08-08,Customer Escalation,Critical,D01,E072,Open,11786.15,Regulatory
+INC0100,2025-05-01,Delivery Delay,Medium,D05,E042,Investigating,18826.94,Internal
+INC0101,2026-09-22,Delivery Delay,Critical,D03,E080,Resolved,47164.71,Regulatory
+INC0102,2026-02-05,Supplier Disruption,Medium,D02,E052,Open,69607.05,Supplier
+INC0103,2025-09-28,Customer Escalation,Critical,D02,E010,Resolved,56696.78,Regulatory
+INC0104,2026-05-29,Security Alert,Critical,D02,E007,Open,29299.1,Regulatory
+INC0105,2026-01-27,Customer Escalation,Medium,D01,E016,Resolved,24121.88,Internal
+INC0106,2025-03-04,Delivery Delay,High,D03,E020,Open,76514.77,Regulatory
+INC0107,2025-03-01,Security Alert,Medium,D08,E034,Investigating,62478.02,Supplier
+INC0108,2026-02-04,Supplier Disruption,Critical,D08,E080,Mitigated,34866.38,Customer Impact
+INC0109,2026-01-08,Delivery Delay,Medium,D05,E080,Investigating,78247.45,Internal
+INC0110,2026-03-26,Customer Escalation,Low,D06,E064,Investigating,5475.85,Supplier
+INC0111,2026-11-02,Security Alert,Medium,D06,E012,Open,21666.64,Internal
+INC0112,2025-06-24,Customer Escalation,Critical,D05,E044,Investigating,59185.57,Internal
+INC0113,2025-07-18,System Outage,High,D02,E077,Resolved,60870.29,Customer Impact
+INC0114,2025-08-06,Supplier Disruption,Critical,D07,E013,Investigating,72225.22,Internal
+INC0115,2025-12-15,System Outage,Medium,D04,E034,Resolved,6833.86,Supplier
+INC0116,2026-02-09,Customer Escalation,Medium,D03,E077,Resolved,77140.24,Internal
+INC0117,2025-10-05,Security Alert,Critical,D02,E048,Mitigated,67414.96,Supplier
+INC0118,2026-04-04,Customer Escalation,Low,D01,E010,Open,49083.55,Internal
+INC0119,2026-04-29,System Outage,Low,D07,E075,Resolved,78521.75,Customer Impact
+INC0120,2025-12-17,System Outage,Critical,D08,E004,Mitigated,78132.91,Internal
+INC0121,2025-02-05,Data Issue,Medium,D08,E060,Resolved,36630.77,Supplier
+INC0122,2025-04-18,Supplier Disruption,Critical,D03,E050,Mitigated,75925.25,Customer Impact
+INC0123,2025-10-16,System Outage,High,D02,E070,Open,67824.03,Customer Impact
+INC0124,2025-08-19,Security Alert,Low,D01,E033,Resolved,51420.2,Supplier
+INC0125,2026-07-04,System Outage,Low,D05,E026,Investigating,12030.15,Internal
+INC0126,2026-11-04,Delivery Delay,Medium,D03,E076,Open,47952.81,Supplier
+INC0127,2026-10-20,Customer Escalation,Low,D08,E047,Open,54527.76,Customer Impact
+INC0128,2025-03-23,Data Issue,Medium,D02,E068,Investigating,66884.93,Internal
+INC0129,2025-06-30,Data Issue,High,D01,E037,Open,9804.47,Internal
+INC0130,2025-11-09,System Outage,High,D08,E013,Mitigated,60034.46,Customer Impact
+INC0131,2025-09-06,Security Alert,Low,D08,E029,Investigating,8702.05,Regulatory
+INC0132,2026-03-15,System Outage,High,D03,E020,Resolved,32204.32,Customer Impact
+INC0133,2026-02-25,Data Issue,Critical,D02,E061,Mitigated,16532.94,Regulatory
+INC0134,2026-08-09,Data Issue,Medium,D08,E011,Open,61683.2,Internal
+INC0135,2026-06-10,Delivery Delay,Low,D02,E034,Investigating,43818.21,Customer Impact
+INC0136,2025-10-11,Customer Escalation,Medium,D05,E007,Investigating,47242.0,Customer Impact
+INC0137,2026-04-08,Data Issue,High,D04,E020,Mitigated,18627.4,Customer Impact
+INC0138,2026-04-07,Supplier Disruption,Critical,D05,E029,Open,56070.7,Regulatory
+INC0139,2025-09-16,Customer Escalation,Critical,D01,E028,Investigating,24101.91,Supplier
+INC0140,2025-03-22,Security Alert,Low,D06,E009,Mitigated,3358.56,Supplier
+INC0141,2026-09-26,Supplier Disruption,Medium,D08,E024,Investigating,45363.14,Internal
+INC0142,2025-11-11,Supplier Disruption,High,D05,E021,Investigating,653.42,Regulatory
+INC0143,2026-03-22,Data Issue,Medium,D07,E005,Resolved,82665.96,Customer Impact
+INC0144,2026-05-16,Customer Escalation,Critical,D07,E002,Resolved,11646.76,Internal
+INC0145,2026-02-06,Data Issue,Medium,D06,E053,Open,5420.72,Regulatory
+INC0146,2025-08-17,System Outage,Low,D03,E025,Resolved,7455.94,Internal
+INC0147,2025-07-21,Customer Escalation,Low,D07,E020,Mitigated,54135.64,Regulatory
+INC0148,2026-08-29,Customer Escalation,Medium,D01,E031,Investigating,65347.09,Regulatory
+INC0149,2025-12-21,System Outage,Low,D06,E053,Resolved,43427.13,Customer Impact
+INC0150,2026-07-02,Security Alert,Low,D01,E077,Open,24652.86,Customer Impact
+INC0151,2025-04-04,Data Issue,High,D05,E063,Resolved,75979.19,Internal
+INC0152,2026-07-13,Data Issue,High,D05,E076,Mitigated,33575.93,Regulatory
+INC0153,2025-12-01,Data Issue,Low,D06,E024,Open,55197.24,Customer Impact
+INC0154,2025-07-20,Customer Escalation,Critical,D06,E015,Investigating,35823.35,Regulatory
+INC0155,2026-03-05,Supplier Disruption,Critical,D08,E023,Resolved,42203.02,Customer Impact
+INC0156,2026-07-15,Customer Escalation,Low,D08,E012,Investigating,33878.59,Customer Impact
+INC0157,2026-04-17,Delivery Delay,Critical,D02,E059,Mitigated,77053.47,Internal
+INC0158,2025-02-17,Supplier Disruption,High,D06,E040,Investigating,7598.04,Supplier
+INC0159,2025-03-18,Supplier Disruption,Critical,D06,E022,Investigating,33674.06,Supplier
+INC0160,2025-02-21,Customer Escalation,Critical,D08,E019,Mitigated,13993.57,Regulatory
+INC0161,2025-05-11,Security Alert,Medium,D05,E018,Mitigated,41411.13,Internal
+INC0162,2026-05-13,Customer Escalation,Critical,D02,E066,Mitigated,77977.89,Internal
+INC0163,2026-09-28,Supplier Disruption,Low,D07,E060,Open,78968.06,Customer Impact
+INC0164,2026-10-23,System Outage,Medium,D01,E067,Open,24873.77,Internal
+INC0165,2026-04-12,Supplier Disruption,High,D02,E080,Resolved,71869.97,Internal
+INC0166,2026-05-18,Security Alert,Medium,D01,E066,Resolved,54707.91,Supplier
+INC0167,2026-02-19,Data Issue,Low,D07,E069,Resolved,56556.1,Internal
+INC0168,2026-05-04,Data Issue,Medium,D02,E004,Open,39140.33,Supplier
+INC0169,2026-10-28,Supplier Disruption,High,D01,E006,Investigating,45985.4,Internal
+INC0170,2025-03-05,Data Issue,Critical,D07,E004,Investigating,77623.73,Customer Impact
+INC0171,2025-02-24,Delivery Delay,Low,D04,E066,Mitigated,12562.59,Customer Impact
+INC0172,2026-04-29,Data Issue,High,D04,E068,Open,40635.69,Supplier
+INC0173,2026-01-01,Security Alert,Critical,D05,E040,Investigating,45891.35,Regulatory
+INC0174,2026-03-25,System Outage,High,D05,E046,Investigating,63284.48,Internal
+INC0175,2026-05-23,Customer Escalation,High,D07,E043,Resolved,78374.19,Regulatory
+INC0176,2025-07-31,Customer Escalation,Medium,D08,E029,Open,23147.68,Supplier
+INC0177,2025-08-04,Delivery Delay,High,D01,E029,Open,26939.1,Supplier
+INC0178,2026-05-09,Data Issue,Critical,D07,E071,Open,82249.86,Regulatory
+INC0179,2026-01-23,System Outage,Critical,D05,E007,Mitigated,52188.31,Regulatory
+INC0180,2026-04-06,Customer Escalation,Low,D01,E038,Open,32532.48,Regulatory
+INC0181,2025-11-14,Supplier Disruption,Medium,D03,E055,Resolved,63362.81,Regulatory
+INC0182,2025-01-06,System Outage,Low,D02,E040,Resolved,35658.39,Supplier
+INC0183,2025-05-14,Delivery Delay,Low,D06,E020,Investigating,57513.04,Supplier
+INC0184,2026-10-17,System Outage,Critical,D05,E045,Open,83408.12,Customer Impact
+INC0185,2026-07-26,Supplier Disruption,High,D04,E031,Investigating,77519.72,Supplier
+INC0186,2026-10-10,Security Alert,High,D07,E039,Mitigated,71053.91,Regulatory
+INC0187,2025-04-14,Security Alert,Medium,D02,E039,Mitigated,60278.67,Internal
+INC0188,2025-08-26,Security Alert,Critical,D06,E041,Investigating,64699.0,Customer Impact
+INC0189,2026-09-05,Customer Escalation,Critical,D06,E066,Open,27277.51,Regulatory
+INC0190,2025-12-24,Supplier Disruption,Medium,D08,E016,Open,65763.79,Customer Impact
+INC0191,2026-04-03,Customer Escalation,Low,D04,E069,Investigating,10521.57,Supplier
+INC0192,2026-10-19,Security Alert,High,D03,E007,Open,78368.47,Customer Impact
+INC0193,2026-08-01,Supplier Disruption,Medium,D04,E061,Resolved,40996.26,Regulatory
+INC0194,2025-12-02,System Outage,Critical,D03,E059,Resolved,33770.52,Supplier
+INC0195,2025-12-29,Supplier Disruption,Medium,D04,E071,Mitigated,48217.53,Supplier
+INC0196,2025-02-27,Data Issue,Critical,D04,E023,Investigating,79353.24,Internal
+INC0197,2025-12-11,System Outage,Low,D03,E050,Investigating,19463.25,Customer Impact
+INC0198,2025-10-30,Customer Escalation,Low,D05,E001,Investigating,26384.36,Internal
+INC0199,2025-11-18,Supplier Disruption,High,D01,E059,Resolved,22804.39,Internal
+INC0200,2025-01-28,Security Alert,Critical,D04,E010,Mitigated,39683.33,Regulatory
+INC0201,2025-11-01,Security Alert,Low,D05,E046,Resolved,58080.27,Customer Impact
+INC0202,2026-04-07,Data Issue,Medium,D02,E035,Investigating,65691.13,Customer Impact
+INC0203,2025-07-19,Customer Escalation,Low,D05,E073,Mitigated,3795.84,Customer Impact
+INC0204,2026-05-07,Supplier Disruption,Critical,D01,E028,Investigating,12574.98,Supplier
+INC0205,2026-10-08,Supplier Disruption,Low,D08,E079,Investigating,70398.88,Customer Impact
+INC0206,2025-02-21,Data Issue,Medium,D01,E050,Investigating,83070.24,Internal
+INC0207,2025-03-12,Delivery Delay,Critical,D08,E021,Open,45786.71,Regulatory
+INC0208,2025-07-01,Delivery Delay,Medium,D02,E035,Resolved,71402.43,Internal
+INC0209,2026-02-20,Data Issue,Medium,D01,E053,Open,3962.42,Internal
+INC0210,2026-02-16,Security Alert,Critical,D06,E053,Mitigated,17076.33,Customer Impact
+INC0211,2025-09-19,Delivery Delay,High,D07,E051,Resolved,811.51,Supplier
+INC0212,2026-03-10,System Outage,Critical,D06,E077,Open,37874.27,Regulatory
+INC0213,2026-10-24,System Outage,High,D02,E042,Mitigated,31826.46,Regulatory
+INC0214,2025-03-01,Customer Escalation,Critical,D06,E025,Investigating,25326.02,Regulatory
+INC0215,2025-04-08,System Outage,Medium,D07,E054,Open,11309.51,Internal
+INC0216,2026-03-23,System Outage,High,D05,E057,Investigating,61495.97,Regulatory
+INC0217,2025-08-16,Security Alert,High,D05,E031,Open,24095.74,Supplier
+INC0218,2026-11-20,Delivery Delay,High,D06,E005,Resolved,2448.53,Regulatory
+INC0219,2025-12-31,Customer Escalation,High,D03,E016,Open,6649.64,Internal
+INC0220,2025-12-11,Supplier Disruption,Low,D05,E046,Investigating,76574.0,Regulatory

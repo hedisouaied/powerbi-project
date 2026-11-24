@@ -1,0 +1,1001 @@
+activity_id,activity_date,employee_id,action_type,module_name,result,event_details
+ACT00001,2026-03-15,E045,Created Task,Case Board,Success,Activity event 0001
+ACT00002,2026-05-29,E043,Changed Layout,Case Board,Success,Activity event 0002
+ACT00003,2026-02-28,E007,Updated Scenario,Investigator,Success,Activity event 0003
+ACT00004,2025-01-15,E014,Acknowledged Alert,Task Manager,Success,Activity event 0004
+ACT00005,2026-01-09,E032,Updated Scenario,Investigator,Success,Activity event 0005
+ACT00006,2025-09-10,E036,Updated Scenario,Data Explorer,Failed,Activity event 0006
+ACT00007,2026-11-15,E031,Viewed KPI,Case Board,Success,Activity event 0007
+ACT00008,2025-11-03,E041,Updated Scenario,Simulator,Success,Activity event 0008
+ACT00009,2026-06-19,E059,Viewed KPI,Command Center,Failed,Activity event 0009
+ACT00010,2026-11-08,E051,Changed Filter,Case Board,Failed,Activity event 0010
+ACT00011,2026-10-22,E049,Created Task,Data Explorer,Failed,Activity event 0011
+ACT00012,2026-01-07,E045,Created Task,Investigator,Failed,Activity event 0012
+ACT00013,2025-11-28,E017,Exported Report,Command Center,Success,Activity event 0013
+ACT00014,2025-09-11,E049,Changed Layout,Case Board,Success,Activity event 0014
+ACT00015,2026-02-23,E013,Changed Layout,Case Board,Success,Activity event 0015
+ACT00016,2026-07-10,E058,Created Task,Case Board,Success,Activity event 0016
+ACT00017,2025-12-29,E037,Changed Filter,Command Center,Success,Activity event 0017
+ACT00018,2026-01-21,E047,Changed Layout,Case Board,Success,Activity event 0018
+ACT00019,2025-10-23,E070,Exported Report,Task Manager,Failed,Activity event 0019
+ACT00020,2025-04-20,E030,Viewed KPI,Task Manager,Failed,Activity event 0020
+ACT00021,2025-10-02,E008,Exported Report,Data Explorer,Success,Activity event 0021
+ACT00022,2025-03-03,E072,Exported Report,Investigator,Success,Activity event 0022
+ACT00023,2026-06-20,E030,Acknowledged Alert,Case Board,Success,Activity event 0023
+ACT00024,2025-07-03,E033,Viewed KPI,Task Manager,Success,Activity event 0024
+ACT00025,2026-05-03,E024,Changed Layout,Command Center,Success,Activity event 0025
+ACT00026,2025-02-15,E034,Created Task,Simulator,Success,Activity event 0026
+ACT00027,2026-02-18,E042,Created Task,Task Manager,Success,Activity event 0027
+ACT00028,2025-04-30,E068,Changed Filter,Case Board,Success,Activity event 0028
+ACT00029,2026-03-13,E058,Exported Report,Command Center,Failed,Activity event 0029
+ACT00030,2026-10-24,E042,Exported Report,Command Center,Failed,Activity event 0030
+ACT00031,2026-02-05,E062,Opened Case,Investigator,Success,Activity event 0031
+ACT00032,2026-06-19,E068,Opened Case,Task Manager,Failed,Activity event 0032
+ACT00033,2026-05-02,E005,Created Task,Investigator,Success,Activity event 0033
+ACT00034,2025-08-31,E048,Updated Scenario,Data Explorer,Success,Activity event 0034
+ACT00035,2025-11-04,E004,Changed Filter,Case Board,Success,Activity event 0035
+ACT00036,2025-07-04,E025,Updated Scenario,Command Center,Success,Activity event 0036
+ACT00037,2025-01-25,E061,Viewed KPI,Task Manager,Success,Activity event 0037
+ACT00038,2025-09-19,E064,Changed Layout,Command Center,Success,Activity event 0038
+ACT00039,2026-08-25,E071,Updated Scenario,Simulator,Success,Activity event 0039
+ACT00040,2026-09-20,E040,Created Task,Investigator,Success,Activity event 0040
+ACT00041,2025-06-17,E007,Exported Report,Data Explorer,Failed,Activity event 0041
+ACT00042,2026-03-08,E011,Viewed KPI,Investigator,Success,Activity event 0042
+ACT00043,2025-06-16,E020,Changed Layout,Command Center,Failed,Activity event 0043
+ACT00044,2025-07-09,E030,Changed Filter,Command Center,Success,Activity event 0044
+ACT00045,2025-08-17,E043,Viewed KPI,Simulator,Success,Activity event 0045
+ACT00046,2026-10-24,E052,Changed Layout,Command Center,Success,Activity event 0046
+ACT00047,2026-04-13,E014,Changed Filter,Investigator,Success,Activity event 0047
+ACT00048,2025-03-20,E016,Created Task,Data Explorer,Success,Activity event 0048
+ACT00049,2026-08-10,E014,Created Task,Investigator,Success,Activity event 0049
+ACT00050,2026-11-11,E061,Acknowledged Alert,Case Board,Success,Activity event 0050
+ACT00051,2026-07-27,E025,Opened Case,Simulator,Success,Activity event 0051
+ACT00052,2025-04-19,E014,Acknowledged Alert,Case Board,Success,Activity event 0052
+ACT00053,2026-08-16,E035,Exported Report,Case Board,Failed,Activity event 0053
+ACT00054,2025-10-10,E020,Changed Filter,Task Manager,Success,Activity event 0054
+ACT00055,2025-09-04,E030,Changed Layout,Command Center,Failed,Activity event 0055
+ACT00056,2026-06-02,E066,Opened Case,Simulator,Success,Activity event 0056
+ACT00057,2025-08-19,E037,Changed Filter,Command Center,Failed,Activity event 0057
+ACT00058,2025-05-01,E006,Changed Filter,Task Manager,Success,Activity event 0058
+ACT00059,2025-06-10,E002,Updated Scenario,Investigator,Success,Activity event 0059
+ACT00060,2025-01-24,E020,Updated Scenario,Investigator,Success,Activity event 0060
+ACT00061,2026-09-15,E015,Exported Report,Data Explorer,Success,Activity event 0061
+ACT00062,2026-04-27,E012,Updated Scenario,Investigator,Success,Activity event 0062
+ACT00063,2025-11-17,E049,Updated Scenario,Investigator,Success,Activity event 0063
+ACT00064,2026-01-23,E064,Acknowledged Alert,Command Center,Success,Activity event 0064
+ACT00065,2025-06-25,E060,Created Task,Case Board,Success,Activity event 0065
+ACT00066,2025-10-06,E036,Changed Layout,Task Manager,Failed,Activity event 0066
+ACT00067,2025-08-10,E080,Exported Report,Data Explorer,Failed,Activity event 0067
+ACT00068,2026-07-24,E038,Created Task,Data Explorer,Failed,Activity event 0068
+ACT00069,2026-05-29,E074,Acknowledged Alert,Task Manager,Success,Activity event 0069
+ACT00070,2025-07-16,E027,Changed Filter,Investigator,Success,Activity event 0070
+ACT00071,2026-06-11,E023,Viewed KPI,Command Center,Success,Activity event 0071
+ACT00072,2025-03-06,E048,Viewed KPI,Case Board,Success,Activity event 0072
+ACT00073,2025-05-20,E047,Acknowledged Alert,Data Explorer,Failed,Activity event 0073
+ACT00074,2025-03-15,E039,Created Task,Command Center,Success,Activity event 0074
+ACT00075,2025-06-14,E043,Exported Report,Simulator,Success,Activity event 0075
+ACT00076,2025-06-06,E021,Opened Case,Task Manager,Success,Activity event 0076
+ACT00077,2026-09-15,E079,Changed Filter,Case Board,Failed,Activity event 0077
+ACT00078,2025-08-15,E052,Viewed KPI,Case Board,Success,Activity event 0078
+ACT00079,2025-09-03,E014,Changed Filter,Case Board,Success,Activity event 0079
+ACT00080,2025-03-10,E072,Acknowledged Alert,Data Explorer,Success,Activity event 0080
+ACT00081,2025-02-15,E040,Changed Filter,Task Manager,Success,Activity event 0081
+ACT00082,2025-06-01,E061,Changed Layout,Simulator,Success,Activity event 0082
+ACT00083,2025-04-03,E047,Changed Filter,Command Center,Success,Activity event 0083
+ACT00084,2025-08-27,E042,Changed Layout,Investigator,Success,Activity event 0084
+ACT00085,2025-05-09,E010,Acknowledged Alert,Command Center,Failed,Activity event 0085
+ACT00086,2025-05-04,E047,Changed Filter,Task Manager,Success,Activity event 0086
+ACT00087,2026-03-24,E073,Updated Scenario,Command Center,Failed,Activity event 0087
+ACT00088,2026-10-13,E061,Opened Case,Command Center,Success,Activity event 0088
+ACT00089,2025-01-09,E057,Changed Layout,Data Explorer,Failed,Activity event 0089
+ACT00090,2026-05-03,E057,Opened Case,Simulator,Success,Activity event 0090
+ACT00091,2026-04-01,E056,Viewed KPI,Task Manager,Success,Activity event 0091
+ACT00092,2026-02-09,E050,Acknowledged Alert,Task Manager,Success,Activity event 0092
+ACT00093,2026-04-24,E004,Changed Layout,Simulator,Success,Activity event 0093
+ACT00094,2025-12-18,E011,Viewed KPI,Task Manager,Success,Activity event 0094
+ACT00095,2026-10-03,E080,Updated Scenario,Simulator,Failed,Activity event 0095
+ACT00096,2025-04-20,E072,Viewed KPI,Task Manager,Success,Activity event 0096
+ACT00097,2025-11-24,E054,Opened Case,Investigator,Failed,Activity event 0097
+ACT00098,2026-03-28,E010,Updated Scenario,Task Manager,Success,Activity event 0098
+ACT00099,2026-09-20,E052,Acknowledged Alert,Case Board,Success,Activity event 0099
+ACT00100,2025-12-03,E050,Exported Report,Data Explorer,Failed,Activity event 0100
+ACT00101,2026-11-07,E052,Created Task,Case Board,Success,Activity event 0101
+ACT00102,2026-03-30,E071,Created Task,Case Board,Success,Activity event 0102
+ACT00103,2026-04-29,E012,Opened Case,Simulator,Failed,Activity event 0103
+ACT00104,2026-07-20,E072,Exported Report,Data Explorer,Success,Activity event 0104
+ACT00105,2026-05-23,E013,Acknowledged Alert,Simulator,Failed,Activity event 0105
+ACT00106,2025-12-28,E005,Opened Case,Case Board,Failed,Activity event 0106
+ACT00107,2026-06-18,E077,Changed Filter,Investigator,Success,Activity event 0107
+ACT00108,2026-10-07,E064,Created Task,Case Board,Success,Activity event 0108
+ACT00109,2026-07-23,E017,Changed Layout,Data Explorer,Success,Activity event 0109
+ACT00110,2026-03-17,E067,Viewed KPI,Case Board,Success,Activity event 0110
+ACT00111,2025-02-17,E023,Exported Report,Investigator,Success,Activity event 0111
+ACT00112,2025-07-23,E044,Created Task,Simulator,Failed,Activity event 0112
+ACT00113,2025-06-25,E028,Changed Filter,Data Explorer,Success,Activity event 0113
+ACT00114,2025-06-27,E006,Viewed KPI,Investigator,Success,Activity event 0114
+ACT00115,2026-04-10,E052,Viewed KPI,Case Board,Success,Activity event 0115
+ACT00116,2026-08-29,E047,Updated Scenario,Task Manager,Success,Activity event 0116
+ACT00117,2026-04-17,E029,Changed Layout,Command Center,Success,Activity event 0117
+ACT00118,2025-09-26,E033,Exported Report,Investigator,Failed,Activity event 0118
+ACT00119,2026-11-01,E038,Opened Case,Simulator,Success,Activity event 0119
+ACT00120,2026-08-20,E026,Opened Case,Task Manager,Success,Activity event 0120
+ACT00121,2026-04-19,E022,Updated Scenario,Task Manager,Failed,Activity event 0121
+ACT00122,2025-10-02,E069,Created Task,Task Manager,Success,Activity event 0122
+ACT00123,2026-04-18,E039,Viewed KPI,Investigator,Success,Activity event 0123
+ACT00124,2025-10-09,E064,Changed Layout,Simulator,Success,Activity event 0124
+ACT00125,2025-04-18,E068,Acknowledged Alert,Simulator,Failed,Activity event 0125
+ACT00126,2026-03-04,E027,Acknowledged Alert,Simulator,Success,Activity event 0126
+ACT00127,2026-04-28,E080,Updated Scenario,Command Center,Success,Activity event 0127
+ACT00128,2025-08-30,E032,Viewed KPI,Case Board,Success,Activity event 0128
+ACT00129,2026-10-05,E028,Updated Scenario,Simulator,Success,Activity event 0129
+ACT00130,2026-08-14,E072,Changed Filter,Case Board,Failed,Activity event 0130
+ACT00131,2026-02-07,E007,Changed Filter,Data Explorer,Success,Activity event 0131
+ACT00132,2025-02-11,E023,Opened Case,Command Center,Success,Activity event 0132
+ACT00133,2025-01-12,E062,Exported Report,Data Explorer,Success,Activity event 0133
+ACT00134,2026-03-19,E037,Updated Scenario,Case Board,Failed,Activity event 0134
+ACT00135,2026-07-17,E011,Changed Layout,Task Manager,Success,Activity event 0135
+ACT00136,2025-08-22,E002,Changed Layout,Command Center,Failed,Activity event 0136
+ACT00137,2025-11-27,E012,Exported Report,Case Board,Success,Activity event 0137
+ACT00138,2025-02-01,E017,Acknowledged Alert,Task Manager,Failed,Activity event 0138
+ACT00139,2025-05-15,E051,Opened Case,Investigator,Success,Activity event 0139
+ACT00140,2026-07-02,E039,Opened Case,Task Manager,Success,Activity event 0140
+ACT00141,2026-03-20,E009,Changed Layout,Command Center,Failed,Activity event 0141
+ACT00142,2026-06-28,E041,Viewed KPI,Data Explorer,Success,Activity event 0142
+ACT00143,2025-10-24,E070,Changed Layout,Case Board,Success,Activity event 0143
+ACT00144,2025-08-05,E036,Changed Filter,Simulator,Success,Activity event 0144
+ACT00145,2026-10-02,E012,Changed Layout,Data Explorer,Success,Activity event 0145
+ACT00146,2025-12-27,E047,Updated Scenario,Investigator,Failed,Activity event 0146
+ACT00147,2026-04-29,E075,Viewed KPI,Case Board,Success,Activity event 0147
+ACT00148,2025-08-26,E010,Changed Layout,Simulator,Failed,Activity event 0148
+ACT00149,2025-10-03,E013,Changed Filter,Command Center,Success,Activity event 0149
+ACT00150,2026-05-18,E046,Viewed KPI,Investigator,Failed,Activity event 0150
+ACT00151,2026-06-08,E028,Changed Filter,Investigator,Success,Activity event 0151
+ACT00152,2026-10-22,E072,Changed Layout,Case Board,Failed,Activity event 0152
+ACT00153,2026-09-25,E058,Viewed KPI,Case Board,Success,Activity event 0153
+ACT00154,2025-05-10,E012,Changed Layout,Simulator,Failed,Activity event 0154
+ACT00155,2026-10-24,E070,Acknowledged Alert,Simulator,Success,Activity event 0155
+ACT00156,2026-09-01,E052,Acknowledged Alert,Investigator,Success,Activity event 0156
+ACT00157,2026-08-15,E040,Opened Case,Command Center,Success,Activity event 0157
+ACT00158,2025-04-23,E021,Changed Filter,Simulator,Failed,Activity event 0158
+ACT00159,2026-08-12,E052,Changed Layout,Simulator,Success,Activity event 0159
+ACT00160,2026-11-21,E072,Opened Case,Task Manager,Success,Activity event 0160
+ACT00161,2026-06-09,E004,Opened Case,Command Center,Success,Activity event 0161
+ACT00162,2025-05-08,E031,Created Task,Simulator,Success,Activity event 0162
+ACT00163,2025-01-25,E075,Changed Layout,Simulator,Failed,Activity event 0163
+ACT00164,2025-06-07,E031,Changed Filter,Command Center,Success,Activity event 0164
+ACT00165,2026-04-12,E003,Created Task,Simulator,Success,Activity event 0165
+ACT00166,2026-03-16,E009,Changed Layout,Data Explorer,Success,Activity event 0166
+ACT00167,2026-09-16,E056,Opened Case,Command Center,Success,Activity event 0167
+ACT00168,2025-08-20,E057,Changed Filter,Data Explorer,Failed,Activity event 0168
+ACT00169,2025-08-06,E010,Viewed KPI,Case Board,Failed,Activity event 0169
+ACT00170,2025-01-07,E018,Opened Case,Command Center,Success,Activity event 0170
+ACT00171,2026-05-05,E046,Changed Filter,Case Board,Success,Activity event 0171
+ACT00172,2025-07-08,E055,Changed Layout,Data Explorer,Success,Activity event 0172
+ACT00173,2025-09-26,E013,Created Task,Command Center,Success,Activity event 0173
+ACT00174,2026-04-15,E037,Created Task,Command Center,Success,Activity event 0174
+ACT00175,2026-04-05,E045,Updated Scenario,Data Explorer,Success,Activity event 0175
+ACT00176,2025-03-12,E004,Acknowledged Alert,Data Explorer,Success,Activity event 0176
+ACT00177,2025-03-11,E018,Created Task,Investigator,Failed,Activity event 0177
+ACT00178,2025-06-04,E074,Changed Filter,Investigator,Success,Activity event 0178
+ACT00179,2026-06-26,E071,Updated Scenario,Simulator,Success,Activity event 0179
+ACT00180,2025-11-24,E026,Acknowledged Alert,Simulator,Failed,Activity event 0180
+ACT00181,2025-10-06,E070,Viewed KPI,Case Board,Success,Activity event 0181
+ACT00182,2025-09-03,E051,Viewed KPI,Command Center,Success,Activity event 0182
+ACT00183,2025-04-10,E079,Viewed KPI,Case Board,Success,Activity event 0183
+ACT00184,2026-03-20,E078,Exported Report,Simulator,Failed,Activity event 0184
+ACT00185,2025-07-23,E050,Updated Scenario,Simulator,Failed,Activity event 0185
+ACT00186,2025-07-09,E038,Changed Layout,Data Explorer,Success,Activity event 0186
+ACT00187,2025-08-12,E012,Changed Filter,Simulator,Failed,Activity event 0187
+ACT00188,2025-11-02,E043,Changed Filter,Simulator,Success,Activity event 0188
+ACT00189,2025-04-19,E032,Created Task,Command Center,Failed,Activity event 0189
+ACT00190,2025-03-06,E052,Changed Filter,Investigator,Success,Activity event 0190
+ACT00191,2025-08-05,E008,Updated Scenario,Task Manager,Failed,Activity event 0191
+ACT00192,2025-12-21,E067,Exported Report,Simulator,Success,Activity event 0192
+ACT00193,2026-11-16,E078,Opened Case,Command Center,Failed,Activity event 0193
+ACT00194,2025-04-30,E017,Viewed KPI,Case Board,Failed,Activity event 0194
+ACT00195,2026-09-10,E051,Viewed KPI,Simulator,Success,Activity event 0195
+ACT00196,2026-01-11,E065,Opened Case,Data Explorer,Success,Activity event 0196
+ACT00197,2026-01-19,E046,Created Task,Data Explorer,Failed,Activity event 0197
+ACT00198,2026-10-09,E038,Created Task,Simulator,Success,Activity event 0198
+ACT00199,2025-12-20,E065,Changed Layout,Command Center,Failed,Activity event 0199
+ACT00200,2025-07-06,E006,Viewed KPI,Data Explorer,Success,Activity event 0200
+ACT00201,2025-11-22,E049,Changed Filter,Task Manager,Success,Activity event 0201
+ACT00202,2025-12-04,E057,Viewed KPI,Case Board,Success,Activity event 0202
+ACT00203,2025-06-25,E002,Opened Case,Case Board,Failed,Activity event 0203
+ACT00204,2026-06-28,E069,Exported Report,Case Board,Success,Activity event 0204
+ACT00205,2026-03-03,E026,Acknowledged Alert,Data Explorer,Failed,Activity event 0205
+ACT00206,2025-09-13,E039,Opened Case,Task Manager,Success,Activity event 0206
+ACT00207,2025-10-19,E018,Changed Layout,Case Board,Success,Activity event 0207
+ACT00208,2025-09-14,E024,Changed Layout,Case Board,Success,Activity event 0208
+ACT00209,2025-11-06,E031,Acknowledged Alert,Task Manager,Success,Activity event 0209
+ACT00210,2025-12-31,E065,Acknowledged Alert,Case Board,Success,Activity event 0210
+ACT00211,2025-08-17,E005,Exported Report,Case Board,Success,Activity event 0211
+ACT00212,2025-05-09,E075,Updated Scenario,Case Board,Success,Activity event 0212
+ACT00213,2026-01-01,E042,Updated Scenario,Case Board,Failed,Activity event 0213
+ACT00214,2025-10-10,E057,Acknowledged Alert,Case Board,Failed,Activity event 0214
+ACT00215,2026-03-28,E075,Updated Scenario,Investigator,Success,Activity event 0215
+ACT00216,2025-01-12,E016,Acknowledged Alert,Simulator,Success,Activity event 0216
+ACT00217,2025-07-11,E016,Exported Report,Simulator,Failed,Activity event 0217
+ACT00218,2026-10-18,E006,Created Task,Command Center,Success,Activity event 0218
+ACT00219,2025-03-25,E036,Updated Scenario,Simulator,Success,Activity event 0219
+ACT00220,2025-07-02,E027,Created Task,Task Manager,Failed,Activity event 0220
+ACT00221,2026-02-22,E045,Exported Report,Simulator,Failed,Activity event 0221
+ACT00222,2026-08-21,E037,Changed Layout,Task Manager,Success,Activity event 0222
+ACT00223,2026-10-10,E016,Changed Layout,Investigator,Success,Activity event 0223
+ACT00224,2025-05-15,E032,Created Task,Case Board,Success,Activity event 0224
+ACT00225,2025-03-22,E003,Acknowledged Alert,Command Center,Failed,Activity event 0225
+ACT00226,2025-09-14,E043,Opened Case,Command Center,Success,Activity event 0226
+ACT00227,2025-07-11,E022,Updated Scenario,Case Board,Failed,Activity event 0227
+ACT00228,2025-03-09,E009,Changed Layout,Investigator,Success,Activity event 0228
+ACT00229,2026-09-03,E006,Opened Case,Simulator,Success,Activity event 0229
+ACT00230,2026-05-01,E058,Viewed KPI,Data Explorer,Failed,Activity event 0230
+ACT00231,2025-05-21,E020,Changed Filter,Data Explorer,Failed,Activity event 0231
+ACT00232,2025-09-12,E053,Opened Case,Case Board,Success,Activity event 0232
+ACT00233,2025-01-26,E066,Created Task,Simulator,Success,Activity event 0233
+ACT00234,2025-08-24,E040,Exported Report,Command Center,Success,Activity event 0234
+ACT00235,2026-09-21,E011,Changed Filter,Case Board,Success,Activity event 0235
+ACT00236,2026-10-17,E050,Acknowledged Alert,Simulator,Success,Activity event 0236
+ACT00237,2025-10-22,E006,Opened Case,Simulator,Success,Activity event 0237
+ACT00238,2025-02-16,E066,Viewed KPI,Command Center,Success,Activity event 0238
+ACT00239,2025-10-05,E061,Exported Report,Investigator,Success,Activity event 0239
+ACT00240,2026-07-30,E033,Acknowledged Alert,Data Explorer,Success,Activity event 0240
+ACT00241,2025-08-07,E022,Updated Scenario,Simulator,Success,Activity event 0241
+ACT00242,2026-03-16,E057,Exported Report,Simulator,Success,Activity event 0242
+ACT00243,2025-08-30,E046,Viewed KPI,Investigator,Success,Activity event 0243
+ACT00244,2026-01-09,E012,Updated Scenario,Simulator,Failed,Activity event 0244
+ACT00245,2025-12-30,E061,Updated Scenario,Investigator,Success,Activity event 0245
+ACT00246,2026-10-27,E027,Created Task,Command Center,Success,Activity event 0246
+ACT00247,2025-06-14,E072,Changed Layout,Command Center,Success,Activity event 0247
+ACT00248,2026-09-28,E067,Updated Scenario,Data Explorer,Success,Activity event 0248
+ACT00249,2025-08-20,E023,Updated Scenario,Data Explorer,Success,Activity event 0249
+ACT00250,2026-03-08,E021,Created Task,Simulator,Success,Activity event 0250
+ACT00251,2026-06-16,E032,Changed Filter,Command Center,Success,Activity event 0251
+ACT00252,2025-08-15,E065,Acknowledged Alert,Data Explorer,Failed,Activity event 0252
+ACT00253,2025-09-03,E011,Changed Layout,Simulator,Success,Activity event 0253
+ACT00254,2026-07-04,E026,Changed Filter,Command Center,Failed,Activity event 0254
+ACT00255,2026-03-29,E053,Changed Layout,Data Explorer,Success,Activity event 0255
+ACT00256,2025-02-27,E003,Opened Case,Investigator,Failed,Activity event 0256
+ACT00257,2026-07-21,E005,Viewed KPI,Investigator,Success,Activity event 0257
+ACT00258,2025-08-18,E061,Updated Scenario,Task Manager,Failed,Activity event 0258
+ACT00259,2025-12-27,E010,Opened Case,Investigator,Success,Activity event 0259
+ACT00260,2026-01-21,E058,Exported Report,Command Center,Failed,Activity event 0260
+ACT00261,2025-06-21,E023,Opened Case,Data Explorer,Success,Activity event 0261
+ACT00262,2026-01-03,E064,Exported Report,Simulator,Success,Activity event 0262
+ACT00263,2026-01-12,E057,Opened Case,Simulator,Failed,Activity event 0263
+ACT00264,2025-10-13,E011,Updated Scenario,Simulator,Success,Activity event 0264
+ACT00265,2026-10-29,E064,Exported Report,Data Explorer,Success,Activity event 0265
+ACT00266,2025-02-04,E023,Updated Scenario,Task Manager,Success,Activity event 0266
+ACT00267,2025-10-14,E007,Updated Scenario,Data Explorer,Failed,Activity event 0267
+ACT00268,2026-08-16,E014,Viewed KPI,Task Manager,Success,Activity event 0268
+ACT00269,2025-05-23,E026,Changed Filter,Data Explorer,Success,Activity event 0269
+ACT00270,2026-10-09,E019,Opened Case,Investigator,Success,Activity event 0270
+ACT00271,2025-10-22,E055,Exported Report,Data Explorer,Success,Activity event 0271
+ACT00272,2025-04-19,E008,Changed Layout,Data Explorer,Failed,Activity event 0272
+ACT00273,2025-03-06,E015,Opened Case,Command Center,Failed,Activity event 0273
+ACT00274,2025-08-15,E076,Acknowledged Alert,Case Board,Success,Activity event 0274
+ACT00275,2026-09-28,E046,Acknowledged Alert,Case Board,Success,Activity event 0275
+ACT00276,2026-10-11,E003,Changed Layout,Simulator,Success,Activity event 0276
+ACT00277,2026-01-25,E036,Updated Scenario,Investigator,Success,Activity event 0277
+ACT00278,2025-03-23,E045,Viewed KPI,Data Explorer,Success,Activity event 0278
+ACT00279,2025-11-12,E062,Viewed KPI,Simulator,Success,Activity event 0279
+ACT00280,2025-10-16,E035,Created Task,Command Center,Success,Activity event 0280
+ACT00281,2025-06-09,E038,Acknowledged Alert,Command Center,Success,Activity event 0281
+ACT00282,2025-02-22,E046,Changed Layout,Simulator,Success,Activity event 0282
+ACT00283,2025-09-21,E022,Created Task,Data Explorer,Success,Activity event 0283
+ACT00284,2025-09-14,E072,Created Task,Simulator,Failed,Activity event 0284
+ACT00285,2026-05-02,E069,Acknowledged Alert,Simulator,Success,Activity event 0285
+ACT00286,2025-09-30,E032,Updated Scenario,Command Center,Success,Activity event 0286
+ACT00287,2025-01-10,E055,Created Task,Case Board,Failed,Activity event 0287
+ACT00288,2025-01-14,E078,Opened Case,Simulator,Success,Activity event 0288
+ACT00289,2026-04-21,E038,Viewed KPI,Simulator,Success,Activity event 0289
+ACT00290,2026-04-02,E080,Changed Filter,Command Center,Success,Activity event 0290
+ACT00291,2025-04-21,E060,Created Task,Investigator,Success,Activity event 0291
+ACT00292,2026-08-22,E047,Changed Layout,Investigator,Success,Activity event 0292
+ACT00293,2026-04-03,E041,Created Task,Simulator,Success,Activity event 0293
+ACT00294,2025-04-17,E079,Updated Scenario,Command Center,Success,Activity event 0294
+ACT00295,2025-07-18,E031,Created Task,Case Board,Success,Activity event 0295
+ACT00296,2026-11-04,E005,Viewed KPI,Data Explorer,Success,Activity event 0296
+ACT00297,2025-10-09,E045,Created Task,Command Center,Failed,Activity event 0297
+ACT00298,2025-06-13,E054,Created Task,Simulator,Success,Activity event 0298
+ACT00299,2025-12-29,E021,Exported Report,Investigator,Success,Activity event 0299
+ACT00300,2025-05-23,E023,Changed Layout,Simulator,Failed,Activity event 0300
+ACT00301,2026-07-02,E042,Created Task,Task Manager,Success,Activity event 0301
+ACT00302,2026-07-03,E058,Updated Scenario,Simulator,Success,Activity event 0302
+ACT00303,2026-07-08,E069,Changed Filter,Data Explorer,Success,Activity event 0303
+ACT00304,2026-03-03,E029,Viewed KPI,Case Board,Failed,Activity event 0304
+ACT00305,2026-04-25,E076,Changed Layout,Task Manager,Failed,Activity event 0305
+ACT00306,2025-08-11,E040,Opened Case,Investigator,Failed,Activity event 0306
+ACT00307,2026-08-31,E048,Exported Report,Investigator,Failed,Activity event 0307
+ACT00308,2025-04-10,E029,Acknowledged Alert,Investigator,Failed,Activity event 0308
+ACT00309,2025-06-25,E039,Created Task,Investigator,Failed,Activity event 0309
+ACT00310,2026-11-17,E068,Created Task,Command Center,Success,Activity event 0310
+ACT00311,2026-10-26,E060,Changed Filter,Investigator,Success,Activity event 0311
+ACT00312,2025-12-17,E053,Acknowledged Alert,Command Center,Failed,Activity event 0312
+ACT00313,2025-12-11,E004,Opened Case,Data Explorer,Success,Activity event 0313
+ACT00314,2025-03-22,E045,Exported Report,Command Center,Success,Activity event 0314
+ACT00315,2026-04-01,E021,Changed Layout,Simulator,Success,Activity event 0315
+ACT00316,2025-01-22,E006,Updated Scenario,Data Explorer,Success,Activity event 0316
+ACT00317,2025-08-06,E069,Changed Layout,Investigator,Success,Activity event 0317
+ACT00318,2026-11-04,E072,Acknowledged Alert,Data Explorer,Success,Activity event 0318
+ACT00319,2026-08-17,E078,Created Task,Command Center,Success,Activity event 0319
+ACT00320,2025-06-17,E078,Changed Layout,Case Board,Failed,Activity event 0320
+ACT00321,2026-10-01,E064,Opened Case,Data Explorer,Failed,Activity event 0321
+ACT00322,2025-05-14,E024,Exported Report,Simulator,Failed,Activity event 0322
+ACT00323,2026-03-27,E004,Created Task,Data Explorer,Success,Activity event 0323
+ACT00324,2026-07-22,E035,Updated Scenario,Simulator,Success,Activity event 0324
+ACT00325,2025-01-15,E024,Acknowledged Alert,Case Board,Success,Activity event 0325
+ACT00326,2025-10-01,E053,Exported Report,Data Explorer,Failed,Activity event 0326
+ACT00327,2026-02-21,E030,Opened Case,Command Center,Success,Activity event 0327
+ACT00328,2026-03-05,E072,Exported Report,Investigator,Failed,Activity event 0328
+ACT00329,2025-08-30,E030,Viewed KPI,Data Explorer,Success,Activity event 0329
+ACT00330,2025-03-12,E031,Exported Report,Case Board,Success,Activity event 0330
+ACT00331,2025-07-16,E061,Acknowledged Alert,Investigator,Success,Activity event 0331
+ACT00332,2025-03-20,E048,Viewed KPI,Command Center,Success,Activity event 0332
+ACT00333,2026-06-18,E021,Acknowledged Alert,Command Center,Success,Activity event 0333
+ACT00334,2025-02-16,E055,Updated Scenario,Task Manager,Success,Activity event 0334
+ACT00335,2026-02-11,E046,Viewed KPI,Data Explorer,Failed,Activity event 0335
+ACT00336,2026-08-31,E009,Exported Report,Investigator,Failed,Activity event 0336
+ACT00337,2025-05-17,E038,Exported Report,Investigator,Success,Activity event 0337
+ACT00338,2026-01-24,E074,Acknowledged Alert,Case Board,Success,Activity event 0338
+ACT00339,2026-03-04,E017,Changed Filter,Data Explorer,Failed,Activity event 0339
+ACT00340,2026-08-12,E034,Opened Case,Investigator,Success,Activity event 0340
+ACT00341,2026-08-23,E023,Changed Filter,Simulator,Failed,Activity event 0341
+ACT00342,2026-07-01,E043,Exported Report,Task Manager,Failed,Activity event 0342
+ACT00343,2026-01-19,E079,Acknowledged Alert,Simulator,Success,Activity event 0343
+ACT00344,2025-04-17,E025,Updated Scenario,Command Center,Failed,Activity event 0344
+ACT00345,2025-05-07,E067,Acknowledged Alert,Data Explorer,Success,Activity event 0345
+ACT00346,2026-08-11,E068,Viewed KPI,Command Center,Success,Activity event 0346
+ACT00347,2025-06-14,E021,Viewed KPI,Simulator,Success,Activity event 0347
+ACT00348,2025-10-05,E062,Opened Case,Investigator,Success,Activity event 0348
+ACT00349,2026-06-04,E080,Opened Case,Simulator,Failed,Activity event 0349
+ACT00350,2026-06-27,E077,Acknowledged Alert,Simulator,Success,Activity event 0350
+ACT00351,2025-07-03,E049,Changed Filter,Simulator,Success,Activity event 0351
+ACT00352,2026-01-04,E013,Acknowledged Alert,Task Manager,Failed,Activity event 0352
+ACT00353,2026-10-17,E010,Changed Filter,Simulator,Failed,Activity event 0353
+ACT00354,2026-08-14,E022,Created Task,Task Manager,Failed,Activity event 0354
+ACT00355,2025-06-03,E049,Changed Filter,Command Center,Failed,Activity event 0355
+ACT00356,2025-11-19,E031,Exported Report,Investigator,Success,Activity event 0356
+ACT00357,2026-09-17,E056,Changed Layout,Case Board,Success,Activity event 0357
+ACT00358,2026-02-25,E064,Exported Report,Investigator,Success,Activity event 0358
+ACT00359,2026-07-10,E015,Acknowledged Alert,Investigator,Success,Activity event 0359
+ACT00360,2025-11-01,E073,Updated Scenario,Command Center,Failed,Activity event 0360
+ACT00361,2026-07-17,E005,Changed Layout,Case Board,Success,Activity event 0361
+ACT00362,2025-06-20,E022,Acknowledged Alert,Data Explorer,Failed,Activity event 0362
+ACT00363,2025-12-21,E066,Viewed KPI,Investigator,Success,Activity event 0363
+ACT00364,2025-11-30,E015,Acknowledged Alert,Command Center,Success,Activity event 0364
+ACT00365,2026-01-21,E018,Updated Scenario,Simulator,Success,Activity event 0365
+ACT00366,2026-04-14,E079,Changed Layout,Simulator,Success,Activity event 0366
+ACT00367,2026-03-13,E073,Exported Report,Data Explorer,Failed,Activity event 0367
+ACT00368,2026-01-12,E066,Opened Case,Investigator,Success,Activity event 0368
+ACT00369,2026-10-12,E014,Acknowledged Alert,Command Center,Success,Activity event 0369
+ACT00370,2026-04-05,E021,Created Task,Investigator,Failed,Activity event 0370
+ACT00371,2025-02-28,E019,Changed Filter,Case Board,Success,Activity event 0371
+ACT00372,2025-04-09,E016,Opened Case,Data Explorer,Failed,Activity event 0372
+ACT00373,2025-01-05,E078,Created Task,Data Explorer,Failed,Activity event 0373
+ACT00374,2025-11-01,E014,Viewed KPI,Case Board,Success,Activity event 0374
+ACT00375,2025-08-26,E060,Changed Filter,Case Board,Success,Activity event 0375
+ACT00376,2026-03-13,E005,Changed Layout,Data Explorer,Failed,Activity event 0376
+ACT00377,2025-04-13,E044,Updated Scenario,Data Explorer,Failed,Activity event 0377
+ACT00378,2026-11-02,E006,Updated Scenario,Case Board,Success,Activity event 0378
+ACT00379,2026-08-19,E005,Created Task,Case Board,Success,Activity event 0379
+ACT00380,2025-12-09,E019,Exported Report,Investigator,Failed,Activity event 0380
+ACT00381,2025-10-20,E075,Changed Filter,Command Center,Success,Activity event 0381
+ACT00382,2025-05-30,E052,Changed Filter,Task Manager,Success,Activity event 0382
+ACT00383,2025-08-19,E053,Created Task,Investigator,Failed,Activity event 0383
+ACT00384,2025-07-25,E077,Changed Layout,Command Center,Success,Activity event 0384
+ACT00385,2026-05-16,E075,Viewed KPI,Command Center,Failed,Activity event 0385
+ACT00386,2026-04-16,E015,Created Task,Command Center,Success,Activity event 0386
+ACT00387,2025-11-16,E071,Acknowledged Alert,Case Board,Success,Activity event 0387
+ACT00388,2026-04-17,E042,Changed Filter,Command Center,Success,Activity event 0388
+ACT00389,2026-08-23,E010,Acknowledged Alert,Case Board,Success,Activity event 0389
+ACT00390,2026-10-26,E011,Viewed KPI,Investigator,Success,Activity event 0390
+ACT00391,2026-11-20,E065,Viewed KPI,Investigator,Success,Activity event 0391
+ACT00392,2025-12-04,E039,Updated Scenario,Simulator,Failed,Activity event 0392
+ACT00393,2025-01-23,E026,Changed Layout,Command Center,Success,Activity event 0393
+ACT00394,2025-06-08,E057,Acknowledged Alert,Investigator,Success,Activity event 0394
+ACT00395,2025-05-17,E065,Acknowledged Alert,Simulator,Success,Activity event 0395
+ACT00396,2025-07-27,E069,Changed Layout,Investigator,Success,Activity event 0396
+ACT00397,2025-09-07,E061,Created Task,Task Manager,Success,Activity event 0397
+ACT00398,2026-04-08,E080,Changed Layout,Investigator,Success,Activity event 0398
+ACT00399,2025-12-30,E029,Acknowledged Alert,Command Center,Failed,Activity event 0399
+ACT00400,2026-03-25,E003,Exported Report,Task Manager,Success,Activity event 0400
+ACT00401,2026-11-03,E055,Changed Layout,Data Explorer,Success,Activity event 0401
+ACT00402,2025-02-03,E014,Acknowledged Alert,Case Board,Failed,Activity event 0402
+ACT00403,2025-01-10,E054,Opened Case,Simulator,Success,Activity event 0403
+ACT00404,2026-04-05,E014,Exported Report,Simulator,Success,Activity event 0404
+ACT00405,2026-01-13,E040,Changed Layout,Simulator,Success,Activity event 0405
+ACT00406,2025-11-30,E050,Viewed KPI,Command Center,Success,Activity event 0406
+ACT00407,2026-08-13,E074,Changed Filter,Simulator,Success,Activity event 0407
+ACT00408,2025-04-20,E076,Changed Layout,Simulator,Success,Activity event 0408
+ACT00409,2026-02-01,E015,Changed Filter,Case Board,Success,Activity event 0409
+ACT00410,2026-10-06,E030,Exported Report,Investigator,Success,Activity event 0410
+ACT00411,2025-11-05,E078,Changed Layout,Data Explorer,Failed,Activity event 0411
+ACT00412,2026-02-05,E012,Changed Filter,Task Manager,Success,Activity event 0412
+ACT00413,2025-02-18,E066,Updated Scenario,Data Explorer,Success,Activity event 0413
+ACT00414,2025-08-30,E008,Exported Report,Simulator,Failed,Activity event 0414
+ACT00415,2025-01-29,E076,Updated Scenario,Case Board,Success,Activity event 0415
+ACT00416,2026-01-31,E042,Viewed KPI,Command Center,Success,Activity event 0416
+ACT00417,2026-02-13,E034,Opened Case,Simulator,Failed,Activity event 0417
+ACT00418,2026-10-20,E049,Changed Layout,Task Manager,Failed,Activity event 0418
+ACT00419,2026-03-18,E072,Exported Report,Data Explorer,Success,Activity event 0419
+ACT00420,2025-01-03,E026,Exported Report,Task Manager,Failed,Activity event 0420
+ACT00421,2026-07-30,E008,Exported Report,Investigator,Success,Activity event 0421
+ACT00422,2025-08-16,E014,Viewed KPI,Simulator,Success,Activity event 0422
+ACT00423,2026-05-09,E068,Opened Case,Command Center,Failed,Activity event 0423
+ACT00424,2025-07-02,E056,Exported Report,Simulator,Success,Activity event 0424
+ACT00425,2026-06-10,E073,Created Task,Simulator,Failed,Activity event 0425
+ACT00426,2026-10-03,E037,Acknowledged Alert,Simulator,Success,Activity event 0426
+ACT00427,2025-02-24,E060,Opened Case,Command Center,Success,Activity event 0427
+ACT00428,2025-11-14,E044,Exported Report,Task Manager,Success,Activity event 0428
+ACT00429,2026-03-21,E023,Exported Report,Case Board,Success,Activity event 0429
+ACT00430,2025-08-15,E028,Changed Filter,Data Explorer,Success,Activity event 0430
+ACT00431,2025-12-07,E055,Updated Scenario,Simulator,Success,Activity event 0431
+ACT00432,2025-01-30,E024,Acknowledged Alert,Investigator,Failed,Activity event 0432
+ACT00433,2026-05-19,E003,Updated Scenario,Data Explorer,Success,Activity event 0433
+ACT00434,2026-07-04,E062,Changed Layout,Task Manager,Success,Activity event 0434
+ACT00435,2025-08-09,E051,Changed Layout,Command Center,Success,Activity event 0435
+ACT00436,2025-12-05,E021,Exported Report,Command Center,Failed,Activity event 0436
+ACT00437,2025-04-14,E077,Changed Filter,Data Explorer,Failed,Activity event 0437
+ACT00438,2026-08-17,E072,Changed Layout,Investigator,Success,Activity event 0438
+ACT00439,2025-04-08,E078,Exported Report,Investigator,Success,Activity event 0439
+ACT00440,2026-03-09,E041,Changed Layout,Case Board,Success,Activity event 0440
+ACT00441,2025-08-25,E019,Viewed KPI,Simulator,Success,Activity event 0441
+ACT00442,2025-08-13,E014,Opened Case,Case Board,Success,Activity event 0442
+ACT00443,2026-06-30,E076,Updated Scenario,Command Center,Success,Activity event 0443
+ACT00444,2026-10-31,E072,Changed Layout,Simulator,Failed,Activity event 0444
+ACT00445,2025-04-02,E060,Viewed KPI,Data Explorer,Success,Activity event 0445
+ACT00446,2026-08-16,E041,Changed Filter,Case Board,Failed,Activity event 0446
+ACT00447,2026-01-21,E031,Viewed KPI,Investigator,Success,Activity event 0447
+ACT00448,2026-07-23,E057,Viewed KPI,Data Explorer,Success,Activity event 0448
+ACT00449,2026-03-11,E001,Acknowledged Alert,Command Center,Success,Activity event 0449
+ACT00450,2026-10-26,E042,Opened Case,Investigator,Success,Activity event 0450
+ACT00451,2026-10-23,E055,Created Task,Investigator,Success,Activity event 0451
+ACT00452,2025-12-26,E061,Viewed KPI,Task Manager,Failed,Activity event 0452
+ACT00453,2025-06-20,E037,Changed Filter,Case Board,Success,Activity event 0453
+ACT00454,2025-01-18,E060,Changed Layout,Command Center,Success,Activity event 0454
+ACT00455,2025-08-12,E008,Created Task,Task Manager,Success,Activity event 0455
+ACT00456,2026-07-05,E019,Created Task,Task Manager,Success,Activity event 0456
+ACT00457,2025-06-04,E012,Acknowledged Alert,Data Explorer,Success,Activity event 0457
+ACT00458,2026-02-21,E028,Opened Case,Simulator,Success,Activity event 0458
+ACT00459,2026-01-30,E028,Exported Report,Command Center,Success,Activity event 0459
+ACT00460,2026-06-05,E030,Acknowledged Alert,Investigator,Success,Activity event 0460
+ACT00461,2026-07-02,E038,Changed Filter,Simulator,Success,Activity event 0461
+ACT00462,2025-10-29,E020,Viewed KPI,Simulator,Success,Activity event 0462
+ACT00463,2025-12-05,E010,Acknowledged Alert,Simulator,Success,Activity event 0463
+ACT00464,2026-06-05,E050,Changed Layout,Case Board,Success,Activity event 0464
+ACT00465,2025-04-09,E079,Changed Layout,Investigator,Success,Activity event 0465
+ACT00466,2025-08-31,E017,Changed Layout,Task Manager,Success,Activity event 0466
+ACT00467,2025-01-01,E020,Changed Filter,Case Board,Success,Activity event 0467
+ACT00468,2025-01-20,E039,Exported Report,Simulator,Failed,Activity event 0468
+ACT00469,2026-02-24,E030,Updated Scenario,Investigator,Success,Activity event 0469
+ACT00470,2026-08-29,E078,Viewed KPI,Investigator,Success,Activity event 0470
+ACT00471,2025-07-31,E052,Changed Filter,Simulator,Success,Activity event 0471
+ACT00472,2025-10-05,E022,Exported Report,Simulator,Success,Activity event 0472
+ACT00473,2025-05-26,E042,Changed Layout,Task Manager,Success,Activity event 0473
+ACT00474,2025-04-09,E054,Viewed KPI,Case Board,Failed,Activity event 0474
+ACT00475,2026-09-03,E030,Opened Case,Command Center,Failed,Activity event 0475
+ACT00476,2026-01-31,E079,Updated Scenario,Simulator,Success,Activity event 0476
+ACT00477,2026-05-03,E033,Changed Layout,Investigator,Success,Activity event 0477
+ACT00478,2026-09-02,E004,Updated Scenario,Task Manager,Failed,Activity event 0478
+ACT00479,2026-02-11,E021,Changed Layout,Data Explorer,Success,Activity event 0479
+ACT00480,2025-05-05,E042,Exported Report,Simulator,Success,Activity event 0480
+ACT00481,2026-05-08,E060,Viewed KPI,Data Explorer,Success,Activity event 0481
+ACT00482,2026-06-01,E024,Viewed KPI,Investigator,Success,Activity event 0482
+ACT00483,2025-10-14,E010,Viewed KPI,Task Manager,Success,Activity event 0483
+ACT00484,2026-03-03,E065,Exported Report,Data Explorer,Success,Activity event 0484
+ACT00485,2025-12-01,E026,Exported Report,Data Explorer,Success,Activity event 0485
+ACT00486,2025-08-19,E053,Created Task,Command Center,Success,Activity event 0486
+ACT00487,2026-04-10,E039,Created Task,Data Explorer,Failed,Activity event 0487
+ACT00488,2025-06-20,E033,Exported Report,Command Center,Success,Activity event 0488
+ACT00489,2025-08-15,E008,Exported Report,Simulator,Success,Activity event 0489
+ACT00490,2025-10-08,E068,Opened Case,Case Board,Success,Activity event 0490
+ACT00491,2026-03-01,E011,Changed Filter,Command Center,Success,Activity event 0491
+ACT00492,2026-08-12,E018,Created Task,Task Manager,Success,Activity event 0492
+ACT00493,2026-03-01,E046,Opened Case,Simulator,Success,Activity event 0493
+ACT00494,2026-05-17,E062,Exported Report,Data Explorer,Success,Activity event 0494
+ACT00495,2025-07-22,E063,Exported Report,Command Center,Failed,Activity event 0495
+ACT00496,2026-02-10,E028,Acknowledged Alert,Task Manager,Success,Activity event 0496
+ACT00497,2025-03-13,E046,Opened Case,Command Center,Success,Activity event 0497
+ACT00498,2025-11-17,E038,Acknowledged Alert,Case Board,Success,Activity event 0498
+ACT00499,2026-04-22,E057,Changed Filter,Simulator,Success,Activity event 0499
+ACT00500,2025-05-05,E024,Exported Report,Command Center,Success,Activity event 0500
+ACT00501,2026-09-16,E048,Acknowledged Alert,Case Board,Success,Activity event 0501
+ACT00502,2025-10-16,E078,Changed Filter,Simulator,Success,Activity event 0502
+ACT00503,2026-04-09,E068,Changed Filter,Simulator,Success,Activity event 0503
+ACT00504,2025-11-21,E014,Acknowledged Alert,Case Board,Success,Activity event 0504
+ACT00505,2026-05-21,E066,Acknowledged Alert,Investigator,Success,Activity event 0505
+ACT00506,2026-02-08,E035,Changed Filter,Data Explorer,Success,Activity event 0506
+ACT00507,2025-03-26,E020,Acknowledged Alert,Data Explorer,Success,Activity event 0507
+ACT00508,2026-10-01,E014,Exported Report,Case Board,Success,Activity event 0508
+ACT00509,2026-04-02,E054,Created Task,Command Center,Success,Activity event 0509
+ACT00510,2025-11-23,E080,Viewed KPI,Command Center,Failed,Activity event 0510
+ACT00511,2026-04-13,E078,Viewed KPI,Data Explorer,Success,Activity event 0511
+ACT00512,2025-06-30,E060,Opened Case,Investigator,Success,Activity event 0512
+ACT00513,2026-06-16,E074,Acknowledged Alert,Simulator,Success,Activity event 0513
+ACT00514,2025-10-12,E027,Changed Filter,Case Board,Success,Activity event 0514
+ACT00515,2026-07-11,E058,Created Task,Task Manager,Success,Activity event 0515
+ACT00516,2025-07-09,E025,Viewed KPI,Data Explorer,Success,Activity event 0516
+ACT00517,2026-07-01,E046,Created Task,Simulator,Success,Activity event 0517
+ACT00518,2026-09-19,E051,Opened Case,Command Center,Success,Activity event 0518
+ACT00519,2026-11-09,E027,Updated Scenario,Data Explorer,Success,Activity event 0519
+ACT00520,2026-06-21,E016,Viewed KPI,Data Explorer,Success,Activity event 0520
+ACT00521,2026-05-02,E034,Opened Case,Simulator,Success,Activity event 0521
+ACT00522,2025-12-26,E065,Exported Report,Simulator,Failed,Activity event 0522
+ACT00523,2025-03-15,E018,Opened Case,Investigator,Success,Activity event 0523
+ACT00524,2026-01-22,E034,Acknowledged Alert,Simulator,Success,Activity event 0524
+ACT00525,2026-01-25,E035,Opened Case,Case Board,Failed,Activity event 0525
+ACT00526,2025-02-14,E075,Viewed KPI,Command Center,Failed,Activity event 0526
+ACT00527,2026-04-23,E049,Updated Scenario,Task Manager,Success,Activity event 0527
+ACT00528,2025-05-17,E048,Created Task,Investigator,Success,Activity event 0528
+ACT00529,2025-02-06,E038,Changed Filter,Task Manager,Success,Activity event 0529
+ACT00530,2026-09-07,E071,Created Task,Task Manager,Success,Activity event 0530
+ACT00531,2025-06-10,E006,Updated Scenario,Simulator,Success,Activity event 0531
+ACT00532,2025-04-29,E023,Changed Filter,Task Manager,Failed,Activity event 0532
+ACT00533,2026-01-16,E059,Created Task,Simulator,Success,Activity event 0533
+ACT00534,2025-11-15,E067,Changed Filter,Investigator,Success,Activity event 0534
+ACT00535,2025-04-22,E034,Updated Scenario,Task Manager,Success,Activity event 0535
+ACT00536,2026-03-01,E005,Viewed KPI,Data Explorer,Success,Activity event 0536
+ACT00537,2026-09-18,E080,Exported Report,Simulator,Failed,Activity event 0537
+ACT00538,2026-05-27,E057,Created Task,Simulator,Success,Activity event 0538
+ACT00539,2025-05-25,E015,Exported Report,Case Board,Failed,Activity event 0539
+ACT00540,2025-06-14,E011,Opened Case,Task Manager,Success,Activity event 0540
+ACT00541,2026-01-21,E077,Changed Layout,Task Manager,Success,Activity event 0541
+ACT00542,2026-04-14,E071,Created Task,Simulator,Failed,Activity event 0542
+ACT00543,2026-11-08,E053,Exported Report,Simulator,Success,Activity event 0543
+ACT00544,2025-03-14,E075,Changed Layout,Data Explorer,Success,Activity event 0544
+ACT00545,2026-01-13,E044,Opened Case,Command Center,Success,Activity event 0545
+ACT00546,2026-11-14,E055,Viewed KPI,Data Explorer,Failed,Activity event 0546
+ACT00547,2025-03-18,E062,Created Task,Command Center,Success,Activity event 0547
+ACT00548,2026-11-04,E020,Changed Layout,Investigator,Success,Activity event 0548
+ACT00549,2025-11-16,E009,Updated Scenario,Data Explorer,Success,Activity event 0549
+ACT00550,2026-05-11,E012,Acknowledged Alert,Simulator,Success,Activity event 0550
+ACT00551,2025-10-21,E053,Acknowledged Alert,Simulator,Failed,Activity event 0551
+ACT00552,2026-08-05,E026,Viewed KPI,Data Explorer,Success,Activity event 0552
+ACT00553,2026-09-20,E002,Changed Layout,Case Board,Success,Activity event 0553
+ACT00554,2025-04-26,E010,Updated Scenario,Data Explorer,Success,Activity event 0554
+ACT00555,2026-06-01,E029,Acknowledged Alert,Data Explorer,Failed,Activity event 0555
+ACT00556,2025-01-15,E064,Acknowledged Alert,Simulator,Failed,Activity event 0556
+ACT00557,2025-07-11,E055,Updated Scenario,Data Explorer,Success,Activity event 0557
+ACT00558,2026-01-17,E009,Viewed KPI,Simulator,Failed,Activity event 0558
+ACT00559,2026-02-21,E069,Opened Case,Simulator,Success,Activity event 0559
+ACT00560,2025-09-10,E067,Changed Filter,Case Board,Success,Activity event 0560
+ACT00561,2025-07-06,E023,Acknowledged Alert,Task Manager,Success,Activity event 0561
+ACT00562,2025-04-29,E017,Acknowledged Alert,Task Manager,Success,Activity event 0562
+ACT00563,2025-06-15,E052,Opened Case,Command Center,Success,Activity event 0563
+ACT00564,2025-03-31,E044,Changed Filter,Simulator,Success,Activity event 0564
+ACT00565,2025-06-30,E012,Acknowledged Alert,Simulator,Success,Activity event 0565
+ACT00566,2026-07-22,E044,Changed Layout,Investigator,Success,Activity event 0566
+ACT00567,2025-07-18,E052,Created Task,Command Center,Success,Activity event 0567
+ACT00568,2026-09-20,E023,Opened Case,Investigator,Success,Activity event 0568
+ACT00569,2025-06-19,E055,Viewed KPI,Data Explorer,Success,Activity event 0569
+ACT00570,2025-12-06,E054,Created Task,Command Center,Success,Activity event 0570
+ACT00571,2025-04-26,E075,Opened Case,Case Board,Success,Activity event 0571
+ACT00572,2025-01-12,E022,Updated Scenario,Task Manager,Failed,Activity event 0572
+ACT00573,2026-03-09,E042,Exported Report,Command Center,Failed,Activity event 0573
+ACT00574,2025-08-22,E079,Changed Layout,Investigator,Success,Activity event 0574
+ACT00575,2025-08-27,E055,Updated Scenario,Case Board,Success,Activity event 0575
+ACT00576,2025-10-09,E036,Exported Report,Case Board,Failed,Activity event 0576
+ACT00577,2026-06-22,E029,Updated Scenario,Investigator,Success,Activity event 0577
+ACT00578,2025-10-04,E063,Changed Layout,Simulator,Failed,Activity event 0578
+ACT00579,2025-03-01,E035,Viewed KPI,Task Manager,Success,Activity event 0579
+ACT00580,2025-07-12,E039,Changed Filter,Investigator,Success,Activity event 0580
+ACT00581,2026-02-03,E035,Updated Scenario,Data Explorer,Success,Activity event 0581
+ACT00582,2026-11-18,E074,Updated Scenario,Data Explorer,Failed,Activity event 0582
+ACT00583,2025-04-09,E052,Changed Filter,Command Center,Failed,Activity event 0583
+ACT00584,2025-08-12,E058,Created Task,Simulator,Success,Activity event 0584
+ACT00585,2025-12-02,E077,Updated Scenario,Case Board,Success,Activity event 0585
+ACT00586,2026-10-15,E005,Viewed KPI,Case Board,Success,Activity event 0586
+ACT00587,2025-03-16,E002,Opened Case,Command Center,Success,Activity event 0587
+ACT00588,2026-07-03,E019,Changed Layout,Simulator,Success,Activity event 0588
+ACT00589,2026-05-15,E027,Exported Report,Simulator,Success,Activity event 0589
+ACT00590,2025-07-31,E049,Changed Filter,Case Board,Success,Activity event 0590
+ACT00591,2026-06-19,E046,Viewed KPI,Data Explorer,Success,Activity event 0591
+ACT00592,2026-02-02,E059,Created Task,Task Manager,Success,Activity event 0592
+ACT00593,2025-04-29,E048,Changed Layout,Simulator,Failed,Activity event 0593
+ACT00594,2025-07-17,E013,Exported Report,Command Center,Success,Activity event 0594
+ACT00595,2025-08-15,E016,Updated Scenario,Investigator,Success,Activity event 0595
+ACT00596,2025-08-12,E002,Viewed KPI,Data Explorer,Success,Activity event 0596
+ACT00597,2026-05-31,E028,Exported Report,Data Explorer,Success,Activity event 0597
+ACT00598,2026-04-02,E060,Viewed KPI,Task Manager,Success,Activity event 0598
+ACT00599,2026-07-21,E007,Viewed KPI,Task Manager,Success,Activity event 0599
+ACT00600,2025-12-19,E034,Updated Scenario,Simulator,Success,Activity event 0600
+ACT00601,2025-08-31,E065,Updated Scenario,Task Manager,Success,Activity event 0601
+ACT00602,2025-02-16,E025,Created Task,Simulator,Success,Activity event 0602
+ACT00603,2026-07-03,E032,Updated Scenario,Simulator,Success,Activity event 0603
+ACT00604,2025-02-21,E014,Changed Layout,Command Center,Failed,Activity event 0604
+ACT00605,2025-07-28,E020,Updated Scenario,Investigator,Success,Activity event 0605
+ACT00606,2026-04-08,E014,Viewed KPI,Command Center,Success,Activity event 0606
+ACT00607,2026-06-13,E025,Exported Report,Task Manager,Success,Activity event 0607
+ACT00608,2025-02-17,E001,Opened Case,Simulator,Success,Activity event 0608
+ACT00609,2026-02-24,E059,Created Task,Data Explorer,Failed,Activity event 0609
+ACT00610,2025-04-05,E025,Viewed KPI,Simulator,Success,Activity event 0610
+ACT00611,2026-06-08,E070,Viewed KPI,Investigator,Success,Activity event 0611
+ACT00612,2026-05-20,E050,Opened Case,Command Center,Success,Activity event 0612
+ACT00613,2026-06-01,E024,Created Task,Simulator,Success,Activity event 0613
+ACT00614,2025-02-14,E046,Created Task,Data Explorer,Success,Activity event 0614
+ACT00615,2026-01-22,E065,Opened Case,Simulator,Success,Activity event 0615
+ACT00616,2025-06-16,E072,Acknowledged Alert,Task Manager,Success,Activity event 0616
+ACT00617,2025-12-09,E036,Changed Layout,Simulator,Success,Activity event 0617
+ACT00618,2026-11-15,E044,Changed Layout,Data Explorer,Success,Activity event 0618
+ACT00619,2025-03-04,E021,Changed Layout,Case Board,Success,Activity event 0619
+ACT00620,2026-02-15,E019,Acknowledged Alert,Investigator,Success,Activity event 0620
+ACT00621,2025-04-25,E024,Viewed KPI,Simulator,Failed,Activity event 0621
+ACT00622,2025-12-19,E008,Acknowledged Alert,Data Explorer,Failed,Activity event 0622
+ACT00623,2025-12-26,E059,Changed Filter,Investigator,Success,Activity event 0623
+ACT00624,2025-11-12,E056,Created Task,Command Center,Success,Activity event 0624
+ACT00625,2026-03-18,E040,Changed Filter,Investigator,Failed,Activity event 0625
+ACT00626,2026-11-05,E049,Opened Case,Task Manager,Success,Activity event 0626
+ACT00627,2026-07-11,E052,Viewed KPI,Investigator,Success,Activity event 0627
+ACT00628,2026-10-25,E035,Updated Scenario,Simulator,Success,Activity event 0628
+ACT00629,2025-05-11,E015,Viewed KPI,Investigator,Success,Activity event 0629
+ACT00630,2026-11-18,E064,Updated Scenario,Investigator,Success,Activity event 0630
+ACT00631,2025-07-30,E036,Exported Report,Investigator,Success,Activity event 0631
+ACT00632,2025-01-24,E077,Acknowledged Alert,Case Board,Success,Activity event 0632
+ACT00633,2025-10-29,E031,Created Task,Simulator,Success,Activity event 0633
+ACT00634,2025-06-20,E007,Opened Case,Data Explorer,Success,Activity event 0634
+ACT00635,2026-06-11,E018,Created Task,Simulator,Success,Activity event 0635
+ACT00636,2025-03-02,E079,Created Task,Investigator,Failed,Activity event 0636
+ACT00637,2026-01-14,E007,Changed Filter,Data Explorer,Success,Activity event 0637
+ACT00638,2025-07-19,E045,Exported Report,Data Explorer,Success,Activity event 0638
+ACT00639,2025-05-23,E080,Acknowledged Alert,Case Board,Success,Activity event 0639
+ACT00640,2026-08-29,E071,Viewed KPI,Command Center,Success,Activity event 0640
+ACT00641,2025-12-23,E080,Viewed KPI,Task Manager,Success,Activity event 0641
+ACT00642,2025-08-13,E045,Changed Filter,Case Board,Success,Activity event 0642
+ACT00643,2026-05-31,E041,Changed Filter,Command Center,Success,Activity event 0643
+ACT00644,2026-08-13,E009,Changed Layout,Command Center,Failed,Activity event 0644
+ACT00645,2025-11-02,E067,Exported Report,Command Center,Success,Activity event 0645
+ACT00646,2025-05-06,E031,Created Task,Case Board,Success,Activity event 0646
+ACT00647,2026-11-19,E050,Opened Case,Task Manager,Success,Activity event 0647
+ACT00648,2025-09-08,E017,Acknowledged Alert,Case Board,Success,Activity event 0648
+ACT00649,2026-05-23,E009,Created Task,Command Center,Success,Activity event 0649
+ACT00650,2025-05-24,E010,Changed Layout,Case Board,Failed,Activity event 0650
+ACT00651,2026-06-05,E076,Changed Filter,Simulator,Success,Activity event 0651
+ACT00652,2025-03-02,E076,Acknowledged Alert,Investigator,Success,Activity event 0652
+ACT00653,2026-09-26,E041,Exported Report,Data Explorer,Failed,Activity event 0653
+ACT00654,2025-01-26,E056,Viewed KPI,Investigator,Failed,Activity event 0654
+ACT00655,2025-12-29,E067,Changed Layout,Command Center,Success,Activity event 0655
+ACT00656,2025-07-23,E045,Viewed KPI,Command Center,Success,Activity event 0656
+ACT00657,2026-09-09,E054,Updated Scenario,Data Explorer,Success,Activity event 0657
+ACT00658,2026-03-23,E078,Exported Report,Command Center,Success,Activity event 0658
+ACT00659,2025-12-05,E014,Acknowledged Alert,Investigator,Success,Activity event 0659
+ACT00660,2026-11-06,E012,Opened Case,Data Explorer,Success,Activity event 0660
+ACT00661,2026-01-16,E061,Updated Scenario,Data Explorer,Success,Activity event 0661
+ACT00662,2026-06-28,E057,Acknowledged Alert,Investigator,Success,Activity event 0662
+ACT00663,2025-10-21,E015,Exported Report,Case Board,Success,Activity event 0663
+ACT00664,2025-01-27,E025,Exported Report,Case Board,Success,Activity event 0664
+ACT00665,2026-11-03,E055,Opened Case,Task Manager,Success,Activity event 0665
+ACT00666,2025-10-09,E040,Viewed KPI,Task Manager,Failed,Activity event 0666
+ACT00667,2025-08-19,E072,Viewed KPI,Data Explorer,Success,Activity event 0667
+ACT00668,2025-11-10,E067,Updated Scenario,Data Explorer,Failed,Activity event 0668
+ACT00669,2025-02-05,E039,Exported Report,Command Center,Success,Activity event 0669
+ACT00670,2026-02-21,E054,Created Task,Command Center,Success,Activity event 0670
+ACT00671,2025-01-17,E052,Acknowledged Alert,Command Center,Success,Activity event 0671
+ACT00672,2026-08-03,E008,Opened Case,Case Board,Success,Activity event 0672
+ACT00673,2025-08-17,E035,Viewed KPI,Case Board,Success,Activity event 0673
+ACT00674,2025-06-25,E036,Created Task,Investigator,Failed,Activity event 0674
+ACT00675,2026-09-10,E072,Changed Layout,Simulator,Success,Activity event 0675
+ACT00676,2026-02-20,E071,Opened Case,Task Manager,Success,Activity event 0676
+ACT00677,2026-07-18,E005,Changed Filter,Data Explorer,Success,Activity event 0677
+ACT00678,2025-09-25,E068,Updated Scenario,Simulator,Success,Activity event 0678
+ACT00679,2025-11-02,E049,Created Task,Task Manager,Failed,Activity event 0679
+ACT00680,2025-10-12,E002,Acknowledged Alert,Task Manager,Success,Activity event 0680
+ACT00681,2026-01-26,E031,Acknowledged Alert,Data Explorer,Success,Activity event 0681
+ACT00682,2026-09-06,E009,Created Task,Command Center,Success,Activity event 0682
+ACT00683,2025-09-05,E032,Opened Case,Task Manager,Success,Activity event 0683
+ACT00684,2026-04-13,E032,Exported Report,Task Manager,Failed,Activity event 0684
+ACT00685,2026-01-26,E073,Updated Scenario,Command Center,Success,Activity event 0685
+ACT00686,2026-02-12,E008,Acknowledged Alert,Command Center,Failed,Activity event 0686
+ACT00687,2025-11-29,E071,Viewed KPI,Data Explorer,Success,Activity event 0687
+ACT00688,2025-11-30,E079,Opened Case,Simulator,Success,Activity event 0688
+ACT00689,2026-09-16,E022,Exported Report,Case Board,Success,Activity event 0689
+ACT00690,2025-10-13,E015,Created Task,Data Explorer,Success,Activity event 0690
+ACT00691,2025-05-13,E030,Exported Report,Case Board,Success,Activity event 0691
+ACT00692,2025-10-18,E029,Acknowledged Alert,Simulator,Success,Activity event 0692
+ACT00693,2026-05-22,E013,Changed Filter,Data Explorer,Failed,Activity event 0693
+ACT00694,2025-11-25,E072,Acknowledged Alert,Data Explorer,Success,Activity event 0694
+ACT00695,2026-05-21,E017,Acknowledged Alert,Investigator,Success,Activity event 0695
+ACT00696,2025-06-15,E075,Updated Scenario,Task Manager,Success,Activity event 0696
+ACT00697,2026-02-07,E071,Exported Report,Simulator,Success,Activity event 0697
+ACT00698,2026-08-21,E036,Acknowledged Alert,Case Board,Success,Activity event 0698
+ACT00699,2026-01-01,E030,Changed Layout,Investigator,Success,Activity event 0699
+ACT00700,2026-03-17,E052,Exported Report,Command Center,Success,Activity event 0700
+ACT00701,2026-04-15,E069,Viewed KPI,Case Board,Success,Activity event 0701
+ACT00702,2026-05-27,E009,Updated Scenario,Simulator,Success,Activity event 0702
+ACT00703,2025-08-31,E046,Exported Report,Simulator,Success,Activity event 0703
+ACT00704,2026-03-10,E070,Exported Report,Task Manager,Success,Activity event 0704
+ACT00705,2025-10-15,E066,Opened Case,Task Manager,Success,Activity event 0705
+ACT00706,2025-09-28,E012,Created Task,Command Center,Success,Activity event 0706
+ACT00707,2025-11-25,E012,Changed Filter,Task Manager,Failed,Activity event 0707
+ACT00708,2025-10-09,E020,Changed Layout,Task Manager,Success,Activity event 0708
+ACT00709,2025-01-18,E054,Viewed KPI,Investigator,Success,Activity event 0709
+ACT00710,2026-05-28,E011,Updated Scenario,Investigator,Success,Activity event 0710
+ACT00711,2026-02-08,E041,Updated Scenario,Data Explorer,Success,Activity event 0711
+ACT00712,2025-04-06,E049,Created Task,Data Explorer,Success,Activity event 0712
+ACT00713,2025-06-30,E066,Updated Scenario,Command Center,Failed,Activity event 0713
+ACT00714,2026-02-27,E009,Viewed KPI,Task Manager,Success,Activity event 0714
+ACT00715,2025-12-24,E010,Changed Filter,Investigator,Failed,Activity event 0715
+ACT00716,2026-05-15,E024,Exported Report,Data Explorer,Success,Activity event 0716
+ACT00717,2025-12-05,E056,Changed Layout,Investigator,Failed,Activity event 0717
+ACT00718,2026-08-07,E041,Viewed KPI,Command Center,Success,Activity event 0718
+ACT00719,2025-02-23,E021,Updated Scenario,Command Center,Success,Activity event 0719
+ACT00720,2026-02-28,E004,Changed Filter,Case Board,Failed,Activity event 0720
+ACT00721,2025-09-14,E026,Changed Filter,Investigator,Success,Activity event 0721
+ACT00722,2025-08-01,E077,Viewed KPI,Simulator,Failed,Activity event 0722
+ACT00723,2026-10-15,E072,Exported Report,Data Explorer,Failed,Activity event 0723
+ACT00724,2026-08-20,E072,Acknowledged Alert,Task Manager,Success,Activity event 0724
+ACT00725,2025-05-07,E032,Changed Filter,Task Manager,Failed,Activity event 0725
+ACT00726,2025-02-09,E064,Viewed KPI,Investigator,Success,Activity event 0726
+ACT00727,2026-08-23,E003,Opened Case,Case Board,Success,Activity event 0727
+ACT00728,2025-04-27,E014,Created Task,Command Center,Success,Activity event 0728
+ACT00729,2026-10-04,E064,Acknowledged Alert,Investigator,Success,Activity event 0729
+ACT00730,2025-07-11,E004,Changed Filter,Investigator,Success,Activity event 0730
+ACT00731,2025-10-12,E047,Changed Filter,Investigator,Success,Activity event 0731
+ACT00732,2025-02-01,E038,Updated Scenario,Simulator,Failed,Activity event 0732
+ACT00733,2026-01-07,E079,Changed Layout,Case Board,Success,Activity event 0733
+ACT00734,2025-05-11,E015,Created Task,Data Explorer,Success,Activity event 0734
+ACT00735,2025-10-25,E026,Created Task,Task Manager,Success,Activity event 0735
+ACT00736,2026-09-28,E063,Updated Scenario,Investigator,Success,Activity event 0736
+ACT00737,2025-06-24,E027,Changed Filter,Simulator,Failed,Activity event 0737
+ACT00738,2026-03-15,E070,Acknowledged Alert,Case Board,Success,Activity event 0738
+ACT00739,2025-05-20,E024,Opened Case,Command Center,Success,Activity event 0739
+ACT00740,2026-02-26,E069,Acknowledged Alert,Command Center,Success,Activity event 0740
+ACT00741,2025-07-19,E038,Created Task,Investigator,Failed,Activity event 0741
+ACT00742,2026-04-16,E035,Viewed KPI,Case Board,Success,Activity event 0742
+ACT00743,2026-06-17,E042,Exported Report,Simulator,Failed,Activity event 0743
+ACT00744,2026-09-01,E049,Opened Case,Data Explorer,Failed,Activity event 0744
+ACT00745,2026-09-27,E069,Viewed KPI,Investigator,Success,Activity event 0745
+ACT00746,2025-06-16,E072,Changed Filter,Task Manager,Success,Activity event 0746
+ACT00747,2025-07-15,E004,Opened Case,Command Center,Success,Activity event 0747
+ACT00748,2025-03-14,E058,Updated Scenario,Command Center,Success,Activity event 0748
+ACT00749,2025-03-18,E015,Exported Report,Data Explorer,Failed,Activity event 0749
+ACT00750,2025-10-10,E065,Changed Filter,Command Center,Failed,Activity event 0750
+ACT00751,2026-07-15,E078,Created Task,Task Manager,Failed,Activity event 0751
+ACT00752,2025-02-08,E012,Changed Filter,Case Board,Success,Activity event 0752
+ACT00753,2025-10-03,E023,Changed Filter,Simulator,Success,Activity event 0753
+ACT00754,2025-03-09,E042,Acknowledged Alert,Case Board,Success,Activity event 0754
+ACT00755,2025-11-20,E035,Viewed KPI,Data Explorer,Success,Activity event 0755
+ACT00756,2025-01-16,E035,Opened Case,Investigator,Success,Activity event 0756
+ACT00757,2025-11-13,E018,Changed Layout,Task Manager,Failed,Activity event 0757
+ACT00758,2026-07-04,E072,Opened Case,Investigator,Success,Activity event 0758
+ACT00759,2026-10-04,E055,Updated Scenario,Investigator,Success,Activity event 0759
+ACT00760,2026-04-13,E013,Acknowledged Alert,Task Manager,Success,Activity event 0760
+ACT00761,2025-09-30,E001,Changed Filter,Simulator,Success,Activity event 0761
+ACT00762,2026-01-22,E062,Viewed KPI,Investigator,Failed,Activity event 0762
+ACT00763,2026-04-08,E002,Updated Scenario,Case Board,Success,Activity event 0763
+ACT00764,2026-01-20,E071,Updated Scenario,Data Explorer,Success,Activity event 0764
+ACT00765,2025-03-12,E043,Opened Case,Command Center,Success,Activity event 0765
+ACT00766,2025-06-22,E075,Updated Scenario,Task Manager,Success,Activity event 0766
+ACT00767,2026-01-16,E062,Changed Filter,Command Center,Success,Activity event 0767
+ACT00768,2025-12-29,E072,Exported Report,Data Explorer,Success,Activity event 0768
+ACT00769,2025-07-18,E060,Viewed KPI,Investigator,Success,Activity event 0769
+ACT00770,2025-10-24,E047,Changed Filter,Case Board,Success,Activity event 0770
+ACT00771,2026-04-19,E014,Created Task,Command Center,Failed,Activity event 0771
+ACT00772,2026-08-23,E059,Acknowledged Alert,Investigator,Success,Activity event 0772
+ACT00773,2025-10-10,E048,Opened Case,Investigator,Failed,Activity event 0773
+ACT00774,2026-04-04,E037,Opened Case,Task Manager,Success,Activity event 0774
+ACT00775,2026-03-15,E045,Changed Layout,Command Center,Success,Activity event 0775
+ACT00776,2026-06-23,E019,Created Task,Investigator,Success,Activity event 0776
+ACT00777,2025-01-03,E033,Opened Case,Task Manager,Success,Activity event 0777
+ACT00778,2026-07-24,E010,Created Task,Case Board,Success,Activity event 0778
+ACT00779,2026-08-19,E033,Acknowledged Alert,Command Center,Success,Activity event 0779
+ACT00780,2025-05-25,E038,Updated Scenario,Simulator,Success,Activity event 0780
+ACT00781,2026-07-15,E069,Changed Filter,Simulator,Success,Activity event 0781
+ACT00782,2026-02-28,E043,Acknowledged Alert,Simulator,Failed,Activity event 0782
+ACT00783,2026-07-12,E073,Opened Case,Investigator,Success,Activity event 0783
+ACT00784,2026-07-04,E078,Opened Case,Investigator,Success,Activity event 0784
+ACT00785,2026-07-29,E004,Changed Layout,Simulator,Failed,Activity event 0785
+ACT00786,2025-01-14,E048,Changed Filter,Data Explorer,Failed,Activity event 0786
+ACT00787,2026-10-24,E024,Viewed KPI,Task Manager,Failed,Activity event 0787
+ACT00788,2026-10-30,E069,Created Task,Task Manager,Success,Activity event 0788
+ACT00789,2025-04-08,E040,Acknowledged Alert,Investigator,Success,Activity event 0789
+ACT00790,2025-06-02,E007,Updated Scenario,Case Board,Success,Activity event 0790
+ACT00791,2026-04-23,E018,Updated Scenario,Investigator,Success,Activity event 0791
+ACT00792,2026-01-22,E054,Viewed KPI,Case Board,Success,Activity event 0792
+ACT00793,2025-02-25,E006,Exported Report,Data Explorer,Success,Activity event 0793
+ACT00794,2025-09-19,E004,Created Task,Task Manager,Failed,Activity event 0794
+ACT00795,2026-08-26,E014,Exported Report,Command Center,Success,Activity event 0795
+ACT00796,2025-01-21,E012,Opened Case,Investigator,Success,Activity event 0796
+ACT00797,2026-04-27,E048,Created Task,Data Explorer,Success,Activity event 0797
+ACT00798,2026-04-12,E028,Changed Filter,Investigator,Failed,Activity event 0798
+ACT00799,2025-08-10,E054,Opened Case,Case Board,Failed,Activity event 0799
+ACT00800,2025-03-19,E032,Changed Filter,Simulator,Success,Activity event 0800
+ACT00801,2025-03-12,E034,Changed Layout,Data Explorer,Success,Activity event 0801
+ACT00802,2026-11-01,E069,Created Task,Simulator,Success,Activity event 0802
+ACT00803,2026-04-13,E053,Exported Report,Command Center,Success,Activity event 0803
+ACT00804,2025-09-17,E057,Updated Scenario,Case Board,Failed,Activity event 0804
+ACT00805,2026-07-30,E045,Created Task,Simulator,Success,Activity event 0805
+ACT00806,2025-03-13,E056,Acknowledged Alert,Task Manager,Success,Activity event 0806
+ACT00807,2025-03-29,E026,Viewed KPI,Simulator,Failed,Activity event 0807
+ACT00808,2025-05-17,E005,Updated Scenario,Command Center,Success,Activity event 0808
+ACT00809,2026-06-12,E052,Opened Case,Investigator,Failed,Activity event 0809
+ACT00810,2025-10-10,E031,Opened Case,Command Center,Success,Activity event 0810
+ACT00811,2026-03-21,E043,Changed Filter,Data Explorer,Success,Activity event 0811
+ACT00812,2025-06-10,E039,Changed Filter,Command Center,Success,Activity event 0812
+ACT00813,2026-06-22,E045,Exported Report,Command Center,Success,Activity event 0813
+ACT00814,2026-07-08,E041,Changed Filter,Data Explorer,Success,Activity event 0814
+ACT00815,2025-10-13,E060,Acknowledged Alert,Command Center,Success,Activity event 0815
+ACT00816,2025-05-25,E051,Changed Filter,Task Manager,Success,Activity event 0816
+ACT00817,2026-03-12,E023,Viewed KPI,Data Explorer,Failed,Activity event 0817
+ACT00818,2025-06-26,E007,Created Task,Task Manager,Success,Activity event 0818
+ACT00819,2025-04-13,E008,Changed Layout,Task Manager,Failed,Activity event 0819
+ACT00820,2026-03-02,E010,Created Task,Command Center,Success,Activity event 0820
+ACT00821,2025-12-21,E009,Updated Scenario,Task Manager,Success,Activity event 0821
+ACT00822,2026-06-26,E055,Acknowledged Alert,Command Center,Failed,Activity event 0822
+ACT00823,2025-07-21,E059,Changed Layout,Data Explorer,Success,Activity event 0823
+ACT00824,2025-06-05,E051,Opened Case,Simulator,Success,Activity event 0824
+ACT00825,2026-03-19,E035,Changed Layout,Simulator,Failed,Activity event 0825
+ACT00826,2026-04-30,E076,Opened Case,Task Manager,Success,Activity event 0826
+ACT00827,2025-10-13,E023,Created Task,Case Board,Success,Activity event 0827
+ACT00828,2025-11-02,E046,Changed Filter,Task Manager,Failed,Activity event 0828
+ACT00829,2025-03-27,E077,Changed Layout,Data Explorer,Success,Activity event 0829
+ACT00830,2025-11-21,E078,Created Task,Investigator,Success,Activity event 0830
+ACT00831,2026-10-27,E006,Acknowledged Alert,Command Center,Failed,Activity event 0831
+ACT00832,2025-03-20,E015,Acknowledged Alert,Command Center,Success,Activity event 0832
+ACT00833,2026-01-28,E029,Updated Scenario,Simulator,Failed,Activity event 0833
+ACT00834,2025-01-13,E046,Updated Scenario,Command Center,Success,Activity event 0834
+ACT00835,2025-08-13,E068,Exported Report,Case Board,Success,Activity event 0835
+ACT00836,2026-06-10,E068,Updated Scenario,Case Board,Failed,Activity event 0836
+ACT00837,2026-01-27,E056,Changed Filter,Data Explorer,Success,Activity event 0837
+ACT00838,2025-02-26,E061,Changed Layout,Command Center,Success,Activity event 0838
+ACT00839,2025-11-09,E001,Created Task,Task Manager,Success,Activity event 0839
+ACT00840,2025-02-24,E025,Changed Filter,Investigator,Success,Activity event 0840
+ACT00841,2025-09-16,E017,Viewed KPI,Data Explorer,Success,Activity event 0841
+ACT00842,2026-06-16,E036,Updated Scenario,Data Explorer,Success,Activity event 0842
+ACT00843,2025-06-28,E054,Exported Report,Simulator,Failed,Activity event 0843
+ACT00844,2025-11-10,E063,Changed Layout,Investigator,Success,Activity event 0844
+ACT00845,2025-12-12,E060,Opened Case,Command Center,Success,Activity event 0845
+ACT00846,2026-08-13,E007,Updated Scenario,Data Explorer,Success,Activity event 0846
+ACT00847,2025-03-25,E059,Acknowledged Alert,Case Board,Success,Activity event 0847
+ACT00848,2026-01-16,E020,Viewed KPI,Task Manager,Success,Activity event 0848
+ACT00849,2025-01-22,E077,Exported Report,Command Center,Success,Activity event 0849
+ACT00850,2025-03-06,E038,Opened Case,Case Board,Success,Activity event 0850
+ACT00851,2025-06-02,E032,Changed Filter,Data Explorer,Success,Activity event 0851
+ACT00852,2026-05-13,E041,Acknowledged Alert,Command Center,Success,Activity event 0852
+ACT00853,2025-01-29,E007,Changed Layout,Simulator,Success,Activity event 0853
+ACT00854,2026-10-16,E021,Changed Filter,Data Explorer,Failed,Activity event 0854
+ACT00855,2025-10-23,E063,Changed Filter,Simulator,Failed,Activity event 0855
+ACT00856,2026-08-03,E023,Changed Layout,Task Manager,Success,Activity event 0856
+ACT00857,2025-06-03,E035,Created Task,Command Center,Success,Activity event 0857
+ACT00858,2025-08-22,E057,Created Task,Task Manager,Success,Activity event 0858
+ACT00859,2026-05-18,E021,Changed Layout,Investigator,Success,Activity event 0859
+ACT00860,2025-09-20,E059,Changed Filter,Task Manager,Success,Activity event 0860
+ACT00861,2025-12-17,E045,Acknowledged Alert,Investigator,Failed,Activity event 0861
+ACT00862,2026-07-14,E053,Created Task,Investigator,Success,Activity event 0862
+ACT00863,2026-03-26,E039,Changed Layout,Task Manager,Failed,Activity event 0863
+ACT00864,2026-08-01,E002,Updated Scenario,Data Explorer,Success,Activity event 0864
+ACT00865,2025-03-01,E055,Updated Scenario,Command Center,Success,Activity event 0865
+ACT00866,2026-02-25,E023,Exported Report,Data Explorer,Success,Activity event 0866
+ACT00867,2026-02-20,E009,Exported Report,Simulator,Failed,Activity event 0867
+ACT00868,2026-02-24,E029,Viewed KPI,Data Explorer,Failed,Activity event 0868
+ACT00869,2026-02-11,E028,Opened Case,Task Manager,Success,Activity event 0869
+ACT00870,2026-05-16,E009,Changed Layout,Data Explorer,Success,Activity event 0870
+ACT00871,2026-08-07,E040,Opened Case,Data Explorer,Success,Activity event 0871
+ACT00872,2025-06-08,E077,Opened Case,Investigator,Success,Activity event 0872
+ACT00873,2025-03-14,E043,Viewed KPI,Case Board,Success,Activity event 0873
+ACT00874,2025-02-21,E072,Opened Case,Investigator,Success,Activity event 0874
+ACT00875,2025-04-20,E021,Changed Filter,Task Manager,Success,Activity event 0875
+ACT00876,2026-03-30,E071,Created Task,Simulator,Success,Activity event 0876
+ACT00877,2025-10-15,E021,Exported Report,Task Manager,Success,Activity event 0877
+ACT00878,2025-08-30,E074,Changed Filter,Data Explorer,Success,Activity event 0878
+ACT00879,2026-09-21,E010,Viewed KPI,Case Board,Failed,Activity event 0879
+ACT00880,2026-09-15,E068,Changed Filter,Task Manager,Success,Activity event 0880
+ACT00881,2026-01-08,E021,Opened Case,Investigator,Success,Activity event 0881
+ACT00882,2025-11-13,E063,Changed Filter,Investigator,Success,Activity event 0882
+ACT00883,2025-07-06,E028,Changed Filter,Investigator,Success,Activity event 0883
+ACT00884,2025-11-14,E006,Exported Report,Investigator,Failed,Activity event 0884
+ACT00885,2025-10-11,E011,Changed Layout,Investigator,Success,Activity event 0885
+ACT00886,2025-01-05,E031,Acknowledged Alert,Simulator,Failed,Activity event 0886
+ACT00887,2026-06-09,E079,Acknowledged Alert,Investigator,Success,Activity event 0887
+ACT00888,2025-10-31,E061,Created Task,Simulator,Success,Activity event 0888
+ACT00889,2025-06-03,E051,Exported Report,Command Center,Success,Activity event 0889
+ACT00890,2026-04-06,E027,Opened Case,Task Manager,Success,Activity event 0890
+ACT00891,2025-11-06,E054,Acknowledged Alert,Task Manager,Success,Activity event 0891
+ACT00892,2025-08-05,E049,Acknowledged Alert,Investigator,Success,Activity event 0892
+ACT00893,2025-06-09,E043,Changed Filter,Task Manager,Success,Activity event 0893
+ACT00894,2025-02-10,E036,Acknowledged Alert,Case Board,Failed,Activity event 0894
+ACT00895,2025-12-14,E067,Changed Layout,Command Center,Failed,Activity event 0895
+ACT00896,2025-09-17,E001,Changed Filter,Case Board,Success,Activity event 0896
+ACT00897,2025-01-28,E044,Updated Scenario,Investigator,Failed,Activity event 0897
+ACT00898,2026-07-16,E072,Changed Layout,Data Explorer,Failed,Activity event 0898
+ACT00899,2026-07-13,E028,Updated Scenario,Investigator,Success,Activity event 0899
+ACT00900,2025-12-05,E072,Viewed KPI,Investigator,Failed,Activity event 0900
+ACT00901,2026-08-03,E037,Acknowledged Alert,Data Explorer,Success,Activity event 0901
+ACT00902,2025-11-29,E006,Changed Filter,Task Manager,Failed,Activity event 0902
+ACT00903,2025-04-27,E043,Changed Layout,Investigator,Failed,Activity event 0903
+ACT00904,2025-12-24,E046,Opened Case,Investigator,Success,Activity event 0904
+ACT00905,2025-08-04,E019,Opened Case,Investigator,Failed,Activity event 0905
+ACT00906,2025-11-09,E071,Created Task,Simulator,Success,Activity event 0906
+ACT00907,2026-11-02,E005,Updated Scenario,Data Explorer,Success,Activity event 0907
+ACT00908,2025-09-03,E042,Exported Report,Task Manager,Success,Activity event 0908
+ACT00909,2025-05-30,E029,Opened Case,Task Manager,Success,Activity event 0909
+ACT00910,2025-03-30,E038,Updated Scenario,Case Board,Success,Activity event 0910
+ACT00911,2026-09-03,E075,Acknowledged Alert,Command Center,Success,Activity event 0911
+ACT00912,2025-01-11,E051,Opened Case,Data Explorer,Success,Activity event 0912
+ACT00913,2026-09-20,E062,Changed Layout,Investigator,Success,Activity event 0913
+ACT00914,2025-02-12,E032,Viewed KPI,Task Manager,Success,Activity event 0914
+ACT00915,2026-06-05,E079,Created Task,Case Board,Success,Activity event 0915
+ACT00916,2025-07-22,E023,Exported Report,Case Board,Success,Activity event 0916
+ACT00917,2026-09-11,E015,Acknowledged Alert,Simulator,Failed,Activity event 0917
+ACT00918,2025-09-10,E011,Changed Layout,Investigator,Failed,Activity event 0918
+ACT00919,2026-10-12,E006,Updated Scenario,Simulator,Success,Activity event 0919
+ACT00920,2025-12-17,E013,Acknowledged Alert,Simulator,Success,Activity event 0920
+ACT00921,2025-10-09,E048,Created Task,Task Manager,Success,Activity event 0921
+ACT00922,2026-04-28,E046,Opened Case,Simulator,Success,Activity event 0922
+ACT00923,2025-10-23,E023,Changed Filter,Case Board,Failed,Activity event 0923
+ACT00924,2026-07-09,E055,Created Task,Case Board,Success,Activity event 0924
+ACT00925,2026-04-10,E062,Exported Report,Simulator,Success,Activity event 0925
+ACT00926,2025-06-02,E079,Changed Layout,Simulator,Success,Activity event 0926
+ACT00927,2026-09-28,E036,Opened Case,Simulator,Success,Activity event 0927
+ACT00928,2025-05-21,E030,Opened Case,Investigator,Success,Activity event 0928
+ACT00929,2025-09-26,E078,Updated Scenario,Case Board,Success,Activity event 0929
+ACT00930,2025-07-19,E076,Changed Filter,Simulator,Success,Activity event 0930
+ACT00931,2025-06-09,E075,Opened Case,Case Board,Success,Activity event 0931
+ACT00932,2026-10-05,E049,Viewed KPI,Task Manager,Failed,Activity event 0932
+ACT00933,2025-03-16,E050,Acknowledged Alert,Data Explorer,Success,Activity event 0933
+ACT00934,2026-09-22,E075,Viewed KPI,Investigator,Success,Activity event 0934
+ACT00935,2025-11-13,E039,Changed Layout,Task Manager,Success,Activity event 0935
+ACT00936,2025-09-23,E018,Acknowledged Alert,Simulator,Success,Activity event 0936
+ACT00937,2026-03-28,E079,Updated Scenario,Case Board,Success,Activity event 0937
+ACT00938,2025-07-04,E068,Changed Filter,Command Center,Failed,Activity event 0938
+ACT00939,2025-03-08,E005,Changed Layout,Simulator,Success,Activity event 0939
+ACT00940,2026-09-15,E009,Updated Scenario,Investigator,Success,Activity event 0940
+ACT00941,2025-10-14,E071,Updated Scenario,Case Board,Success,Activity event 0941
+ACT00942,2025-08-30,E025,Changed Filter,Case Board,Success,Activity event 0942
+ACT00943,2025-01-29,E056,Opened Case,Case Board,Success,Activity event 0943
+ACT00944,2025-08-10,E010,Exported Report,Case Board,Failed,Activity event 0944
+ACT00945,2025-11-25,E014,Changed Filter,Case Board,Success,Activity event 0945
+ACT00946,2026-08-10,E060,Updated Scenario,Command Center,Success,Activity event 0946
+ACT00947,2026-11-09,E079,Created Task,Case Board,Success,Activity event 0947
+ACT00948,2026-08-02,E041,Opened Case,Data Explorer,Success,Activity event 0948
+ACT00949,2025-04-28,E004,Updated Scenario,Data Explorer,Failed,Activity event 0949
+ACT00950,2025-03-05,E019,Exported Report,Command Center,Success,Activity event 0950
+ACT00951,2026-09-03,E018,Acknowledged Alert,Simulator,Success,Activity event 0951
+ACT00952,2025-03-06,E075,Acknowledged Alert,Command Center,Success,Activity event 0952
+ACT00953,2025-10-28,E034,Exported Report,Simulator,Failed,Activity event 0953
+ACT00954,2025-07-28,E076,Opened Case,Investigator,Success,Activity event 0954
+ACT00955,2025-08-29,E069,Changed Layout,Investigator,Success,Activity event 0955
+ACT00956,2026-11-17,E037,Created Task,Data Explorer,Success,Activity event 0956
+ACT00957,2026-04-30,E002,Acknowledged Alert,Case Board,Success,Activity event 0957
+ACT00958,2026-06-25,E078,Updated Scenario,Investigator,Success,Activity event 0958
+ACT00959,2025-05-15,E001,Opened Case,Simulator,Success,Activity event 0959
+ACT00960,2025-01-31,E069,Exported Report,Investigator,Failed,Activity event 0960
+ACT00961,2025-06-18,E034,Opened Case,Command Center,Success,Activity event 0961
+ACT00962,2025-08-21,E025,Opened Case,Data Explorer,Failed,Activity event 0962
+ACT00963,2025-04-25,E033,Acknowledged Alert,Case Board,Success,Activity event 0963
+ACT00964,2026-10-01,E029,Created Task,Data Explorer,Success,Activity event 0964
+ACT00965,2026-07-08,E056,Exported Report,Task Manager,Success,Activity event 0965
+ACT00966,2026-07-05,E046,Exported Report,Task Manager,Failed,Activity event 0966
+ACT00967,2025-09-14,E021,Exported Report,Case Board,Success,Activity event 0967
+ACT00968,2025-07-13,E043,Created Task,Investigator,Success,Activity event 0968
+ACT00969,2025-10-07,E033,Acknowledged Alert,Investigator,Success,Activity event 0969
+ACT00970,2025-09-12,E074,Changed Filter,Task Manager,Failed,Activity event 0970
+ACT00971,2026-03-21,E072,Exported Report,Command Center,Success,Activity event 0971
+ACT00972,2026-10-04,E050,Viewed KPI,Command Center,Success,Activity event 0972
+ACT00973,2025-03-05,E078,Created Task,Case Board,Success,Activity event 0973
+ACT00974,2025-11-27,E031,Updated Scenario,Investigator,Success,Activity event 0974
+ACT00975,2025-10-13,E008,Changed Filter,Simulator,Success,Activity event 0975
+ACT00976,2026-04-04,E004,Changed Filter,Case Board,Success,Activity event 0976
+ACT00977,2026-05-14,E067,Changed Filter,Simulator,Success,Activity event 0977
+ACT00978,2025-10-19,E031,Exported Report,Case Board,Failed,Activity event 0978
+ACT00979,2026-04-11,E069,Viewed KPI,Investigator,Success,Activity event 0979
+ACT00980,2025-03-08,E037,Opened Case,Investigator,Success,Activity event 0980
+ACT00981,2025-08-12,E001,Changed Filter,Case Board,Success,Activity event 0981
+ACT00982,2025-01-06,E043,Acknowledged Alert,Investigator,Failed,Activity event 0982
+ACT00983,2026-06-12,E048,Opened Case,Investigator,Failed,Activity event 0983
+ACT00984,2025-06-21,E037,Created Task,Data Explorer,Success,Activity event 0984
+ACT00985,2026-10-30,E068,Opened Case,Data Explorer,Failed,Activity event 0985
+ACT00986,2025-03-24,E052,Acknowledged Alert,Task Manager,Failed,Activity event 0986
+ACT00987,2026-03-08,E030,Created Task,Task Manager,Success,Activity event 0987
+ACT00988,2025-09-09,E058,Created Task,Case Board,Success,Activity event 0988
+ACT00989,2026-10-08,E026,Exported Report,Case Board,Success,Activity event 0989
+ACT00990,2026-10-03,E068,Changed Filter,Investigator,Success,Activity event 0990
+ACT00991,2025-07-13,E036,Created Task,Task Manager,Success,Activity event 0991
+ACT00992,2026-04-06,E019,Created Task,Simulator,Success,Activity event 0992
+ACT00993,2025-10-14,E008,Created Task,Simulator,Success,Activity event 0993
+ACT00994,2025-03-11,E035,Viewed KPI,Task Manager,Success,Activity event 0994
+ACT00995,2026-03-12,E037,Changed Filter,Command Center,Failed,Activity event 0995
+ACT00996,2025-09-22,E040,Viewed KPI,Command Center,Success,Activity event 0996
+ACT00997,2026-03-15,E058,Opened Case,Case Board,Failed,Activity event 0997
+ACT00998,2026-01-09,E008,Created Task,Simulator,Failed,Activity event 0998
+ACT00999,2025-01-29,E028,Exported Report,Command Center,Success,Activity event 0999
+ACT01000,2025-05-22,E043,Changed Layout,Data Explorer,Success,Activity event 1000

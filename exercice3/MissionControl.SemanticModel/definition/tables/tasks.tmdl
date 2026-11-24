@@ -1,0 +1,111 @@
+table tasks
+	lineageTag: 3c39461f-3fe5-479b-a56a-aaeef45e1c32
+
+	column task_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: acbe35b9-ea32-47e2-b0a8-0b4e905bec89
+		summarizeBy: none
+		sourceColumn: task_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column project_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 6afd755e-87a2-484e-aaed-1fcf30cab7ac
+		summarizeBy: none
+		sourceColumn: project_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 563fb757-f758-479d-afa4-0ead17453daa
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column assignee_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: b77d353e-1e73-4c7f-9369-adcb8a3a8e82
+		summarizeBy: none
+		sourceColumn: assignee_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_title
+		dataType: string
+		formatString:  type text
+		lineageTag: 6b3f0637-04a6-4600-990f-58841dede721
+		summarizeBy: none
+		sourceColumn: task_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_status
+		dataType: string
+		formatString:  type text
+		lineageTag: b3dd263c-ce76-436f-bda9-64ee7bb11286
+		summarizeBy: none
+		sourceColumn: task_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column priority
+		dataType: string
+		formatString:  type text
+		lineageTag: 8de17e4e-3345-4983-8f1b-05e2f3adddab
+		summarizeBy: none
+		sourceColumn: priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: ae0513a8-a1eb-4b65-916a-fad5a1141d13
+		summarizeBy: none
+		sourceColumn: created_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column due_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: c3c38596-533e-48b9-83cb-6027b55061db
+		summarizeBy: none
+		sourceColumn: due_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column task_type
+		dataType: string
+		formatString:  type text
+		lineageTag: 860b65bb-7cad-4d3a-9cbd-a4c7c9fbdce4
+		summarizeBy: none
+		sourceColumn: task_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tasks = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\tasks.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"task_id", type text}, {"project_id", type text}, {"department_id", type text}, {"assignee_employee_id", type text}, {"task_title", type text}, {"task_status", type text}, {"priority", type text}, {"created_date", type date}, {"due_date", type date}, {"task_type", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

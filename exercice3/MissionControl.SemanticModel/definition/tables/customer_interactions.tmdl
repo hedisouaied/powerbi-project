@@ -1,0 +1,100 @@
+table customer_interactions
+	lineageTag: c7933f61-f18f-4245-84c1-15236658cba5
+
+	column interaction_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: df5bf0cf-58ce-4efe-8b78-b2f7c5e17c79
+		summarizeBy: none
+		sourceColumn: interaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		formatString:  type text
+		lineageTag: d77ee3c1-05d7-413d-a34e-c2e30422fa8c
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column interaction_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 709e4de1-06ea-4c83-b8a7-881e16fb6009
+		summarizeBy: none
+		sourceColumn: interaction_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column channel
+		dataType: string
+		formatString:  type text
+		lineageTag: 91b180c0-fc3d-4375-9a30-046030942e9b
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column interaction_type
+		dataType: string
+		formatString:  type text
+		lineageTag: b40e3855-f274-46cf-80a6-a3285b1a34f9
+		summarizeBy: none
+		sourceColumn: interaction_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column priority
+		dataType: string
+		formatString:  type text
+		lineageTag: 839a5646-19e9-4511-9132-6308a1bd8d8e
+		summarizeBy: none
+		sourceColumn: priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column interaction_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 96eb01c2-f087-490c-8d05-4d1e71fb654a
+		summarizeBy: none
+		sourceColumn: interaction_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column resolution_hours
+		dataType: int64
+		formatString: #,0 Int64.Type
+		lineageTag: f52cf175-a3c5-47e3-95e1-8aebcc58997c
+		summarizeBy: sum
+		sourceColumn: resolution_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	column owner_employee_id
+		dataType: string
+		formatString:  type text
+		lineageTag: e1326b0e-6488-4c06-aeed-1fba96b1689d
+		summarizeBy: none
+		sourceColumn: owner_employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customer_interactions = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\customer_interactions.csv"), [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"interaction_id", type text}, {"customer_id", type text}, {"interaction_date", type date}, {"channel", type text}, {"interaction_type", type text}, {"priority", type text}, {"interaction_status", type text}, {"resolution_hours", Int64.Type}, {"owner_employee_id", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

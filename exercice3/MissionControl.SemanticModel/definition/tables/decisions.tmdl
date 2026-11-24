@@ -1,0 +1,109 @@
+table decisions
+	lineageTag: 2191b5c6-0197-4c01-9253-ae6741e2e2f4
+
+	column decision_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: bd6bd49a-b401-4e70-82ae-db8c93c45ced
+		summarizeBy: none
+		sourceColumn: decision_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column decision_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: d0fa7dc3-838c-48f9-aaa0-c550f386e206
+		summarizeBy: none
+		sourceColumn: decision_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column decision_type
+		dataType: string
+		formatString:  type text
+		lineageTag: fb06725d-b1fc-4caf-86af-40b77ff2f901
+		summarizeBy: none
+		sourceColumn: decision_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 0f4f3d98-3c3b-4690-862a-a62604f199e7
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column decision_owner_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 42829ae1-3027-4d51-912a-fe5de289c7f7
+		summarizeBy: none
+		sourceColumn: decision_owner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column decision_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 78d221dd-0cc2-4db1-9ec7-825ebc0bcc4e
+		summarizeBy: none
+		sourceColumn: decision_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column expected_impact_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: 786b1343-8ecb-4b68-a394-d2328026ce30
+		summarizeBy: sum
+		sourceColumn: expected_impact_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column expected_kpi_change_pct
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 0659e121-479a-474d-9b64-6d387957f0b6
+		summarizeBy: none
+		sourceColumn: expected_kpi_change_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_kpi_change_pct
+		dataType: double
+		formatString: 0.0% type number
+		lineageTag: 8936a5b1-ccb2-428a-94c0-cf4317a9ea61
+		summarizeBy: none
+		sourceColumn: actual_kpi_change_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column decision_notes
+		dataType: string
+		formatString:  type text
+		lineageTag: dc8f945a-a8bb-43bd-9bc8-ec29a0ce46c7
+		summarizeBy: none
+		sourceColumn: decision_notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition decisions = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\decisions.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"decision_id", type text}, {"decision_date", type date}, {"decision_type", type text}, {"department_id", type text}, {"decision_owner_id", type text}, {"decision_status", type text}, {"expected_impact_tnd", Currency.Type}, {"expected_kpi_change_pct", type number}, {"actual_kpi_change_pct", type number}, {"decision_notes", type text}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

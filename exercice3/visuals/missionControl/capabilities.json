@@ -1,0 +1,449 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Feed activity_log",
+      "name": "activity_log",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed alerts",
+      "name": "alerts",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed approval_requests",
+      "name": "approval_requests",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed calendar_events",
+      "name": "calendar_events",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed collaboration_comments",
+      "name": "collaboration_comments",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed customer_interactions",
+      "name": "customer_interactions",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed customers",
+      "name": "customers",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed data_quality_issues",
+      "name": "data_quality_issues",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed data_sources",
+      "name": "data_sources",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed decisions",
+      "name": "decisions",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed departments",
+      "name": "departments",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed employees",
+      "name": "employees",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed entity_relationships",
+      "name": "entity_relationships",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed expenses",
+      "name": "expenses",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed incidents",
+      "name": "incidents",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed inventory_snapshots",
+      "name": "inventory_snapshots",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed investigation_cases",
+      "name": "investigation_cases",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed investigation_evidence",
+      "name": "investigation_evidence",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed kpi_targets",
+      "name": "kpi_targets",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed missions",
+      "name": "missions",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed notifications",
+      "name": "notifications",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed payments",
+      "name": "payments",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed products",
+      "name": "products",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed projects",
+      "name": "projects",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed risk_register",
+      "name": "risk_register",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed sales_order_items",
+      "name": "sales_order_items",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed sales_orders",
+      "name": "sales_orders",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed scenarios",
+      "name": "scenarios",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed strategic_goals",
+      "name": "strategic_goals",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed suppliers",
+      "name": "suppliers",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Feed tasks",
+      "name": "tasks",
+      "kind": "Measure"
+    }
+  ],
+  "objects": {
+    "prefs": {
+      "properties": {
+        "json": {
+          "type": {
+            "text": true
+          }
+        }
+      }
+    },
+    "workspace": {
+      "properties": {
+        "json": {
+          "type": {
+            "text": true
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "activity_log": {
+            "max": 1
+          },
+          "alerts": {
+            "max": 1
+          },
+          "approval_requests": {
+            "max": 1
+          },
+          "calendar_events": {
+            "max": 1
+          },
+          "collaboration_comments": {
+            "max": 1
+          },
+          "customer_interactions": {
+            "max": 1
+          },
+          "customers": {
+            "max": 1
+          },
+          "data_quality_issues": {
+            "max": 1
+          },
+          "data_sources": {
+            "max": 1
+          },
+          "decisions": {
+            "max": 1
+          },
+          "departments": {
+            "max": 1
+          },
+          "employees": {
+            "max": 1
+          },
+          "entity_relationships": {
+            "max": 1
+          },
+          "expenses": {
+            "max": 1
+          },
+          "incidents": {
+            "max": 1
+          },
+          "inventory_snapshots": {
+            "max": 1
+          },
+          "investigation_cases": {
+            "max": 1
+          },
+          "investigation_evidence": {
+            "max": 1
+          },
+          "kpi_targets": {
+            "max": 1
+          },
+          "missions": {
+            "max": 1
+          },
+          "notifications": {
+            "max": 1
+          },
+          "payments": {
+            "max": 1
+          },
+          "products": {
+            "max": 1
+          },
+          "projects": {
+            "max": 1
+          },
+          "risk_register": {
+            "max": 1
+          },
+          "sales_order_items": {
+            "max": 1
+          },
+          "sales_orders": {
+            "max": 1
+          },
+          "scenarios": {
+            "max": 1
+          },
+          "strategic_goals": {
+            "max": 1
+          },
+          "suppliers": {
+            "max": 1
+          },
+          "tasks": {
+            "max": 1
+          }
+        }
+      ],
+      "table": {
+        "rows": {
+          "select": [
+            {
+              "for": {
+                "in": "activity_log"
+              }
+            },
+            {
+              "for": {
+                "in": "alerts"
+              }
+            },
+            {
+              "for": {
+                "in": "approval_requests"
+              }
+            },
+            {
+              "for": {
+                "in": "calendar_events"
+              }
+            },
+            {
+              "for": {
+                "in": "collaboration_comments"
+              }
+            },
+            {
+              "for": {
+                "in": "customer_interactions"
+              }
+            },
+            {
+              "for": {
+                "in": "customers"
+              }
+            },
+            {
+              "for": {
+                "in": "data_quality_issues"
+              }
+            },
+            {
+              "for": {
+                "in": "data_sources"
+              }
+            },
+            {
+              "for": {
+                "in": "decisions"
+              }
+            },
+            {
+              "for": {
+                "in": "departments"
+              }
+            },
+            {
+              "for": {
+                "in": "employees"
+              }
+            },
+            {
+              "for": {
+                "in": "entity_relationships"
+              }
+            },
+            {
+              "for": {
+                "in": "expenses"
+              }
+            },
+            {
+              "for": {
+                "in": "incidents"
+              }
+            },
+            {
+              "for": {
+                "in": "inventory_snapshots"
+              }
+            },
+            {
+              "for": {
+                "in": "investigation_cases"
+              }
+            },
+            {
+              "for": {
+                "in": "investigation_evidence"
+              }
+            },
+            {
+              "for": {
+                "in": "kpi_targets"
+              }
+            },
+            {
+              "for": {
+                "in": "missions"
+              }
+            },
+            {
+              "for": {
+                "in": "notifications"
+              }
+            },
+            {
+              "for": {
+                "in": "payments"
+              }
+            },
+            {
+              "for": {
+                "in": "products"
+              }
+            },
+            {
+              "for": {
+                "in": "projects"
+              }
+            },
+            {
+              "for": {
+                "in": "risk_register"
+              }
+            },
+            {
+              "for": {
+                "in": "sales_order_items"
+              }
+            },
+            {
+              "for": {
+                "in": "sales_orders"
+              }
+            },
+            {
+              "for": {
+                "in": "scenarios"
+              }
+            },
+            {
+              "for": {
+                "in": "strategic_goals"
+              }
+            },
+            {
+              "for": {
+                "in": "suppliers"
+              }
+            },
+            {
+              "for": {
+                "in": "tasks"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "privileges": [
+    {
+      "name": "ExportContent",
+      "essential": false
+    }
+  ],
+  "supportsKeyboardFocus": true,
+  "suppressDefaultTitle": true
+}

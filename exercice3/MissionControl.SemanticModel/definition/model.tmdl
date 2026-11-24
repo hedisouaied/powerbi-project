@@ -1,0 +1,287 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+expression DataFolder = "C:\Users\DELL\Downloads\powerBiProject\exercice3\Mission_Control_Enterprise" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 75fcb08e-c0d0-4d15-a06b-a6ea0b235173
+
+	annotation PBI_ResultType = Text
+
+expression fnCleanText =
+		(source as table) as table =>
+		    Table.TransformColumns(
+		        source,
+		        List.Transform(
+		            Table.ColumnNames(source),
+		            (col) => {
+		                col,
+		                (v) => (let t = if v = null then null else Text.Trim(Text.Clean(v)) in if t = "" then null else t),
+		                type nullable text
+		            }
+		        )
+		    )
+	lineageTag: c677f590-dc03-455b-bdcb-85ceb362357f
+
+	annotation PBI_ResultType = Function
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+relationship 3d3af02c-b3f9-4d8a-982c-ae7a6754edf3
+	fromColumn: sales_orders.customer_id
+	toColumn: customers.customer_id
+
+relationship fa6377b4-aeae-43c5-b5ec-eb3b7b68aadc
+	fromColumn: sales_orders.sales_owner_id
+	toColumn: employees.employee_id
+
+relationship b076452d-e177-42a4-8d90-698f1915c12b
+	fromColumn: sales_orders.order_date
+	toColumn: dim_date.date
+
+relationship eaa26780-c8e2-4666-b66b-d00634766645
+	isActive: false
+	fromColumn: sales_orders.promised_delivery_date
+	toColumn: dim_date.date
+
+relationship 2c33053a-4c4e-468e-af2f-15adfedcacc3
+	fromColumn: sales_order_items.order_id
+	toColumn: sales_orders.order_id
+
+relationship 05729cb5-037b-4f1c-ade9-ddf05acd23b3
+	fromColumn: sales_order_items.product_id
+	toColumn: products.product_id
+
+relationship fab90ec1-aa5e-46df-a06c-bf6b1ef42a71
+	fromColumn: payments.order_id
+	toColumn: sales_orders.order_id
+
+relationship 4a486d4a-942c-4802-90cd-9d5712d70ed1
+	isActive: false
+	fromColumn: payments.customer_id
+	toColumn: customers.customer_id
+
+relationship 0bac0594-fa84-4054-8fc0-dbbd1ebd9028
+	isActive: false
+	fromColumn: payments.payment_date
+	toColumn: dim_date.date
+
+relationship bdd0466a-7e19-4e5e-9779-7df03c5f8fb5
+	isActive: false
+	fromColumn: payments.settlement_date
+	toColumn: dim_date.date
+
+relationship 90045ca4-8210-4a0c-befb-fa4eebfd8f1e
+	fromColumn: expenses.department_id
+	toColumn: departments.department_id
+
+relationship 5d8d1b33-4fe0-4ce7-9064-51bd720d08fc
+	fromColumn: expenses.submitted_by_employee_id
+	toColumn: employees.employee_id
+
+relationship 0eed7948-76e9-46f8-90d6-f6f5322bb224
+	fromColumn: expenses.expense_date
+	toColumn: dim_date.date
+
+relationship 7c9b400f-fd38-491c-a5f9-673306d3b006
+	fromColumn: inventory_snapshots.product_id
+	toColumn: products.product_id
+
+relationship 257df2d8-bdff-4569-b74f-3adbe071f2a4
+	fromColumn: inventory_snapshots.supplier_id
+	toColumn: suppliers.supplier_id
+
+relationship 52ae9e45-7d82-47ac-9152-76a013855eb3
+	fromColumn: inventory_snapshots.snapshot_date
+	toColumn: dim_date.date
+
+relationship 84936c1c-f716-4820-a26d-44ef128c3722
+	isActive: false
+	fromColumn: employees.department_id
+	toColumn: departments.department_id
+
+relationship d450a1e4-5e4f-4bf5-b18c-a87952084ef1
+	fromColumn: projects.department_id
+	toColumn: departments.department_id
+
+relationship f70ad2fd-8c5c-4d5f-9279-efaa395c644a
+	isActive: false
+	fromColumn: projects.project_owner_id
+	toColumn: employees.employee_id
+
+relationship 329b382c-3114-4651-8f90-f4479db5af0a
+	isActive: false
+	fromColumn: projects.start_date
+	toColumn: dim_date.date
+
+relationship cd87be31-9afc-4f6e-897b-db888195f23a
+	isActive: false
+	fromColumn: projects.planned_end_date
+	toColumn: dim_date.date
+
+relationship 2529915d-0b1d-4dd6-b9a2-036b096d2d33
+	fromColumn: tasks.project_id
+	toColumn: projects.project_id
+
+relationship 67112619-d487-4274-8df9-baf0ea42885f
+	isActive: false
+	fromColumn: tasks.department_id
+	toColumn: departments.department_id
+
+relationship db0e7547-53ea-4924-980e-80b9c470d40c
+	fromColumn: tasks.assignee_employee_id
+	toColumn: employees.employee_id
+
+relationship c83a6abb-6d6e-47b1-a2a1-5f0dcefe69c2
+	fromColumn: tasks.due_date
+	toColumn: dim_date.date
+
+relationship a2132c84-233b-4edf-b5bf-6ef4c02e60dd
+	isActive: false
+	fromColumn: tasks.created_date
+	toColumn: dim_date.date
+
+relationship 0e025e57-00c4-43be-9e7e-1dd7cac2a4e4
+	fromColumn: incidents.department_id
+	toColumn: departments.department_id
+
+relationship 552d3490-6f93-4a1b-ad96-cbf7a265ee4a
+	fromColumn: incidents.incident_owner_id
+	toColumn: employees.employee_id
+
+relationship 4b328443-2391-4262-9698-ba494adf9608
+	fromColumn: incidents.incident_date
+	toColumn: dim_date.date
+
+relationship b147e6e8-6445-4485-9d6e-e69429fd0b6d
+	fromColumn: alerts.alert_date
+	toColumn: dim_date.date
+
+relationship 13b56751-853d-4f98-873d-a0872b7b00dc
+	fromColumn: decisions.department_id
+	toColumn: departments.department_id
+
+relationship 0716a532-72db-4537-aee9-988e07feafda
+	fromColumn: decisions.decision_owner_id
+	toColumn: employees.employee_id
+
+relationship e81c6d00-95fe-4f01-aa3f-c5bc766c2ee4
+	fromColumn: decisions.decision_date
+	toColumn: dim_date.date
+
+relationship e78d849b-a63b-41b5-9e28-d6823dd31e72
+	fromColumn: kpi_targets.department_id
+	toColumn: departments.department_id
+
+relationship b7144ea5-e1cc-495f-a80a-27da5cee577a
+	fromColumn: kpi_targets.month_start
+	toColumn: dim_date.date
+
+relationship ea89e59f-1706-4f97-aad4-236f800f1f33
+	fromColumn: customer_interactions.customer_id
+	toColumn: customers.customer_id
+
+relationship ec8f862d-0f02-436e-93e2-f23db71f2b9d
+	fromColumn: customer_interactions.owner_employee_id
+	toColumn: employees.employee_id
+
+relationship cc4d9def-86bd-4152-88b6-99c8d7fd2fda
+	fromColumn: customer_interactions.interaction_date
+	toColumn: dim_date.date
+
+relationship f12b87c8-160e-49ec-b1b3-5b7e9c25e122
+	fromColumn: data_quality_issues.detected_date
+	toColumn: dim_date.date
+
+relationship f790d213-2d71-459e-ac08-fd4b90a59848
+	fromColumn: activity_log.employee_id
+	toColumn: employees.employee_id
+
+relationship e15b71f7-0fca-4745-ae01-78a28d09cb4d
+	fromColumn: activity_log.activity_date
+	toColumn: dim_date.date
+
+relationship e4cad24f-cd85-41bf-8389-07b4c3c936c6
+	fromColumn: calendar_events.owner_employee_id
+	toColumn: employees.employee_id
+
+relationship 3e3914e7-1c50-48c4-84f2-e24d97c4c28c
+	fromColumn: calendar_events.department_id
+	toColumn: departments.department_id
+
+relationship 1d534b6a-4ad8-4f60-9301-aaa3cd1d0b56
+	fromColumn: calendar_events.event_date
+	toColumn: dim_date.date
+
+relationship 0817242e-bef4-4b80-8a8b-b92bcc9e9389
+	fromColumn: missions.department_id
+	toColumn: departments.department_id
+
+relationship 46e43748-a08b-45ca-bd1d-72eb4c767e33
+	isActive: false
+	fromColumn: missions.target_date
+	toColumn: dim_date.date
+
+relationship 3a75be72-86fc-4389-92ca-ba4817fbb9d4
+	fromColumn: risk_register.department_id
+	toColumn: departments.department_id
+
+relationship 15e2a4c1-be47-4be2-b3ed-9f1382a12460
+	fromColumn: risk_register.risk_owner_employee_id
+	toColumn: employees.employee_id
+
+relationship eca4bb7c-3b69-49f6-aa5c-987700398d5d
+	fromColumn: risk_register.identified_date
+	toColumn: dim_date.date
+
+relationship f0f810ae-ce08-445c-b669-0fbf9adb6321
+	fromColumn: investigation_cases.department_id
+	toColumn: departments.department_id
+
+relationship 3c1521ad-2492-4354-88df-45073b621cc2
+	fromColumn: investigation_cases.case_owner_employee_id
+	toColumn: employees.employee_id
+
+relationship fbdf75c8-c973-4f15-bd13-bc13751d2426
+	fromColumn: investigation_cases.opened_date
+	toColumn: dim_date.date
+
+relationship a6ec6a72-3925-4ae6-abc6-5ad9cfe4c582
+	fromColumn: investigation_evidence.case_id
+	toColumn: investigation_cases.case_id
+
+relationship ca277fa6-9631-4cf1-8617-072cc6ae6f99
+	fromColumn: notifications.recipient_employee_id
+	toColumn: employees.employee_id
+
+relationship 61a5ee86-4d09-4826-a03f-bd5b3da56a84
+	fromColumn: notifications.notification_date
+	toColumn: dim_date.date
+
+relationship adc09c04-5c05-4d85-94b8-fdaa1adedb75
+	fromColumn: collaboration_comments.author_employee_id
+	toColumn: employees.employee_id
+
+relationship 2c1a05ff-5722-472d-b19c-2c7d70bcf8ea
+	fromColumn: collaboration_comments.comment_date
+	toColumn: dim_date.date
+
+relationship 19b05e8d-bd51-4a82-85aa-d551a89c2fa1
+	fromColumn: approval_requests.requester_employee_id
+	toColumn: employees.employee_id
+
+relationship 6fe0617d-1b7e-4e5c-90ec-43b6788aab93
+	isActive: false
+	fromColumn: approval_requests.approver_employee_id
+	toColumn: employees.employee_id
+
+relationship f6efcb57-d5ff-4943-b645-820cbeb7cf84
+	fromColumn: approval_requests.request_date
+	toColumn: dim_date.date
+
+relationship 4023c9f5-81a1-455e-a573-ec58c0ec0a7a
+	fromColumn: strategic_goals.department_id
+	toColumn: departments.department_id

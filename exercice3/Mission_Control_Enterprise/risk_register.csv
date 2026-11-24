@@ -1,0 +1,181 @@
+risk_id,risk_category,severity,confidence_score,estimated_exposure_tnd,department_id,risk_owner_employee_id,mitigation_status,identified_date,risk_description
+RSK0001,Data Quality,Critical,0.51,5990.81,D03,E043,Open,2025-03-15,Risk scenario 001 requires assessment
+RSK0002,Operational,High,0.5,109734.67,D07,E031,Closed,2025-05-24,Risk scenario 002 requires assessment
+RSK0003,Operational,Medium,0.67,167076.26,D07,E020,Mitigating,2026-05-11,Risk scenario 003 requires assessment
+RSK0004,Supplier,Critical,0.87,177833.04,D08,E025,Accepted,2026-06-15,Risk scenario 004 requires assessment
+RSK0005,Security & Process,Low,0.76,10568.29,D04,E043,Open,2025-09-30,Risk scenario 005 requires assessment
+RSK0006,Operational,High,0.66,24906.44,D05,E005,Closed,2025-03-24,Risk scenario 006 requires assessment
+RSK0007,Operational,High,0.81,12975.69,D06,E059,Accepted,2025-04-20,Risk scenario 007 requires assessment
+RSK0008,Security & Process,Low,0.68,69409.04,D08,E039,Open,2026-01-10,Risk scenario 008 requires assessment
+RSK0009,Operational,Low,0.54,129562.61,D06,E062,Open,2026-04-09,Risk scenario 009 requires assessment
+RSK0010,Security & Process,Critical,0.66,68057.55,D01,E046,Open,2026-06-12,Risk scenario 010 requires assessment
+RSK0011,Operational,Low,0.84,24177.2,D07,E017,Closed,2025-07-29,Risk scenario 011 requires assessment
+RSK0012,Supplier,Low,0.67,126230.13,D03,E054,Closed,2026-03-01,Risk scenario 012 requires assessment
+RSK0013,Customer,High,0.81,56466.7,D04,E077,Accepted,2026-08-17,Risk scenario 013 requires assessment
+RSK0014,Security & Process,Critical,0.69,53623.78,D03,E022,Closed,2025-07-13,Risk scenario 014 requires assessment
+RSK0015,Customer,Medium,0.87,142412.15,D07,E068,Open,2025-06-11,Risk scenario 015 requires assessment
+RSK0016,Financial,Low,0.62,88892.6,D01,E063,Accepted,2025-12-09,Risk scenario 016 requires assessment
+RSK0017,Supplier,High,0.87,98424.6,D05,E018,Accepted,2025-11-24,Risk scenario 017 requires assessment
+RSK0018,Supplier,Medium,0.54,69512.86,D03,E057,Open,2025-01-11,Risk scenario 018 requires assessment
+RSK0019,Supplier,Low,0.91,77258.13,D08,E013,Open,2025-11-20,Risk scenario 019 requires assessment
+RSK0020,Data Quality,Critical,0.78,15021.97,D05,E045,Closed,2026-03-07,Risk scenario 020 requires assessment
+RSK0021,Operational,Low,0.73,77979.19,D04,E069,Closed,2025-06-22,Risk scenario 021 requires assessment
+RSK0022,Data Quality,Critical,0.95,54232.39,D03,E007,Accepted,2025-11-13,Risk scenario 022 requires assessment
+RSK0023,Data Quality,Low,0.98,85228.54,D01,E022,Accepted,2025-06-30,Risk scenario 023 requires assessment
+RSK0024,Security & Process,Medium,0.85,86139.58,D03,E072,Accepted,2025-11-27,Risk scenario 024 requires assessment
+RSK0025,Project,Medium,0.53,101411.23,D02,E025,Mitigating,2025-06-28,Risk scenario 025 requires assessment
+RSK0026,Financial,Medium,0.96,56385.52,D08,E016,Mitigating,2025-03-01,Risk scenario 026 requires assessment
+RSK0027,Supplier,Critical,0.96,93588.21,D05,E024,Mitigating,2025-08-20,Risk scenario 027 requires assessment
+RSK0028,Operational,Medium,0.75,38314.46,D08,E055,Closed,2026-06-24,Risk scenario 028 requires assessment
+RSK0029,Security & Process,Low,0.99,114370.76,D03,E046,Open,2026-07-20,Risk scenario 029 requires assessment
+RSK0030,Project,High,0.96,100382.97,D03,E001,Open,2025-11-08,Risk scenario 030 requires assessment
+RSK0031,Customer,Low,0.7,36158.6,D03,E035,Mitigating,2026-03-24,Risk scenario 031 requires assessment
+RSK0032,Data Quality,Medium,0.9,29494.93,D07,E032,Mitigating,2025-08-19,Risk scenario 032 requires assessment
+RSK0033,Customer,Medium,0.73,115879.16,D06,E045,Closed,2026-03-31,Risk scenario 033 requires assessment
+RSK0034,Customer,Medium,0.7,7146.27,D05,E038,Accepted,2025-11-03,Risk scenario 034 requires assessment
+RSK0035,Project,Critical,0.9,13774.53,D03,E019,Open,2026-10-05,Risk scenario 035 requires assessment
+RSK0036,Supplier,Low,0.54,56876.33,D07,E024,Accepted,2025-10-27,Risk scenario 036 requires assessment
+RSK0037,Operational,Critical,0.88,166546.78,D08,E074,Mitigating,2026-08-15,Risk scenario 037 requires assessment
+RSK0038,Operational,Low,0.65,124104.49,D02,E054,Closed,2025-01-28,Risk scenario 038 requires assessment
+RSK0039,Security & Process,Low,0.68,177701.56,D05,E023,Mitigating,2025-03-06,Risk scenario 039 requires assessment
+RSK0040,Project,Critical,0.57,131193.43,D01,E079,Accepted,2025-04-09,Risk scenario 040 requires assessment
+RSK0041,Project,Low,0.84,168659.87,D03,E027,Accepted,2025-08-18,Risk scenario 041 requires assessment
+RSK0042,Security & Process,Low,0.51,23532.36,D03,E007,Closed,2025-02-21,Risk scenario 042 requires assessment
+RSK0043,Customer,Medium,0.95,78393.2,D08,E020,Mitigating,2026-03-31,Risk scenario 043 requires assessment
+RSK0044,Security & Process,High,0.63,35437.49,D03,E002,Closed,2025-10-24,Risk scenario 044 requires assessment
+RSK0045,Supplier,Medium,0.56,135724.52,D05,E057,Accepted,2026-05-08,Risk scenario 045 requires assessment
+RSK0046,Financial,Critical,0.86,90395.2,D08,E046,Open,2025-01-30,Risk scenario 046 requires assessment
+RSK0047,Data Quality,High,0.59,41618.82,D08,E006,Open,2025-01-03,Risk scenario 047 requires assessment
+RSK0048,Customer,High,0.91,107662.09,D06,E009,Open,2025-01-31,Risk scenario 048 requires assessment
+RSK0049,Financial,Critical,0.86,97223.02,D07,E039,Mitigating,2026-03-25,Risk scenario 049 requires assessment
+RSK0050,Customer,Medium,0.85,160099.64,D03,E069,Mitigating,2025-02-11,Risk scenario 050 requires assessment
+RSK0051,Operational,High,0.63,70509.9,D05,E075,Open,2025-01-25,Risk scenario 051 requires assessment
+RSK0052,Data Quality,Medium,0.8,23918.47,D06,E079,Open,2026-11-17,Risk scenario 052 requires assessment
+RSK0053,Operational,Critical,0.59,46742.88,D06,E077,Accepted,2025-11-15,Risk scenario 053 requires assessment
+RSK0054,Customer,High,0.9,3513.78,D03,E054,Mitigating,2026-10-04,Risk scenario 054 requires assessment
+RSK0055,Supplier,Low,0.78,36416.88,D01,E040,Accepted,2025-06-19,Risk scenario 055 requires assessment
+RSK0056,Security & Process,Medium,0.76,35099.76,D04,E043,Mitigating,2025-06-22,Risk scenario 056 requires assessment
+RSK0057,Financial,High,0.84,7319.12,D02,E040,Accepted,2026-03-04,Risk scenario 057 requires assessment
+RSK0058,Operational,High,0.64,17077.18,D01,E029,Mitigating,2025-01-22,Risk scenario 058 requires assessment
+RSK0059,Data Quality,Low,0.92,138545.51,D01,E037,Closed,2026-08-10,Risk scenario 059 requires assessment
+RSK0060,Financial,Critical,0.86,2260.52,D06,E013,Closed,2026-01-23,Risk scenario 060 requires assessment
+RSK0061,Security & Process,Critical,0.62,93554.73,D07,E043,Closed,2025-04-14,Risk scenario 061 requires assessment
+RSK0062,Financial,Low,0.79,59955.16,D05,E040,Closed,2026-07-10,Risk scenario 062 requires assessment
+RSK0063,Security & Process,Low,0.62,154777.47,D07,E026,Mitigating,2026-01-29,Risk scenario 063 requires assessment
+RSK0064,Financial,Medium,0.92,19051.63,D08,E021,Open,2026-01-20,Risk scenario 064 requires assessment
+RSK0065,Financial,Medium,0.89,12983.92,D05,E025,Closed,2026-11-11,Risk scenario 065 requires assessment
+RSK0066,Security & Process,Critical,0.7,12109.88,D02,E021,Accepted,2025-08-31,Risk scenario 066 requires assessment
+RSK0067,Customer,Medium,0.96,75075.39,D02,E026,Accepted,2026-05-14,Risk scenario 067 requires assessment
+RSK0068,Financial,Medium,0.84,60576.7,D06,E078,Open,2025-02-14,Risk scenario 068 requires assessment
+RSK0069,Supplier,Low,0.79,120141.15,D03,E054,Open,2025-07-13,Risk scenario 069 requires assessment
+RSK0070,Project,Medium,0.78,115854.82,D03,E025,Closed,2026-11-02,Risk scenario 070 requires assessment
+RSK0071,Financial,Critical,0.97,58530.42,D03,E055,Mitigating,2025-08-04,Risk scenario 071 requires assessment
+RSK0072,Supplier,High,0.85,116121.4,D02,E013,Open,2025-08-18,Risk scenario 072 requires assessment
+RSK0073,Supplier,Medium,0.66,168225.05,D08,E021,Accepted,2026-09-15,Risk scenario 073 requires assessment
+RSK0074,Project,Critical,0.99,125610.94,D02,E024,Open,2026-11-07,Risk scenario 074 requires assessment
+RSK0075,Data Quality,Critical,0.91,162165.81,D03,E026,Mitigating,2025-12-05,Risk scenario 075 requires assessment
+RSK0076,Financial,Low,0.94,99426.77,D03,E040,Mitigating,2026-02-19,Risk scenario 076 requires assessment
+RSK0077,Customer,Medium,0.66,93755.32,D08,E011,Open,2025-10-08,Risk scenario 077 requires assessment
+RSK0078,Financial,Medium,0.98,29424.9,D04,E064,Closed,2025-04-22,Risk scenario 078 requires assessment
+RSK0079,Financial,High,0.66,22948.74,D02,E032,Accepted,2025-08-15,Risk scenario 079 requires assessment
+RSK0080,Customer,Medium,0.86,152252.92,D01,E078,Closed,2026-07-28,Risk scenario 080 requires assessment
+RSK0081,Security & Process,Medium,0.95,140969.41,D05,E077,Open,2025-03-12,Risk scenario 081 requires assessment
+RSK0082,Security & Process,Low,0.84,153072.95,D01,E016,Open,2026-02-20,Risk scenario 082 requires assessment
+RSK0083,Financial,Medium,0.58,41802.89,D07,E037,Open,2025-09-19,Risk scenario 083 requires assessment
+RSK0084,Data Quality,Low,0.73,168138.69,D03,E072,Open,2026-02-05,Risk scenario 084 requires assessment
+RSK0085,Supplier,Critical,0.66,12851.79,D05,E015,Closed,2026-06-06,Risk scenario 085 requires assessment
+RSK0086,Customer,Medium,0.59,76745.63,D06,E057,Mitigating,2025-07-17,Risk scenario 086 requires assessment
+RSK0087,Customer,Medium,0.55,112163.91,D03,E057,Closed,2026-05-03,Risk scenario 087 requires assessment
+RSK0088,Data Quality,High,0.61,159802.9,D01,E071,Mitigating,2025-09-25,Risk scenario 088 requires assessment
+RSK0089,Operational,Low,0.98,123510.34,D03,E058,Closed,2025-05-05,Risk scenario 089 requires assessment
+RSK0090,Customer,High,0.76,126116.89,D02,E059,Accepted,2025-03-15,Risk scenario 090 requires assessment
+RSK0091,Customer,High,0.73,30764.07,D05,E054,Mitigating,2026-06-13,Risk scenario 091 requires assessment
+RSK0092,Supplier,High,0.94,7861.38,D04,E077,Accepted,2025-08-28,Risk scenario 092 requires assessment
+RSK0093,Financial,Medium,0.53,125718.01,D06,E030,Open,2025-08-13,Risk scenario 093 requires assessment
+RSK0094,Supplier,Critical,0.8,162235.91,D03,E043,Accepted,2026-07-27,Risk scenario 094 requires assessment
+RSK0095,Operational,Low,0.75,117216.71,D01,E047,Mitigating,2025-11-09,Risk scenario 095 requires assessment
+RSK0096,Supplier,Low,0.89,6811.09,D05,E023,Closed,2025-10-26,Risk scenario 096 requires assessment
+RSK0097,Financial,High,0.69,65499.47,D03,E069,Closed,2026-09-11,Risk scenario 097 requires assessment
+RSK0098,Security & Process,High,0.73,134172.45,D02,E071,Open,2025-03-17,Risk scenario 098 requires assessment
+RSK0099,Security & Process,High,0.57,179025.52,D03,E074,Open,2025-07-18,Risk scenario 099 requires assessment
+RSK0100,Operational,Critical,0.94,3964.63,D02,E032,Open,2025-05-19,Risk scenario 100 requires assessment
+RSK0101,Customer,High,0.75,11541.98,D05,E064,Open,2026-03-23,Risk scenario 101 requires assessment
+RSK0102,Operational,Critical,0.89,109917.35,D08,E053,Mitigating,2025-07-23,Risk scenario 102 requires assessment
+RSK0103,Operational,High,0.94,88175.83,D07,E072,Accepted,2025-07-05,Risk scenario 103 requires assessment
+RSK0104,Data Quality,Medium,0.54,95434.16,D07,E063,Open,2025-03-17,Risk scenario 104 requires assessment
+RSK0105,Operational,High,0.95,177406.84,D07,E066,Closed,2025-05-17,Risk scenario 105 requires assessment
+RSK0106,Security & Process,Low,0.53,31825.28,D01,E036,Closed,2026-06-04,Risk scenario 106 requires assessment
+RSK0107,Supplier,High,0.81,106120.13,D06,E078,Closed,2025-10-28,Risk scenario 107 requires assessment
+RSK0108,Data Quality,Medium,0.74,50120.87,D06,E017,Open,2026-09-22,Risk scenario 108 requires assessment
+RSK0109,Customer,Medium,0.56,135484.25,D07,E061,Accepted,2025-05-20,Risk scenario 109 requires assessment
+RSK0110,Customer,Low,0.86,29445.06,D01,E061,Open,2026-09-19,Risk scenario 110 requires assessment
+RSK0111,Operational,High,0.8,161917.03,D06,E080,Mitigating,2026-08-04,Risk scenario 111 requires assessment
+RSK0112,Security & Process,Critical,0.52,49232.59,D05,E035,Accepted,2025-11-27,Risk scenario 112 requires assessment
+RSK0113,Supplier,High,0.82,23068.41,D08,E008,Accepted,2026-03-04,Risk scenario 113 requires assessment
+RSK0114,Project,Critical,0.98,23893.56,D03,E055,Accepted,2025-08-30,Risk scenario 114 requires assessment
+RSK0115,Customer,Medium,0.71,116979.68,D07,E064,Accepted,2026-05-07,Risk scenario 115 requires assessment
+RSK0116,Supplier,Critical,0.9,31425.73,D02,E015,Open,2025-05-27,Risk scenario 116 requires assessment
+RSK0117,Financial,Low,0.79,7237.6,D04,E062,Mitigating,2025-01-02,Risk scenario 117 requires assessment
+RSK0118,Customer,Medium,0.76,43375.89,D01,E001,Mitigating,2026-11-22,Risk scenario 118 requires assessment
+RSK0119,Financial,Medium,0.57,7792.87,D05,E064,Accepted,2025-04-22,Risk scenario 119 requires assessment
+RSK0120,Project,High,0.91,45092.92,D08,E010,Accepted,2025-07-04,Risk scenario 120 requires assessment
+RSK0121,Financial,Medium,0.96,178630.53,D01,E064,Mitigating,2025-09-23,Risk scenario 121 requires assessment
+RSK0122,Security & Process,Low,0.56,61631.0,D07,E062,Closed,2026-02-01,Risk scenario 122 requires assessment
+RSK0123,Data Quality,Medium,0.84,67479.02,D01,E027,Mitigating,2025-09-26,Risk scenario 123 requires assessment
+RSK0124,Financial,Medium,0.84,30891.32,D05,E065,Mitigating,2026-03-26,Risk scenario 124 requires assessment
+RSK0125,Security & Process,High,0.64,118296.07,D07,E030,Mitigating,2026-01-31,Risk scenario 125 requires assessment
+RSK0126,Financial,Critical,0.75,22166.59,D04,E079,Closed,2025-12-20,Risk scenario 126 requires assessment
+RSK0127,Project,Medium,0.94,5741.96,D08,E059,Accepted,2025-03-03,Risk scenario 127 requires assessment
+RSK0128,Customer,High,0.64,138753.8,D03,E036,Accepted,2026-06-04,Risk scenario 128 requires assessment
+RSK0129,Customer,Critical,0.65,144850.87,D05,E065,Mitigating,2026-05-08,Risk scenario 129 requires assessment
+RSK0130,Security & Process,Critical,0.97,128911.91,D04,E054,Open,2026-03-04,Risk scenario 130 requires assessment
+RSK0131,Supplier,Low,0.94,63743.19,D08,E011,Open,2025-08-31,Risk scenario 131 requires assessment
+RSK0132,Customer,Critical,0.84,37564.65,D06,E052,Mitigating,2026-05-01,Risk scenario 132 requires assessment
+RSK0133,Customer,Low,0.87,98066.38,D05,E030,Open,2025-08-03,Risk scenario 133 requires assessment
+RSK0134,Project,High,0.75,156453.23,D04,E028,Closed,2026-09-26,Risk scenario 134 requires assessment
+RSK0135,Project,Medium,0.65,63768.96,D02,E038,Accepted,2025-03-24,Risk scenario 135 requires assessment
+RSK0136,Supplier,Medium,0.53,78979.19,D03,E023,Mitigating,2026-01-20,Risk scenario 136 requires assessment
+RSK0137,Financial,High,0.94,118628.23,D01,E065,Accepted,2025-01-02,Risk scenario 137 requires assessment
+RSK0138,Customer,High,0.95,19093.01,D02,E013,Mitigating,2026-10-09,Risk scenario 138 requires assessment
+RSK0139,Customer,Medium,0.63,133073.12,D04,E066,Mitigating,2025-07-27,Risk scenario 139 requires assessment
+RSK0140,Supplier,Critical,0.89,86630.01,D01,E015,Closed,2025-11-05,Risk scenario 140 requires assessment
+RSK0141,Financial,High,0.6,51678.79,D06,E049,Closed,2025-04-30,Risk scenario 141 requires assessment
+RSK0142,Supplier,Medium,0.94,4506.1,D08,E058,Open,2026-01-22,Risk scenario 142 requires assessment
+RSK0143,Financial,Medium,0.75,100640.44,D08,E047,Open,2025-03-03,Risk scenario 143 requires assessment
+RSK0144,Operational,High,0.53,72455.15,D02,E058,Closed,2026-09-24,Risk scenario 144 requires assessment
+RSK0145,Customer,Low,0.85,37003.24,D01,E004,Open,2026-10-06,Risk scenario 145 requires assessment
+RSK0146,Data Quality,Medium,0.63,95604.86,D07,E051,Open,2026-04-04,Risk scenario 146 requires assessment
+RSK0147,Operational,Low,0.77,19573.79,D02,E045,Mitigating,2025-02-23,Risk scenario 147 requires assessment
+RSK0148,Supplier,Low,0.74,38949.22,D02,E043,Accepted,2026-01-12,Risk scenario 148 requires assessment
+RSK0149,Data Quality,Critical,0.51,141563.73,D03,E011,Mitigating,2026-10-03,Risk scenario 149 requires assessment
+RSK0150,Security & Process,Low,0.74,67092.16,D01,E066,Mitigating,2025-11-12,Risk scenario 150 requires assessment
+RSK0151,Security & Process,Critical,0.68,102396.69,D01,E070,Mitigating,2026-10-31,Risk scenario 151 requires assessment
+RSK0152,Customer,High,0.67,104847.08,D06,E014,Mitigating,2026-01-18,Risk scenario 152 requires assessment
+RSK0153,Data Quality,Low,0.68,79835.47,D07,E050,Open,2025-09-07,Risk scenario 153 requires assessment
+RSK0154,Customer,High,0.51,12539.07,D04,E018,Mitigating,2026-06-08,Risk scenario 154 requires assessment
+RSK0155,Financial,Critical,0.73,25509.53,D01,E065,Closed,2026-09-22,Risk scenario 155 requires assessment
+RSK0156,Data Quality,Low,0.81,151369.15,D05,E029,Closed,2026-01-07,Risk scenario 156 requires assessment
+RSK0157,Data Quality,Low,0.71,165041.87,D08,E043,Accepted,2025-09-01,Risk scenario 157 requires assessment
+RSK0158,Supplier,High,0.95,148843.19,D07,E066,Accepted,2026-05-15,Risk scenario 158 requires assessment
+RSK0159,Customer,Critical,0.67,11346.31,D01,E057,Open,2025-11-13,Risk scenario 159 requires assessment
+RSK0160,Supplier,Medium,0.85,35969.99,D04,E001,Accepted,2026-10-15,Risk scenario 160 requires assessment
+RSK0161,Customer,High,0.92,89618.98,D04,E045,Mitigating,2026-06-10,Risk scenario 161 requires assessment
+RSK0162,Supplier,Low,0.8,113550.11,D06,E042,Open,2026-08-27,Risk scenario 162 requires assessment
+RSK0163,Customer,Critical,0.65,56373.01,D04,E042,Accepted,2025-07-01,Risk scenario 163 requires assessment
+RSK0164,Financial,High,0.81,153659.38,D05,E060,Mitigating,2025-07-04,Risk scenario 164 requires assessment
+RSK0165,Financial,High,0.8,16349.94,D07,E070,Closed,2026-05-30,Risk scenario 165 requires assessment
+RSK0166,Customer,High,0.68,81350.9,D03,E060,Open,2026-11-01,Risk scenario 166 requires assessment
+RSK0167,Supplier,Low,0.9,85239.91,D02,E068,Open,2026-04-21,Risk scenario 167 requires assessment
+RSK0168,Financial,Low,0.9,82684.38,D06,E045,Mitigating,2026-09-06,Risk scenario 168 requires assessment
+RSK0169,Customer,Low,0.55,53997.6,D03,E020,Open,2025-06-20,Risk scenario 169 requires assessment
+RSK0170,Data Quality,Critical,0.73,133418.29,D04,E057,Mitigating,2026-05-06,Risk scenario 170 requires assessment
+RSK0171,Security & Process,Low,0.7,55923.26,D01,E033,Accepted,2026-08-25,Risk scenario 171 requires assessment
+RSK0172,Operational,Low,0.76,67712.25,D04,E032,Accepted,2026-10-03,Risk scenario 172 requires assessment
+RSK0173,Project,High,0.87,46503.06,D07,E009,Open,2025-06-18,Risk scenario 173 requires assessment
+RSK0174,Operational,High,0.86,117344.32,D06,E052,Open,2025-03-24,Risk scenario 174 requires assessment
+RSK0175,Security & Process,Critical,0.89,57765.72,D03,E053,Accepted,2025-08-08,Risk scenario 175 requires assessment
+RSK0176,Data Quality,High,0.91,118596.67,D08,E066,Open,2025-12-13,Risk scenario 176 requires assessment
+RSK0177,Data Quality,High,0.73,35235.44,D03,E002,Open,2025-03-06,Risk scenario 177 requires assessment
+RSK0178,Operational,Critical,0.74,10400.02,D05,E064,Closed,2026-02-14,Risk scenario 178 requires assessment
+RSK0179,Project,High,0.76,128352.59,D06,E035,Closed,2025-02-28,Risk scenario 179 requires assessment
+RSK0180,Security & Process,Medium,0.58,99956.76,D06,E031,Closed,2025-07-19,Risk scenario 180 requires assessment

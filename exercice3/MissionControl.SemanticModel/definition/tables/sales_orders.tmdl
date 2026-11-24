@@ -1,0 +1,111 @@
+table sales_orders
+	lineageTag: 33af3bce-95a9-44c6-b41f-337dd252be33
+
+	column order_id
+		dataType: string
+		formatString:  type text
+		isKey
+		lineageTag: 4bd10f80-a9cf-49b0-816c-9d167a3745c0
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		formatString:  type text
+		lineageTag: 89aa5180-959b-4d8b-9e1b-f1e530b3fc1c
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 99c89116-8d2e-44c4-87dc-11d8c0cf6f62
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column sales_owner_id
+		dataType: string
+		formatString:  type text
+		lineageTag: c58a3c04-cd1b-42ca-b663-028a18ff7be0
+		summarizeBy: none
+		sourceColumn: sales_owner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sales_channel
+		dataType: string
+		formatString:  type text
+		lineageTag: a5911ba0-0e90-469b-81ed-f6188e372ee6
+		summarizeBy: none
+		sourceColumn: sales_channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status
+		dataType: string
+		formatString:  type text
+		lineageTag: 04746fbf-2696-4a10-aee6-9a4496746939
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column net_amount_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: 95ec4013-be7b-4bd1-a929-1c18d7d1e757
+		summarizeBy: sum
+		sourceColumn: net_amount_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column tax_amount_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: ee0c4857-ebbb-49c6-b948-6139685b141b
+		summarizeBy: sum
+		sourceColumn: tax_amount_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column gross_amount_tnd
+		dataType: decimal
+		formatString: #,0.00" TND" Currency.Type
+		lineageTag: 6b2f6d8c-3c94-46fd-b10e-9fe663eee122
+		summarizeBy: sum
+		sourceColumn: gross_amount_tnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column promised_delivery_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd type date
+		lineageTag: 82b3bf6c-e83d-44a4-aedb-ef1b4a48b751
+		summarizeBy: none
+		sourceColumn: promised_delivery_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition sales_orders = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\sales_orders.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Cleaned = fnCleanText(Promoted),
+				    Typed = Table.TransformColumnTypes(Cleaned, {{"order_id", type text}, {"customer_id", type text}, {"order_date", type date}, {"sales_owner_id", type text}, {"sales_channel", type text}, {"order_status", type text}, {"net_amount_tnd", Currency.Type}, {"tax_amount_tnd", Currency.Type}, {"gross_amount_tnd", Currency.Type}, {"promised_delivery_date", type date}}, "en-US"),
+				    Result = Typed
+				in
+				    Result
+
+	annotation PBI_ResultType = Table

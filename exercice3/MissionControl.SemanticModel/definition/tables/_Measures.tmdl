@@ -1,0 +1,721 @@
+table _Measures
+	lineageTag: 14f1e157-4b09-491d-ae9f-daa345559d12
+
+	/// The dataset's "as of" date: the last order date. Used instead of TODAY() for overdue and late rules.
+	measure 'Reference Date' =
+			CALCULATE ( MAX ( sales_orders[order_date] ), REMOVEFILTERS () )
+		formatString: yyyy-mm-dd
+		displayFolder: 00 Reference
+		lineageTag: 13769945-b081-45eb-85fa-5fd93a6cf01f
+
+	/// Order net amount (before tax) of Completed and Processing orders. Cancelled and Returned orders are excluded.
+	measure 'Net Revenue' =
+			CALCULATE (
+			    SUM ( sales_orders[net_amount_tnd] ),
+			    KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } )
+			)
+		formatString: #,0" TND"
+		displayFolder: 01 Sales
+		lineageTag: 7c11cdb8-6c0c-4bc3-bb9f-1746a11fc26d
+
+	/// Order gross amount (net + tax) of revenue orders. Includes the planted anomaly O00004 (gross 99,999 vs net+tax 28,566) — see Data Doctor.
+	measure 'Gross Revenue' =
+			CALCULATE (
+			    SUM ( sales_orders[gross_amount_tnd] ),
+			    KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } )
+			)
+		formatString: #,0" TND"
+		displayFolder: 01 Sales
+		lineageTag: 9c6331d5-d870-4f9a-8a4b-8cd9bdffc59a
+
+	/// Tax amount of revenue orders.
+	measure Tax =
+			CALCULATE (
+			    SUM ( sales_orders[tax_amount_tnd] ),
+			    KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } )
+			)
+		formatString: #,0" TND"
+		displayFolder: 01 Sales
+		lineageTag: eb9c403c-884d-4e8c-a960-a0a3b12999b0
+
+	/// Number of orders, every status.
+	measure Orders =
+			COUNTROWS ( sales_orders )
+		formatString: #,0
+		displayFolder: 01 Sales
+		lineageTag: edb965cc-7cfb-4ab8-8003-b7d3d080a5c4
+
+	/// Orders that count as revenue (Completed + Processing).
+	measure 'Revenue Orders' =
+			CALCULATE ( COUNTROWS ( sales_orders ), KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } ) )
+		formatString: #,0
+		displayFolder: 01 Sales
+		lineageTag: ce7b1fc2-4449-48b3-b16b-7acf3a37faa9
+
+	/// Orders with status Completed.
+	measure 'Completed Orders' =
+			CALCULATE ( COUNTROWS ( sales_orders ), KEEPFILTERS ( sales_orders[order_status] = "Completed" ) )
+		formatString: #,0
+		displayFolder: 01 Sales
+		lineageTag: 46e1514c-6978-4266-ab8c-745af83a9131
+
+	/// Orders with status Cancelled.
+	measure 'Cancelled Orders' =
+			CALCULATE ( COUNTROWS ( sales_orders ), KEEPFILTERS ( sales_orders[order_status] = "Cancelled" ) )
+		formatString: #,0
+		displayFolder: 01 Sales
+		lineageTag: f985b4ae-6b20-41ff-bd5b-bf9824a499a4
+
+	/// Orders with status Returned.
+	measure 'Returned Orders' =
+			CALCULATE ( COUNTROWS ( sales_orders ), KEEPFILTERS ( sales_orders[order_status] = "Returned" ) )
+		formatString: #,0
+		displayFolder: 01 Sales
+		lineageTag: bc9f6628-c225-4020-aee4-545afba0cbc2
+
+	/// Quantity on the lines of revenue orders (line grain; the order-status filter flows from orders to lines).
+	measure 'Units Sold' =
+			CALCULATE ( SUM ( sales_order_items[quantity] ), KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } ) )
+		formatString: #,0
+		displayFolder: 01 Sales
+		lineageTag: 5a08c7ed-e488-4f94-950e-cc7cec652c6c
+
+	/// Net revenue per revenue order.
+	measure 'Average Order Value' =
+			DIVIDE ( [Net Revenue], [Revenue Orders] )
+		formatString: #,0" TND"
+		displayFolder: 01 Sales
+		lineageTag: 2ed10b8f-dbe5-4be8-8f5e-32f802806448
+
+	/// Quantity × unit price before discount, on revenue orders.
+	measure 'List Amount' =
+			CALCULATE (
+			    SUMX ( sales_order_items, sales_order_items[quantity] * sales_order_items[unit_price_tnd] ),
+			    KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } )
+			)
+		formatString: #,0" TND"
+		displayFolder: 01 Sales
+		lineageTag: 81a76ad1-6253-4805-968d-a9cdc8a2a6b0
+
+	/// List amount minus net line amount on revenue orders.
+	measure 'Discount Amount' =
+			[List Amount]
+			    - CALCULATE ( SUM ( sales_order_items[net_line_amount_tnd] ), KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } ) )
+		formatString: #,0" TND"
+		displayFolder: 01 Sales
+		lineageTag: 66d31640-60a6-44fc-94b8-7d916e9a0dc6
+
+	/// Line cost of revenue orders.
+	measure 'Product Cost' =
+			CALCULATE ( SUM ( sales_order_items[line_cost_tnd] ), KEEPFILTERS ( sales_orders[order_status] IN { "Completed", "Processing" } ) )
+		formatString: #,0" TND"
+		displayFolder: 01 Sales
+		lineageTag: e012b22a-2b4b-46e5-ac0d-8da31150c8dd
+
+	/// Net revenue minus product cost.
+	measure 'Gross Profit' =
+			[Net Revenue] - [Product Cost]
+		formatString: #,0" TND"
+		displayFolder: 01 Sales
+		lineageTag: 111b47e2-62f4-4036-94ec-a378e435bee1
+
+	/// Gross profit ÷ net revenue, recalculated for any filter (never averaged).
+	measure 'Gross Margin %' =
+			DIVIDE ( [Gross Profit], [Net Revenue] )
+		formatString: 0.0%
+		displayFolder: 01 Sales
+		lineageTag: 5a692027-9e4d-4217-8cde-465a518fa986
+
+	/// Money received: payments with status Paid or Partial.
+	measure 'Paid Amount' =
+			CALCULATE ( SUM ( payments[amount_tnd] ), KEEPFILTERS ( payments[payment_status] IN { "Paid", "Partial" } ) )
+		formatString: #,0" TND"
+		displayFolder: 02 Collections
+		lineageTag: 454fc9b6-ad77-4e1c-a4d3-d4510a5f8281
+
+	/// Money still expected: payments with status Pending or Overdue.
+	measure 'Outstanding Amount' =
+			CALCULATE ( SUM ( payments[amount_tnd] ), KEEPFILTERS ( payments[payment_status] IN { "Pending", "Overdue" } ) )
+		formatString: #,0" TND"
+		displayFolder: 02 Collections
+		lineageTag: 580397e1-6a59-487e-bce5-cbf6b6a4beb0
+
+	/// Received ÷ (received + outstanding). Voided and refunded payments are left out.
+	measure 'Collection Rate %' =
+			DIVIDE ( [Paid Amount], [Paid Amount] + [Outstanding Amount] )
+		formatString: 0.0%
+		displayFolder: 02 Collections
+		lineageTag: 489ce7b8-8962-4074-bcbc-04ad9a98c901
+
+	/// Amount of payments with status Overdue.
+	measure 'Overdue Payments' =
+			CALCULATE ( SUM ( payments[amount_tnd] ), KEEPFILTERS ( payments[payment_status] = "Overdue" ) )
+		formatString: #,0" TND"
+		displayFolder: 02 Collections
+		lineageTag: 65f335ae-e4c4-4572-b378-14163824e889
+
+	/// Number of payments with status Overdue.
+	measure 'Overdue Payment Count' =
+			CALCULATE ( COUNTROWS ( payments ), KEEPFILTERS ( payments[payment_status] = "Overdue" ) )
+		formatString: #,0
+		displayFolder: 02 Collections
+		lineageTag: a5e9098a-61c8-45a0-9d72-76a8629f1d83
+
+	/// Expenses of every approval status except Rejected.
+	measure 'Total Expenses' =
+			CALCULATE ( SUM ( expenses[amount_tnd] ), KEEPFILTERS ( expenses[approval_status] <> "Rejected" ) )
+		formatString: #,0" TND"
+		displayFolder: 03 Expenses
+		lineageTag: 2322593e-abb8-44f4-aec1-753d58712ce8
+
+	/// Same rule as Total Expenses, meant to be shown by department.
+	measure 'Department Spend' =
+			[Total Expenses]
+		formatString: #,0" TND"
+		displayFolder: 03 Expenses
+		lineageTag: b4d4a7c2-17e4-49e4-a7d9-bd2dd240fc52
+
+	/// Total expenses ÷ net revenue. The dataset has no expense target, so expenses are compared with revenue instead.
+	measure 'Expense Ratio %' =
+			DIVIDE ( [Total Expenses], [Net Revenue] )
+		formatString: 0.0%
+		displayFolder: 03 Expenses
+		lineageTag: 66f3bd09-1c11-4f5d-8807-cc30ff5fe796
+
+	/// Gross profit minus total expenses (a simple proxy: payroll is inside expenses).
+	measure 'Operating Profit' =
+			[Gross Profit] - [Total Expenses]
+		formatString: #,0" TND"
+		displayFolder: 03 Expenses
+		lineageTag: bd1c778c-628e-40fc-abfc-72e5811ac0ec
+
+	/// Quantity on hand at the LATEST snapshot of each product × warehouse in context (snapshots are not additive over time).
+	measure 'Inventory On Hand' =
+			VAR _pairs = SUMMARIZE ( inventory_snapshots, inventory_snapshots[product_id], inventory_snapshots[warehouse] )
+			RETURN
+			    SUMX (
+			        _pairs,
+			        VAR _last = CALCULATE ( MAX ( inventory_snapshots[snapshot_date] ) )
+			        RETURN CALCULATE ( SUM ( inventory_snapshots[quantity_on_hand] ), inventory_snapshots[snapshot_date] = _last )
+			    )
+		formatString: #,0
+		displayFolder: 04 Inventory
+		lineageTag: 19466288-3dd6-48a4-a3fa-25e7aea21dce
+
+	/// Product × warehouse pairs whose latest snapshot is below the reorder point.
+	measure 'Low Stock Items' =
+			VAR _pairs = SUMMARIZE ( inventory_snapshots, inventory_snapshots[product_id], inventory_snapshots[warehouse] )
+			RETURN
+			    COUNTROWS (
+			        FILTER (
+			            _pairs,
+			            VAR _last = CALCULATE ( MAX ( inventory_snapshots[snapshot_date] ) )
+			            RETURN
+			                CALCULATE (
+			                    SUM ( inventory_snapshots[quantity_on_hand] ) < SUM ( inventory_snapshots[reorder_point] ),
+			                    inventory_snapshots[snapshot_date] = _last
+			                )
+			        )
+			    ) + 0
+		formatString: #,0
+		displayFolder: 04 Inventory
+		lineageTag: 905b21c4-be34-42b8-b19e-d41a45ebf3ce
+
+	/// Proxy: latest quantity on hand ÷ latest target stock.
+	measure 'Stock Coverage %' =
+			VAR _pairs = SUMMARIZE ( inventory_snapshots, inventory_snapshots[product_id], inventory_snapshots[warehouse] )
+			VAR _target =
+			    SUMX (
+			        _pairs,
+			        VAR _last = CALCULATE ( MAX ( inventory_snapshots[snapshot_date] ) )
+			        RETURN CALCULATE ( SUM ( inventory_snapshots[target_stock] ), inventory_snapshots[snapshot_date] = _last )
+			    )
+			RETURN
+			    DIVIDE ( [Inventory On Hand], _target )
+		formatString: 0.0%
+		displayFolder: 04 Inventory
+		lineageTag: 293d18b8-eabf-4eab-a339-9dc408f3676b
+
+	/// Incidents with status Open or Investigating.
+	measure 'Open Incidents' =
+			CALCULATE ( COUNTROWS ( incidents ), KEEPFILTERS ( incidents[incident_status] IN { "Open", "Investigating" } ) )
+		formatString: #,0
+		displayFolder: 05 Operations
+		lineageTag: 9ff7e53f-10ca-46d6-9765-32db9216c5c1
+
+	/// Open incidents with severity Critical.
+	measure 'Critical Incidents' =
+			CALCULATE ( [Open Incidents], KEEPFILTERS ( incidents[severity] = "Critical" ) )
+		formatString: #,0
+		displayFolder: 05 Operations
+		lineageTag: 93428791-0c96-470a-946f-d598e65476ce
+
+	/// Estimated financial impact of open incidents (an estimate recorded in the data, not a loss).
+	measure 'Estimated Incident Impact' =
+			CALCULATE ( SUM ( incidents[estimated_impact_tnd] ), KEEPFILTERS ( incidents[incident_status] IN { "Open", "Investigating" } ) )
+		formatString: #,0" TND"
+		displayFolder: 05 Operations
+		lineageTag: 8c8330dc-8d61-4a55-aafa-b59be31477b2
+
+	/// Alerts with status New, In Progress or Acknowledged.
+	measure 'Open Alerts' =
+			CALCULATE ( COUNTROWS ( alerts ), KEEPFILTERS ( alerts[alert_status] IN { "New", "In Progress", "Acknowledged" } ) )
+		formatString: #,0
+		displayFolder: 05 Operations
+		lineageTag: 2b4595c3-e89e-4080-b0dc-6040fa0f0a50
+
+	/// Open alerts with severity Critical.
+	measure 'Critical Alerts' =
+			CALCULATE ( [Open Alerts], KEEPFILTERS ( alerts[severity] = "Critical" ) )
+		formatString: #,0
+		displayFolder: 05 Operations
+		lineageTag: 12f7bc7a-9728-4a4f-a1a4-45303087a2ec
+
+	/// Customers whose status is At Risk.
+	measure 'At-Risk Customers' =
+			CALCULATE ( COUNTROWS ( customers ), KEEPFILTERS ( customers[customer_status] = "At Risk" ) )
+		formatString: #,0
+		displayFolder: 05 Operations
+		lineageTag: d097497f-b959-4949-a206-91d8397c6c13
+
+	/// Budget-weighted completion of the projects in context.
+	measure 'Project Completion %' =
+			DIVIDE ( SUMX ( projects, projects[approved_budget_tnd] * projects[completion_percent] ), SUM ( projects[approved_budget_tnd] ) )
+		formatString: 0.0%
+		displayFolder: 05 Operations
+		lineageTag: 50713ec9-2b2c-4dc2-8ac9-49c5c5c04ac7
+
+	/// Projects with status At Risk, or not Completed and past their planned end at the reference date.
+	measure 'At-Risk Projects' =
+			VAR _ref = [Reference Date]
+			RETURN
+			    COUNTROWS ( FILTER ( projects, projects[project_status] = "At Risk" || ( projects[planned_end_date] < _ref && projects[project_status] <> "Completed" ) ) ) + 0
+		formatString: #,0
+		displayFolder: 05 Operations
+		lineageTag: 94e2cc5b-d1ae-4f9a-9537-ec167e927cfb
+
+	/// Tasks not Done.
+	measure 'Open Tasks' =
+			CALCULATE ( COUNTROWS ( tasks ), KEEPFILTERS ( tasks[task_status] <> "Done" ) )
+		formatString: #,0
+		displayFolder: 05 Operations
+		lineageTag: 98c575e7-b3c5-48ea-8946-65dfae7a5f68
+
+	/// Tasks not Done whose due date is before the reference date.
+	measure 'Overdue Tasks' =
+			VAR _ref = [Reference Date]
+			RETURN
+			    CALCULATE ( COUNTROWS ( tasks ), KEEPFILTERS ( tasks[task_status] <> "Done" ), KEEPFILTERS ( tasks[due_date] < _ref ) ) + 0
+		formatString: #,0
+		displayFolder: 05 Operations
+		lineageTag: 0159613a-b5b9-4696-9b26-8e9b4a628908
+
+	/// Sum of the monthly department revenue targets in context.
+	measure 'Revenue Target' =
+			SUM ( kpi_targets[revenue_target_tnd] )
+		formatString: #,0" TND"
+		displayFolder: 06 Targets
+		lineageTag: 1d9d6fd7-dcc4-4910-832a-1386767a9dd2
+
+	/// Net revenue ÷ revenue target (company level: orders carry no department).
+	measure 'Revenue vs Target %' =
+			DIVIDE ( [Net Revenue], [Revenue Target] )
+		formatString: 0.0%
+		displayFolder: 06 Targets
+		lineageTag: fd1d47ae-6af4-47a3-af8b-071634bc90d8
+
+	/// Average of the monthly gross-margin targets in context.
+	measure 'Margin Target %' =
+			AVERAGE ( kpi_targets[gross_margin_target_pct] )
+		formatString: 0.0%
+		displayFolder: 06 Targets
+		lineageTag: eea77af2-331a-4102-92c7-added5b24bb6
+
+	/// Gross margin minus margin target, in percentage points.
+	measure 'Margin vs Target pts' =
+			IF ( NOT ISBLANK ( [Margin Target %] ), ( [Gross Margin %] - [Margin Target %] ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: 06 Targets
+		lineageTag: 924b6b97-6999-41c5-9186-5ff6af5de529
+
+	/// Net revenue of the previous month (blank when no dates are selected).
+	measure 'Net Revenue PM' =
+			IF ( ISFILTERED ( dim_date ), CALCULATE ( [Net Revenue], DATEADD ( dim_date[date], -1, MONTH ) ) )
+		formatString: #,0" TND"
+		displayFolder: 07 Time Intelligence
+		lineageTag: 7e4ce03b-51e6-42f9-9b21-5ff8c946314a
+
+	/// Period-over-period growth vs previous month.
+	measure 'Revenue MoM %' =
+			VAR _cur = [Net Revenue]
+			VAR _prev = [Net Revenue PM]
+			RETURN IF ( NOT ISBLANK ( _cur ), DIVIDE ( _cur - _prev, _prev ) )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 07 Time Intelligence
+		lineageTag: 5f6bab4e-3fb4-43de-995d-bcf57c015114
+
+	/// Net revenue of the same period last year (2025 data exists, so 2026 comparisons work).
+	measure 'Net Revenue PY' =
+			IF ( ISFILTERED ( dim_date ), CALCULATE ( [Net Revenue], SAMEPERIODLASTYEAR ( dim_date[date] ) ) )
+		formatString: #,0" TND"
+		displayFolder: 07 Time Intelligence
+		lineageTag: 3f8aadba-19e7-4322-9985-408648e90e50
+
+	/// Growth vs the same period last year.
+	measure 'Revenue YoY %' =
+			VAR _cur = [Net Revenue]
+			VAR _prev = [Net Revenue PY]
+			RETURN IF ( NOT ISBLANK ( _cur ), DIVIDE ( _cur - _prev, _prev ) )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 07 Time Intelligence
+		lineageTag: bd025974-8673-4c99-9abf-b3762d45c433
+
+	/// Revenue change of the scenario selected in the disconnected scenarios table (0 when none).
+	measure 'Scenario Revenue Change' =
+			SELECTEDVALUE ( scenarios[revenue_change_pct], 0 )
+		formatString: 0.0%
+		displayFolder: 08 Scenarios
+		lineageTag: d71a095c-59e7-40aa-aa44-9b49f4d60587
+
+	/// Cost change of the selected scenario (0 when none).
+	measure 'Scenario Cost Change' =
+			SELECTEDVALUE ( scenarios[cost_change_pct], 0 )
+		formatString: 0.0%
+		displayFolder: 08 Scenarios
+		lineageTag: b91960f6-ee3b-4d97-8a98-535782c5cc78
+
+	/// Modeled revenue: net revenue × (1 + scenario revenue change). A model, not a prediction.
+	measure 'Scenario Revenue' =
+			[Net Revenue] * ( 1 + [Scenario Revenue Change] )
+		formatString: #,0" TND"
+		displayFolder: 08 Scenarios
+		lineageTag: 456e3ba0-a114-413a-a422-3bcef56821f1
+
+	/// Modeled cost: (product cost + expenses) × (1 + scenario cost change).
+	measure 'Scenario Cost' =
+			( [Product Cost] + [Total Expenses] ) * ( 1 + [Scenario Cost Change] )
+		formatString: #,0" TND"
+		displayFolder: 08 Scenarios
+		lineageTag: f3da2cfe-bbd2-472d-8ca0-8a08da5be6ed
+
+	/// Scenario revenue minus scenario cost.
+	measure 'Scenario Profit' =
+			[Scenario Revenue] - [Scenario Cost]
+		formatString: #,0" TND"
+		displayFolder: 08 Scenarios
+		lineageTag: d0a95b6f-db1b-4d12-9eb4-40d34da0ae92
+
+	/// Scenario profit ÷ scenario revenue.
+	measure 'Scenario Margin %' =
+			DIVIDE ( [Scenario Profit], [Scenario Revenue] )
+		formatString: 0.0%
+		displayFolder: 08 Scenarios
+		lineageTag: 2146410e-5ab0-4fa2-a5bc-f66982df0b08
+
+	/// What-if parameter: revenue shock selected in the 'Revenue Shock' table (0 when none).
+	measure 'Revenue Shock Value' =
+			SELECTEDVALUE ( 'Revenue Shock'[Revenue Shock], 0 )
+		formatString: +0%;-0%;0%
+		displayFolder: 08 Scenarios
+		lineageTag: 90daa85a-c037-43d3-978f-9a076428930c
+
+	/// First-order revenue lost under the selected negative revenue shock (modeled estimate).
+	measure 'Crisis Revenue Exposure' =
+			[Net Revenue] * MAX ( 0, - [Revenue Shock Value] )
+		formatString: #,0" TND"
+		displayFolder: 08 Scenarios
+		lineageTag: 2ef8eae5-9a97-49c8-9ddb-9894f7dd650b
+
+	/// Rows in the data-quality issue register (a sample register, not ground truth).
+	measure 'Data Quality Issues' =
+			COUNTROWS ( data_quality_issues )
+		formatString: #,0
+		displayFolder: 09 Data Quality
+		lineageTag: 6b42538f-5a63-44d4-9d09-3dd7295ddb41
+
+	/// Register issues with status Open or Under Review.
+	measure 'Open Quality Issues' =
+			CALCULATE ( COUNTROWS ( data_quality_issues ), KEEPFILTERS ( data_quality_issues[issue_status] IN { "Open", "Under Review" } ) )
+		formatString: #,0
+		displayFolder: 09 Data Quality
+		lineageTag: 469c6da3-7027-4360-8f3f-2285b815c413
+
+	/// 100 × (1 − weighted open issues ÷ weighted all issues). Weights: Critical 5, High 3, Medium 1.5, Low 0.5. Transparent, not a certification.
+	measure 'Quality Score' =
+			VAR _w = SUMX ( data_quality_issues, SWITCH ( data_quality_issues[severity], "Critical", 5, "High", 3, "Medium", 1.5, 0.5 ) )
+			VAR _open = SUMX ( FILTER ( data_quality_issues, data_quality_issues[issue_status] IN { "Open", "Under Review" } ), SWITCH ( data_quality_issues[severity], "Critical", 5, "High", 3, "Medium", 1.5, 0.5 ) )
+			RETURN IF ( _w > 0, 100 * ( 1 - DIVIDE ( _open, _w ) ) )
+		formatString: 0.0
+		displayFolder: 09 Data Quality
+		lineageTag: 5c39d77c-6240-456a-92c9-ac73ebdd5978
+
+	/// Orders whose gross amount differs from net + tax by more than 0.05 TND (planted anomaly O00004).
+	measure 'Gross Amount Mismatch Orders' =
+			COUNTROWS ( FILTER ( sales_orders, ABS ( sales_orders[net_amount_tnd] + sales_orders[tax_amount_tnd] - sales_orders[gross_amount_tnd] ) > 0.05 ) ) + 0
+		formatString: #,0
+		displayFolder: 09 Data Quality
+		lineageTag: 927d6e88-e54c-4e22-bc47-b045a140b6f7
+
+	/// Orders whose promised delivery date is before the order date (planted anomaly O00008).
+	measure 'Promise Before Order' =
+			COUNTROWS ( FILTER ( sales_orders, sales_orders[promised_delivery_date] < sales_orders[order_date] ) ) + 0
+		formatString: #,0
+		displayFolder: 09 Data Quality
+		lineageTag: 84353455-885a-4e68-a6c2-6f243b004428
+
+	/// Transparent baseline: the average net revenue of the 3 months before the month in context (moving average, not AI).
+	measure 'Revenue Forecast (3M MA)' =
+			VAR _monthStart = DATE ( YEAR ( MIN ( dim_date[date] ) ), MONTH ( MIN ( dim_date[date] ) ), 1 )
+			VAR _prior = CALCULATE ( [Net Revenue], DATESBETWEEN ( dim_date[date], EDATE ( _monthStart, -3 ), _monthStart - 1 ) )
+			RETURN IF ( HASONEVALUE ( dim_date[month_year] ), DIVIDE ( _prior, 3 ) )
+		formatString: #,0" TND"
+		displayFolder: 10 Forecast
+		lineageTag: 8eb3b020-d388-4441-8922-1dcf7fde2e36
+
+	/// Absolute error of the 3-month moving average vs actual, for one month (backtest).
+	measure 'Forecast Error %' =
+			VAR _a = [Net Revenue]
+			VAR _f = [Revenue Forecast (3M MA)]
+			RETURN IF ( NOT ISBLANK ( _a ) && NOT ISBLANK ( _f ), DIVIDE ( ABS ( _a - _f ), _a ) )
+		formatString: 0.0%
+		displayFolder: 10 Forecast
+		lineageTag: 1081a489-b130-4cce-9a99-2daa0d8dc343
+
+	/// Mean absolute percentage error of the moving-average forecast over the complete months in context that have 3 prior months.
+	measure 'Forecast MAPE %' =
+			VAR _months = FILTER ( VALUES ( dim_date[month_year] ), NOT ISBLANK ( [Forecast Error %] ) )
+			RETURN AVERAGEX ( _months, [Forecast Error %] )
+		formatString: 0.0%
+		displayFolder: 10 Forecast
+		lineageTag: b695ef0b-4a40-4a7f-b049-d1f9ac74a40e
+
+	/// Columnar JSON feed of activity_log for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed activity_log' =
+			"{""c"":[""activity_id"",""activity_date"",""employee_id"",""action_type"",""module_name"",""result"",""event_details""],""r"":[" & CONCATENATEX ( activity_log, "[" & IF ( ISBLANK ( activity_log[activity_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( activity_log[activity_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( activity_log[activity_date] ), "null", """" & FORMAT ( activity_log[activity_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( activity_log[employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( activity_log[employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( activity_log[action_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( activity_log[action_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( activity_log[module_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( activity_log[module_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( activity_log[result] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( activity_log[result], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( activity_log[event_details] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( activity_log[event_details], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", activity_log[activity_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 488ffd7f-c92a-40ff-b100-3c26f568f0bc
+
+	/// Columnar JSON feed of alerts for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed alerts' =
+			"{""c"":[""alert_id"",""alert_date"",""alert_type"",""severity"",""alert_status"",""affected_area"",""alert_description"",""confidence_score""],""r"":[" & CONCATENATEX ( alerts, "[" & IF ( ISBLANK ( alerts[alert_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( alerts[alert_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( alerts[alert_date] ), "null", """" & FORMAT ( alerts[alert_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( alerts[alert_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( alerts[alert_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( alerts[severity] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( alerts[severity], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( alerts[alert_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( alerts[alert_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( alerts[affected_area] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( alerts[affected_area], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( alerts[alert_description] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( alerts[alert_description], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( alerts[confidence_score] ), "null", VAR _s = FORMAT ( alerts[confidence_score], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "]", ",", alerts[alert_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: b247bbd8-0b32-4855-8bce-519ac8e30716
+
+	/// Columnar JSON feed of approval_requests for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed approval_requests' =
+			"{""c"":[""approval_id"",""request_type"",""priority"",""requested_amount_tnd"",""requester_employee_id"",""approver_employee_id"",""approval_status"",""request_date"",""request_description""],""r"":[" & CONCATENATEX ( approval_requests, "[" & IF ( ISBLANK ( approval_requests[approval_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( approval_requests[approval_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( approval_requests[request_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( approval_requests[request_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( approval_requests[priority] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( approval_requests[priority], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( approval_requests[requested_amount_tnd] ), "null", VAR _s = FORMAT ( approval_requests[requested_amount_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( approval_requests[requester_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( approval_requests[requester_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( approval_requests[approver_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( approval_requests[approver_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( approval_requests[approval_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( approval_requests[approval_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( approval_requests[request_date] ), "null", """" & FORMAT ( approval_requests[request_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( approval_requests[request_description] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( approval_requests[request_description], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", approval_requests[approval_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 9df65c8c-00f9-4695-b3af-8ae438170e81
+
+	/// Columnar JSON feed of calendar_events for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed calendar_events' =
+			"{""c"":[""event_id"",""event_title"",""event_type"",""priority"",""start_datetime"",""end_datetime"",""owner_employee_id"",""department_id"",""related_project_id"",""related_task_id"",""location_or_meeting_link"",""event_status"",""recurrence_pattern"",""reminder_setting"",""event_description""],""r"":[" & CONCATENATEX ( calendar_events, "[" & IF ( ISBLANK ( calendar_events[event_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[event_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[event_title] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[event_title], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[event_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[event_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[priority] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[priority], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[start_datetime] ), "null", """" & FORMAT ( calendar_events[start_datetime], "yyyy-mm-dd hh:nn", "en-US" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[end_datetime] ), "null", """" & FORMAT ( calendar_events[end_datetime], "yyyy-mm-dd hh:nn", "en-US" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[owner_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[owner_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[related_project_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[related_project_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[related_task_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[related_task_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[location_or_meeting_link] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[location_or_meeting_link], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[event_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[event_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[recurrence_pattern] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[recurrence_pattern], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[reminder_setting] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[reminder_setting], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( calendar_events[event_description] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( calendar_events[event_description], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", calendar_events[event_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: e74e06cf-c40e-467d-b33e-940acc6977ab
+
+	/// Columnar JSON feed of collaboration_comments for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed collaboration_comments' =
+			"{""c"":[""comment_id"",""comment_date"",""author_employee_id"",""linked_item_type"",""linked_item_reference"",""comment_text"",""comment_type""],""r"":[" & CONCATENATEX ( collaboration_comments, "[" & IF ( ISBLANK ( collaboration_comments[comment_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( collaboration_comments[comment_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( collaboration_comments[comment_date] ), "null", """" & FORMAT ( collaboration_comments[comment_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( collaboration_comments[author_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( collaboration_comments[author_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( collaboration_comments[linked_item_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( collaboration_comments[linked_item_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( collaboration_comments[linked_item_reference] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( collaboration_comments[linked_item_reference], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( collaboration_comments[comment_text] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( collaboration_comments[comment_text], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( collaboration_comments[comment_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( collaboration_comments[comment_type], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", collaboration_comments[comment_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 218e3222-f274-4603-888d-c8751c346141
+
+	/// Columnar JSON feed of customer_interactions for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed customer_interactions' =
+			"{""c"":[""interaction_id"",""customer_id"",""interaction_date"",""channel"",""interaction_type"",""priority"",""interaction_status"",""resolution_hours"",""owner_employee_id""],""r"":[" & CONCATENATEX ( customer_interactions, "[" & IF ( ISBLANK ( customer_interactions[interaction_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customer_interactions[interaction_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customer_interactions[customer_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customer_interactions[customer_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customer_interactions[interaction_date] ), "null", """" & FORMAT ( customer_interactions[interaction_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( customer_interactions[channel] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customer_interactions[channel], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customer_interactions[interaction_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customer_interactions[interaction_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customer_interactions[priority] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customer_interactions[priority], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customer_interactions[interaction_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customer_interactions[interaction_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customer_interactions[resolution_hours] ), "null", VAR _s = FORMAT ( customer_interactions[resolution_hours], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( customer_interactions[owner_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customer_interactions[owner_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", customer_interactions[interaction_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 62848762-335b-47f8-a97c-5100c5b305bd
+
+	/// Columnar JSON feed of customers for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed customers' =
+			"{""c"":[""customer_id"",""customer_name"",""customer_segment"",""industry"",""region"",""acquisition_date"",""customer_status"",""annual_contract_value_tnd""],""r"":[" & CONCATENATEX ( customers, "[" & IF ( ISBLANK ( customers[customer_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customers[customer_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customers[customer_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customers[customer_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customers[customer_segment] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customers[customer_segment], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customers[industry] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customers[industry], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customers[region] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customers[region], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customers[acquisition_date] ), "null", """" & FORMAT ( customers[acquisition_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( customers[customer_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( customers[customer_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( customers[annual_contract_value_tnd] ), "null", VAR _s = FORMAT ( customers[annual_contract_value_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "]", ",", customers[customer_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 54302646-3f02-40bf-b9f9-fa44667fc4ab
+
+	/// Columnar JSON feed of data_quality_issues for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed data_quality_issues' =
+			"{""c"":[""issue_id"",""source_table"",""issue_type"",""severity"",""issue_status"",""issue_description"",""detected_date""],""r"":[" & CONCATENATEX ( data_quality_issues, "[" & IF ( ISBLANK ( data_quality_issues[issue_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_quality_issues[issue_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_quality_issues[source_table] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_quality_issues[source_table], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_quality_issues[issue_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_quality_issues[issue_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_quality_issues[severity] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_quality_issues[severity], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_quality_issues[issue_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_quality_issues[issue_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_quality_issues[issue_description] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_quality_issues[issue_description], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_quality_issues[detected_date] ), "null", """" & FORMAT ( data_quality_issues[detected_date], "yyyy-mm-dd", "en-US" ) & """" ) & "]", ",", data_quality_issues[issue_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 9cea3c4e-66ea-4e39-8b93-30ae3264e5e5
+
+	/// Columnar JSON feed of data_sources for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed data_sources' =
+			"{""c"":[""source_id"",""source_name"",""source_type"",""connection_location"",""refresh_frequency_label"",""source_files"",""connection_status""],""r"":[" & CONCATENATEX ( data_sources, "[" & IF ( ISBLANK ( data_sources[source_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_sources[source_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_sources[source_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_sources[source_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_sources[source_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_sources[source_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_sources[connection_location] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_sources[connection_location], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_sources[refresh_frequency_label] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_sources[refresh_frequency_label], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_sources[source_files] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_sources[source_files], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( data_sources[connection_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( data_sources[connection_status], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", data_sources[source_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 835bdf00-de9c-4f1f-a9b4-1ca857912c0d
+
+	/// Columnar JSON feed of decisions for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed decisions' =
+			"{""c"":[""decision_id"",""decision_date"",""decision_type"",""department_id"",""decision_owner_id"",""decision_status"",""expected_impact_tnd"",""expected_kpi_change_pct"",""actual_kpi_change_pct"",""decision_notes""],""r"":[" & CONCATENATEX ( decisions, "[" & IF ( ISBLANK ( decisions[decision_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( decisions[decision_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( decisions[decision_date] ), "null", """" & FORMAT ( decisions[decision_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( decisions[decision_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( decisions[decision_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( decisions[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( decisions[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( decisions[decision_owner_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( decisions[decision_owner_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( decisions[decision_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( decisions[decision_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( decisions[expected_impact_tnd] ), "null", VAR _s = FORMAT ( decisions[expected_impact_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( decisions[expected_kpi_change_pct] ), "null", VAR _s = FORMAT ( decisions[expected_kpi_change_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( decisions[actual_kpi_change_pct] ), "null", VAR _s = FORMAT ( decisions[actual_kpi_change_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( decisions[decision_notes] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( decisions[decision_notes], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", decisions[decision_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: c6fec5e7-dfb6-4fce-87a6-cda93ead54d4
+
+	/// Columnar JSON feed of departments for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed departments' =
+			"{""c"":[""department_id"",""department_name"",""division"",""primary_location"",""mission""],""r"":[" & CONCATENATEX ( departments, "[" & IF ( ISBLANK ( departments[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( departments[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( departments[department_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( departments[department_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( departments[division] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( departments[division], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( departments[primary_location] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( departments[primary_location], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( departments[mission] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( departments[mission], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", departments[department_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 322a8b62-9ece-4e3b-a439-6fa82d29ee79
+
+	/// Columnar JSON feed of employees for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed employees' =
+			"{""c"":[""employee_id"",""employee_name"",""department_id"",""job_title"",""employment_status"",""location"",""hire_date""],""r"":[" & CONCATENATEX ( employees, "[" & IF ( ISBLANK ( employees[employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( employees[employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( employees[employee_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( employees[employee_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( employees[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( employees[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( employees[job_title] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( employees[job_title], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( employees[employment_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( employees[employment_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( employees[location] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( employees[location], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( employees[hire_date] ), "null", """" & FORMAT ( employees[hire_date], "yyyy-mm-dd", "en-US" ) & """" ) & "]", ",", employees[employee_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: f19d62a5-cb61-4196-9bdf-5fc9f272148e
+
+	/// Columnar JSON feed of entity_relationships for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed entity_relationships' =
+			"{""c"":[""relationship_id"",""source_entity_type"",""source_entity_id"",""relationship_type"",""target_entity_type"",""target_entity_id"",""relationship_strength"",""relationship_basis""],""r"":[" & CONCATENATEX ( entity_relationships, "[" & IF ( ISBLANK ( entity_relationships[relationship_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( entity_relationships[relationship_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( entity_relationships[source_entity_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( entity_relationships[source_entity_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( entity_relationships[source_entity_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( entity_relationships[source_entity_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( entity_relationships[relationship_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( entity_relationships[relationship_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( entity_relationships[target_entity_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( entity_relationships[target_entity_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( entity_relationships[target_entity_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( entity_relationships[target_entity_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( entity_relationships[relationship_strength] ), "null", VAR _s = FORMAT ( entity_relationships[relationship_strength], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( entity_relationships[relationship_basis] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( entity_relationships[relationship_basis], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", entity_relationships[relationship_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 857de212-99a2-4cf2-b914-ae3462cd1aad
+
+	/// Columnar JSON feed of expenses for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed expenses' =
+			"{""c"":[""expense_id"",""expense_date"",""department_id"",""expense_category"",""amount_tnd"",""approval_status"",""submitted_by_employee_id""],""r"":[" & CONCATENATEX ( expenses, "[" & IF ( ISBLANK ( expenses[expense_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( expenses[expense_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( expenses[expense_date] ), "null", """" & FORMAT ( expenses[expense_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( expenses[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( expenses[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( expenses[expense_category] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( expenses[expense_category], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( expenses[amount_tnd] ), "null", VAR _s = FORMAT ( expenses[amount_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( expenses[approval_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( expenses[approval_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( expenses[submitted_by_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( expenses[submitted_by_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", expenses[expense_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 0e43d67a-66a5-424a-b69c-471fac1ff214
+
+	/// Columnar JSON feed of incidents for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed incidents' =
+			"{""c"":[""incident_id"",""incident_date"",""incident_type"",""severity"",""department_id"",""incident_owner_id"",""incident_status"",""estimated_impact_tnd"",""impact_domain""],""r"":[" & CONCATENATEX ( incidents, "[" & IF ( ISBLANK ( incidents[incident_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( incidents[incident_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( incidents[incident_date] ), "null", """" & FORMAT ( incidents[incident_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( incidents[incident_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( incidents[incident_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( incidents[severity] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( incidents[severity], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( incidents[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( incidents[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( incidents[incident_owner_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( incidents[incident_owner_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( incidents[incident_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( incidents[incident_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( incidents[estimated_impact_tnd] ), "null", VAR _s = FORMAT ( incidents[estimated_impact_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( incidents[impact_domain] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( incidents[impact_domain], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", incidents[incident_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: fa6b37f1-63d1-4a54-bfd4-04f25806654e
+
+	/// Columnar JSON feed of inventory_snapshots for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed inventory_snapshots' =
+			"{""c"":[""product_id"",""warehouse"",""snapshot_date"",""quantity_on_hand"",""reorder_point"",""target_stock"",""supplier_id""],""r"":[" & CONCATENATEX ( inventory_snapshots, "[" & IF ( ISBLANK ( inventory_snapshots[product_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( inventory_snapshots[product_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( inventory_snapshots[warehouse] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( inventory_snapshots[warehouse], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( inventory_snapshots[snapshot_date] ), "null", """" & FORMAT ( inventory_snapshots[snapshot_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( inventory_snapshots[quantity_on_hand] ), "null", VAR _s = FORMAT ( inventory_snapshots[quantity_on_hand], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( inventory_snapshots[reorder_point] ), "null", VAR _s = FORMAT ( inventory_snapshots[reorder_point], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( inventory_snapshots[target_stock] ), "null", VAR _s = FORMAT ( inventory_snapshots[target_stock], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( inventory_snapshots[supplier_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( inventory_snapshots[supplier_id], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", inventory_snapshots[inventory_snapshot_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 19f4b8f7-d162-4af0-acda-bc6510040955
+
+	/// Columnar JSON feed of investigation_cases for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed investigation_cases' =
+			"{""c"":[""case_id"",""case_title"",""case_type"",""severity"",""case_status"",""case_owner_employee_id"",""department_id"",""opened_date"",""case_summary"",""review_status""],""r"":[" & CONCATENATEX ( investigation_cases, "[" & IF ( ISBLANK ( investigation_cases[case_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_cases[case_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_cases[case_title] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_cases[case_title], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_cases[case_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_cases[case_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_cases[severity] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_cases[severity], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_cases[case_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_cases[case_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_cases[case_owner_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_cases[case_owner_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_cases[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_cases[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_cases[opened_date] ), "null", """" & FORMAT ( investigation_cases[opened_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( investigation_cases[case_summary] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_cases[case_summary], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_cases[review_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_cases[review_status], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", investigation_cases[case_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 4437c239-9719-48db-a41b-28e4411b67fd
+
+	/// Columnar JSON feed of investigation_evidence for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed investigation_evidence' =
+			"{""c"":[""evidence_id"",""case_id"",""evidence_type"",""source_table"",""source_record_reference"",""relevance_level"",""evidence_date"",""evidence_summary"",""evidence_status""],""r"":[" & CONCATENATEX ( investigation_evidence, "[" & IF ( ISBLANK ( investigation_evidence[evidence_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_evidence[evidence_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_evidence[case_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_evidence[case_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_evidence[evidence_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_evidence[evidence_type], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_evidence[source_table] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_evidence[source_table], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_evidence[source_record_reference] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_evidence[source_record_reference], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_evidence[relevance_level] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_evidence[relevance_level], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_evidence[evidence_date] ), "null", """" & FORMAT ( investigation_evidence[evidence_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( investigation_evidence[evidence_summary] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_evidence[evidence_summary], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( investigation_evidence[evidence_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( investigation_evidence[evidence_status], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", investigation_evidence[evidence_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 905979aa-2d09-4e9b-b4cf-ae3e2aab6501
+
+	/// Columnar JSON feed of kpi_targets for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed kpi_targets' =
+			"{""c"":[""department_id"",""month_start"",""revenue_target_tnd"",""gross_margin_target_pct"",""customer_satisfaction_target"",""incident_rate_target_pct""],""r"":[" & CONCATENATEX ( kpi_targets, "[" & IF ( ISBLANK ( kpi_targets[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( kpi_targets[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( kpi_targets[month_start] ), "null", """" & FORMAT ( kpi_targets[month_start], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( kpi_targets[revenue_target_tnd] ), "null", VAR _s = FORMAT ( kpi_targets[revenue_target_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( kpi_targets[gross_margin_target_pct] ), "null", VAR _s = FORMAT ( kpi_targets[gross_margin_target_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( kpi_targets[customer_satisfaction_target] ), "null", VAR _s = FORMAT ( kpi_targets[customer_satisfaction_target], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( kpi_targets[incident_rate_target_pct] ), "null", VAR _s = FORMAT ( kpi_targets[incident_rate_target_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "]", ",", kpi_targets[target_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 25602ae0-b590-4d1c-95af-ca3f35b3d0b4
+
+	/// Columnar JSON feed of missions for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed missions' =
+			"{""c"":[""mission_id"",""mission_title"",""mission_category"",""priority"",""mission_status"",""department_id"",""target_value_tnd"",""progress_pct"",""completion_threshold_pct"",""start_date"",""target_date""],""r"":[" & CONCATENATEX ( missions, "[" & IF ( ISBLANK ( missions[mission_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( missions[mission_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( missions[mission_title] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( missions[mission_title], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( missions[mission_category] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( missions[mission_category], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( missions[priority] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( missions[priority], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( missions[mission_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( missions[mission_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( missions[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( missions[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( missions[target_value_tnd] ), "null", VAR _s = FORMAT ( missions[target_value_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( missions[progress_pct] ), "null", VAR _s = FORMAT ( missions[progress_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( missions[completion_threshold_pct] ), "null", VAR _s = FORMAT ( missions[completion_threshold_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( missions[start_date] ), "null", """" & FORMAT ( missions[start_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( missions[target_date] ), "null", """" & FORMAT ( missions[target_date], "yyyy-mm-dd", "en-US" ) & """" ) & "]", ",", missions[mission_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 99208244-e290-46d5-9dd2-26c43b99b928
+
+	/// Columnar JSON feed of notifications for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed notifications' =
+			"{""c"":[""notification_id"",""notification_date"",""notification_category"",""severity"",""notification_message"",""read_status"",""recipient_employee_id"",""source_module"",""action_type""],""r"":[" & CONCATENATEX ( notifications, "[" & IF ( ISBLANK ( notifications[notification_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( notifications[notification_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( notifications[notification_date] ), "null", """" & FORMAT ( notifications[notification_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( notifications[notification_category] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( notifications[notification_category], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( notifications[severity] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( notifications[severity], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( notifications[notification_message] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( notifications[notification_message], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( notifications[read_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( notifications[read_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( notifications[recipient_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( notifications[recipient_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( notifications[source_module] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( notifications[source_module], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( notifications[action_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( notifications[action_type], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", notifications[notification_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 76e9e388-5ded-494e-8842-544e2532a8f0
+
+	/// Columnar JSON feed of payments for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed payments' =
+			"{""c"":[""payment_id"",""order_id"",""payment_date"",""payment_method"",""amount_tnd"",""payment_status"",""settlement_date""],""r"":[" & CONCATENATEX ( payments, "[" & IF ( ISBLANK ( payments[payment_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( payments[payment_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( payments[order_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( payments[order_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( payments[payment_date] ), "null", """" & FORMAT ( payments[payment_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( payments[payment_method] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( payments[payment_method], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( payments[amount_tnd] ), "null", VAR _s = FORMAT ( payments[amount_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( payments[payment_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( payments[payment_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( payments[settlement_date] ), "null", """" & FORMAT ( payments[settlement_date], "yyyy-mm-dd", "en-US" ) & """" ) & "]", ",", payments[payment_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: da833c4a-4659-4256-a307-eaad414fa80d
+
+	/// Columnar JSON feed of products for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed products' =
+			"{""c"":[""product_id"",""product_name"",""category"",""product_tier"",""list_price_tnd"",""unit_cost_tnd"",""product_status""],""r"":[" & CONCATENATEX ( products, "[" & IF ( ISBLANK ( products[product_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( products[product_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( products[product_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( products[product_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( products[category] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( products[category], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( products[product_tier] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( products[product_tier], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( products[list_price_tnd] ), "null", VAR _s = FORMAT ( products[list_price_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( products[unit_cost_tnd] ), "null", VAR _s = FORMAT ( products[unit_cost_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( products[product_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( products[product_status], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", products[product_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 72ecf3de-ad98-4abb-8046-fcc78d72ef8d
+
+	/// Columnar JSON feed of projects for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed projects' =
+			"{""c"":[""project_id"",""project_name"",""strategic_theme"",""department_id"",""project_owner_id"",""start_date"",""planned_end_date"",""project_status"",""approved_budget_tnd"",""completion_percent""],""r"":[" & CONCATENATEX ( projects, "[" & IF ( ISBLANK ( projects[project_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( projects[project_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( projects[project_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( projects[project_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( projects[strategic_theme] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( projects[strategic_theme], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( projects[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( projects[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( projects[project_owner_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( projects[project_owner_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( projects[start_date] ), "null", """" & FORMAT ( projects[start_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( projects[planned_end_date] ), "null", """" & FORMAT ( projects[planned_end_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( projects[project_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( projects[project_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( projects[approved_budget_tnd] ), "null", VAR _s = FORMAT ( projects[approved_budget_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( projects[completion_percent] ), "null", VAR _s = FORMAT ( projects[completion_percent], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "]", ",", projects[project_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: b3cc868e-7d09-422b-8bb4-61bf2c528de8
+
+	/// Columnar JSON feed of risk_register for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed risk_register' =
+			"{""c"":[""risk_id"",""risk_category"",""severity"",""confidence_score"",""estimated_exposure_tnd"",""department_id"",""risk_owner_employee_id"",""mitigation_status"",""identified_date"",""risk_description""],""r"":[" & CONCATENATEX ( risk_register, "[" & IF ( ISBLANK ( risk_register[risk_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( risk_register[risk_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( risk_register[risk_category] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( risk_register[risk_category], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( risk_register[severity] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( risk_register[severity], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( risk_register[confidence_score] ), "null", VAR _s = FORMAT ( risk_register[confidence_score], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( risk_register[estimated_exposure_tnd] ), "null", VAR _s = FORMAT ( risk_register[estimated_exposure_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( risk_register[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( risk_register[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( risk_register[risk_owner_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( risk_register[risk_owner_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( risk_register[mitigation_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( risk_register[mitigation_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( risk_register[identified_date] ), "null", """" & FORMAT ( risk_register[identified_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( risk_register[risk_description] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( risk_register[risk_description], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", risk_register[risk_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: e3af78a9-ee81-46c1-a041-3f096b45147f
+
+	/// Columnar JSON feed of sales_order_items for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed sales_order_items' =
+			"{""c"":[""order_id"",""product_id"",""quantity"",""unit_price_tnd"",""discount_rate"",""net_line_amount_tnd"",""line_cost_tnd""],""r"":[" & CONCATENATEX ( sales_order_items, "[" & IF ( ISBLANK ( sales_order_items[order_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( sales_order_items[order_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( sales_order_items[product_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( sales_order_items[product_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( sales_order_items[quantity] ), "null", VAR _s = FORMAT ( sales_order_items[quantity], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( sales_order_items[unit_price_tnd] ), "null", VAR _s = FORMAT ( sales_order_items[unit_price_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( sales_order_items[discount_rate] ), "null", VAR _s = FORMAT ( sales_order_items[discount_rate], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( sales_order_items[net_line_amount_tnd] ), "null", VAR _s = FORMAT ( sales_order_items[net_line_amount_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( sales_order_items[line_cost_tnd] ), "null", VAR _s = FORMAT ( sales_order_items[line_cost_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "]", ",", sales_order_items[order_line_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: fb2d844c-897b-4419-aeea-bc192f5f22a7
+
+	/// Columnar JSON feed of sales_orders for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed sales_orders' =
+			"{""c"":[""order_id"",""customer_id"",""order_date"",""sales_owner_id"",""sales_channel"",""order_status"",""net_amount_tnd"",""tax_amount_tnd"",""gross_amount_tnd"",""promised_delivery_date""],""r"":[" & CONCATENATEX ( sales_orders, "[" & IF ( ISBLANK ( sales_orders[order_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( sales_orders[order_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( sales_orders[customer_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( sales_orders[customer_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( sales_orders[order_date] ), "null", """" & FORMAT ( sales_orders[order_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( sales_orders[sales_owner_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( sales_orders[sales_owner_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( sales_orders[sales_channel] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( sales_orders[sales_channel], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( sales_orders[order_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( sales_orders[order_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( sales_orders[net_amount_tnd] ), "null", VAR _s = FORMAT ( sales_orders[net_amount_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( sales_orders[tax_amount_tnd] ), "null", VAR _s = FORMAT ( sales_orders[tax_amount_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( sales_orders[gross_amount_tnd] ), "null", VAR _s = FORMAT ( sales_orders[gross_amount_tnd], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( sales_orders[promised_delivery_date] ), "null", """" & FORMAT ( sales_orders[promised_delivery_date], "yyyy-mm-dd", "en-US" ) & """" ) & "]", ",", sales_orders[order_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: d7945190-8d60-4585-b254-88732879c185
+
+	/// Columnar JSON feed of scenarios for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed scenarios' =
+			"{""c"":[""scenario_id"",""scenario_name"",""scenario_description"",""revenue_change_pct"",""cost_change_pct"",""retention_change_pct"",""margin_change_pct""],""r"":[" & CONCATENATEX ( scenarios, "[" & IF ( ISBLANK ( scenarios[scenario_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( scenarios[scenario_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( scenarios[scenario_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( scenarios[scenario_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( scenarios[scenario_description] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( scenarios[scenario_description], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( scenarios[revenue_change_pct] ), "null", VAR _s = FORMAT ( scenarios[revenue_change_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( scenarios[cost_change_pct] ), "null", VAR _s = FORMAT ( scenarios[cost_change_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( scenarios[retention_change_pct] ), "null", VAR _s = FORMAT ( scenarios[retention_change_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( scenarios[margin_change_pct] ), "null", VAR _s = FORMAT ( scenarios[margin_change_pct], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "]", ",", scenarios[scenario_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 03b6ca04-a7d7-4d4c-b1aa-c6f832024837
+
+	/// Columnar JSON feed of strategic_goals for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed strategic_goals' =
+			"{""c"":[""goal_id"",""goal_name"",""goal_metric"",""department_id"",""target_value"",""current_value"",""start_date"",""target_date"",""goal_status""],""r"":[" & CONCATENATEX ( strategic_goals, "[" & IF ( ISBLANK ( strategic_goals[goal_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( strategic_goals[goal_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( strategic_goals[goal_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( strategic_goals[goal_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( strategic_goals[goal_metric] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( strategic_goals[goal_metric], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( strategic_goals[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( strategic_goals[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( strategic_goals[target_value] ), "null", VAR _s = FORMAT ( strategic_goals[target_value], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( strategic_goals[current_value] ), "null", VAR _s = FORMAT ( strategic_goals[current_value], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( strategic_goals[start_date] ), "null", """" & FORMAT ( strategic_goals[start_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( strategic_goals[target_date] ), "null", """" & FORMAT ( strategic_goals[target_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( strategic_goals[goal_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( strategic_goals[goal_status], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", strategic_goals[goal_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 4d9bdfbe-e995-4d0d-8e52-e8d3252cc004
+
+	/// Columnar JSON feed of suppliers for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed suppliers' =
+			"{""c"":[""supplier_id"",""supplier_name"",""supplier_category"",""country"",""risk_level"",""quality_rating"",""supplier_status""],""r"":[" & CONCATENATEX ( suppliers, "[" & IF ( ISBLANK ( suppliers[supplier_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( suppliers[supplier_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( suppliers[supplier_name] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( suppliers[supplier_name], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( suppliers[supplier_category] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( suppliers[supplier_category], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( suppliers[country] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( suppliers[country], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( suppliers[risk_level] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( suppliers[risk_level], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( suppliers[quality_rating] ), "null", VAR _s = FORMAT ( suppliers[quality_rating], "0.####", "en-US" ) RETURN IF ( RIGHT ( _s, 1 ) = ".", LEFT ( _s, LEN ( _s ) - 1 ), _s ) ) & "," & IF ( ISBLANK ( suppliers[supplier_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( suppliers[supplier_status], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", suppliers[supplier_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: 13026515-277d-4894-afe3-2c71f0078d6a
+
+	/// Columnar JSON feed of tasks for the Mission Control visual ({c: columns, r: rows}). Generated.
+	measure 'Feed tasks' =
+			"{""c"":[""task_id"",""project_id"",""department_id"",""assignee_employee_id"",""task_title"",""task_status"",""priority"",""created_date"",""due_date"",""task_type""],""r"":[" & CONCATENATEX ( tasks, "[" & IF ( ISBLANK ( tasks[task_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( tasks[task_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( tasks[project_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( tasks[project_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( tasks[department_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( tasks[department_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( tasks[assignee_employee_id] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( tasks[assignee_employee_id], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( tasks[task_title] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( tasks[task_title], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( tasks[task_status] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( tasks[task_status], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( tasks[priority] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( tasks[priority], "\", "\\" ), """", "\""" ) & """" ) & "," & IF ( ISBLANK ( tasks[created_date] ), "null", """" & FORMAT ( tasks[created_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( tasks[due_date] ), "null", """" & FORMAT ( tasks[due_date], "yyyy-mm-dd", "en-US" ) & """" ) & "," & IF ( ISBLANK ( tasks[task_type] ), "null", """" & SUBSTITUTE ( SUBSTITUTE ( tasks[task_type], "\", "\\" ), """", "\""" ) & """" ) & "]", ",", tasks[task_id], ASC ) & "]}"
+		formatString: General
+		displayFolder: 99 Visual Feeds
+		lineageTag: acd2ef67-a11a-42dd-9c08-d344c36ee9ee
+
+	column Value
+		dataType: int64
+		isHidden
+		lineageTag: 996cc363-301f-47ac-82f0-9c99cdfe4fd1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = ROW("Value", 0)

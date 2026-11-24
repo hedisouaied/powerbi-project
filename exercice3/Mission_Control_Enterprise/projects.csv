@@ -1,0 +1,31 @@
+project_id,project_name,strategic_theme,department_id,project_owner_id,start_date,planned_end_date,project_status,approved_budget_tnd,completion_percent
+PR001,Strategic Initiative 01,Finance,D08,E016,2025-03-28,2025-05-20,At Risk,62586.95,0.73
+PR002,Strategic Initiative 02,Operations,D06,E044,2025-07-03,2025-08-18,Not Started,170909.0,0.42
+PR003,Strategic Initiative 03,Customer,D03,E067,2025-05-05,2025-11-11,Completed,403771.34,0.75
+PR004,Strategic Initiative 04,Finance,D06,E033,2025-05-30,2025-11-21,At Risk,268112.74,0.35
+PR005,Strategic Initiative 05,Growth,D06,E002,2025-12-21,2026-02-28,In Progress,83419.2,0.13
+PR006,Strategic Initiative 06,Customer,D06,E048,2025-03-02,2025-07-14,Not Started,233327.78,0.48
+PR007,Strategic Initiative 07,Customer,D07,E020,2025-11-02,2026-05-02,On Hold,200873.48,0.76
+PR008,Strategic Initiative 08,Operations,D06,E057,2025-03-04,2025-08-17,Completed,123805.49,0.95
+PR009,Strategic Initiative 09,Finance,D04,E004,2025-08-13,2026-03-16,Completed,392247.78,0.86
+PR010,Strategic Initiative 10,Finance,D01,E046,2026-03-29,2026-10-23,At Risk,140825.41,0.27
+PR011,Strategic Initiative 11,Growth,D03,E038,2025-09-04,2026-01-29,On Hold,214191.74,0.63
+PR012,Strategic Initiative 12,Finance,D03,E057,2025-07-20,2025-10-14,Not Started,189894.98,0.69
+PR013,Strategic Initiative 13,Finance,D01,E061,2025-05-21,2025-11-20,At Risk,179399.84,0.58
+PR014,Strategic Initiative 14,Growth,D07,E051,2026-01-21,2026-05-12,In Progress,328868.36,0.92
+PR015,Strategic Initiative 15,Finance,D01,E031,2025-09-21,2025-12-11,Completed,464524.27,0.84
+PR016,Strategic Initiative 16,Technology,D05,E011,2025-06-30,2025-09-14,Not Started,175308.52,0.86
+PR017,Strategic Initiative 17,Growth,D06,E040,2025-04-29,2025-11-07,At Risk,79139.07,0.78
+PR018,Strategic Initiative 18,Finance,D05,E030,2025-05-28,2025-10-26,In Progress,212148.22,0.35
+PR019,Strategic Initiative 19,Operations,D03,E067,2026-05-13,2026-07-21,Completed,171523.88,0.07
+PR020,Strategic Initiative 20,Growth,D03,E008,2025-09-06,2026-03-22,On Hold,410461.72,0.24
+PR021,Strategic Initiative 21,Technology,D04,E058,2025-04-23,2025-09-30,At Risk,87375.03,0.53
+PR022,Strategic Initiative 22,Finance,D07,E005,2025-12-14,2026-07-19,Completed,248957.42,0.84
+PR023,Strategic Initiative 23,Technology,D08,E075,2025-10-29,2026-01-14,Completed,213078.58,0.61
+PR024,Strategic Initiative 24,Customer,D05,E002,2026-02-28,2026-09-29,In Progress,226130.26,0.83
+PR025,Strategic Initiative 25,Operations,D03,E020,2025-06-06,2025-09-02,At Risk,495843.22,0.31
+PR026,Strategic Initiative 26,Operations,D01,E073,2026-04-05,2026-09-12,On Hold,97966.6,0.77
+PR027,Strategic Initiative 27,Finance,D01,E001,2026-05-09,2026-10-23,At Risk,141175.33,0.3
+PR028,Strategic Initiative 28,Growth,D08,E059,2025-05-02,2025-12-07,Not Started,99214.9,0.69
+PR029,Strategic Initiative 29,Growth,D08,E025,2025-04-01,2025-11-24,Not Started,389967.4,0.03
+PR030,Strategic Initiative 30,Technology,D07,E028,2025-07-20,2025-09-21,On Hold,449858.59,0.64
