@@ -277,7 +277,7 @@ export function synthesis(c: Ctx, el: HTMLElement): void {
     const secs = c.m<Record<string, boolean>>("briefSecs", () => ({ kpis: true, changes: true, risks: true, decisions: true, actions: true }));
     const k = kpis(c.ix, c.ec), p = prevKpis(c);
     el.appendChild(h("div", "mc-page-title", h("h1", null, "Synthèse de direction · Studio de rapport"), h("span", "mc-muted", "Choisissez les sections ; la période et le département viennent des filtres du bandeau.")));
-    const opts = h("div", "mc-row-gap mc-wrap", ...Object.keys(secs).map(key => { const cb = h("input", { type: "checkbox" }) as HTMLInputElement; cb.checked = secs[key]; cb.onchange = (): void => { secs[key] = cb.checked; c.rerender(); }; return h("label", "mc-check", cb, key[0].toUpperCase() + key.slice(1)); }));
+    const opts = h("div", "mc-row-gap mc-wrap", ...Object.keys(secs).map(key => { const cb = h("input", { type: "checkbox" }) as HTMLInputElement; cb.checked = secs[key]; cb.onchange = (): void => { secs[key] = cb.checked; c.rerender(); }; return h("label", "mc-check", cb, ({ kpis: "KPI", changes: "Évolutions", risks: "Risques", decisions: "Décisions", actions: "Actions" } as Record<string, string>)[key] ?? key); }));
     el.appendChild(opts);
     const doc = h("article", "mc-doc");
     doc.appendChild(h("h2", null, `Synthèse de direction — ${c.ec.p.label}${c.ec.dept ? " · " + c.ix.deptName(c.ec.dept) : ""}`));

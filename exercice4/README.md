@@ -48,6 +48,20 @@ npm install
 node node_modules\vite\bin\vite.js build      # écrit backend/public/app
 ```
 
+## Responsive (téléphone, tablette, ordinateur)
+
+Le tableau de bord s'adapte à l'écran ; il n'est plus réduit comme une image.
+
+| Largeur | Mise en page |
+|---|---|
+| **> 1024 px** (ordinateur) | Identique à Power BI : barre latérale fixe, grille sur 12 colonnes. |
+| **≤ 1024 px** (tablette) | Bouton ☰ et barre latérale en tiroir (fermée après le choix d'un module), bandeau d'indicateurs défilant, grilles sur 2 colonnes, Kanban et Gantt défilant horizontalement. |
+| **≤ 640 px** (téléphone) | Une colonne, en-tête compact (logo, recherche, thème, notifications, profil), cartes KPI par 2, calendrier ouvert sur l'Agenda, formulaires en feuille depuis le bas, panneaux en plein écran, boutons d'au moins 38 px. |
+
+Les styles sont dans `frontend/src/mc/visual.less` (section « responsive web layout »). Le menu est géré dans `app.ts` (`.mc-menu-btn`, `mc-nav-open`). Le tableau de bord se redessine quand la largeur change, pour que les graphiques s'adaptent.
+
+**Test :** `node tools/e2e-mobile.js` (18 contrôles) émule un téléphone (390 × 844) et une tablette (820 × 1180) avec de vrais touchers. Il vérifie le menu, le tiroir et le formulaire, et contrôle qu'aucun des 33 modules ne déborde en largeur. Lancez les tests quelques secondes après une reconstruction du front : juste après, le serveur peut encore servir l'ancienne version.
+
 ## Traduction française
 
 | Élément | Comment il est traduit |
@@ -95,7 +109,8 @@ node exercice4\tools\e2e.js
 | Test | Résultat |
 |---|---|
 | Tests backend | 15 / 15 |
-| De bout en bout | 17 / 17 |
+| De bout en bout (ordinateur) | 17 / 17 |
+| Téléphone et tablette | 18 / 18 |
 | Moteur français vs Power BI | 0 différence sur 43 groupes de résultats |
 
 ## Mise en ligne (Railway)

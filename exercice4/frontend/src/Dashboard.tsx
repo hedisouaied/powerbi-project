@@ -47,11 +47,14 @@ export function Dashboard({ user, onSignOut }: { user: User; onSignOut: () => vo
             });
         };
 
+        // Responsive: the dashboard fills the window at every size (CSS breakpoints in visual.less), no scaling.
+        // A width change re-renders (debounced) so charts and layouts adapt.
+        let lastW = 0, resizeTimer = 0;
         const fit = (): void => {
-            const w = el.clientWidth, h = el.clientHeight;
-            const scale = Math.min(1, w / MIN_W, h / MIN_H);
-            stage.style.width = `${Math.max(w / scale, MIN_W)}px`; stage.style.height = `${Math.max(h / scale, MIN_H)}px`;
-            stage.style.transform = scale < 1 ? `scale(${scale})` : "";
+            stage.style.width = "100%"; stage.style.height = "100%"; stage.style.transform = "";
+            const w = el.clientWidth;
+            if (lastW && Math.abs(w - lastW) > 40) { window.clearTimeout(resizeTimer); resizeTimer = window.setTimeout(() => app.render(), 200); }
+            lastW = w;
         };
         fit();
         const ro = new ResizeObserver(() => { fit(); });

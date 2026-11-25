@@ -15,7 +15,7 @@ import {
     Minimize2, Minus, Monitor, Moon, Move, Network, NotebookPen, Package, Palette, PanelLeft, Pause, Pencil, Pin, Play, Plug, Plus, Printer, Quote, Radar, Receipt, RefreshCw,
     Rocket, Rotate3d, RotateCcw, Route, Save, Scale, ScanSearch, ScrollText, Search, Send, Server, Settings, Shield, ShieldAlert, Shuffle, Siren, SkipBack, SkipForward,
     SlidersHorizontal, Sparkles, SquareKanban, Star, Stethoscope, Store, Sun, Swords, Table, Tag, Target, Telescope, Timer, Trash, TrendingDown, TrendingUp, TriangleAlert,
-    Trophy, Truck, Type, User, Users, Wallet, Wand, Warehouse, Waypoints, X, Zap, LogOut
+    Trophy, Truck, Type, User, Users, Wallet, Wand, Warehouse, Waypoints, X, Zap, LogOut, Menu
 } from "lucide";
 
 const ICONS: Record<string, IconNode> = {
@@ -27,7 +27,7 @@ const ICONS: Record<string, IconNode> = {
     Minimize2, Minus, Monitor, Moon, Move, Network, NotebookPen, Package, Palette, PanelLeft, Pause, Pencil, Pin, Play, Plug, Plus, Printer, Quote, Radar, Receipt, RefreshCw,
     Rocket, Rotate3d, RotateCcw, Route, Save, Scale, ScanSearch, ScrollText, Search, Send, Server, Settings, Shield, ShieldAlert, Shuffle, Siren, SkipBack, SkipForward,
     SlidersHorizontal, Sparkles, SquareKanban, Star, Stethoscope, Store, Sun, Swords, Table, Tag, Target, Telescope, Timer, Trash, TrendingDown, TrendingUp, TriangleAlert,
-    Trophy, Truck, Type, User, Users, Wallet, Wand, Warehouse, Waypoints, X, Zap, LogOut
+    Trophy, Truck, Type, User, Users, Wallet, Wand, Warehouse, Waypoints, X, Zap, LogOut, Menu
 };
 
 export function icon(name: string, size = 16): SVGElement {

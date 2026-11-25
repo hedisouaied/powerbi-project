@@ -542,3 +542,130 @@ dl.mc-kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 10px; dt { 
 // missing / unreadable feeds: never silent
 .mc-feed-alert { display: flex; align-items: center; gap: 8px; padding: 7px 16px; flex: none; font-size: 0.88em; color: var(--mc-text);
     background: color-mix(in srgb, var(--mc-warn) 16%, var(--mc-bg2)); border-bottom: 1px solid color-mix(in srgb, var(--mc-warn) 45%, transparent); svg { color: var(--mc-warn); flex: none; } }
+
+// ================================================================ responsive web layout (exercice4)
+// Desktop (> 1024 px) is unchanged. Tablet: drawer sidebar, 2-column grids. Phone (≤ 640 px): one column, compact header.
+.mc-menu-btn { display: none; }
+.mc-nav-veil { display: none; }
+
+@media (max-width: 1024px) {
+    .mc-menu-btn { display: inline-grid; flex: none; }
+    .mc-header { gap: 10px; padding: 0 12px; }
+    .mc-header > .mc-chip, .mc-brand-sub, .mc-search kbd, .mc-profile > div:last-child { display: none; }
+    .mc-brand { min-width: 0; }
+    .mc-search { max-width: none; min-width: 0; }
+    .mc-profile { padding-left: 6px; }
+
+    // sidebar becomes an off-canvas drawer (labels always visible, collapse button hidden)
+    .mc-side, .mc-side-collapsed .mc-side { position: fixed; top: 0; bottom: 0; left: 0; z-index: 60; width: 272px; padding: 12px 12px 14px; transform: translateX(-105%);
+        transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: 0 0 40px rgba(0, 0, 0, 0.45); background: var(--mc-bg2); }
+    .mc-nav-open .mc-side { transform: none; }
+    .mc-side-top { display: none; }
+    .mc-side-collapsed .mc-nav-label, .mc-side-collapsed .mc-side-group, .mc-side-collapsed .mc-side-foot { display: revert; }
+    .mc-side-collapsed .mc-nav { justify-content: flex-start; padding: 0 10px; }
+    .mc-nav { height: 38px; }
+    .mc-nav-open .mc-nav-veil { display: block; position: fixed; inset: 0; z-index: 55; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(2px); animation: mc-fade 0.2s ease both; }
+
+    // status ribbon: one swipeable line
+    .mc-ribbon { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; padding: 0 10px; &::-webkit-scrollbar { display: none; } > * { flex: none; } }
+    .mc-rib-spacer { display: none; }
+    .mc-crumb-period { display: none; }
+    .mc-crumbs { padding: 0 12px; overflow: hidden; white-space: nowrap; }
+    .mc-outlet { padding: 4px 12px 20px; }
+
+    // grids
+    .mc-g-3, .mc-g-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .mc-g-graph, .mc-g-explorer, .mc-g-assist, .mc-g-collab, .mc-g-detective, .mc-g-terminal, .mc-g-wi, .mc-cal-layout { grid-template-columns: minmax(0, 1fr); }
+    .mc-w-s { grid-column: span 6; } .mc-w-m, .mc-w-l { grid-column: span 12; }
+    .mc-hero-text { max-width: 62%; }
+
+    // wide boards scroll sideways inside their card instead of squeezing
+    .mc-kanban, .mc-kanban-3 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+    .mc-kanban > .mc-lane { flex: 0 0 min(300px, 82%); scroll-snap-align: start; }
+    .mc-gantt { overflow-x: auto; > * { min-width: 860px; } }
+
+    .mc-palette { top: 12px; width: 96%; max-width: 96%; }
+    .mc-modal { width: 94%; }
+}
+
+@media (max-width: 640px) {
+    .mc-header { height: 52px; gap: 6px; padding: 0 8px; }
+    .mc-brand > div { display: none; }                       // logo only
+    .mc-search { flex: 1 1 auto; height: 36px; span { overflow: hidden; text-overflow: ellipsis; } }
+    .mc-header-right { gap: 2px; }
+    .mc-header-right > .mc-icon-btn[title="Aide et limites"] { display: none; }
+    .mc-theme-switch .mc-icon-btn { width: 28px; }
+    .mc-ribbon { height: 38px; }
+    .mc-rib-label { display: none; }
+
+    .mc-g-2, .mc-g-3, .mc-g-4 { grid-template-columns: minmax(0, 1fr); }
+    .mc-span-2 { grid-column: auto; }
+    .mc-dash .mc-widget { grid-column: span 12; }
+    .mc-kpi-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .mc-kpi { padding: 12px 10px 8px; gap: 2px 8px; }
+    .mc-kpi-icon { width: 34px; height: 34px; }
+    .mc-kpi-value { font-size: 1.3em; }
+    .mc-page-title { gap: 4px 10px; h1 { font-size: 1.25em; } > .mc-muted { font-size: 0.86em; } }
+    .mc-page-title .mc-push { margin-left: 0; }
+
+    .mc-hero { min-height: 360px; }
+    .mc-hero-text { position: relative; left: auto; top: auto; max-width: none; padding: 16px; }
+    .mc-hero-stage { opacity: 0.45; }
+    .mc-hero-title { font-size: 1.35em; }
+    .mc-scene { height: 300px; }
+    .mc-twin2d, .mc-graph svg { height: 320px; }
+    .mc-gauge { max-width: 190px; }
+    .mc-story { padding: 22px 18px; min-height: 360px; }
+    .mc-story-title { font-size: 1.5em; } .mc-story-kpi { font-size: 2.2em; }
+
+    .mc-tabs { display: flex; flex-wrap: nowrap; overflow-x: auto; max-width: 100%; scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
+    .mc-tab { flex: none; }
+    .mc-filters, .mc-page-toolbar { gap: 6px; }
+    .mc-filters > .mc-field, .mc-filters > .mc-select { flex: 1 1 140px; }
+    .mc-form { grid-template-columns: minmax(0, 1fr); }
+    .mc-cal-cell { min-height: 58px; padding: 3px; }
+    .mc-cal-dow { padding: 2px; font-size: 0.7em; }
+    .mc-agenda-row { grid-template-columns: 1fr; gap: 4px; }
+    .mc-kv-row { grid-template-columns: 1fr; gap: 2px; }
+    dl.mc-kv { grid-template-columns: 1fr; }
+
+    // touch-friendly controls
+    .mc-btn { min-height: 38px; } .mc-btn-sm { min-height: 32px; }
+    .mc-icon-btn { width: 38px; height: 38px; }
+    .mc-select, .mc-input { height: 38px; }
+
+    // full-screen overlays
+    .mc-drawer { width: 100% !important; max-width: 100%; border-left: 0; }
+    .mc-modal { left: 0; width: 100%; max-width: 100%; max-height: 92%; top: auto; bottom: 0; transform: none; border-radius: 18px 18px 0 0; animation: mc-sheet-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .mc-palette { top: 0; width: 100%; max-width: 100%; border-radius: 0 0 16px 16px; }
+    .mc-toast { left: 12px; right: 12px; bottom: 12px; max-width: none; }
+}
+@keyframes mc-sheet-in { from { transform: translateY(100%); } to { transform: none; } }
+
+// small-screen wrapping: nothing may push the page wider than the screen
+@media (max-width: 1024px) {
+    .mc-field, .mc-select, .mc-input { max-width: 100%; min-width: 0; }
+    .mc-page-title .mc-push { flex-wrap: wrap; max-width: 100%; min-width: 0; }
+}
+@media (max-width: 640px) {
+    .mc-chip { white-space: normal; height: auto; min-height: 22px; padding: 2px 9px; text-align: left; }
+    .mc-ins-row, .mc-queue-row, .mc-out-row, .mc-change, .mc-watch-row, .mc-mission-line, .mc-row-gap { flex-wrap: wrap; min-width: 0; }
+    .mc-ins-row > *, .mc-mission-line > * { min-width: 0; }
+    .mc-small, .mc-muted, .mc-card-sub { overflow-wrap: anywhere; }
+    .mc-page-title .mc-tabs { max-width: 100%; }
+}
+@media (max-width: 1024px) {
+    .mc-brand { flex: none; }
+    .mc-logo { flex: none; }
+}
+@media (max-width: 640px) {
+    .mc-kpi-icon, .mc-kpi-note { display: none; }
+    .mc-kpi { grid-template-columns: minmax(0, 1fr); }
+    .mc-kpi-value { font-size: 1.2em; }
+    .mc-kpi .mc-spark { height: 26px; }
+    .mc-crumbs .mc-chip { display: none; }
+    .mc-field .mc-select { flex: none; }
+}
+@media (max-width: 1024px) and (min-width: 641px) {
+    .mc-kpi-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

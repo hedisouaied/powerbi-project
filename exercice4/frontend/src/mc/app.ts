@@ -109,7 +109,7 @@ export class App {
         const prefs = this.store.prefs;
         const t = tokens(prefs.theme, prefs.accent);
         applyTokens(this.root, t, prefs.density, prefs.fontScale);
-        this.root.className = `mc-app mc-theme-${prefs.theme}${this.reduced ? " mc-reduced" : ""}${prefs.sidebar === "collapsed" ? " mc-side-collapsed" : ""}`;
+        this.root.className = `mc-app mc-theme-${prefs.theme}${this.reduced ? " mc-reduced" : ""}${prefs.sidebar === "collapsed" ? " mc-side-collapsed" : ""}${this.s.m.navOpen ? " mc-nav-open" : ""}`;
         const d = applyWorkspace(this.base, this.store.ws);
         this.ix = new Index(d);
         this.ch.dispose(); this.ch.t = t; this.ch.reduced = this.reduced;
@@ -126,7 +126,7 @@ export class App {
         const route = ROUTES.find(r => r.id === this.s.route) ?? ROUTES[0];
         const outlet = h("main", { class: `mc-outlet${this.animateNext ? " mc-enter" : ""}`, "aria-label": route.label });
         const issues = this.feedIssues.length ? h("div", { class: "mc-feed-alert", role: "alert" }, icon("TriangleAlert", 15), h("span", null, h("b", null, `${this.feedIssues.length} table(s) n'ont pas été reçues : `), this.feedIssues.join(", "), ". Les chiffres qui en dépendent s'affichent à zéro. Rechargez la page ; si cela persiste, lancez php artisan mc:import --check sur le serveur.")) : null;
-        const frame = h("div", "mc-frame", this.header(ctx), this.ribbon(ctx), issues, h("div", "mc-body", this.sidebar(ctx), h("div", "mc-stage", this.crumbs(ctx, route), outlet)), overlay);
+        const frame = h("div", "mc-frame", this.header(ctx), this.ribbon(ctx), issues, h("div", "mc-body", this.sidebar(ctx), h("div", { class: "mc-nav-veil", onclick: () => { this.s.m.navOpen = false; this.render(); } }), h("div", "mc-stage", this.crumbs(ctx, route), outlet)), overlay);
         this.root.replaceChildren(frame);
         if (this.toastEl) { this.root.appendChild(this.toastEl); }
         try { (MODULES[route.id] ?? MODULES.command)(ctx, outlet); }
@@ -149,7 +149,9 @@ export class App {
             iconBtn("Sun", "Thème clair", () => { prefs.theme = "light"; this.store.savePrefs(); this.render(); }, prefs.theme === "light" ? "mc-on" : ""),
             iconBtn("Moon", "Thème sombre", () => { prefs.theme = "dark"; this.store.savePrefs(); this.render(); }, prefs.theme === "dark" ? "mc-on" : ""));
         const bell = h("div", "mc-bell", iconBtn("Bell", `Notifications (${unread} non lues)`, () => { this.s.notifOpen = !this.s.notifOpen; this.render(); }), unread ? badge(unread) : null);
-        return h("header", "mc-header",
+        const menu = iconBtn("Menu", "Menu des modules", () => { this.s.m.navOpen = !this.s.m.navOpen; this.render(); }, "mc-menu-btn");
+        menu.setAttribute("aria-expanded", this.s.m.navOpen ? "true" : "false");
+        return h("header", "mc-header", menu,
             h("div", "mc-brand", this.logo(), h("div", null, h("div", "mc-brand-name", "Mission Control"), h("div", "mc-brand-sub", "Terminal d'intelligence d'entreprise"))),
             chip("DÉMO · données synthétiques", "info", "Jeu de données synthétique, devise TND. Ce ne sont pas des données réelles."),
             search, h("div", "mc-header-right", themeBtn, bell, iconBtn("CircleQuestionMark", "Aide et limites", () => this.go("settings")),
@@ -194,7 +196,7 @@ export class App {
                 const on = it.id === this.s.route;
                 const b = h("button", { class: `mc-nav${on ? " mc-nav-on" : ""}`, type: "button", title: it.label, "aria-current": on ? "page" : null }, icon(it.icon, 17), h("span", "mc-nav-label", it.label),
                     it.id === "notifications" ? (() => { const u = c.d.notifications.filter(n => n.read_status === "Non lu").length; return u ? badge(u) : null; })() : null);
-                b.onclick = (): void => this.go(it.id);
+                b.onclick = (): void => { const wasOpen = !!this.s.m.navOpen; this.s.m.navOpen = false; if (it.id === this.s.route) { if (wasOpen) { this.render(); } } else { this.go(it.id); } };
                 nav.appendChild(b);
             });
         });

@@ -75,6 +75,13 @@ The user asked for French everywhere: interface, API messages and the data.
 
 **API:** `APP_LOCALE=fr` (local `.env`, `.env.example` and Railway), `backend/lang/fr/validation.php`. Controller messages and audit actions (`Créé`, `Mis à jour`, `Supprimé`) are French.
 
+## Responsive
+
+- **No scaling any more.** `Dashboard.tsx` lets the stage fill the window and re-renders on width changes. Breakpoints live at the end of `frontend/src/mc/visual.less`: ≤ 1024 px tablet (☰ + drawer sidebar, 2-column grids), ≤ 640 px phone (one column).
+- **Desktop (> 1024 px) must look exactly like Power BI.** Put every mobile rule inside a media query.
+- **New wide content** (tables, boards, charts) must scroll inside its card, never widen the page. `node tools/e2e-mobile.js` fails if any module overflows on phone or tablet, and names the element.
+- **Wait a few seconds after `vite build`** before running the UI tests; the first page load can hit the old build.
+
 ## Deployment (Railway)
 
 - **Live:** https://web-production-7ed674ac.up.railway.app. Project `mission-control`; services `web` (Dockerfile) and `MySQL`.

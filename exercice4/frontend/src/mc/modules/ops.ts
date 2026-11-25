@@ -255,7 +255,7 @@ export function approvals(c: Ctx, el: HTMLElement): void {
 
 // ======================================================================== Calendar (16)
 export function calendar(c: Ctx, el: HTMLElement): void {
-    const view = c.m<string>("calView", () => "month");
+    const view = c.m<string>("calView", () => (window.innerWidth <= 640 ? "agenda" : "month"));
     const date = c.m<string>("calDate", () => c.ix.ref);
     const f = c.m<Record<string, string>>("calF", () => ({ type: "", priority: "", status: "", owner: "", dept: "", location: "" }));
     let from = date, to = date;
@@ -269,7 +269,7 @@ export function calendar(c: Ctx, el: HTMLElement): void {
     const typeColor = (t: string): string => ({ "Réunion": "accent", Maintenance: "warn", "Revue": "info", "Formation": "good", "Appel client": "teal", "Jalon de projet": "violet", "Rappel": "muted", "Échéance de tâche": "bad" } as Record<string, string>)[t] ?? "muted";
     title(el, "Calendrier et gestion des événements", "Horaires locaux de démonstration (sans conversion de fuseau). Les événements récurrents sont développés pour l'affichage (60 max. par événement).", sessionTag(c.persisted), btn("Nouvel événement", { icon: "Plus", kind: "primary", onClick: () => { c.s.m.evForm = { mode: "new" }; c.rerender(); } }));
     const nav = h("div", "mc-cal-nav",
-        tabs(["month", "week", "day", "agenda", "timeline"].map(v => ({ id: v, label: v[0].toUpperCase() + v.slice(1) })), view, v => { c.s.m.calView = v; c.rerender(); }),
+        tabs(([["month", "Mois"], ["week", "Semaine"], ["day", "Jour"], ["agenda", "Agenda"], ["timeline", "Chronologie"]] as Array<[string, string]>).map(([v, l]) => ({ id: v, label: l })), view, v => { c.s.m.calView = v; c.rerender(); }),
         iconBtn("ChevronLeft", "Précédent", () => { c.s.m.calDate = view === "month" ? addMonths(date, -1) : view === "day" ? addDays(date, -1) : addDays(date, view === "agenda" ? -30 : view === "timeline" ? -14 : -7); c.rerender(); }),
         btn("Aujourd'hui", { small: true, onClick: () => { c.s.m.calDate = c.ix.ref; c.rerender(); } }),
         iconBtn("ChevronRight", "Suivant", () => { c.s.m.calDate = view === "month" ? addMonths(date, 1) : view === "day" ? addDays(date, 1) : addDays(date, view === "agenda" ? 30 : view === "timeline" ? 14 : 7); c.rerender(); }),
@@ -281,7 +281,7 @@ export function calendar(c: Ctx, el: HTMLElement): void {
     fb.appendChild(select(c.d.employees.map(e => ({ value: e.employee_id, label: e.employee_name })), f.owner, v => { f.owner = v; c.rerender(); }, "Responsable", "Tous"));
     fb.appendChild(select(c.d.departments.map(d => ({ value: d.department_id, label: d.department_name })), f.dept, v => { f.dept = v; c.rerender(); }, "Équipe / département", "Tous"));
     el.appendChild(fb);
-    el.appendChild(h("div", "mc-legend", ...["Réunion", "Maintenance", "Revue", "Formation", "Appel client", "Jalon de projet", "Rappel", "Échéance de tâche"].map(t => h("span", null, h("i", `mc-dot-legend mc-bg-${typeColor(t)}`), t)), h("span", null, icon("TriangleAlert", 12), "conflict"), h("span", null, icon("RefreshCw", 12), "recurring"), h("span", null, h("i", "mc-dot-legend mc-ring-task"), "échéance de tâche (superposition)"), h("span", null, h("i", "mc-dot-legend mc-ring-ms"), "jalon de projet (superposition)"), h("span", null, h("i", "mc-dot-legend mc-ring-inc"), "incident (superposition)")));
+    el.appendChild(h("div", "mc-legend", ...["Réunion", "Maintenance", "Revue", "Formation", "Appel client", "Jalon de projet", "Rappel", "Échéance de tâche"].map(t => h("span", null, h("i", `mc-dot-legend mc-bg-${typeColor(t)}`), t)), h("span", null, icon("TriangleAlert", 12), "conflit"), h("span", null, icon("RefreshCw", 12), "récurrent"), h("span", null, h("i", "mc-dot-legend mc-ring-task"), "échéance de tâche (superposition)"), h("span", null, h("i", "mc-dot-legend mc-ring-ms"), "jalon de projet (superposition)"), h("span", null, h("i", "mc-dot-legend mc-ring-inc"), "incident (superposition)")));
     const chipEv = (e: CalEvent): HTMLElement => {
         const b = h("button", { class: `mc-ev mc-bg-${typeColor(e.type)}${e.status === "Annulé" ? " mc-ev-cancel" : ""}${conflictIds.has(e.id) ? " mc-ev-conflict" : ""}`, type: "button", draggable: "true", title: `${e.title} · ${fmt.time(e.start)}–${fmt.time(e.end)} · ${c.ix.empName(e.owner)} · ${e.status}` },
             conflictIds.has(e.id) ? icon("TriangleAlert", 10) : null, e.occurrence ? icon("RefreshCw", 10) : null, h("span", null, `${fmt.time(e.start)} ${e.title}`));
