@@ -1,0 +1,8 @@
+source_id,source_name,source_type,connection_location,refresh_frequency_label,source_files,connection_status
+SRC01,Sales Orders CSV,CSV,Local file,Daily,sales_orders.csv,Connected (demo)
+SRC02,Payments CSV,CSV,Local file,Daily,payments.csv,Connected (demo)
+SRC03,Customers CSV,CSV,Local file,Weekly,customers.csv,Connected (demo)
+SRC04,Operations CSVs,CSV,Local files,Daily,tasks.csv;projects.csv;incidents.csv,Connected (demo)
+SRC05,Calendar Events CSV,CSV,Local file,Daily,calendar_events.csv,Connected (demo)
+SRC06,Risk & Alerts CSVs,CSV,Local files,Daily,risk_register.csv;alerts.csv,Connected (demo)
+SRC07,Collaboration Demo Data,CSV,Local files,On refresh,notifications.csv;collaboration_comments.csv,Connected (demo)

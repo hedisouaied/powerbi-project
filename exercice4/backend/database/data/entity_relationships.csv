@@ -1,0 +1,501 @@
+relationship_id,source_entity_type,source_entity_id,relationship_type,target_entity_type,target_entity_id,relationship_strength,relationship_basis
+REL0001,Employee,E063,assigned_to,Department,D05,0.89,Verified by source key
+REL0002,Project,PR022,related_to,Employee,E066,0.64,Synthetic analytical link
+REL0003,Employee,E008,works_with,Incident,INC0129,0.41,Synthetic analytical link
+REL0004,Product,P008,belongs_to,Supplier,S004,0.75,Synthetic analytical link
+REL0005,Order,O01158,works_with,Employee,E079,0.43,Synthetic analytical link
+REL0006,Order,O01667,supplies,Employee,E016,0.86,Synthetic analytical link
+REL0007,Supplier,S013,owns,Customer,C0119,0.43,Verified by source key
+REL0008,Order,O00918,works_with,Product,P016,0.45,Synthetic analytical link
+REL0009,Incident,INC0008,belongs_to,Product,P001,0.88,Synthetic analytical link
+REL0010,Incident,INC0199,impacts,Order,O00026,0.86,Synthetic analytical link
+REL0011,Order,O01380,owns,Incident,INC0131,0.72,Verified by source key
+REL0012,Order,O00385,works_with,Incident,INC0119,0.62,Verified by source key
+REL0013,Customer,C0114,works_with,Order,O01480,0.77,Synthetic analytical link
+REL0014,Project,PR014,related_to,Order,O00457,0.46,Synthetic analytical link
+REL0015,Customer,C0092,impacts,Product,P010,0.32,Synthetic analytical link
+REL0016,Order,O01353,purchased,Project,PR004,0.54,Synthetic analytical link
+REL0017,Project,PR025,belongs_to,Supplier,S025,0.73,Synthetic analytical link
+REL0018,Supplier,S002,owns,Employee,E005,0.43,Verified by source key
+REL0019,Department,D04,related_to,Customer,C0097,0.8,Verified by source key
+REL0020,Supplier,S004,purchased,Customer,C0225,0.9,Synthetic analytical link
+REL0021,Order,O00667,supplies,Customer,C0199,0.57,Verified by source key
+REL0022,Customer,C0216,supplies,Employee,E017,0.54,Synthetic analytical link
+REL0023,Order,O01748,related_to,Employee,E074,0.39,Verified by source key
+REL0024,Supplier,S002,assigned_to,Customer,C0033,0.86,Verified by source key
+REL0025,Incident,INC0033,related_to,Customer,C0219,0.56,Synthetic analytical link
+REL0026,Customer,C0095,owns,Employee,E066,0.97,Synthetic analytical link
+REL0027,Supplier,S002,owns,Department,D05,0.63,Verified by source key
+REL0028,Department,D07,owns,Supplier,S006,0.69,Synthetic analytical link
+REL0029,Product,P029,belongs_to,Order,O00235,0.52,Verified by source key
+REL0030,Order,O00941,assigned_to,Customer,C0231,0.66,Synthetic analytical link
+REL0031,Order,O00710,impacts,Product,P014,0.81,Synthetic analytical link
+REL0032,Customer,C0262,supplies,Department,D05,0.48,Verified by source key
+REL0033,Project,PR020,purchased,Order,O00162,0.73,Synthetic analytical link
+REL0034,Project,PR015,owns,Department,D02,0.98,Synthetic analytical link
+REL0035,Project,PR030,belongs_to,Supplier,S022,0.56,Verified by source key
+REL0036,Project,PR023,impacts,Order,O01783,0.42,Verified by source key
+REL0037,Order,O01047,assigned_to,Supplier,S017,0.93,Synthetic analytical link
+REL0038,Project,PR003,supplies,Employee,E040,0.35,Synthetic analytical link
+REL0039,Project,PR024,impacts,Incident,INC0210,0.97,Verified by source key
+REL0040,Customer,C0286,related_to,Supplier,S024,0.96,Synthetic analytical link
+REL0041,Department,D01,purchased,Project,PR018,0.54,Synthetic analytical link
+REL0042,Incident,INC0061,owns,Customer,C0048,0.64,Verified by source key
+REL0043,Supplier,S011,supplies,Product,P009,0.4,Verified by source key
+REL0044,Supplier,S025,supplies,Incident,INC0103,0.71,Synthetic analytical link
+REL0045,Product,P026,works_with,Incident,INC0144,0.32,Verified by source key
+REL0046,Employee,E014,supplies,Product,P013,0.88,Synthetic analytical link
+REL0047,Product,P002,works_with,Customer,C0063,0.37,Synthetic analytical link
+REL0048,Order,O01435,assigned_to,Project,PR005,0.93,Verified by source key
+REL0049,Order,O01694,assigned_to,Incident,INC0194,0.45,Synthetic analytical link
+REL0050,Order,O01329,impacts,Product,P014,0.55,Verified by source key
+REL0051,Order,O01365,purchased,Project,PR029,0.32,Verified by source key
+REL0052,Product,P037,impacts,Department,D07,0.56,Synthetic analytical link
+REL0053,Supplier,S006,works_with,Order,O00692,0.34,Verified by source key
+REL0054,Employee,E055,owns,Product,P045,0.94,Synthetic analytical link
+REL0055,Incident,INC0072,supplies,Project,PR022,0.86,Verified by source key
+REL0056,Project,PR006,supplies,Customer,C0062,0.97,Synthetic analytical link
+REL0057,Employee,E030,impacts,Customer,C0087,0.61,Synthetic analytical link
+REL0058,Order,O01092,impacts,Supplier,S004,0.73,Synthetic analytical link
+REL0059,Supplier,S001,purchased,Incident,INC0014,0.65,Verified by source key
+REL0060,Department,D06,purchased,Project,PR019,0.97,Synthetic analytical link
+REL0061,Customer,C0042,owns,Incident,INC0155,0.68,Synthetic analytical link
+REL0062,Product,P040,works_with,Employee,E022,0.85,Verified by source key
+REL0063,Supplier,S002,belongs_to,Product,P015,0.52,Synthetic analytical link
+REL0064,Department,D07,purchased,Incident,INC0083,0.81,Verified by source key
+REL0065,Project,PR001,related_to,Employee,E055,0.81,Synthetic analytical link
+REL0066,Project,PR030,supplies,Department,D06,0.59,Synthetic analytical link
+REL0067,Incident,INC0180,related_to,Customer,C0065,0.45,Synthetic analytical link
+REL0068,Employee,E030,related_to,Department,D07,0.4,Synthetic analytical link
+REL0069,Project,PR025,owns,Department,D05,0.86,Synthetic analytical link
+REL0070,Supplier,S020,belongs_to,Order,O00316,0.95,Synthetic analytical link
+REL0071,Incident,INC0163,works_with,Product,P040,0.44,Synthetic analytical link
+REL0072,Project,PR010,purchased,Incident,INC0106,0.68,Synthetic analytical link
+REL0073,Product,P035,assigned_to,Order,O01412,0.74,Synthetic analytical link
+REL0074,Incident,INC0157,owns,Employee,E079,0.38,Verified by source key
+REL0075,Product,P022,related_to,Incident,INC0197,0.91,Synthetic analytical link
+REL0076,Order,O01715,impacts,Customer,C0126,0.44,Verified by source key
+REL0077,Customer,C0280,assigned_to,Department,D02,0.76,Synthetic analytical link
+REL0078,Supplier,S015,impacts,Incident,INC0050,0.67,Verified by source key
+REL0079,Supplier,S010,supplies,Product,P039,0.79,Verified by source key
+REL0080,Order,O01729,belongs_to,Product,P050,0.7,Synthetic analytical link
+REL0081,Product,P022,works_with,Project,PR011,0.41,Verified by source key
+REL0082,Project,PR027,related_to,Department,D04,0.34,Synthetic analytical link
+REL0083,Employee,E035,related_to,Department,D04,0.77,Synthetic analytical link
+REL0084,Product,P003,related_to,Customer,C0041,0.92,Synthetic analytical link
+REL0085,Employee,E063,purchased,Department,D05,0.63,Synthetic analytical link
+REL0086,Employee,E039,owns,Order,O01570,0.92,Verified by source key
+REL0087,Customer,C0037,impacts,Product,P037,0.99,Synthetic analytical link
+REL0088,Product,P001,supplies,Employee,E079,0.68,Synthetic analytical link
+REL0089,Customer,C0067,related_to,Project,PR011,0.52,Verified by source key
+REL0090,Project,PR020,purchased,Department,D06,0.44,Synthetic analytical link
+REL0091,Product,P022,assigned_to,Incident,INC0040,0.7,Synthetic analytical link
+REL0092,Order,O00034,owns,Product,P040,0.93,Verified by source key
+REL0093,Customer,C0199,supplies,Product,P016,0.33,Verified by source key
+REL0094,Project,PR014,assigned_to,Supplier,S013,0.65,Synthetic analytical link
+REL0095,Department,D04,related_to,Employee,E028,0.98,Synthetic analytical link
+REL0096,Employee,E074,impacts,Project,PR021,0.85,Verified by source key
+REL0097,Order,O00287,purchased,Customer,C0170,0.8,Verified by source key
+REL0098,Incident,INC0124,assigned_to,Supplier,S024,0.5,Verified by source key
+REL0099,Product,P010,belongs_to,Supplier,S018,0.33,Synthetic analytical link
+REL0100,Employee,E069,belongs_to,Department,D06,0.83,Verified by source key
+REL0101,Department,D07,works_with,Customer,C0092,0.87,Verified by source key
+REL0102,Incident,INC0147,related_to,Supplier,S005,0.39,Synthetic analytical link
+REL0103,Supplier,S015,works_with,Project,PR006,0.38,Synthetic analytical link
+REL0104,Department,D01,owns,Customer,C0251,0.42,Verified by source key
+REL0105,Department,D07,impacts,Supplier,S010,0.69,Verified by source key
+REL0106,Order,O01316,assigned_to,Incident,INC0096,0.68,Verified by source key
+REL0107,Department,D02,assigned_to,Incident,INC0077,0.56,Synthetic analytical link
+REL0108,Customer,C0162,belongs_to,Order,O00212,0.97,Synthetic analytical link
+REL0109,Department,D06,belongs_to,Customer,C0104,0.81,Synthetic analytical link
+REL0110,Employee,E061,works_with,Supplier,S009,0.66,Verified by source key
+REL0111,Project,PR007,belongs_to,Incident,INC0172,0.43,Verified by source key
+REL0112,Incident,INC0031,impacts,Customer,C0206,0.35,Verified by source key
+REL0113,Product,P008,belongs_to,Employee,E058,0.63,Verified by source key
+REL0114,Department,D06,impacts,Employee,E043,0.92,Synthetic analytical link
+REL0115,Supplier,S007,owns,Project,PR021,0.78,Synthetic analytical link
+REL0116,Employee,E041,impacts,Project,PR020,0.93,Synthetic analytical link
+REL0117,Product,P025,impacts,Employee,E023,0.49,Synthetic analytical link
+REL0118,Product,P048,supplies,Department,D05,0.57,Synthetic analytical link
+REL0119,Order,O00269,belongs_to,Employee,E008,0.63,Verified by source key
+REL0120,Incident,INC0068,supplies,Department,D04,0.46,Synthetic analytical link
+REL0121,Project,PR029,related_to,Customer,C0252,0.73,Synthetic analytical link
+REL0122,Project,PR016,supplies,Customer,C0200,0.4,Verified by source key
+REL0123,Order,O01269,related_to,Product,P038,0.67,Verified by source key
+REL0124,Customer,C0146,impacts,Project,PR025,0.63,Verified by source key
+REL0125,Incident,INC0052,belongs_to,Order,O01032,0.52,Synthetic analytical link
+REL0126,Project,PR022,assigned_to,Supplier,S018,0.34,Synthetic analytical link
+REL0127,Project,PR030,impacts,Incident,INC0079,0.51,Synthetic analytical link
+REL0128,Project,PR024,purchased,Customer,C0285,0.57,Synthetic analytical link
+REL0129,Customer,C0157,related_to,Order,O00511,0.5,Synthetic analytical link
+REL0130,Order,O00231,supplies,Customer,C0012,0.55,Synthetic analytical link
+REL0131,Project,PR005,assigned_to,Supplier,S025,0.53,Synthetic analytical link
+REL0132,Supplier,S018,works_with,Employee,E064,0.57,Synthetic analytical link
+REL0133,Order,O01399,impacts,Employee,E074,0.46,Verified by source key
+REL0134,Project,PR009,purchased,Product,P045,0.36,Synthetic analytical link
+REL0135,Order,O00711,assigned_to,Customer,C0288,0.38,Verified by source key
+REL0136,Customer,C0253,belongs_to,Employee,E009,0.59,Verified by source key
+REL0137,Product,P045,owns,Project,PR002,0.79,Synthetic analytical link
+REL0138,Order,O01556,impacts,Supplier,S001,0.55,Synthetic analytical link
+REL0139,Project,PR001,assigned_to,Incident,INC0029,0.46,Verified by source key
+REL0140,Product,P008,works_with,Project,PR010,0.73,Verified by source key
+REL0141,Incident,INC0036,belongs_to,Employee,E049,0.49,Synthetic analytical link
+REL0142,Incident,INC0204,belongs_to,Customer,C0019,0.56,Verified by source key
+REL0143,Product,P020,works_with,Order,O01259,0.87,Verified by source key
+REL0144,Customer,C0224,works_with,Product,P041,0.6,Verified by source key
+REL0145,Employee,E047,impacts,Customer,C0297,0.52,Synthetic analytical link
+REL0146,Department,D07,supplies,Employee,E011,0.5,Synthetic analytical link
+REL0147,Incident,INC0104,belongs_to,Employee,E057,0.71,Synthetic analytical link
+REL0148,Order,O01448,assigned_to,Product,P015,0.99,Synthetic analytical link
+REL0149,Customer,C0043,works_with,Product,P032,0.69,Synthetic analytical link
+REL0150,Order,O00920,impacts,Project,PR001,0.86,Synthetic analytical link
+REL0151,Department,D05,related_to,Incident,INC0092,0.31,Synthetic analytical link
+REL0152,Project,PR023,belongs_to,Department,D03,0.98,Verified by source key
+REL0153,Supplier,S012,belongs_to,Product,P034,0.64,Verified by source key
+REL0154,Project,PR009,assigned_to,Supplier,S019,0.88,Verified by source key
+REL0155,Department,D01,related_to,Order,O00283,0.98,Verified by source key
+REL0156,Supplier,S003,belongs_to,Department,D07,0.7,Verified by source key
+REL0157,Product,P001,impacts,Customer,C0038,0.89,Verified by source key
+REL0158,Project,PR007,impacts,Customer,C0241,0.35,Verified by source key
+REL0159,Product,P002,assigned_to,Project,PR028,0.89,Verified by source key
+REL0160,Customer,C0143,assigned_to,Product,P014,0.4,Verified by source key
+REL0161,Customer,C0082,belongs_to,Incident,INC0145,0.33,Verified by source key
+REL0162,Supplier,S004,works_with,Incident,INC0042,0.52,Synthetic analytical link
+REL0163,Supplier,S016,owns,Order,O01505,0.63,Synthetic analytical link
+REL0164,Customer,C0073,belongs_to,Supplier,S005,0.74,Synthetic analytical link
+REL0165,Incident,INC0207,belongs_to,Department,D06,0.43,Synthetic analytical link
+REL0166,Project,PR029,owns,Incident,INC0028,0.72,Verified by source key
+REL0167,Incident,INC0162,related_to,Supplier,S007,0.32,Verified by source key
+REL0168,Employee,E065,supplies,Project,PR011,0.97,Synthetic analytical link
+REL0169,Product,P037,belongs_to,Project,PR007,0.93,Verified by source key
+REL0170,Incident,INC0182,owns,Product,P035,0.58,Verified by source key
+REL0171,Department,D06,purchased,Customer,C0147,0.54,Synthetic analytical link
+REL0172,Supplier,S005,belongs_to,Product,P036,0.64,Synthetic analytical link
+REL0173,Incident,INC0015,belongs_to,Order,O01454,0.96,Verified by source key
+REL0174,Customer,C0185,supplies,Order,O00127,0.76,Synthetic analytical link
+REL0175,Incident,INC0217,works_with,Supplier,S007,0.84,Synthetic analytical link
+REL0176,Project,PR025,impacts,Supplier,S024,0.76,Synthetic analytical link
+REL0177,Project,PR030,impacts,Incident,INC0021,0.99,Verified by source key
+REL0178,Product,P013,owns,Incident,INC0192,0.37,Synthetic analytical link
+REL0179,Order,O00804,related_to,Employee,E050,0.91,Synthetic analytical link
+REL0180,Customer,C0133,owns,Department,D01,0.53,Synthetic analytical link
+REL0181,Employee,E002,impacts,Order,O00844,0.35,Verified by source key
+REL0182,Employee,E025,owns,Department,D08,0.5,Synthetic analytical link
+REL0183,Customer,C0157,assigned_to,Order,O00713,0.36,Verified by source key
+REL0184,Department,D02,assigned_to,Employee,E040,0.84,Verified by source key
+REL0185,Supplier,S021,belongs_to,Department,D06,0.76,Verified by source key
+REL0186,Department,D04,impacts,Customer,C0211,0.64,Verified by source key
+REL0187,Department,D05,assigned_to,Employee,E043,0.87,Verified by source key
+REL0188,Department,D01,owns,Project,PR008,0.53,Verified by source key
+REL0189,Incident,INC0016,owns,Department,D06,0.65,Synthetic analytical link
+REL0190,Project,PR027,works_with,Employee,E027,0.69,Verified by source key
+REL0191,Supplier,S010,belongs_to,Incident,INC0163,0.63,Verified by source key
+REL0192,Customer,C0269,supplies,Department,D01,0.42,Verified by source key
+REL0193,Supplier,S014,belongs_to,Product,P005,0.8,Synthetic analytical link
+REL0194,Customer,C0101,belongs_to,Employee,E050,0.46,Verified by source key
+REL0195,Supplier,S009,works_with,Customer,C0157,0.36,Synthetic analytical link
+REL0196,Project,PR013,related_to,Customer,C0105,0.48,Verified by source key
+REL0197,Product,P050,belongs_to,Customer,C0287,0.57,Synthetic analytical link
+REL0198,Supplier,S019,supplies,Project,PR014,0.79,Verified by source key
+REL0199,Product,P012,belongs_to,Employee,E065,0.68,Verified by source key
+REL0200,Employee,E071,owns,Customer,C0207,0.94,Verified by source key
+REL0201,Order,O00313,impacts,Product,P031,0.67,Synthetic analytical link
+REL0202,Incident,INC0071,purchased,Order,O00955,0.51,Verified by source key
+REL0203,Incident,INC0210,impacts,Department,D05,0.91,Synthetic analytical link
+REL0204,Incident,INC0135,purchased,Project,PR006,0.32,Synthetic analytical link
+REL0205,Product,P014,owns,Order,O01364,0.43,Verified by source key
+REL0206,Incident,INC0067,assigned_to,Department,D02,0.83,Synthetic analytical link
+REL0207,Employee,E056,purchased,Supplier,S008,0.51,Verified by source key
+REL0208,Incident,INC0147,supplies,Order,O00146,0.96,Verified by source key
+REL0209,Supplier,S008,assigned_to,Department,D02,0.36,Verified by source key
+REL0210,Project,PR022,owns,Incident,INC0026,0.36,Verified by source key
+REL0211,Product,P012,purchased,Order,O01618,0.52,Verified by source key
+REL0212,Project,PR010,assigned_to,Supplier,S024,0.78,Verified by source key
+REL0213,Project,PR004,impacts,Order,O00012,0.89,Synthetic analytical link
+REL0214,Product,P036,belongs_to,Order,O01190,0.48,Synthetic analytical link
+REL0215,Supplier,S003,purchased,Employee,E051,0.55,Verified by source key
+REL0216,Supplier,S005,purchased,Product,P009,0.81,Synthetic analytical link
+REL0217,Employee,E027,related_to,Incident,INC0131,0.73,Synthetic analytical link
+REL0218,Employee,E050,works_with,Product,P028,0.68,Verified by source key
+REL0219,Order,O00255,assigned_to,Customer,C0229,0.76,Verified by source key
+REL0220,Employee,E049,belongs_to,Project,PR006,0.68,Verified by source key
+REL0221,Project,PR006,supplies,Employee,E073,0.37,Verified by source key
+REL0222,Incident,INC0161,assigned_to,Customer,C0157,0.38,Synthetic analytical link
+REL0223,Supplier,S025,supplies,Project,PR007,0.6,Verified by source key
+REL0224,Project,PR012,purchased,Product,P006,0.31,Verified by source key
+REL0225,Department,D02,purchased,Incident,INC0040,0.54,Verified by source key
+REL0226,Department,D02,owns,Customer,C0037,0.63,Verified by source key
+REL0227,Order,O00216,related_to,Customer,C0279,0.98,Verified by source key
+REL0228,Incident,INC0035,assigned_to,Customer,C0203,0.7,Synthetic analytical link
+REL0229,Incident,INC0184,related_to,Supplier,S014,0.41,Verified by source key
+REL0230,Customer,C0128,belongs_to,Project,PR005,0.64,Verified by source key
+REL0231,Order,O00328,supplies,Customer,C0167,0.64,Verified by source key
+REL0232,Project,PR003,owns,Order,O00723,0.79,Synthetic analytical link
+REL0233,Supplier,S015,purchased,Customer,C0032,0.79,Verified by source key
+REL0234,Employee,E036,related_to,Supplier,S006,0.52,Synthetic analytical link
+REL0235,Department,D06,impacts,Supplier,S012,0.87,Synthetic analytical link
+REL0236,Order,O00191,purchased,Employee,E056,0.64,Synthetic analytical link
+REL0237,Department,D05,related_to,Order,O00562,0.33,Verified by source key
+REL0238,Product,P029,related_to,Order,O01351,0.62,Synthetic analytical link
+REL0239,Department,D08,purchased,Incident,INC0105,0.41,Verified by source key
+REL0240,Project,PR025,works_with,Order,O00853,0.74,Verified by source key
+REL0241,Department,D07,impacts,Incident,INC0017,0.79,Verified by source key
+REL0242,Incident,INC0001,impacts,Employee,E049,0.74,Synthetic analytical link
+REL0243,Product,P029,impacts,Customer,C0143,0.53,Synthetic analytical link
+REL0244,Order,O00112,related_to,Product,P038,0.46,Synthetic analytical link
+REL0245,Incident,INC0191,purchased,Employee,E005,0.36,Synthetic analytical link
+REL0246,Incident,INC0162,works_with,Customer,C0209,0.53,Verified by source key
+REL0247,Project,PR002,works_with,Product,P003,0.67,Verified by source key
+REL0248,Employee,E079,belongs_to,Project,PR012,0.35,Synthetic analytical link
+REL0249,Supplier,S013,belongs_to,Product,P036,0.86,Verified by source key
+REL0250,Project,PR020,impacts,Employee,E036,0.57,Synthetic analytical link
+REL0251,Incident,INC0016,supplies,Order,O00335,0.35,Synthetic analytical link
+REL0252,Order,O00897,supplies,Product,P038,0.5,Verified by source key
+REL0253,Supplier,S013,works_with,Department,D08,0.42,Synthetic analytical link
+REL0254,Customer,C0239,related_to,Employee,E022,0.48,Synthetic analytical link
+REL0255,Department,D03,assigned_to,Order,O00162,0.54,Synthetic analytical link
+REL0256,Order,O01293,belongs_to,Supplier,S015,0.47,Synthetic analytical link
+REL0257,Order,O00646,belongs_to,Customer,C0046,0.34,Verified by source key
+REL0258,Employee,E049,works_with,Customer,C0211,0.89,Verified by source key
+REL0259,Project,PR001,impacts,Order,O01758,0.78,Verified by source key
+REL0260,Project,PR024,related_to,Department,D06,0.71,Synthetic analytical link
+REL0261,Product,P030,assigned_to,Order,O00663,0.81,Verified by source key
+REL0262,Order,O00470,belongs_to,Customer,C0026,0.73,Verified by source key
+REL0263,Incident,INC0216,assigned_to,Supplier,S013,0.68,Verified by source key
+REL0264,Order,O01326,belongs_to,Employee,E076,0.45,Synthetic analytical link
+REL0265,Incident,INC0208,owns,Product,P023,0.69,Verified by source key
+REL0266,Project,PR029,belongs_to,Incident,INC0149,0.64,Verified by source key
+REL0267,Employee,E031,related_to,Project,PR021,0.85,Verified by source key
+REL0268,Incident,INC0125,belongs_to,Supplier,S022,0.86,Synthetic analytical link
+REL0269,Incident,INC0187,impacts,Employee,E074,0.77,Verified by source key
+REL0270,Incident,INC0218,related_to,Employee,E063,0.64,Synthetic analytical link
+REL0271,Project,PR027,assigned_to,Incident,INC0122,0.36,Verified by source key
+REL0272,Project,PR006,assigned_to,Incident,INC0138,0.92,Verified by source key
+REL0273,Incident,INC0012,owns,Supplier,S020,0.65,Synthetic analytical link
+REL0274,Project,PR027,related_to,Order,O01031,0.97,Synthetic analytical link
+REL0275,Customer,C0120,supplies,Order,O00286,0.36,Synthetic analytical link
+REL0276,Supplier,S012,impacts,Customer,C0285,0.34,Synthetic analytical link
+REL0277,Incident,INC0191,related_to,Project,PR011,0.72,Verified by source key
+REL0278,Incident,INC0095,impacts,Project,PR010,0.32,Verified by source key
+REL0279,Product,P005,impacts,Incident,INC0106,0.96,Synthetic analytical link
+REL0280,Employee,E079,purchased,Incident,INC0175,0.31,Synthetic analytical link
+REL0281,Supplier,S017,owns,Employee,E040,0.84,Synthetic analytical link
+REL0282,Customer,C0180,works_with,Department,D05,0.82,Synthetic analytical link
+REL0283,Order,O01459,belongs_to,Department,D03,0.73,Synthetic analytical link
+REL0284,Department,D05,owns,Employee,E047,0.71,Synthetic analytical link
+REL0285,Customer,C0268,works_with,Incident,INC0075,0.78,Synthetic analytical link
+REL0286,Product,P008,supplies,Supplier,S012,0.91,Verified by source key
+REL0287,Incident,INC0141,belongs_to,Order,O01303,0.91,Synthetic analytical link
+REL0288,Supplier,S015,belongs_to,Department,D05,0.6,Synthetic analytical link
+REL0289,Supplier,S016,related_to,Incident,INC0182,0.35,Verified by source key
+REL0290,Incident,INC0114,works_with,Project,PR028,0.82,Synthetic analytical link
+REL0291,Department,D06,assigned_to,Order,O01258,0.5,Synthetic analytical link
+REL0292,Project,PR018,supplies,Incident,INC0210,0.64,Verified by source key
+REL0293,Project,PR016,assigned_to,Customer,C0179,0.49,Verified by source key
+REL0294,Incident,INC0088,owns,Supplier,S025,0.4,Synthetic analytical link
+REL0295,Product,P016,owns,Incident,INC0134,0.41,Verified by source key
+REL0296,Customer,C0204,works_with,Employee,E049,0.76,Verified by source key
+REL0297,Product,P018,purchased,Customer,C0202,0.67,Verified by source key
+REL0298,Department,D03,owns,Supplier,S010,0.44,Verified by source key
+REL0299,Customer,C0118,impacts,Order,O01046,0.82,Synthetic analytical link
+REL0300,Product,P035,purchased,Incident,INC0169,0.86,Verified by source key
+REL0301,Order,O01192,supplies,Product,P047,0.77,Verified by source key
+REL0302,Project,PR027,assigned_to,Product,P006,0.7,Verified by source key
+REL0303,Order,O00895,assigned_to,Customer,C0219,0.92,Synthetic analytical link
+REL0304,Employee,E047,purchased,Department,D04,0.5,Synthetic analytical link
+REL0305,Employee,E013,supplies,Incident,INC0097,0.78,Synthetic analytical link
+REL0306,Employee,E041,related_to,Department,D06,0.71,Verified by source key
+REL0307,Order,O01095,assigned_to,Incident,INC0171,0.71,Synthetic analytical link
+REL0308,Project,PR026,supplies,Incident,INC0084,0.54,Verified by source key
+REL0309,Product,P016,related_to,Project,PR005,0.49,Synthetic analytical link
+REL0310,Order,O01535,owns,Incident,INC0173,0.34,Verified by source key
+REL0311,Employee,E067,works_with,Department,D05,0.6,Synthetic analytical link
+REL0312,Customer,C0192,purchased,Employee,E001,0.81,Verified by source key
+REL0313,Order,O01175,supplies,Project,PR028,0.7,Synthetic analytical link
+REL0314,Supplier,S018,owns,Order,O00615,0.96,Verified by source key
+REL0315,Incident,INC0049,purchased,Department,D06,0.38,Verified by source key
+REL0316,Department,D02,impacts,Project,PR021,0.64,Verified by source key
+REL0317,Incident,INC0006,works_with,Project,PR015,0.36,Synthetic analytical link
+REL0318,Customer,C0118,impacts,Employee,E026,0.94,Synthetic analytical link
+REL0319,Project,PR026,related_to,Employee,E044,0.49,Verified by source key
+REL0320,Department,D06,belongs_to,Order,O00178,0.54,Verified by source key
+REL0321,Department,D03,assigned_to,Incident,INC0012,0.83,Synthetic analytical link
+REL0322,Order,O01584,works_with,Incident,INC0046,0.9,Synthetic analytical link
+REL0323,Project,PR009,works_with,Customer,C0254,0.97,Synthetic analytical link
+REL0324,Employee,E052,belongs_to,Customer,C0299,0.61,Verified by source key
+REL0325,Order,O00437,belongs_to,Employee,E010,0.46,Synthetic analytical link
+REL0326,Product,P033,impacts,Customer,C0073,0.94,Verified by source key
+REL0327,Incident,INC0035,owns,Order,O00325,0.71,Verified by source key
+REL0328,Department,D07,belongs_to,Employee,E013,0.92,Synthetic analytical link
+REL0329,Supplier,S008,assigned_to,Employee,E072,0.43,Verified by source key
+REL0330,Project,PR007,related_to,Incident,INC0168,0.87,Synthetic analytical link
+REL0331,Order,O01417,works_with,Employee,E040,0.88,Synthetic analytical link
+REL0332,Project,PR005,related_to,Supplier,S018,0.97,Synthetic analytical link
+REL0333,Product,P002,works_with,Order,O00167,0.55,Verified by source key
+REL0334,Incident,INC0156,owns,Supplier,S006,0.58,Verified by source key
+REL0335,Department,D06,owns,Customer,C0157,0.77,Synthetic analytical link
+REL0336,Customer,C0080,works_with,Project,PR012,0.5,Synthetic analytical link
+REL0337,Incident,INC0083,belongs_to,Employee,E063,0.81,Synthetic analytical link
+REL0338,Product,P025,assigned_to,Order,O01599,0.95,Synthetic analytical link
+REL0339,Employee,E004,belongs_to,Incident,INC0092,0.67,Verified by source key
+REL0340,Order,O00565,purchased,Supplier,S005,0.7,Synthetic analytical link
+REL0341,Customer,C0098,assigned_to,Project,PR029,0.47,Verified by source key
+REL0342,Department,D03,assigned_to,Employee,E050,0.45,Verified by source key
+REL0343,Customer,C0022,supplies,Product,P037,0.46,Synthetic analytical link
+REL0344,Order,O01146,belongs_to,Department,D03,0.51,Verified by source key
+REL0345,Project,PR014,related_to,Product,P006,0.84,Verified by source key
+REL0346,Customer,C0062,related_to,Incident,INC0136,0.84,Synthetic analytical link
+REL0347,Order,O00465,impacts,Project,PR015,0.46,Synthetic analytical link
+REL0348,Employee,E046,purchased,Supplier,S018,0.57,Verified by source key
+REL0349,Incident,INC0117,supplies,Project,PR005,0.97,Verified by source key
+REL0350,Project,PR026,owns,Employee,E033,0.58,Synthetic analytical link
+REL0351,Department,D04,impacts,Product,P015,0.58,Synthetic analytical link
+REL0352,Order,O00386,works_with,Employee,E010,0.89,Verified by source key
+REL0353,Department,D02,impacts,Employee,E064,0.84,Verified by source key
+REL0354,Incident,INC0167,owns,Supplier,S020,0.61,Synthetic analytical link
+REL0355,Department,D03,impacts,Supplier,S015,0.86,Synthetic analytical link
+REL0356,Employee,E021,assigned_to,Product,P012,0.54,Synthetic analytical link
+REL0357,Project,PR011,purchased,Incident,INC0105,0.33,Synthetic analytical link
+REL0358,Project,PR019,supplies,Customer,C0069,0.5,Verified by source key
+REL0359,Product,P049,owns,Project,PR006,0.92,Verified by source key
+REL0360,Department,D02,related_to,Project,PR005,0.36,Synthetic analytical link
+REL0361,Incident,INC0200,works_with,Customer,C0140,0.85,Synthetic analytical link
+REL0362,Product,P030,works_with,Project,PR004,0.64,Verified by source key
+REL0363,Product,P030,works_with,Customer,C0290,0.47,Synthetic analytical link
+REL0364,Project,PR016,works_with,Employee,E051,0.51,Verified by source key
+REL0365,Product,P006,impacts,Employee,E062,0.93,Verified by source key
+REL0366,Customer,C0073,supplies,Supplier,S007,0.87,Verified by source key
+REL0367,Customer,C0020,belongs_to,Supplier,S008,0.73,Synthetic analytical link
+REL0368,Supplier,S015,impacts,Employee,E022,0.83,Verified by source key
+REL0369,Project,PR004,belongs_to,Employee,E048,0.88,Verified by source key
+REL0370,Supplier,S020,assigned_to,Customer,C0084,0.56,Verified by source key
+REL0371,Supplier,S024,works_with,Product,P018,0.55,Synthetic analytical link
+REL0372,Department,D08,supplies,Customer,C0195,0.45,Verified by source key
+REL0373,Incident,INC0128,belongs_to,Product,P029,0.32,Verified by source key
+REL0374,Incident,INC0052,works_with,Order,O01769,0.68,Verified by source key
+REL0375,Supplier,S004,related_to,Incident,INC0093,0.32,Synthetic analytical link
+REL0376,Employee,E036,assigned_to,Order,O01147,0.74,Verified by source key
+REL0377,Department,D04,works_with,Supplier,S021,0.7,Verified by source key
+REL0378,Department,D03,owns,Incident,INC0180,0.89,Verified by source key
+REL0379,Product,P007,assigned_to,Supplier,S014,0.52,Synthetic analytical link
+REL0380,Product,P007,related_to,Incident,INC0162,0.85,Verified by source key
+REL0381,Incident,INC0171,purchased,Customer,C0272,0.65,Synthetic analytical link
+REL0382,Order,O00928,owns,Product,P046,0.44,Verified by source key
+REL0383,Employee,E013,belongs_to,Incident,INC0176,0.75,Synthetic analytical link
+REL0384,Customer,C0066,impacts,Supplier,S010,0.71,Synthetic analytical link
+REL0385,Project,PR010,belongs_to,Department,D04,0.99,Synthetic analytical link
+REL0386,Project,PR025,impacts,Product,P033,0.83,Verified by source key
+REL0387,Incident,INC0048,related_to,Supplier,S016,0.8,Synthetic analytical link
+REL0388,Order,O01391,works_with,Product,P042,0.53,Verified by source key
+REL0389,Incident,INC0051,owns,Employee,E068,0.94,Verified by source key
+REL0390,Supplier,S009,purchased,Incident,INC0104,0.32,Synthetic analytical link
+REL0391,Supplier,S024,owns,Project,PR027,0.59,Verified by source key
+REL0392,Product,P032,owns,Project,PR009,0.92,Synthetic analytical link
+REL0393,Product,P039,assigned_to,Department,D02,0.35,Verified by source key
+REL0394,Order,O00625,works_with,Product,P006,0.64,Synthetic analytical link
+REL0395,Employee,E041,supplies,Project,PR004,0.83,Verified by source key
+REL0396,Product,P050,assigned_to,Department,D01,0.33,Synthetic analytical link
+REL0397,Incident,INC0146,purchased,Project,PR025,0.53,Verified by source key
+REL0398,Employee,E009,works_with,Order,O01410,0.76,Verified by source key
+REL0399,Product,P009,assigned_to,Order,O00735,0.53,Verified by source key
+REL0400,Project,PR012,purchased,Product,P035,0.8,Synthetic analytical link
+REL0401,Incident,INC0088,owns,Employee,E019,0.55,Verified by source key
+REL0402,Department,D03,belongs_to,Incident,INC0082,0.77,Verified by source key
+REL0403,Employee,E040,purchased,Incident,INC0044,0.65,Verified by source key
+REL0404,Supplier,S012,works_with,Customer,C0300,0.38,Verified by source key
+REL0405,Department,D01,belongs_to,Incident,INC0206,0.69,Verified by source key
+REL0406,Project,PR005,supplies,Product,P018,0.67,Verified by source key
+REL0407,Customer,C0111,belongs_to,Project,PR023,0.57,Synthetic analytical link
+REL0408,Order,O01734,assigned_to,Department,D02,0.89,Synthetic analytical link
+REL0409,Employee,E028,owns,Customer,C0011,0.72,Verified by source key
+REL0410,Project,PR019,purchased,Supplier,S018,0.77,Synthetic analytical link
+REL0411,Department,D03,related_to,Employee,E067,0.4,Verified by source key
+REL0412,Employee,E011,belongs_to,Supplier,S012,0.57,Verified by source key
+REL0413,Order,O01349,impacts,Customer,C0087,0.51,Verified by source key
+REL0414,Order,O01767,assigned_to,Customer,C0278,0.81,Verified by source key
+REL0415,Product,P017,related_to,Employee,E025,0.38,Synthetic analytical link
+REL0416,Project,PR024,owns,Supplier,S024,0.52,Verified by source key
+REL0417,Product,P035,purchased,Order,O01231,0.58,Synthetic analytical link
+REL0418,Order,O00928,impacts,Incident,INC0180,0.59,Verified by source key
+REL0419,Product,P033,impacts,Order,O00754,0.8,Verified by source key
+REL0420,Product,P005,belongs_to,Project,PR002,0.47,Synthetic analytical link
+REL0421,Product,P003,supplies,Project,PR018,0.54,Synthetic analytical link
+REL0422,Department,D05,owns,Product,P040,0.38,Synthetic analytical link
+REL0423,Incident,INC0065,purchased,Supplier,S001,0.82,Synthetic analytical link
+REL0424,Department,D03,purchased,Supplier,S012,0.48,Synthetic analytical link
+REL0425,Project,PR021,supplies,Product,P044,0.53,Verified by source key
+REL0426,Project,PR011,purchased,Supplier,S024,0.51,Synthetic analytical link
+REL0427,Customer,C0248,assigned_to,Order,O00476,0.63,Synthetic analytical link
+REL0428,Incident,INC0053,supplies,Employee,E027,0.86,Synthetic analytical link
+REL0429,Project,PR026,impacts,Order,O00461,0.75,Verified by source key
+REL0430,Project,PR027,related_to,Supplier,S002,0.64,Synthetic analytical link
+REL0431,Project,PR003,belongs_to,Order,O00398,0.92,Synthetic analytical link
+REL0432,Customer,C0194,belongs_to,Supplier,S025,0.74,Synthetic analytical link
+REL0433,Order,O00172,impacts,Incident,INC0022,0.98,Synthetic analytical link
+REL0434,Employee,E073,purchased,Supplier,S012,0.75,Synthetic analytical link
+REL0435,Employee,E032,purchased,Product,P030,0.34,Synthetic analytical link
+REL0436,Project,PR018,owns,Department,D02,0.8,Verified by source key
+REL0437,Department,D01,supplies,Supplier,S010,0.61,Verified by source key
+REL0438,Incident,INC0139,assigned_to,Employee,E071,0.87,Synthetic analytical link
+REL0439,Department,D04,assigned_to,Product,P047,0.9,Synthetic analytical link
+REL0440,Product,P035,related_to,Employee,E001,0.67,Synthetic analytical link
+REL0441,Project,PR019,works_with,Product,P024,0.76,Verified by source key
+REL0442,Project,PR001,assigned_to,Employee,E045,0.74,Verified by source key
+REL0443,Customer,C0246,works_with,Incident,INC0051,0.55,Verified by source key
+REL0444,Order,O00511,related_to,Product,P014,0.95,Verified by source key
+REL0445,Supplier,S022,belongs_to,Department,D04,0.33,Synthetic analytical link
+REL0446,Department,D04,related_to,Project,PR023,0.34,Verified by source key
+REL0447,Department,D02,belongs_to,Incident,INC0094,0.71,Verified by source key
+REL0448,Incident,INC0010,owns,Supplier,S006,0.62,Synthetic analytical link
+REL0449,Employee,E037,works_with,Department,D01,0.53,Verified by source key
+REL0450,Incident,INC0139,belongs_to,Project,PR011,0.9,Verified by source key
+REL0451,Supplier,S005,supplies,Employee,E058,0.78,Verified by source key
+REL0452,Supplier,S003,owns,Incident,INC0216,0.93,Synthetic analytical link
+REL0453,Project,PR021,purchased,Product,P024,0.94,Verified by source key
+REL0454,Supplier,S011,supplies,Customer,C0025,0.83,Synthetic analytical link
+REL0455,Product,P034,works_with,Employee,E006,0.44,Synthetic analytical link
+REL0456,Employee,E039,works_with,Product,P006,0.65,Verified by source key
+REL0457,Supplier,S001,supplies,Order,O00616,0.76,Synthetic analytical link
+REL0458,Order,O00958,purchased,Incident,INC0204,0.84,Synthetic analytical link
+REL0459,Incident,INC0094,supplies,Customer,C0252,0.62,Verified by source key
+REL0460,Employee,E022,owns,Product,P040,0.38,Synthetic analytical link
+REL0461,Department,D01,purchased,Supplier,S003,0.38,Synthetic analytical link
+REL0462,Project,PR008,owns,Department,D06,0.63,Synthetic analytical link
+REL0463,Order,O01667,owns,Supplier,S008,0.91,Verified by source key
+REL0464,Customer,C0179,impacts,Incident,INC0135,0.92,Synthetic analytical link
+REL0465,Customer,C0171,related_to,Project,PR010,0.66,Verified by source key
+REL0466,Customer,C0269,assigned_to,Order,O01391,0.71,Synthetic analytical link
+REL0467,Supplier,S009,owns,Product,P039,0.9,Synthetic analytical link
+REL0468,Customer,C0111,owns,Order,O01726,0.69,Verified by source key
+REL0469,Incident,INC0160,purchased,Employee,E002,0.7,Synthetic analytical link
+REL0470,Product,P045,impacts,Project,PR025,0.36,Synthetic analytical link
+REL0471,Incident,INC0157,impacts,Product,P009,0.66,Synthetic analytical link
+REL0472,Product,P046,assigned_to,Order,O01796,0.88,Synthetic analytical link
+REL0473,Department,D02,related_to,Customer,C0275,0.65,Synthetic analytical link
+REL0474,Product,P016,belongs_to,Order,O00730,0.46,Verified by source key
+REL0475,Incident,INC0211,works_with,Department,D08,0.36,Synthetic analytical link
+REL0476,Employee,E001,related_to,Project,PR029,0.89,Verified by source key
+REL0477,Customer,C0114,works_with,Project,PR004,0.45,Synthetic analytical link
+REL0478,Supplier,S008,assigned_to,Customer,C0193,0.93,Verified by source key
+REL0479,Incident,INC0177,owns,Customer,C0199,0.36,Synthetic analytical link
+REL0480,Incident,INC0205,owns,Product,P013,0.55,Synthetic analytical link
+REL0481,Product,P021,related_to,Project,PR019,0.92,Synthetic analytical link
+REL0482,Employee,E011,purchased,Department,D01,0.75,Synthetic analytical link
+REL0483,Department,D07,supplies,Project,PR020,0.33,Synthetic analytical link
+REL0484,Order,O00215,impacts,Supplier,S012,0.42,Verified by source key
+REL0485,Order,O00633,impacts,Incident,INC0201,0.79,Verified by source key
+REL0486,Customer,C0239,purchased,Product,P014,0.88,Synthetic analytical link
+REL0487,Project,PR012,related_to,Customer,C0216,0.7,Synthetic analytical link
+REL0488,Customer,C0164,supplies,Employee,E032,0.4,Verified by source key
+REL0489,Supplier,S022,works_with,Incident,INC0031,0.35,Verified by source key
+REL0490,Product,P029,impacts,Supplier,S004,0.99,Verified by source key
+REL0491,Customer,C0122,related_to,Project,PR019,0.86,Synthetic analytical link
+REL0492,Order,O00732,purchased,Customer,C0214,0.88,Verified by source key
+REL0493,Order,O01513,supplies,Supplier,S005,0.77,Verified by source key
+REL0494,Product,P041,owns,Order,O00409,0.5,Synthetic analytical link
+REL0495,Employee,E053,owns,Product,P045,0.37,Verified by source key
+REL0496,Customer,C0167,works_with,Department,D01,0.85,Synthetic analytical link
+REL0497,Incident,INC0018,purchased,Supplier,S012,0.68,Verified by source key
+REL0498,Product,P036,related_to,Employee,E034,0.33,Synthetic analytical link
+REL0499,Order,O01623,owns,Department,D06,0.85,Verified by source key
+REL0500,Employee,E036,purchased,Department,D07,0.66,Synthetic analytical link

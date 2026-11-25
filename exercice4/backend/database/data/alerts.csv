@@ -1,0 +1,301 @@
+alert_id,alert_date,alert_type,severity,alert_status,affected_area,alert_description,confidence_score
+AL0001,2026-05-01,Unusual Payment,High,In Progress,Finance,Signal detected in monitored metric 001,0.85
+AL0002,2026-07-05,Project Delay,High,Acknowledged,Customer Success,Signal detected in monitored metric 002,0.84
+AL0003,2025-12-14,Inventory Below Threshold,Info,New,Finance,Signal detected in monitored metric 003,0.77
+AL0004,2026-05-20,Project Delay,Info,New,Customer Success,Signal detected in monitored metric 004,0.73
+AL0005,2025-01-10,Project Delay,Warning,Acknowledged,Supply Chain,Signal detected in monitored metric 005,0.59
+AL0006,2025-07-31,Inventory Below Threshold,Info,New,Customer Success,Signal detected in monitored metric 006,0.8
+AL0007,2025-08-09,Customer Churn Risk,High,In Progress,Supply Chain,Signal detected in monitored metric 007,0.6
+AL0008,2025-11-23,Inventory Below Threshold,Warning,Acknowledged,Sales,Signal detected in monitored metric 008,0.67
+AL0009,2026-01-09,Margin Erosion,Warning,Closed,Customer Success,Signal detected in monitored metric 009,0.66
+AL0010,2026-06-28,Project Delay,High,In Progress,Operations,Signal detected in monitored metric 010,0.74
+AL0011,2025-12-14,Inventory Below Threshold,Info,Closed,Sales,Signal detected in monitored metric 011,0.62
+AL0012,2025-04-22,Inventory Below Threshold,Critical,New,Finance,Signal detected in monitored metric 012,0.88
+AL0013,2025-10-08,Customer Churn Risk,High,Acknowledged,Operations,Signal detected in monitored metric 013,0.68
+AL0014,2025-02-16,Revenue Drop,Info,Acknowledged,Supply Chain,Signal detected in monitored metric 014,0.98
+AL0015,2026-01-16,Data Quality Failure,Critical,Closed,Supply Chain,Signal detected in monitored metric 015,0.82
+AL0016,2025-11-25,Customer Churn Risk,Info,Acknowledged,Technology,Signal detected in monitored metric 016,0.83
+AL0017,2025-03-10,Data Quality Failure,Critical,Closed,Technology,Signal detected in monitored metric 017,0.71
+AL0018,2025-05-16,Customer Churn Risk,High,Acknowledged,Finance,Signal detected in monitored metric 018,0.73
+AL0019,2026-02-16,Revenue Drop,Warning,Acknowledged,Customer Success,Signal detected in monitored metric 019,0.65
+AL0020,2025-06-09,Project Delay,Info,Closed,Customer Success,Signal detected in monitored metric 020,0.82
+AL0021,2026-07-14,Project Delay,High,In Progress,Finance,Signal detected in monitored metric 021,0.61
+AL0022,2025-03-16,Unusual Payment,High,New,Finance,Signal detected in monitored metric 022,0.8
+AL0023,2025-04-21,Margin Erosion,Info,Acknowledged,Operations,Signal detected in monitored metric 023,0.82
+AL0024,2025-11-07,Revenue Drop,Warning,In Progress,Finance,Signal detected in monitored metric 024,0.56
+AL0025,2025-03-03,Unusual Payment,Info,Acknowledged,Finance,Signal detected in monitored metric 025,0.92
+AL0026,2026-05-03,Customer Churn Risk,Info,New,Supply Chain,Signal detected in monitored metric 026,0.78
+AL0027,2026-07-13,Unusual Payment,High,In Progress,Sales,Signal detected in monitored metric 027,0.73
+AL0028,2026-08-05,Project Delay,High,Acknowledged,Technology,Signal detected in monitored metric 028,0.58
+AL0029,2025-05-02,Customer Churn Risk,High,In Progress,Sales,Signal detected in monitored metric 029,0.75
+AL0030,2025-09-18,Project Delay,Info,In Progress,Finance,Signal detected in monitored metric 030,0.93
+AL0031,2025-11-25,Project Delay,High,Acknowledged,Operations,Signal detected in monitored metric 031,0.69
+AL0032,2025-08-20,Revenue Drop,Info,Closed,Supply Chain,Signal detected in monitored metric 032,0.94
+AL0033,2025-10-30,Unusual Payment,Warning,Closed,Finance,Signal detected in monitored metric 033,0.83
+AL0034,2025-06-23,Unusual Payment,High,Acknowledged,Customer Success,Signal detected in monitored metric 034,0.69
+AL0035,2026-06-25,Project Delay,Critical,Acknowledged,Technology,Signal detected in monitored metric 035,0.63
+AL0036,2026-10-20,Margin Erosion,Critical,In Progress,Finance,Signal detected in monitored metric 036,0.87
+AL0037,2025-01-01,Inventory Below Threshold,Info,Closed,Finance,Signal detected in monitored metric 037,0.98
+AL0038,2026-01-16,Inventory Below Threshold,Warning,Acknowledged,Finance,Signal detected in monitored metric 038,0.99
+AL0039,2025-05-31,Customer Churn Risk,Critical,Acknowledged,Supply Chain,Signal detected in monitored metric 039,0.6
+AL0040,2026-07-03,Unusual Payment,Info,In Progress,Finance,Signal detected in monitored metric 040,0.76
+AL0041,2025-12-12,Margin Erosion,Critical,Acknowledged,Sales,Signal detected in monitored metric 041,0.83
+AL0042,2026-08-14,Margin Erosion,Info,Closed,Finance,Signal detected in monitored metric 042,0.94
+AL0043,2025-11-13,Inventory Below Threshold,Critical,New,Supply Chain,Signal detected in monitored metric 043,0.69
+AL0044,2026-07-07,Customer Churn Risk,Warning,New,Customer Success,Signal detected in monitored metric 044,0.64
+AL0045,2026-01-23,Revenue Drop,Critical,Closed,Sales,Signal detected in monitored metric 045,0.86
+AL0046,2025-08-11,Revenue Drop,Info,New,Finance,Signal detected in monitored metric 046,0.76
+AL0047,2026-03-17,Margin Erosion,Info,In Progress,Finance,Signal detected in monitored metric 047,0.88
+AL0048,2025-01-31,Project Delay,Info,New,Sales,Signal detected in monitored metric 048,0.57
+AL0049,2026-09-08,Customer Churn Risk,High,New,Finance,Signal detected in monitored metric 049,0.75
+AL0050,2025-10-10,Margin Erosion,Critical,Closed,Finance,Signal detected in monitored metric 050,0.77
+AL0051,2025-04-24,Unusual Payment,High,Closed,Finance,Signal detected in monitored metric 051,0.88
+AL0052,2025-04-07,Margin Erosion,Info,In Progress,Supply Chain,Signal detected in monitored metric 052,0.92
+AL0053,2026-07-04,Customer Churn Risk,Info,New,Sales,Signal detected in monitored metric 053,0.97
+AL0054,2026-04-28,Revenue Drop,High,New,Customer Success,Signal detected in monitored metric 054,0.66
+AL0055,2026-05-18,Data Quality Failure,Critical,Acknowledged,Sales,Signal detected in monitored metric 055,0.58
+AL0056,2025-04-22,Margin Erosion,Info,Acknowledged,Technology,Signal detected in monitored metric 056,0.87
+AL0057,2025-09-14,Inventory Below Threshold,Warning,In Progress,Supply Chain,Signal detected in monitored metric 057,0.96
+AL0058,2025-04-23,Unusual Payment,Warning,Closed,Supply Chain,Signal detected in monitored metric 058,0.81
+AL0059,2025-07-23,Project Delay,Info,Closed,Finance,Signal detected in monitored metric 059,0.74
+AL0060,2026-07-10,Revenue Drop,Warning,New,Operations,Signal detected in monitored metric 060,0.87
+AL0061,2025-04-15,Unusual Payment,Info,In Progress,Sales,Signal detected in monitored metric 061,0.79
+AL0062,2025-11-03,Unusual Payment,Info,New,Customer Success,Signal detected in monitored metric 062,0.89
+AL0063,2025-11-29,Margin Erosion,Warning,Closed,Customer Success,Signal detected in monitored metric 063,0.94
+AL0064,2025-06-14,Unusual Payment,Warning,Closed,Finance,Signal detected in monitored metric 064,0.87
+AL0065,2025-06-16,Project Delay,High,In Progress,Operations,Signal detected in monitored metric 065,0.65
+AL0066,2026-05-31,Revenue Drop,High,Closed,Supply Chain,Signal detected in monitored metric 066,0.59
+AL0067,2025-11-05,Unusual Payment,High,New,Sales,Signal detected in monitored metric 067,0.83
+AL0068,2025-02-20,Data Quality Failure,Warning,Acknowledged,Operations,Signal detected in monitored metric 068,0.62
+AL0069,2026-09-06,Margin Erosion,Critical,Closed,Supply Chain,Signal detected in monitored metric 069,0.97
+AL0070,2026-11-22,Data Quality Failure,Critical,New,Sales,Signal detected in monitored metric 070,0.56
+AL0071,2025-02-13,Customer Churn Risk,Critical,In Progress,Finance,Signal detected in monitored metric 071,0.66
+AL0072,2026-05-17,Revenue Drop,High,Acknowledged,Finance,Signal detected in monitored metric 072,0.7
+AL0073,2026-11-05,Data Quality Failure,Critical,In Progress,Operations,Signal detected in monitored metric 073,0.92
+AL0074,2025-06-16,Inventory Below Threshold,Critical,Closed,Supply Chain,Signal detected in monitored metric 074,0.94
+AL0075,2026-11-03,Inventory Below Threshold,High,Acknowledged,Supply Chain,Signal detected in monitored metric 075,0.67
+AL0076,2025-01-28,Margin Erosion,Critical,Closed,Customer Success,Signal detected in monitored metric 076,0.75
+AL0077,2026-11-13,Inventory Below Threshold,Critical,Acknowledged,Technology,Signal detected in monitored metric 077,0.59
+AL0078,2025-12-27,Revenue Drop,Critical,Acknowledged,Supply Chain,Signal detected in monitored metric 078,0.92
+AL0079,2026-05-06,Revenue Drop,Warning,In Progress,Sales,Signal detected in monitored metric 079,0.73
+AL0080,2026-10-08,Margin Erosion,Info,In Progress,Customer Success,Signal detected in monitored metric 080,0.93
+AL0081,2025-08-05,Inventory Below Threshold,Warning,New,Sales,Signal detected in monitored metric 081,0.81
+AL0082,2026-04-13,Unusual Payment,High,Acknowledged,Operations,Signal detected in monitored metric 082,0.91
+AL0083,2025-11-09,Inventory Below Threshold,Warning,Closed,Finance,Signal detected in monitored metric 083,0.79
+AL0084,2025-11-23,Margin Erosion,Warning,New,Supply Chain,Signal detected in monitored metric 084,0.67
+AL0085,2026-05-07,Margin Erosion,Info,Acknowledged,Technology,Signal detected in monitored metric 085,0.62
+AL0086,2026-05-08,Project Delay,Info,Closed,Operations,Signal detected in monitored metric 086,0.66
+AL0087,2025-01-09,Revenue Drop,Info,New,Technology,Signal detected in monitored metric 087,0.72
+AL0088,2025-11-28,Data Quality Failure,Warning,New,Finance,Signal detected in monitored metric 088,0.66
+AL0089,2026-07-13,Unusual Payment,Warning,New,Finance,Signal detected in monitored metric 089,0.93
+AL0090,2025-05-13,Revenue Drop,Info,Closed,Finance,Signal detected in monitored metric 090,0.81
+AL0091,2025-05-24,Data Quality Failure,Warning,Closed,Supply Chain,Signal detected in monitored metric 091,0.92
+AL0092,2025-09-18,Margin Erosion,High,Closed,Technology,Signal detected in monitored metric 092,0.91
+AL0093,2026-10-20,Project Delay,High,Closed,Supply Chain,Signal detected in monitored metric 093,0.8
+AL0094,2025-03-18,Project Delay,Info,In Progress,Sales,Signal detected in monitored metric 094,0.68
+AL0095,2025-08-19,Margin Erosion,Info,New,Customer Success,Signal detected in monitored metric 095,0.87
+AL0096,2026-01-09,Data Quality Failure,Warning,Acknowledged,Sales,Signal detected in monitored metric 096,0.55
+AL0097,2025-05-26,Inventory Below Threshold,Critical,Closed,Customer Success,Signal detected in monitored metric 097,0.68
+AL0098,2025-12-21,Project Delay,High,In Progress,Supply Chain,Signal detected in monitored metric 098,0.78
+AL0099,2026-01-08,Margin Erosion,Critical,Acknowledged,Operations,Signal detected in monitored metric 099,0.91
+AL0100,2025-03-17,Revenue Drop,Critical,Acknowledged,Supply Chain,Signal detected in monitored metric 100,0.79
+AL0101,2025-01-05,Margin Erosion,Critical,New,Finance,Signal detected in monitored metric 101,0.89
+AL0102,2025-05-26,Inventory Below Threshold,Warning,New,Supply Chain,Signal detected in monitored metric 102,0.57
+AL0103,2026-05-01,Inventory Below Threshold,Critical,In Progress,Supply Chain,Signal detected in monitored metric 103,0.77
+AL0104,2026-02-14,Project Delay,Critical,Closed,Finance,Signal detected in monitored metric 104,0.57
+AL0105,2025-04-14,Revenue Drop,High,Closed,Finance,Signal detected in monitored metric 105,0.58
+AL0106,2025-06-22,Unusual Payment,Info,New,Sales,Signal detected in monitored metric 106,0.87
+AL0107,2025-10-17,Unusual Payment,High,New,Finance,Signal detected in monitored metric 107,0.59
+AL0108,2026-05-03,Unusual Payment,Warning,New,Sales,Signal detected in monitored metric 108,0.6
+AL0109,2025-11-27,Margin Erosion,Info,In Progress,Finance,Signal detected in monitored metric 109,0.64
+AL0110,2026-09-01,Customer Churn Risk,Warning,New,Finance,Signal detected in monitored metric 110,0.68
+AL0111,2025-09-15,Unusual Payment,Info,New,Customer Success,Signal detected in monitored metric 111,0.58
+AL0112,2026-04-18,Data Quality Failure,Critical,New,Sales,Signal detected in monitored metric 112,0.97
+AL0113,2026-11-14,Unusual Payment,Info,In Progress,Sales,Signal detected in monitored metric 113,0.92
+AL0114,2025-01-16,Unusual Payment,High,Closed,Customer Success,Signal detected in monitored metric 114,0.71
+AL0115,2025-12-05,Margin Erosion,High,Closed,Supply Chain,Signal detected in monitored metric 115,0.72
+AL0116,2025-04-14,Unusual Payment,Warning,New,Operations,Signal detected in monitored metric 116,0.98
+AL0117,2026-01-01,Inventory Below Threshold,Info,Acknowledged,Sales,Signal detected in monitored metric 117,0.58
+AL0118,2025-11-01,Customer Churn Risk,Critical,Closed,Customer Success,Signal detected in monitored metric 118,0.61
+AL0119,2026-10-13,Data Quality Failure,Info,In Progress,Finance,Signal detected in monitored metric 119,0.57
+AL0120,2026-09-04,Margin Erosion,Critical,New,Supply Chain,Signal detected in monitored metric 120,0.91
+AL0121,2025-02-01,Revenue Drop,Warning,Acknowledged,Supply Chain,Signal detected in monitored metric 121,0.62
+AL0122,2025-09-06,Project Delay,Warning,Acknowledged,Customer Success,Signal detected in monitored metric 122,0.97
+AL0123,2025-05-04,Customer Churn Risk,High,Closed,Finance,Signal detected in monitored metric 123,0.82
+AL0124,2025-04-19,Unusual Payment,High,In Progress,Customer Success,Signal detected in monitored metric 124,0.81
+AL0125,2025-07-17,Data Quality Failure,Critical,New,Supply Chain,Signal detected in monitored metric 125,0.66
+AL0126,2026-03-22,Data Quality Failure,Critical,Acknowledged,Finance,Signal detected in monitored metric 126,0.7
+AL0127,2025-12-08,Customer Churn Risk,Info,Acknowledged,Customer Success,Signal detected in monitored metric 127,0.82
+AL0128,2025-11-03,Project Delay,Critical,New,Sales,Signal detected in monitored metric 128,0.7
+AL0129,2026-06-09,Margin Erosion,High,New,Technology,Signal detected in monitored metric 129,0.61
+AL0130,2025-02-06,Revenue Drop,Critical,In Progress,Finance,Signal detected in monitored metric 130,0.88
+AL0131,2025-09-03,Unusual Payment,Warning,New,Operations,Signal detected in monitored metric 131,0.9
+AL0132,2026-09-04,Customer Churn Risk,High,In Progress,Sales,Signal detected in monitored metric 132,0.98
+AL0133,2026-06-27,Revenue Drop,Warning,Closed,Operations,Signal detected in monitored metric 133,0.91
+AL0134,2025-04-30,Inventory Below Threshold,High,Closed,Supply Chain,Signal detected in monitored metric 134,0.83
+AL0135,2026-11-01,Margin Erosion,Info,Closed,Sales,Signal detected in monitored metric 135,0.65
+AL0136,2025-08-16,Unusual Payment,High,Closed,Technology,Signal detected in monitored metric 136,0.64
+AL0137,2026-02-25,Data Quality Failure,Warning,Closed,Operations,Signal detected in monitored metric 137,0.59
+AL0138,2026-05-15,Customer Churn Risk,High,In Progress,Sales,Signal detected in monitored metric 138,0.71
+AL0139,2025-07-28,Project Delay,Critical,Closed,Operations,Signal detected in monitored metric 139,0.86
+AL0140,2026-07-10,Project Delay,Info,New,Supply Chain,Signal detected in monitored metric 140,0.55
+AL0141,2025-09-08,Data Quality Failure,Warning,New,Finance,Signal detected in monitored metric 141,0.95
+AL0142,2025-01-24,Data Quality Failure,Info,In Progress,Technology,Signal detected in monitored metric 142,0.64
+AL0143,2026-02-12,Margin Erosion,Critical,New,Finance,Signal detected in monitored metric 143,0.66
+AL0144,2025-07-29,Inventory Below Threshold,Critical,New,Operations,Signal detected in monitored metric 144,0.95
+AL0145,2025-03-27,Inventory Below Threshold,Critical,Closed,Sales,Signal detected in monitored metric 145,0.65
+AL0146,2025-05-10,Revenue Drop,Warning,New,Technology,Signal detected in monitored metric 146,0.67
+AL0147,2026-10-12,Data Quality Failure,Critical,Acknowledged,Technology,Signal detected in monitored metric 147,0.9
+AL0148,2026-07-09,Unusual Payment,Info,In Progress,Operations,Signal detected in monitored metric 148,0.76
+AL0149,2025-01-08,Customer Churn Risk,Critical,Acknowledged,Supply Chain,Signal detected in monitored metric 149,0.71
+AL0150,2025-08-15,Project Delay,Critical,New,Operations,Signal detected in monitored metric 150,0.99
+AL0151,2025-08-20,Inventory Below Threshold,Info,Acknowledged,Technology,Signal detected in monitored metric 151,0.87
+AL0152,2026-02-01,Margin Erosion,Warning,In Progress,Customer Success,Signal detected in monitored metric 152,0.88
+AL0153,2025-06-26,Revenue Drop,Critical,New,Operations,Signal detected in monitored metric 153,0.61
+AL0154,2026-11-01,Data Quality Failure,Critical,Closed,Finance,Signal detected in monitored metric 154,0.74
+AL0155,2026-10-02,Revenue Drop,Warning,New,Supply Chain,Signal detected in monitored metric 155,0.63
+AL0156,2025-03-14,Inventory Below Threshold,High,In Progress,Supply Chain,Signal detected in monitored metric 156,0.62
+AL0157,2025-07-08,Margin Erosion,Info,Acknowledged,Sales,Signal detected in monitored metric 157,0.96
+AL0158,2026-08-30,Unusual Payment,Critical,New,Operations,Signal detected in monitored metric 158,0.61
+AL0159,2025-07-31,Data Quality Failure,Critical,Closed,Customer Success,Signal detected in monitored metric 159,0.91
+AL0160,2025-05-02,Margin Erosion,High,Acknowledged,Sales,Signal detected in monitored metric 160,0.59
+AL0161,2025-05-28,Revenue Drop,Critical,In Progress,Operations,Signal detected in monitored metric 161,0.84
+AL0162,2026-05-17,Margin Erosion,Warning,In Progress,Technology,Signal detected in monitored metric 162,0.92
+AL0163,2025-01-06,Inventory Below Threshold,Critical,Acknowledged,Supply Chain,Signal detected in monitored metric 163,0.8
+AL0164,2026-05-24,Inventory Below Threshold,High,Closed,Sales,Signal detected in monitored metric 164,0.76
+AL0165,2025-06-20,Customer Churn Risk,Warning,New,Supply Chain,Signal detected in monitored metric 165,0.67
+AL0166,2025-04-30,Project Delay,Warning,In Progress,Supply Chain,Signal detected in monitored metric 166,0.8
+AL0167,2026-07-13,Data Quality Failure,High,New,Finance,Signal detected in monitored metric 167,0.76
+AL0168,2026-06-18,Inventory Below Threshold,Warning,Closed,Operations,Signal detected in monitored metric 168,0.9
+AL0169,2025-04-04,Revenue Drop,Critical,In Progress,Customer Success,Signal detected in monitored metric 169,0.96
+AL0170,2025-02-17,Project Delay,Info,Closed,Finance,Signal detected in monitored metric 170,0.63
+AL0171,2025-05-08,Project Delay,Critical,New,Sales,Signal detected in monitored metric 171,0.77
+AL0172,2026-08-02,Margin Erosion,Warning,Closed,Supply Chain,Signal detected in monitored metric 172,0.6
+AL0173,2026-03-02,Customer Churn Risk,Warning,Closed,Finance,Signal detected in monitored metric 173,0.95
+AL0174,2025-09-06,Unusual Payment,Warning,Acknowledged,Supply Chain,Signal detected in monitored metric 174,0.92
+AL0175,2025-04-13,Customer Churn Risk,Info,In Progress,Operations,Signal detected in monitored metric 175,0.72
+AL0176,2026-05-15,Revenue Drop,High,In Progress,Customer Success,Signal detected in monitored metric 176,0.81
+AL0177,2026-08-16,Data Quality Failure,Info,Closed,Supply Chain,Signal detected in monitored metric 177,0.84
+AL0178,2025-06-10,Inventory Below Threshold,Critical,Closed,Operations,Signal detected in monitored metric 178,0.66
+AL0179,2025-01-20,Unusual Payment,Critical,In Progress,Sales,Signal detected in monitored metric 179,0.86
+AL0180,2026-07-27,Margin Erosion,Critical,Closed,Operations,Signal detected in monitored metric 180,0.72
+AL0181,2025-06-23,Margin Erosion,Warning,Closed,Technology,Signal detected in monitored metric 181,0.69
+AL0182,2026-04-01,Unusual Payment,Critical,In Progress,Supply Chain,Signal detected in monitored metric 182,0.62
+AL0183,2026-02-05,Customer Churn Risk,Info,New,Sales,Signal detected in monitored metric 183,0.67
+AL0184,2025-06-12,Revenue Drop,Info,Closed,Sales,Signal detected in monitored metric 184,0.65
+AL0185,2025-11-11,Inventory Below Threshold,Info,Closed,Customer Success,Signal detected in monitored metric 185,0.88
+AL0186,2026-04-14,Customer Churn Risk,Info,In Progress,Technology,Signal detected in monitored metric 186,0.75
+AL0187,2025-08-13,Margin Erosion,Warning,Closed,Customer Success,Signal detected in monitored metric 187,0.94
+AL0188,2026-11-14,Inventory Below Threshold,Info,Acknowledged,Technology,Signal detected in monitored metric 188,0.59
+AL0189,2025-07-03,Revenue Drop,High,Closed,Technology,Signal detected in monitored metric 189,0.95
+AL0190,2025-11-15,Data Quality Failure,Critical,New,Operations,Signal detected in monitored metric 190,0.65
+AL0191,2026-02-18,Data Quality Failure,Warning,In Progress,Operations,Signal detected in monitored metric 191,0.97
+AL0192,2025-09-19,Project Delay,High,In Progress,Technology,Signal detected in monitored metric 192,0.89
+AL0193,2025-08-06,Project Delay,Warning,New,Technology,Signal detected in monitored metric 193,0.94
+AL0194,2026-07-30,Revenue Drop,Info,New,Finance,Signal detected in monitored metric 194,0.63
+AL0195,2025-08-06,Data Quality Failure,High,In Progress,Operations,Signal detected in monitored metric 195,0.9
+AL0196,2026-04-29,Margin Erosion,Critical,Acknowledged,Customer Success,Signal detected in monitored metric 196,0.65
+AL0197,2026-06-21,Inventory Below Threshold,Warning,Closed,Sales,Signal detected in monitored metric 197,0.63
+AL0198,2025-01-30,Data Quality Failure,Critical,Acknowledged,Supply Chain,Signal detected in monitored metric 198,0.88
+AL0199,2025-04-16,Inventory Below Threshold,Warning,Closed,Operations,Signal detected in monitored metric 199,0.94
+AL0200,2026-04-25,Customer Churn Risk,Warning,Closed,Finance,Signal detected in monitored metric 200,0.69
+AL0201,2025-12-02,Revenue Drop,Warning,New,Supply Chain,Signal detected in monitored metric 201,0.56
+AL0202,2026-03-06,Customer Churn Risk,Critical,In Progress,Customer Success,Signal detected in monitored metric 202,0.96
+AL0203,2025-12-03,Margin Erosion,High,Acknowledged,Sales,Signal detected in monitored metric 203,0.88
+AL0204,2026-01-19,Revenue Drop,Info,Closed,Sales,Signal detected in monitored metric 204,0.67
+AL0205,2025-08-01,Project Delay,Warning,New,Customer Success,Signal detected in monitored metric 205,0.58
+AL0206,2025-02-26,Project Delay,Info,Closed,Sales,Signal detected in monitored metric 206,0.91
+AL0207,2025-02-06,Project Delay,Warning,Closed,Supply Chain,Signal detected in monitored metric 207,0.91
+AL0208,2025-04-15,Project Delay,High,Acknowledged,Finance,Signal detected in monitored metric 208,0.67
+AL0209,2026-02-23,Project Delay,Warning,In Progress,Finance,Signal detected in monitored metric 209,0.67
+AL0210,2026-01-10,Customer Churn Risk,Warning,Closed,Operations,Signal detected in monitored metric 210,0.57
+AL0211,2026-08-27,Project Delay,Info,In Progress,Sales,Signal detected in monitored metric 211,0.71
+AL0212,2026-01-10,Margin Erosion,Info,New,Sales,Signal detected in monitored metric 212,0.74
+AL0213,2025-05-14,Inventory Below Threshold,Info,New,Finance,Signal detected in monitored metric 213,0.69
+AL0214,2026-02-20,Unusual Payment,High,Acknowledged,Sales,Signal detected in monitored metric 214,0.8
+AL0215,2026-09-16,Revenue Drop,Critical,In Progress,Finance,Signal detected in monitored metric 215,0.59
+AL0216,2026-03-31,Inventory Below Threshold,Info,Closed,Sales,Signal detected in monitored metric 216,0.7
+AL0217,2025-01-12,Inventory Below Threshold,Info,Closed,Supply Chain,Signal detected in monitored metric 217,0.55
+AL0218,2025-03-04,Revenue Drop,Warning,Closed,Technology,Signal detected in monitored metric 218,0.57
+AL0219,2026-07-24,Unusual Payment,Critical,Acknowledged,Finance,Signal detected in monitored metric 219,0.59
+AL0220,2026-02-14,Unusual Payment,Info,Acknowledged,Supply Chain,Signal detected in monitored metric 220,0.93
+AL0221,2025-09-28,Customer Churn Risk,Info,New,Operations,Signal detected in monitored metric 221,0.55
+AL0222,2026-06-09,Unusual Payment,Critical,New,Finance,Signal detected in monitored metric 222,0.8
+AL0223,2025-03-18,Customer Churn Risk,High,New,Finance,Signal detected in monitored metric 223,0.6
+AL0224,2025-01-08,Customer Churn Risk,Info,New,Customer Success,Signal detected in monitored metric 224,0.98
+AL0225,2025-01-11,Customer Churn Risk,Warning,Acknowledged,Operations,Signal detected in monitored metric 225,0.56
+AL0226,2025-11-12,Revenue Drop,Warning,New,Operations,Signal detected in monitored metric 226,0.92
+AL0227,2026-02-27,Margin Erosion,Warning,New,Supply Chain,Signal detected in monitored metric 227,0.79
+AL0228,2026-09-26,Project Delay,Warning,In Progress,Operations,Signal detected in monitored metric 228,0.86
+AL0229,2026-06-13,Inventory Below Threshold,Warning,New,Operations,Signal detected in monitored metric 229,0.87
+AL0230,2026-06-24,Project Delay,High,Closed,Supply Chain,Signal detected in monitored metric 230,0.77
+AL0231,2026-01-25,Data Quality Failure,Critical,Closed,Customer Success,Signal detected in monitored metric 231,0.78
+AL0232,2026-07-30,Inventory Below Threshold,Warning,In Progress,Finance,Signal detected in monitored metric 232,0.66
+AL0233,2025-07-02,Margin Erosion,High,Closed,Sales,Signal detected in monitored metric 233,0.71
+AL0234,2025-01-03,Customer Churn Risk,High,Acknowledged,Finance,Signal detected in monitored metric 234,0.59
+AL0235,2026-03-23,Project Delay,Critical,Closed,Technology,Signal detected in monitored metric 235,0.76
+AL0236,2025-02-13,Inventory Below Threshold,High,In Progress,Customer Success,Signal detected in monitored metric 236,0.97
+AL0237,2025-03-14,Revenue Drop,Critical,Closed,Finance,Signal detected in monitored metric 237,0.67
+AL0238,2026-02-26,Customer Churn Risk,High,In Progress,Supply Chain,Signal detected in monitored metric 238,0.73
+AL0239,2026-07-28,Data Quality Failure,Info,Closed,Finance,Signal detected in monitored metric 239,0.88
+AL0240,2025-02-25,Revenue Drop,High,Closed,Operations,Signal detected in monitored metric 240,0.82
+AL0241,2026-01-10,Customer Churn Risk,High,Closed,Sales,Signal detected in monitored metric 241,0.62
+AL0242,2025-07-20,Revenue Drop,Warning,In Progress,Technology,Signal detected in monitored metric 242,0.82
+AL0243,2025-09-01,Data Quality Failure,Warning,In Progress,Finance,Signal detected in monitored metric 243,0.56
+AL0244,2026-06-26,Revenue Drop,Warning,In Progress,Operations,Signal detected in monitored metric 244,0.72
+AL0245,2025-05-11,Margin Erosion,High,New,Sales,Signal detected in monitored metric 245,0.85
+AL0246,2025-11-15,Unusual Payment,Info,In Progress,Finance,Signal detected in monitored metric 246,0.87
+AL0247,2025-12-19,Inventory Below Threshold,High,Acknowledged,Customer Success,Signal detected in monitored metric 247,0.87
+AL0248,2026-06-30,Revenue Drop,Critical,In Progress,Customer Success,Signal detected in monitored metric 248,0.95
+AL0249,2025-01-22,Margin Erosion,Warning,New,Customer Success,Signal detected in monitored metric 249,0.91
+AL0250,2026-01-15,Unusual Payment,Info,Closed,Supply Chain,Signal detected in monitored metric 250,0.76
+AL0251,2025-07-07,Data Quality Failure,Critical,In Progress,Operations,Signal detected in monitored metric 251,0.69
+AL0252,2026-04-16,Margin Erosion,Warning,New,Technology,Signal detected in monitored metric 252,0.72
+AL0253,2026-09-19,Inventory Below Threshold,Info,In Progress,Technology,Signal detected in monitored metric 253,0.72
+AL0254,2026-07-12,Revenue Drop,Info,Closed,Finance,Signal detected in monitored metric 254,0.81
+AL0255,2026-09-23,Customer Churn Risk,High,Closed,Finance,Signal detected in monitored metric 255,0.61
+AL0256,2025-06-20,Customer Churn Risk,Info,In Progress,Sales,Signal detected in monitored metric 256,0.9
+AL0257,2026-03-09,Project Delay,Info,Closed,Operations,Signal detected in monitored metric 257,0.7
+AL0258,2026-07-15,Margin Erosion,Critical,New,Customer Success,Signal detected in monitored metric 258,0.83
+AL0259,2025-12-31,Customer Churn Risk,Info,In Progress,Supply Chain,Signal detected in monitored metric 259,0.77
+AL0260,2026-07-09,Revenue Drop,Info,Closed,Sales,Signal detected in monitored metric 260,0.77
+AL0261,2026-11-22,Data Quality Failure,Critical,In Progress,Operations,Signal detected in monitored metric 261,0.83
+AL0262,2025-12-01,Unusual Payment,High,Closed,Sales,Signal detected in monitored metric 262,0.61
+AL0263,2026-07-03,Customer Churn Risk,High,Closed,Customer Success,Signal detected in monitored metric 263,0.57
+AL0264,2026-05-01,Revenue Drop,Critical,In Progress,Supply Chain,Signal detected in monitored metric 264,0.87
+AL0265,2026-11-04,Inventory Below Threshold,Critical,New,Operations,Signal detected in monitored metric 265,0.72
+AL0266,2026-09-02,Customer Churn Risk,Info,New,Finance,Signal detected in monitored metric 266,0.62
+AL0267,2025-01-13,Revenue Drop,Info,Acknowledged,Sales,Signal detected in monitored metric 267,0.55
+AL0268,2026-07-30,Unusual Payment,Critical,Acknowledged,Finance,Signal detected in monitored metric 268,0.79
+AL0269,2025-10-01,Revenue Drop,Warning,In Progress,Customer Success,Signal detected in monitored metric 269,0.62
+AL0270,2025-08-03,Revenue Drop,Info,In Progress,Sales,Signal detected in monitored metric 270,0.97
+AL0271,2026-03-19,Revenue Drop,Info,In Progress,Sales,Signal detected in monitored metric 271,0.99
+AL0272,2025-10-14,Unusual Payment,High,Closed,Operations,Signal detected in monitored metric 272,0.75
+AL0273,2026-07-30,Project Delay,Warning,Acknowledged,Customer Success,Signal detected in monitored metric 273,0.79
+AL0274,2025-06-04,Inventory Below Threshold,Info,Acknowledged,Operations,Signal detected in monitored metric 274,0.62
+AL0275,2025-12-14,Data Quality Failure,Warning,Closed,Supply Chain,Signal detected in monitored metric 275,0.93
+AL0276,2025-01-25,Inventory Below Threshold,Info,Acknowledged,Customer Success,Signal detected in monitored metric 276,0.83
+AL0277,2026-04-12,Inventory Below Threshold,Critical,In Progress,Operations,Signal detected in monitored metric 277,0.65
+AL0278,2025-07-18,Data Quality Failure,Critical,Acknowledged,Sales,Signal detected in monitored metric 278,0.93
+AL0279,2025-04-16,Unusual Payment,High,New,Operations,Signal detected in monitored metric 279,0.63
+AL0280,2026-01-21,Customer Churn Risk,Warning,Acknowledged,Supply Chain,Signal detected in monitored metric 280,0.83
+AL0281,2025-02-20,Revenue Drop,Info,Closed,Sales,Signal detected in monitored metric 281,0.86
+AL0282,2025-04-18,Margin Erosion,Info,Acknowledged,Technology,Signal detected in monitored metric 282,0.64
+AL0283,2025-03-24,Data Quality Failure,Critical,Acknowledged,Technology,Signal detected in monitored metric 283,0.9
+AL0284,2026-05-03,Revenue Drop,High,Acknowledged,Customer Success,Signal detected in monitored metric 284,0.76
+AL0285,2026-10-05,Data Quality Failure,High,In Progress,Supply Chain,Signal detected in monitored metric 285,0.9
+AL0286,2026-03-11,Inventory Below Threshold,Warning,New,Finance,Signal detected in monitored metric 286,0.86
+AL0287,2025-08-09,Margin Erosion,High,Closed,Technology,Signal detected in monitored metric 287,0.8
+AL0288,2025-11-07,Data Quality Failure,Warning,Closed,Finance,Signal detected in monitored metric 288,0.89
+AL0289,2026-08-06,Revenue Drop,High,Closed,Finance,Signal detected in monitored metric 289,0.68
+AL0290,2025-05-14,Project Delay,High,New,Finance,Signal detected in monitored metric 290,0.91
+AL0291,2025-04-14,Inventory Below Threshold,Info,New,Finance,Signal detected in monitored metric 291,0.56
+AL0292,2025-01-02,Revenue Drop,Critical,Acknowledged,Operations,Signal detected in monitored metric 292,0.76
+AL0293,2026-04-15,Revenue Drop,Critical,Closed,Operations,Signal detected in monitored metric 293,0.58
+AL0294,2025-12-31,Unusual Payment,Info,New,Operations,Signal detected in monitored metric 294,0.76
+AL0295,2026-04-21,Inventory Below Threshold,Warning,Acknowledged,Technology,Signal detected in monitored metric 295,0.93
+AL0296,2025-10-26,Customer Churn Risk,Critical,In Progress,Sales,Signal detected in monitored metric 296,0.55
+AL0297,2025-05-25,Inventory Below Threshold,High,In Progress,Sales,Signal detected in monitored metric 297,0.61
+AL0298,2026-03-21,Revenue Drop,Critical,Closed,Finance,Signal detected in monitored metric 298,0.84
+AL0299,2025-07-06,Unusual Payment,Warning,Closed,Finance,Signal detected in monitored metric 299,0.71
+AL0300,2025-12-11,Customer Churn Risk,High,Closed,Customer Success,Signal detected in monitored metric 300,0.98

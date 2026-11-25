@@ -1,0 +1,26 @@
+supplier_id,supplier_name,supplier_category,country,risk_level,quality_rating,supplier_status
+S001,Supplier 001,Logistics,Italy,Low,3.4,Blocked
+S002,Supplier 002,Technology,Germany,High,2.6,Under Review
+S003,Supplier 003,Hardware,Germany,Low,4.7,Under Review
+S004,Supplier 004,Hardware,Tunisia,Medium,3.0,Approved
+S005,Supplier 005,Professional Services,France,Low,1.5,Approved
+S006,Supplier 006,Professional Services,Germany,High,2.5,Approved
+S007,Supplier 007,Logistics,Germany,High,1.3,Approved
+S008,Supplier 008,Technology,Tunisia,Medium,1.8,Approved
+S009,Supplier 009,Hardware,Morocco,High,1.1,Blocked
+S010,Supplier 010,Technology,Italy,Low,2.8,Under Review
+S011,Supplier 011,Technology,Tunisia,Low,3.5,Blocked
+S012,Supplier 012,Office Supplies,Germany,Low,2.4,Approved
+S013,Supplier 013,Logistics,Morocco,High,2.7,Approved
+S014,Supplier 014,Office Supplies,Morocco,Low,4.8,Approved
+S015,Supplier 015,Professional Services,Germany,Low,4.0,Under Review
+S016,Supplier 016,Hardware,Morocco,Medium,3.2,Approved
+S017,Supplier 017,Technology,Morocco,Medium,2.1,Approved
+S018,Supplier 018,Office Supplies,Morocco,High,4.6,Approved
+S019,Supplier 019,Logistics,Germany,Low,1.9,Blocked
+S020,Supplier 020,Professional Services,Italy,High,2.3,Approved
+S021,Supplier 021,Professional Services,Tunisia,Medium,4.6,Approved
+S022,Supplier 022,Technology,Morocco,High,3.1,Under Review
+S023,Supplier 023,Hardware,Tunisia,Medium,4.0,Under Review
+S024,Supplier 024,Hardware,Germany,High,3.4,Blocked
+S025,Supplier 025,Hardware,France,Low,3.6,Blocked

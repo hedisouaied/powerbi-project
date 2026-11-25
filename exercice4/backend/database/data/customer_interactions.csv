@@ -1,0 +1,801 @@
+interaction_id,customer_id,interaction_date,channel,interaction_type,priority,interaction_status,resolution_hours,owner_employee_id
+CI00001,C0083,2025-07-21,Phone,Renewal,High,Pending,47,E011
+CI00002,C0081,2026-06-01,Email,Renewal,Medium,Pending,20,E057
+CI00003,C0072,2026-03-31,Meeting,Technical Support,Low,Resolved,27,E004
+CI00004,C0097,2025-07-25,Phone,Question,Urgent,Resolved,29,E036
+CI00005,C0144,2025-04-28,Phone,Upsell,Urgent,Escalated,45,E060
+CI00006,C0202,2025-07-10,Email,Renewal,High,Resolved,33,E019
+CI00007,C0146,2025-07-05,Phone,Technical Support,Urgent,Resolved,15,E052
+CI00008,C0095,2026-05-20,Portal,Complaint,Medium,Resolved,25,E079
+CI00009,C0058,2026-10-15,Phone,Upsell,Medium,Resolved,7,E044
+CI00010,C0112,2026-06-04,Chat,Question,High,Escalated,7,E021
+CI00011,C0070,2026-09-29,Portal,Complaint,Urgent,Escalated,26,E014
+CI00012,C0238,2025-07-17,Email,Complaint,Urgent,Resolved,11,E040
+CI00013,C0238,2026-08-04,Portal,Renewal,Urgent,Resolved,1,E072
+CI00014,C0300,2025-08-10,Meeting,Upsell,Urgent,Escalated,25,E031
+CI00015,C0143,2026-03-27,Meeting,Question,Low,Escalated,32,E038
+CI00016,C0143,2025-12-04,Email,Complaint,High,Pending,20,E010
+CI00017,C0112,2026-05-10,Portal,Technical Support,High,Pending,47,E066
+CI00018,C0259,2026-06-26,Portal,Technical Support,High,Open,25,E055
+CI00019,C0251,2025-06-04,Meeting,Complaint,Urgent,Open,8,E022
+CI00020,C0159,2026-06-28,Meeting,Technical Support,Urgent,Open,22,E079
+CI00021,C0098,2025-11-16,Email,Question,High,Open,45,E014
+CI00022,C0250,2025-04-15,Chat,Technical Support,Low,Resolved,44,E026
+CI00023,C0191,2025-09-17,Portal,Upsell,High,Open,27,E061
+CI00024,C0263,2025-03-17,Email,Technical Support,Low,Pending,24,E069
+CI00025,C0167,2025-01-20,Portal,Complaint,Urgent,Pending,7,E066
+CI00026,C0128,2026-05-02,Phone,Complaint,High,Resolved,43,E008
+CI00027,C0137,2025-04-12,Email,Upsell,Medium,Open,41,E037
+CI00028,C0263,2025-07-27,Email,Question,Medium,Open,7,E070
+CI00029,C0184,2025-05-14,Portal,Question,Medium,Pending,34,E034
+CI00030,C0014,2025-06-29,Email,Upsell,Low,Escalated,37,E011
+CI00031,C0102,2025-06-29,Meeting,Question,Low,Resolved,36,E069
+CI00032,C0237,2026-05-10,Meeting,Upsell,Medium,Pending,5,E074
+CI00033,C0049,2025-10-08,Portal,Renewal,Urgent,Open,40,E020
+CI00034,C0066,2025-01-19,Meeting,Complaint,Low,Pending,18,E040
+CI00035,C0141,2025-01-28,Phone,Complaint,Medium,Pending,10,E001
+CI00036,C0068,2026-02-22,Meeting,Upsell,High,Resolved,1,E014
+CI00037,C0164,2026-01-22,Email,Technical Support,Urgent,Resolved,44,E046
+CI00038,C0278,2026-05-16,Chat,Upsell,Urgent,Open,27,E031
+CI00039,C0034,2026-05-03,Meeting,Upsell,Urgent,Pending,46,E030
+CI00040,C0107,2025-03-09,Email,Renewal,Urgent,Open,29,E025
+CI00041,C0004,2025-01-06,Portal,Upsell,Low,Resolved,17,E037
+CI00042,C0138,2026-05-27,Email,Technical Support,Urgent,Open,26,E063
+CI00043,C0090,2025-06-10,Chat,Complaint,Urgent,Escalated,26,E009
+CI00044,C0230,2025-05-09,Chat,Question,Medium,Resolved,44,E079
+CI00045,C0162,2025-08-04,Portal,Technical Support,Medium,Resolved,17,E035
+CI00046,C0144,2025-02-22,Portal,Upsell,Low,Pending,10,E064
+CI00047,C0016,2025-11-06,Phone,Renewal,High,Escalated,43,E007
+CI00048,C0278,2025-11-23,Phone,Renewal,High,Escalated,21,E058
+CI00049,C0234,2025-11-23,Email,Upsell,Urgent,Escalated,4,E078
+CI00050,C0003,2026-08-26,Portal,Complaint,High,Pending,21,E042
+CI00051,C0230,2026-10-12,Chat,Technical Support,High,Escalated,8,E065
+CI00052,C0199,2025-09-12,Email,Question,Low,Pending,21,E062
+CI00053,C0043,2025-12-16,Phone,Question,Low,Escalated,35,E044
+CI00054,C0135,2025-12-26,Meeting,Renewal,Medium,Pending,25,E065
+CI00055,C0247,2026-09-27,Email,Complaint,Urgent,Escalated,4,E026
+CI00056,C0264,2026-03-20,Email,Question,High,Open,19,E051
+CI00057,C0139,2026-09-06,Email,Question,Urgent,Resolved,27,E036
+CI00058,C0188,2025-05-12,Portal,Question,Medium,Resolved,37,E017
+CI00059,C0008,2025-02-05,Email,Upsell,Urgent,Pending,4,E009
+CI00060,C0016,2025-07-28,Portal,Technical Support,Medium,Pending,47,E009
+CI00061,C0203,2026-08-25,Chat,Upsell,Urgent,Resolved,39,E029
+CI00062,C0016,2025-09-12,Phone,Complaint,Medium,Escalated,29,E061
+CI00063,C0043,2025-07-28,Portal,Complaint,Low,Open,29,E058
+CI00064,C0094,2026-07-23,Email,Complaint,Low,Pending,39,E029
+CI00065,C0161,2025-11-27,Email,Renewal,Urgent,Open,33,E026
+CI00066,C0099,2025-05-30,Chat,Complaint,Urgent,Pending,28,E077
+CI00067,C0105,2026-08-18,Phone,Technical Support,Urgent,Resolved,23,E014
+CI00068,C0149,2025-12-12,Chat,Technical Support,Medium,Open,2,E039
+CI00069,C0050,2026-07-03,Meeting,Upsell,Urgent,Open,26,E025
+CI00070,C0001,2026-01-30,Portal,Question,Medium,Resolved,34,E034
+CI00071,C0272,2025-05-16,Email,Question,Urgent,Pending,37,E040
+CI00072,C0095,2025-07-19,Email,Technical Support,High,Open,22,E007
+CI00073,C0196,2025-10-10,Phone,Renewal,High,Escalated,33,E042
+CI00074,C0294,2025-02-27,Chat,Question,Medium,Resolved,24,E043
+CI00075,C0075,2026-04-10,Email,Technical Support,Medium,Resolved,18,E062
+CI00076,C0277,2026-08-13,Meeting,Technical Support,Low,Open,31,E058
+CI00077,C0260,2026-11-09,Portal,Upsell,High,Open,35,E074
+CI00078,C0290,2025-05-02,Email,Renewal,Urgent,Resolved,25,E029
+CI00079,C0285,2026-05-30,Phone,Renewal,Low,Pending,43,E028
+CI00080,C0253,2025-02-26,Phone,Technical Support,High,Open,46,E019
+CI00081,C0158,2026-05-10,Phone,Upsell,Low,Open,36,E017
+CI00082,C0167,2026-01-02,Chat,Question,Urgent,Open,38,E026
+CI00083,C0230,2026-03-02,Portal,Upsell,Medium,Resolved,37,E071
+CI00084,C0129,2025-10-26,Email,Question,Low,Escalated,39,E063
+CI00085,C0263,2026-01-16,Portal,Complaint,High,Escalated,31,E005
+CI00086,C0137,2025-06-20,Meeting,Renewal,Medium,Open,41,E010
+CI00087,C0234,2026-08-02,Email,Question,Medium,Escalated,23,E054
+CI00088,C0174,2026-04-19,Email,Technical Support,Urgent,Open,13,E056
+CI00089,C0271,2025-08-03,Meeting,Upsell,Medium,Escalated,15,E024
+CI00090,C0274,2026-09-06,Meeting,Technical Support,Medium,Open,17,E075
+CI00091,C0229,2025-10-05,Meeting,Question,High,Resolved,40,E074
+CI00092,C0261,2025-11-22,Phone,Renewal,Urgent,Open,11,E014
+CI00093,C0249,2026-05-22,Phone,Complaint,Low,Open,35,E004
+CI00094,C0290,2025-03-20,Phone,Upsell,Low,Open,28,E076
+CI00095,C0073,2025-12-24,Phone,Question,Low,Open,41,E022
+CI00096,C0031,2025-11-28,Phone,Upsell,Medium,Resolved,39,E047
+CI00097,C0133,2026-03-18,Email,Renewal,High,Pending,3,E028
+CI00098,C0264,2025-09-25,Chat,Complaint,Urgent,Escalated,47,E044
+CI00099,C0281,2026-03-10,Email,Question,Low,Resolved,21,E074
+CI00100,C0081,2025-09-29,Portal,Complaint,Urgent,Resolved,35,E070
+CI00101,C0058,2026-11-18,Phone,Upsell,High,Resolved,21,E028
+CI00102,C0039,2025-01-19,Portal,Renewal,Medium,Resolved,27,E049
+CI00103,C0029,2026-09-17,Chat,Technical Support,Low,Open,27,E005
+CI00104,C0253,2025-05-17,Chat,Upsell,Urgent,Resolved,33,E055
+CI00105,C0244,2026-07-14,Email,Complaint,Medium,Pending,48,E007
+CI00106,C0110,2025-09-09,Chat,Technical Support,Medium,Open,19,E020
+CI00107,C0071,2026-10-29,Chat,Complaint,Low,Pending,44,E055
+CI00108,C0167,2025-11-25,Meeting,Upsell,Low,Open,33,E069
+CI00109,C0128,2026-01-07,Meeting,Question,High,Resolved,44,E073
+CI00110,C0069,2025-06-15,Portal,Upsell,High,Open,10,E003
+CI00111,C0209,2025-10-24,Email,Renewal,Urgent,Escalated,2,E017
+CI00112,C0160,2026-08-01,Email,Upsell,Urgent,Escalated,32,E043
+CI00113,C0056,2025-07-19,Email,Complaint,Medium,Escalated,38,E062
+CI00114,C0261,2025-12-31,Phone,Upsell,Low,Resolved,14,E041
+CI00115,C0269,2025-05-05,Email,Technical Support,High,Open,41,E080
+CI00116,C0246,2026-04-01,Portal,Renewal,High,Pending,20,E069
+CI00117,C0049,2026-06-09,Email,Renewal,Urgent,Escalated,20,E041
+CI00118,C0139,2025-01-07,Email,Question,Urgent,Resolved,48,E054
+CI00119,C0181,2025-03-11,Portal,Upsell,Urgent,Resolved,38,E077
+CI00120,C0245,2025-06-22,Phone,Upsell,Urgent,Pending,9,E030
+CI00121,C0007,2026-01-17,Phone,Question,High,Resolved,22,E041
+CI00122,C0297,2026-03-29,Email,Complaint,High,Resolved,21,E063
+CI00123,C0111,2026-06-08,Portal,Upsell,Low,Resolved,45,E073
+CI00124,C0156,2025-11-21,Chat,Renewal,High,Open,20,E043
+CI00125,C0281,2026-08-27,Email,Renewal,High,Resolved,30,E023
+CI00126,C0113,2025-06-19,Phone,Upsell,Urgent,Open,9,E001
+CI00127,C0233,2026-05-26,Meeting,Question,Urgent,Open,9,E056
+CI00128,C0050,2025-07-11,Chat,Upsell,Medium,Escalated,13,E011
+CI00129,C0219,2025-01-30,Email,Technical Support,Low,Resolved,20,E040
+CI00130,C0174,2025-05-14,Portal,Technical Support,High,Open,23,E064
+CI00131,C0113,2026-10-19,Meeting,Complaint,High,Resolved,21,E063
+CI00132,C0035,2026-08-12,Chat,Upsell,Medium,Pending,24,E080
+CI00133,C0211,2026-05-27,Phone,Complaint,Low,Pending,8,E046
+CI00134,C0222,2026-07-14,Email,Question,Medium,Escalated,19,E046
+CI00135,C0053,2025-10-26,Portal,Renewal,Low,Pending,23,E003
+CI00136,C0275,2026-03-21,Email,Renewal,High,Open,9,E072
+CI00137,C0208,2026-04-24,Chat,Technical Support,Low,Pending,45,E033
+CI00138,C0107,2026-03-03,Chat,Question,Low,Escalated,43,E066
+CI00139,C0236,2026-06-13,Email,Technical Support,Low,Pending,2,E040
+CI00140,C0107,2025-09-07,Phone,Renewal,High,Escalated,42,E032
+CI00141,C0252,2026-09-20,Email,Upsell,High,Pending,22,E014
+CI00142,C0210,2026-08-20,Email,Renewal,High,Resolved,20,E016
+CI00143,C0157,2026-11-09,Meeting,Renewal,Urgent,Resolved,25,E036
+CI00144,C0132,2026-05-22,Portal,Question,Medium,Resolved,17,E059
+CI00145,C0296,2026-06-18,Email,Renewal,Medium,Open,45,E064
+CI00146,C0254,2025-01-28,Email,Technical Support,Medium,Resolved,17,E022
+CI00147,C0259,2025-06-08,Portal,Technical Support,High,Pending,47,E056
+CI00148,C0038,2026-04-18,Meeting,Technical Support,Low,Pending,17,E024
+CI00149,C0299,2026-07-03,Meeting,Question,Low,Pending,37,E025
+CI00150,C0199,2025-08-25,Portal,Technical Support,Urgent,Open,29,E032
+CI00151,C0183,2026-05-30,Portal,Question,Urgent,Escalated,16,E001
+CI00152,C0030,2026-09-19,Chat,Renewal,Medium,Resolved,47,E056
+CI00153,C0033,2026-02-10,Phone,Renewal,Medium,Resolved,21,E019
+CI00154,C0114,2026-06-27,Phone,Upsell,High,Open,48,E070
+CI00155,C0062,2025-12-13,Phone,Upsell,Urgent,Resolved,26,E024
+CI00156,C0131,2025-09-20,Email,Renewal,Low,Resolved,4,E034
+CI00157,C0110,2025-07-31,Meeting,Technical Support,Medium,Escalated,30,E057
+CI00158,C0015,2025-08-25,Meeting,Complaint,Medium,Pending,2,E066
+CI00159,C0279,2025-11-17,Meeting,Technical Support,Medium,Resolved,46,E051
+CI00160,C0261,2026-10-18,Chat,Renewal,High,Open,29,E036
+CI00161,C0223,2025-04-28,Email,Upsell,Urgent,Pending,15,E044
+CI00162,C0061,2025-12-10,Portal,Upsell,Medium,Pending,42,E063
+CI00163,C0268,2026-08-18,Meeting,Question,Medium,Open,16,E058
+CI00164,C0112,2026-11-03,Meeting,Renewal,Urgent,Open,9,E022
+CI00165,C0283,2025-06-15,Phone,Question,Urgent,Open,30,E024
+CI00166,C0086,2026-04-09,Phone,Question,Medium,Escalated,39,E019
+CI00167,C0295,2025-03-03,Meeting,Renewal,Medium,Escalated,5,E079
+CI00168,C0017,2025-08-06,Portal,Complaint,High,Open,6,E018
+CI00169,C0023,2025-09-05,Chat,Renewal,Low,Open,15,E013
+CI00170,C0216,2025-01-25,Email,Renewal,Urgent,Escalated,23,E025
+CI00171,C0196,2025-08-22,Meeting,Upsell,High,Escalated,23,E065
+CI00172,C0044,2025-10-29,Phone,Complaint,Low,Pending,27,E059
+CI00173,C0161,2026-05-24,Email,Technical Support,High,Escalated,39,E064
+CI00174,C0185,2026-09-27,Meeting,Renewal,Urgent,Pending,2,E040
+CI00175,C0241,2025-03-13,Portal,Technical Support,High,Open,40,E004
+CI00176,C0236,2025-05-10,Phone,Renewal,Urgent,Resolved,33,E067
+CI00177,C0245,2026-02-01,Email,Technical Support,Urgent,Resolved,44,E012
+CI00178,C0071,2025-04-02,Chat,Upsell,High,Pending,35,E072
+CI00179,C0280,2025-12-26,Phone,Question,Medium,Escalated,7,E014
+CI00180,C0188,2026-09-12,Portal,Renewal,High,Open,48,E058
+CI00181,C0265,2025-11-27,Chat,Renewal,Medium,Open,10,E038
+CI00182,C0030,2026-04-10,Chat,Renewal,Urgent,Escalated,16,E028
+CI00183,C0001,2026-11-22,Phone,Complaint,High,Resolved,21,E063
+CI00184,C0156,2026-03-19,Portal,Question,Medium,Resolved,23,E055
+CI00185,C0060,2026-11-20,Phone,Question,Medium,Pending,21,E001
+CI00186,C0286,2025-01-16,Email,Technical Support,Low,Pending,23,E063
+CI00187,C0112,2025-05-25,Email,Upsell,Low,Resolved,12,E055
+CI00188,C0173,2025-12-14,Phone,Renewal,Urgent,Escalated,25,E026
+CI00189,C0281,2025-06-09,Portal,Complaint,Urgent,Resolved,41,E063
+CI00190,C0003,2025-04-29,Email,Question,Urgent,Escalated,27,E013
+CI00191,C0256,2025-11-02,Meeting,Renewal,Low,Pending,41,E010
+CI00192,C0008,2026-03-20,Chat,Question,High,Open,39,E080
+CI00193,C0237,2026-06-01,Phone,Question,High,Pending,3,E049
+CI00194,C0215,2025-09-30,Portal,Renewal,High,Escalated,48,E080
+CI00195,C0257,2026-09-01,Portal,Question,High,Open,28,E066
+CI00196,C0022,2025-06-08,Meeting,Question,High,Pending,32,E010
+CI00197,C0244,2025-05-03,Portal,Question,Low,Pending,17,E021
+CI00198,C0163,2025-02-26,Phone,Technical Support,Urgent,Pending,39,E072
+CI00199,C0225,2025-05-08,Phone,Renewal,Urgent,Pending,14,E019
+CI00200,C0181,2026-09-06,Meeting,Complaint,Urgent,Resolved,43,E077
+CI00201,C0207,2025-06-03,Phone,Complaint,Low,Pending,20,E024
+CI00202,C0020,2026-07-07,Email,Upsell,Low,Escalated,28,E078
+CI00203,C0253,2026-03-25,Portal,Technical Support,Medium,Pending,3,E036
+CI00204,C0143,2026-04-12,Email,Upsell,High,Escalated,28,E063
+CI00205,C0007,2025-03-19,Portal,Complaint,High,Escalated,46,E035
+CI00206,C0247,2026-08-16,Portal,Complaint,High,Pending,6,E057
+CI00207,C0053,2025-04-17,Chat,Upsell,Urgent,Escalated,12,E061
+CI00208,C0028,2026-04-07,Portal,Renewal,Urgent,Resolved,19,E022
+CI00209,C0072,2025-08-26,Email,Complaint,Low,Resolved,17,E026
+CI00210,C0156,2026-11-18,Meeting,Upsell,High,Pending,22,E015
+CI00211,C0184,2026-07-28,Meeting,Question,Medium,Escalated,29,E043
+CI00212,C0201,2026-09-01,Chat,Question,High,Escalated,4,E079
+CI00213,C0268,2026-10-27,Phone,Upsell,Urgent,Escalated,24,E069
+CI00214,C0025,2025-10-13,Phone,Question,High,Resolved,43,E022
+CI00215,C0230,2025-08-09,Portal,Complaint,Urgent,Open,29,E053
+CI00216,C0264,2025-08-25,Portal,Renewal,High,Resolved,38,E035
+CI00217,C0119,2025-02-25,Meeting,Upsell,Urgent,Escalated,4,E062
+CI00218,C0032,2025-03-19,Meeting,Renewal,Low,Resolved,9,E027
+CI00219,C0049,2026-02-12,Meeting,Complaint,High,Open,40,E043
+CI00220,C0200,2026-09-10,Chat,Upsell,Urgent,Pending,43,E053
+CI00221,C0021,2026-06-30,Portal,Complaint,Medium,Open,37,E025
+CI00222,C0049,2025-04-02,Portal,Technical Support,High,Pending,14,E060
+CI00223,C0284,2025-04-17,Portal,Technical Support,Low,Open,20,E067
+CI00224,C0026,2026-10-14,Meeting,Question,High,Resolved,1,E023
+CI00225,C0010,2026-06-10,Portal,Question,Low,Pending,21,E035
+CI00226,C0164,2025-07-26,Chat,Technical Support,Medium,Pending,37,E035
+CI00227,C0239,2026-03-23,Portal,Upsell,Medium,Resolved,33,E080
+CI00228,C0152,2025-07-27,Phone,Renewal,High,Escalated,35,E057
+CI00229,C0146,2025-08-20,Phone,Technical Support,Medium,Open,45,E021
+CI00230,C0024,2026-03-13,Email,Question,Low,Escalated,4,E061
+CI00231,C0253,2026-05-11,Meeting,Question,Medium,Resolved,12,E076
+CI00232,C0027,2025-03-16,Chat,Question,Medium,Pending,15,E044
+CI00233,C0214,2025-07-20,Email,Renewal,Low,Escalated,44,E066
+CI00234,C0070,2025-02-12,Meeting,Complaint,High,Open,34,E015
+CI00235,C0085,2025-05-11,Email,Question,Urgent,Open,18,E075
+CI00236,C0205,2026-03-05,Email,Technical Support,Medium,Open,48,E062
+CI00237,C0138,2026-04-05,Portal,Upsell,Medium,Resolved,26,E030
+CI00238,C0293,2026-02-14,Chat,Upsell,Low,Resolved,36,E033
+CI00239,C0060,2025-03-26,Chat,Upsell,Medium,Open,39,E042
+CI00240,C0155,2025-03-25,Chat,Technical Support,Urgent,Escalated,38,E022
+CI00241,C0180,2025-08-31,Chat,Upsell,Low,Pending,11,E014
+CI00242,C0245,2025-03-07,Meeting,Technical Support,High,Escalated,1,E025
+CI00243,C0267,2026-05-01,Chat,Technical Support,Medium,Escalated,40,E017
+CI00244,C0292,2025-03-23,Email,Upsell,Urgent,Resolved,2,E039
+CI00245,C0132,2025-07-21,Portal,Question,Urgent,Pending,9,E026
+CI00246,C0113,2026-02-20,Portal,Question,Urgent,Pending,18,E020
+CI00247,C0180,2026-02-07,Meeting,Renewal,Urgent,Open,21,E009
+CI00248,C0290,2025-12-26,Chat,Renewal,Medium,Open,14,E059
+CI00249,C0126,2025-04-24,Email,Technical Support,Medium,Pending,34,E008
+CI00250,C0083,2026-04-03,Meeting,Technical Support,Medium,Open,35,E080
+CI00251,C0213,2025-06-10,Phone,Upsell,Urgent,Pending,35,E061
+CI00252,C0203,2026-05-31,Email,Upsell,High,Escalated,40,E046
+CI00253,C0299,2026-03-22,Chat,Renewal,Medium,Open,3,E014
+CI00254,C0150,2025-10-28,Chat,Technical Support,Urgent,Open,40,E054
+CI00255,C0001,2025-11-11,Chat,Complaint,Urgent,Escalated,27,E079
+CI00256,C0198,2025-05-05,Chat,Complaint,High,Escalated,10,E026
+CI00257,C0121,2025-03-17,Meeting,Technical Support,Low,Open,38,E006
+CI00258,C0021,2025-03-29,Meeting,Question,Urgent,Pending,7,E046
+CI00259,C0246,2026-10-14,Email,Complaint,Low,Pending,39,E055
+CI00260,C0178,2025-08-02,Phone,Upsell,Low,Open,20,E070
+CI00261,C0032,2026-07-25,Meeting,Upsell,Medium,Escalated,39,E005
+CI00262,C0073,2026-09-24,Phone,Technical Support,Urgent,Escalated,22,E063
+CI00263,C0181,2025-02-25,Email,Renewal,Low,Escalated,33,E051
+CI00264,C0262,2026-09-29,Chat,Renewal,High,Resolved,29,E071
+CI00265,C0042,2026-02-28,Portal,Complaint,Medium,Resolved,28,E014
+CI00266,C0162,2026-04-16,Portal,Complaint,High,Resolved,20,E054
+CI00267,C0224,2026-02-11,Meeting,Upsell,Medium,Resolved,20,E022
+CI00268,C0199,2026-09-15,Phone,Complaint,Urgent,Open,23,E041
+CI00269,C0274,2025-07-25,Chat,Upsell,Medium,Pending,39,E021
+CI00270,C0078,2025-07-14,Meeting,Question,Low,Resolved,3,E037
+CI00271,C0107,2025-06-09,Phone,Complaint,Low,Escalated,37,E042
+CI00272,C0059,2025-05-13,Chat,Question,Low,Escalated,39,E022
+CI00273,C0119,2025-03-24,Portal,Complaint,Low,Resolved,39,E029
+CI00274,C0212,2025-10-08,Portal,Complaint,High,Open,39,E033
+CI00275,C0269,2026-05-16,Phone,Renewal,High,Escalated,24,E039
+CI00276,C0187,2026-04-24,Portal,Renewal,High,Escalated,34,E003
+CI00277,C0080,2025-10-29,Chat,Technical Support,Medium,Open,26,E008
+CI00278,C0060,2025-11-16,Portal,Complaint,Low,Pending,22,E050
+CI00279,C0021,2026-07-05,Chat,Complaint,High,Open,15,E045
+CI00280,C0285,2025-09-20,Phone,Technical Support,Urgent,Resolved,16,E022
+CI00281,C0196,2026-10-24,Portal,Technical Support,High,Escalated,27,E016
+CI00282,C0284,2025-01-30,Phone,Complaint,Low,Pending,20,E011
+CI00283,C0010,2026-11-21,Phone,Question,Medium,Pending,5,E073
+CI00284,C0164,2025-08-10,Phone,Upsell,Low,Resolved,42,E001
+CI00285,C0208,2026-06-15,Email,Question,Medium,Escalated,18,E025
+CI00286,C0003,2025-01-16,Meeting,Upsell,High,Resolved,3,E037
+CI00287,C0160,2025-10-21,Portal,Question,Medium,Escalated,34,E029
+CI00288,C0238,2026-03-28,Meeting,Upsell,Urgent,Resolved,45,E059
+CI00289,C0039,2026-01-22,Chat,Technical Support,High,Open,32,E002
+CI00290,C0014,2025-01-16,Portal,Complaint,Medium,Resolved,9,E071
+CI00291,C0073,2025-05-09,Phone,Upsell,Urgent,Escalated,22,E032
+CI00292,C0299,2025-03-13,Chat,Question,Urgent,Resolved,41,E019
+CI00293,C0093,2025-12-02,Phone,Question,High,Escalated,47,E019
+CI00294,C0104,2026-04-01,Chat,Upsell,Medium,Pending,33,E030
+CI00295,C0040,2026-06-29,Meeting,Renewal,Medium,Open,44,E049
+CI00296,C0262,2025-06-25,Phone,Upsell,High,Pending,42,E065
+CI00297,C0271,2026-10-07,Email,Technical Support,High,Resolved,17,E010
+CI00298,C0225,2026-04-08,Email,Renewal,High,Open,32,E051
+CI00299,C0013,2026-04-08,Portal,Renewal,Low,Resolved,24,E003
+CI00300,C0257,2025-01-20,Meeting,Upsell,Low,Resolved,12,E024
+CI00301,C0235,2025-02-25,Chat,Question,Low,Escalated,19,E030
+CI00302,C0125,2026-08-26,Portal,Upsell,Urgent,Pending,16,E029
+CI00303,C0123,2025-09-29,Meeting,Technical Support,Low,Open,46,E022
+CI00304,C0035,2025-10-19,Chat,Question,Medium,Pending,5,E064
+CI00305,C0268,2026-07-29,Phone,Question,Urgent,Open,39,E034
+CI00306,C0210,2026-08-14,Email,Upsell,Low,Resolved,10,E012
+CI00307,C0293,2025-09-07,Email,Technical Support,High,Pending,15,E054
+CI00308,C0103,2026-06-01,Portal,Question,High,Resolved,21,E063
+CI00309,C0025,2026-05-18,Phone,Technical Support,High,Open,16,E034
+CI00310,C0280,2025-11-30,Meeting,Upsell,Low,Open,4,E037
+CI00311,C0073,2025-11-25,Phone,Technical Support,Medium,Resolved,11,E052
+CI00312,C0071,2025-11-18,Email,Complaint,Urgent,Open,46,E052
+CI00313,C0213,2026-06-18,Chat,Technical Support,Medium,Escalated,45,E071
+CI00314,C0258,2025-08-24,Phone,Question,High,Resolved,30,E066
+CI00315,C0168,2025-03-29,Portal,Renewal,Low,Resolved,25,E018
+CI00316,C0207,2026-08-18,Meeting,Technical Support,Low,Escalated,34,E045
+CI00317,C0180,2026-01-08,Email,Question,Low,Pending,22,E019
+CI00318,C0203,2025-08-30,Email,Complaint,High,Open,8,E065
+CI00319,C0166,2025-12-26,Phone,Question,Medium,Resolved,25,E007
+CI00320,C0161,2026-01-11,Meeting,Question,Medium,Resolved,25,E001
+CI00321,C0226,2026-03-01,Phone,Complaint,High,Open,37,E041
+CI00322,C0099,2026-07-30,Meeting,Renewal,Medium,Resolved,17,E037
+CI00323,C0005,2025-04-23,Phone,Technical Support,High,Escalated,6,E034
+CI00324,C0079,2025-08-18,Phone,Complaint,High,Pending,37,E055
+CI00325,C0240,2026-07-18,Phone,Renewal,High,Escalated,12,E050
+CI00326,C0261,2025-07-30,Chat,Question,Urgent,Resolved,19,E043
+CI00327,C0240,2025-04-12,Portal,Renewal,High,Escalated,23,E020
+CI00328,C0214,2025-06-17,Phone,Question,Urgent,Pending,18,E028
+CI00329,C0022,2026-04-07,Portal,Technical Support,Medium,Escalated,13,E040
+CI00330,C0210,2026-06-28,Chat,Renewal,Medium,Resolved,45,E011
+CI00331,C0189,2025-08-15,Portal,Technical Support,High,Open,37,E032
+CI00332,C0005,2026-08-15,Portal,Complaint,High,Pending,37,E027
+CI00333,C0251,2025-10-11,Meeting,Renewal,Low,Open,20,E024
+CI00334,C0149,2026-11-19,Portal,Complaint,Urgent,Pending,3,E048
+CI00335,C0053,2025-03-27,Meeting,Technical Support,High,Resolved,3,E022
+CI00336,C0220,2026-05-24,Portal,Upsell,Low,Resolved,39,E012
+CI00337,C0033,2026-11-10,Email,Renewal,Low,Pending,45,E057
+CI00338,C0252,2026-07-10,Meeting,Upsell,High,Resolved,28,E039
+CI00339,C0294,2026-04-13,Email,Complaint,High,Resolved,43,E017
+CI00340,C0067,2026-03-12,Phone,Upsell,Medium,Open,46,E050
+CI00341,C0133,2025-01-18,Meeting,Technical Support,Urgent,Escalated,8,E019
+CI00342,C0061,2026-05-01,Meeting,Upsell,Medium,Resolved,33,E031
+CI00343,C0297,2025-09-30,Chat,Technical Support,High,Escalated,22,E043
+CI00344,C0172,2025-05-13,Meeting,Renewal,Low,Pending,15,E056
+CI00345,C0254,2025-10-20,Portal,Question,Urgent,Escalated,6,E069
+CI00346,C0175,2025-10-29,Chat,Technical Support,Urgent,Open,29,E066
+CI00347,C0001,2025-09-06,Phone,Technical Support,Medium,Resolved,46,E025
+CI00348,C0293,2025-07-14,Portal,Technical Support,Medium,Pending,23,E006
+CI00349,C0218,2025-06-15,Phone,Renewal,Low,Open,41,E011
+CI00350,C0036,2025-11-21,Chat,Complaint,High,Escalated,5,E027
+CI00351,C0207,2025-12-15,Meeting,Complaint,Urgent,Open,27,E008
+CI00352,C0204,2025-03-05,Phone,Complaint,Medium,Resolved,28,E064
+CI00353,C0218,2025-09-01,Chat,Question,Medium,Pending,8,E067
+CI00354,C0065,2025-12-09,Phone,Upsell,Low,Pending,12,E003
+CI00355,C0125,2026-01-16,Phone,Technical Support,High,Open,37,E059
+CI00356,C0250,2026-07-17,Meeting,Complaint,High,Open,20,E028
+CI00357,C0181,2025-11-28,Meeting,Technical Support,Urgent,Pending,15,E003
+CI00358,C0143,2025-11-21,Meeting,Upsell,Urgent,Pending,46,E066
+CI00359,C0081,2025-03-18,Email,Upsell,Medium,Resolved,38,E039
+CI00360,C0013,2026-06-05,Phone,Upsell,High,Resolved,17,E014
+CI00361,C0198,2026-06-27,Meeting,Technical Support,Urgent,Open,38,E022
+CI00362,C0178,2025-11-18,Chat,Upsell,Low,Pending,42,E016
+CI00363,C0247,2025-08-28,Portal,Complaint,Medium,Resolved,30,E041
+CI00364,C0105,2025-06-09,Chat,Renewal,Low,Escalated,18,E049
+CI00365,C0185,2026-03-30,Email,Complaint,Medium,Escalated,3,E032
+CI00366,C0095,2025-10-02,Phone,Question,Medium,Resolved,19,E015
+CI00367,C0290,2025-01-01,Meeting,Question,High,Escalated,29,E037
+CI00368,C0212,2026-07-29,Phone,Upsell,Medium,Resolved,32,E062
+CI00369,C0083,2026-11-18,Chat,Upsell,Urgent,Open,5,E054
+CI00370,C0044,2025-06-11,Chat,Upsell,Medium,Pending,40,E055
+CI00371,C0191,2026-07-27,Meeting,Technical Support,Low,Escalated,14,E052
+CI00372,C0061,2025-11-29,Email,Renewal,Low,Escalated,20,E050
+CI00373,C0020,2025-01-18,Email,Complaint,High,Pending,2,E022
+CI00374,C0173,2025-04-19,Portal,Technical Support,Urgent,Escalated,48,E034
+CI00375,C0091,2026-09-10,Email,Upsell,Urgent,Escalated,9,E016
+CI00376,C0115,2025-02-19,Email,Renewal,Urgent,Resolved,33,E063
+CI00377,C0107,2026-08-23,Email,Technical Support,Urgent,Resolved,1,E043
+CI00378,C0220,2025-09-18,Meeting,Renewal,High,Open,46,E035
+CI00379,C0276,2026-04-01,Phone,Upsell,Urgent,Open,12,E067
+CI00380,C0010,2025-05-11,Phone,Question,High,Resolved,38,E073
+CI00381,C0117,2026-03-31,Phone,Technical Support,Urgent,Escalated,34,E060
+CI00382,C0272,2025-03-02,Email,Upsell,High,Open,10,E074
+CI00383,C0164,2025-12-31,Email,Upsell,Urgent,Resolved,20,E029
+CI00384,C0074,2025-10-03,Email,Technical Support,High,Resolved,4,E024
+CI00385,C0299,2025-04-23,Meeting,Renewal,High,Open,36,E003
+CI00386,C0221,2025-07-02,Portal,Renewal,Medium,Resolved,34,E040
+CI00387,C0233,2026-04-06,Chat,Upsell,Low,Escalated,27,E059
+CI00388,C0290,2026-02-16,Chat,Renewal,Low,Open,9,E010
+CI00389,C0165,2025-10-26,Chat,Question,Urgent,Pending,30,E054
+CI00390,C0057,2026-05-29,Phone,Question,Low,Pending,48,E026
+CI00391,C0279,2026-10-04,Phone,Upsell,Urgent,Resolved,21,E064
+CI00392,C0280,2026-08-12,Chat,Upsell,Medium,Escalated,19,E054
+CI00393,C0178,2025-10-13,Email,Question,High,Resolved,31,E075
+CI00394,C0008,2026-09-15,Email,Complaint,Low,Escalated,18,E067
+CI00395,C0033,2026-09-08,Portal,Question,High,Resolved,22,E074
+CI00396,C0129,2026-05-31,Meeting,Upsell,Low,Pending,29,E017
+CI00397,C0075,2026-01-08,Chat,Question,Urgent,Open,24,E050
+CI00398,C0243,2026-06-19,Phone,Technical Support,High,Resolved,3,E040
+CI00399,C0045,2025-12-21,Portal,Technical Support,Medium,Open,26,E080
+CI00400,C0117,2025-11-09,Chat,Technical Support,Urgent,Pending,25,E011
+CI00401,C0018,2026-05-06,Meeting,Renewal,Medium,Resolved,15,E030
+CI00402,C0298,2025-06-21,Portal,Question,Urgent,Pending,44,E051
+CI00403,C0080,2026-10-22,Chat,Renewal,Low,Escalated,30,E026
+CI00404,C0136,2025-09-15,Phone,Question,Urgent,Pending,41,E038
+CI00405,C0012,2026-04-21,Chat,Renewal,Urgent,Resolved,37,E032
+CI00406,C0277,2025-10-21,Email,Complaint,Medium,Open,13,E057
+CI00407,C0039,2026-11-12,Chat,Complaint,Low,Resolved,33,E026
+CI00408,C0025,2026-02-09,Portal,Upsell,Urgent,Resolved,29,E064
+CI00409,C0086,2025-05-27,Portal,Upsell,Urgent,Open,20,E066
+CI00410,C0273,2025-09-03,Chat,Renewal,High,Resolved,3,E009
+CI00411,C0164,2025-01-18,Meeting,Complaint,Urgent,Escalated,35,E003
+CI00412,C0128,2026-07-06,Phone,Technical Support,Medium,Escalated,23,E054
+CI00413,C0101,2026-07-03,Chat,Upsell,Low,Open,21,E061
+CI00414,C0286,2025-09-21,Meeting,Technical Support,High,Open,12,E075
+CI00415,C0205,2026-08-30,Phone,Technical Support,High,Resolved,19,E028
+CI00416,C0038,2026-06-19,Chat,Renewal,Urgent,Escalated,41,E066
+CI00417,C0088,2025-12-04,Email,Complaint,Medium,Resolved,24,E010
+CI00418,C0001,2025-08-19,Portal,Upsell,Urgent,Open,25,E080
+CI00419,C0263,2026-05-10,Chat,Technical Support,Urgent,Pending,47,E062
+CI00420,C0158,2026-09-28,Meeting,Technical Support,Medium,Escalated,10,E023
+CI00421,C0291,2025-01-04,Portal,Question,Low,Escalated,25,E031
+CI00422,C0224,2026-10-25,Phone,Complaint,Low,Resolved,16,E018
+CI00423,C0099,2026-05-10,Phone,Complaint,Urgent,Escalated,18,E052
+CI00424,C0105,2026-05-27,Chat,Complaint,Urgent,Resolved,4,E028
+CI00425,C0093,2026-02-18,Chat,Renewal,Low,Resolved,32,E059
+CI00426,C0271,2026-07-05,Portal,Technical Support,Urgent,Pending,2,E055
+CI00427,C0005,2025-10-13,Meeting,Upsell,Urgent,Resolved,29,E026
+CI00428,C0210,2026-07-05,Meeting,Complaint,Medium,Escalated,30,E042
+CI00429,C0292,2026-03-27,Chat,Question,High,Escalated,11,E053
+CI00430,C0145,2025-01-17,Phone,Question,Urgent,Escalated,44,E064
+CI00431,C0186,2026-04-11,Meeting,Upsell,Medium,Open,28,E028
+CI00432,C0280,2026-01-18,Portal,Complaint,Medium,Open,17,E055
+CI00433,C0048,2025-08-09,Portal,Technical Support,Urgent,Open,7,E007
+CI00434,C0247,2025-10-30,Chat,Technical Support,Medium,Pending,42,E051
+CI00435,C0071,2025-05-27,Portal,Upsell,Low,Resolved,22,E008
+CI00436,C0176,2025-11-14,Email,Technical Support,Urgent,Pending,7,E042
+CI00437,C0255,2026-09-20,Phone,Upsell,High,Pending,21,E006
+CI00438,C0260,2026-01-16,Phone,Upsell,Medium,Resolved,37,E004
+CI00439,C0089,2025-07-17,Phone,Renewal,Low,Open,35,E055
+CI00440,C0223,2025-10-02,Phone,Technical Support,Urgent,Escalated,15,E016
+CI00441,C0077,2025-04-24,Phone,Technical Support,Urgent,Pending,40,E055
+CI00442,C0204,2026-09-05,Phone,Upsell,Low,Resolved,36,E026
+CI00443,C0094,2025-03-29,Phone,Complaint,Urgent,Open,35,E070
+CI00444,C0215,2025-11-22,Email,Question,Urgent,Escalated,16,E036
+CI00445,C0082,2025-04-25,Meeting,Question,Urgent,Resolved,21,E019
+CI00446,C0222,2026-09-19,Portal,Question,Low,Escalated,10,E001
+CI00447,C0263,2025-07-23,Meeting,Question,High,Escalated,13,E069
+CI00448,C0252,2026-02-06,Email,Renewal,Urgent,Escalated,8,E057
+CI00449,C0222,2025-11-03,Meeting,Question,Low,Pending,27,E043
+CI00450,C0199,2025-12-23,Chat,Technical Support,Low,Pending,47,E003
+CI00451,C0016,2025-04-15,Chat,Upsell,High,Pending,8,E040
+CI00452,C0024,2025-05-13,Phone,Upsell,Medium,Resolved,25,E072
+CI00453,C0241,2025-05-30,Email,Renewal,Low,Escalated,3,E060
+CI00454,C0234,2026-10-04,Meeting,Complaint,High,Resolved,21,E005
+CI00455,C0283,2025-07-18,Chat,Upsell,High,Escalated,19,E034
+CI00456,C0296,2025-09-07,Chat,Technical Support,High,Open,27,E041
+CI00457,C0297,2026-10-21,Phone,Complaint,High,Open,31,E009
+CI00458,C0104,2026-04-06,Phone,Renewal,High,Resolved,39,E061
+CI00459,C0147,2026-04-09,Chat,Complaint,High,Escalated,15,E051
+CI00460,C0144,2026-04-18,Meeting,Renewal,Medium,Pending,42,E066
+CI00461,C0220,2026-06-15,Phone,Technical Support,High,Escalated,9,E015
+CI00462,C0252,2026-01-09,Chat,Complaint,Low,Pending,21,E054
+CI00463,C0025,2025-04-25,Portal,Renewal,Medium,Open,8,E046
+CI00464,C0020,2025-01-31,Chat,Renewal,Urgent,Escalated,33,E059
+CI00465,C0078,2026-04-23,Portal,Complaint,High,Pending,5,E033
+CI00466,C0110,2025-08-28,Portal,Technical Support,High,Resolved,42,E007
+CI00467,C0189,2025-07-09,Meeting,Upsell,Medium,Escalated,24,E017
+CI00468,C0220,2025-02-12,Phone,Upsell,Urgent,Open,4,E027
+CI00469,C0265,2025-01-17,Email,Renewal,Medium,Resolved,9,E040
+CI00470,C0007,2026-01-05,Phone,Complaint,Medium,Resolved,18,E052
+CI00471,C0018,2025-05-03,Portal,Question,Medium,Resolved,9,E059
+CI00472,C0222,2025-10-07,Meeting,Upsell,Low,Pending,34,E001
+CI00473,C0031,2026-03-21,Phone,Renewal,Low,Escalated,28,E057
+CI00474,C0140,2026-09-16,Email,Renewal,Low,Resolved,7,E013
+CI00475,C0191,2026-08-16,Portal,Technical Support,Low,Open,2,E057
+CI00476,C0292,2026-01-25,Meeting,Technical Support,Medium,Pending,40,E021
+CI00477,C0242,2025-11-13,Chat,Complaint,Medium,Pending,15,E016
+CI00478,C0256,2026-05-11,Meeting,Complaint,Low,Resolved,38,E057
+CI00479,C0077,2025-05-13,Portal,Renewal,Low,Pending,32,E021
+CI00480,C0195,2026-09-15,Email,Complaint,High,Open,36,E038
+CI00481,C0273,2026-01-16,Phone,Complaint,Medium,Escalated,23,E077
+CI00482,C0101,2025-05-24,Meeting,Question,Low,Resolved,7,E051
+CI00483,C0153,2026-06-19,Email,Complaint,Urgent,Open,8,E026
+CI00484,C0037,2025-08-02,Meeting,Question,Urgent,Pending,47,E072
+CI00485,C0149,2025-03-10,Email,Technical Support,Medium,Escalated,48,E013
+CI00486,C0031,2025-10-11,Chat,Technical Support,Low,Escalated,46,E064
+CI00487,C0108,2025-11-11,Email,Upsell,Medium,Escalated,3,E022
+CI00488,C0202,2025-10-18,Email,Renewal,Urgent,Resolved,47,E036
+CI00489,C0255,2026-05-18,Meeting,Complaint,High,Escalated,25,E070
+CI00490,C0262,2025-08-10,Portal,Renewal,High,Resolved,14,E057
+CI00491,C0009,2026-04-30,Portal,Complaint,High,Resolved,21,E062
+CI00492,C0040,2026-02-02,Portal,Technical Support,High,Escalated,26,E002
+CI00493,C0158,2026-03-30,Email,Complaint,Urgent,Open,20,E049
+CI00494,C0098,2026-02-27,Chat,Technical Support,Urgent,Escalated,12,E023
+CI00495,C0022,2025-03-09,Phone,Complaint,Low,Escalated,7,E016
+CI00496,C0216,2025-05-30,Chat,Question,Urgent,Resolved,18,E014
+CI00497,C0128,2025-06-18,Portal,Complaint,Medium,Open,16,E006
+CI00498,C0152,2025-07-06,Phone,Complaint,High,Resolved,32,E080
+CI00499,C0146,2025-12-20,Chat,Technical Support,Urgent,Open,40,E028
+CI00500,C0043,2026-05-13,Chat,Technical Support,Medium,Pending,32,E038
+CI00501,C0117,2025-01-21,Chat,Complaint,Medium,Escalated,27,E044
+CI00502,C0155,2025-07-30,Phone,Complaint,Medium,Resolved,8,E046
+CI00503,C0187,2025-04-30,Portal,Upsell,Urgent,Resolved,6,E039
+CI00504,C0015,2025-05-14,Phone,Renewal,Urgent,Resolved,31,E024
+CI00505,C0139,2026-04-20,Chat,Complaint,High,Resolved,9,E019
+CI00506,C0090,2025-10-16,Chat,Renewal,Urgent,Resolved,27,E006
+CI00507,C0143,2026-04-20,Meeting,Technical Support,Urgent,Escalated,41,E044
+CI00508,C0188,2026-07-17,Email,Upsell,Low,Escalated,35,E043
+CI00509,C0170,2026-11-19,Chat,Complaint,Urgent,Resolved,37,E020
+CI00510,C0137,2026-05-28,Email,Complaint,Medium,Resolved,26,E035
+CI00511,C0183,2026-04-14,Chat,Renewal,Low,Resolved,36,E072
+CI00512,C0287,2026-05-07,Meeting,Upsell,High,Pending,37,E062
+CI00513,C0100,2026-09-25,Phone,Technical Support,Urgent,Resolved,25,E070
+CI00514,C0066,2025-08-03,Email,Question,Medium,Pending,30,E047
+CI00515,C0121,2025-06-02,Chat,Upsell,Urgent,Open,11,E059
+CI00516,C0007,2025-03-24,Meeting,Upsell,Medium,Resolved,45,E079
+CI00517,C0024,2025-04-09,Portal,Technical Support,Urgent,Open,16,E047
+CI00518,C0058,2026-11-10,Email,Question,High,Resolved,24,E043
+CI00519,C0059,2025-08-01,Portal,Renewal,Urgent,Resolved,36,E051
+CI00520,C0068,2025-11-02,Email,Upsell,Medium,Open,9,E033
+CI00521,C0066,2026-11-08,Chat,Upsell,Medium,Pending,15,E038
+CI00522,C0193,2025-01-29,Portal,Renewal,Medium,Open,11,E080
+CI00523,C0210,2025-06-17,Meeting,Complaint,High,Resolved,21,E069
+CI00524,C0060,2025-07-26,Portal,Technical Support,High,Open,12,E054
+CI00525,C0159,2025-12-12,Phone,Question,High,Resolved,19,E027
+CI00526,C0155,2026-07-07,Meeting,Complaint,Medium,Resolved,40,E063
+CI00527,C0014,2025-12-05,Meeting,Complaint,Urgent,Resolved,19,E075
+CI00528,C0125,2025-06-20,Chat,Complaint,High,Resolved,13,E016
+CI00529,C0133,2025-07-02,Portal,Question,Medium,Open,28,E019
+CI00530,C0176,2026-03-02,Meeting,Upsell,Urgent,Escalated,33,E071
+CI00531,C0024,2025-02-06,Email,Technical Support,Low,Resolved,23,E042
+CI00532,C0228,2025-06-06,Email,Technical Support,Urgent,Open,22,E049
+CI00533,C0197,2026-01-11,Portal,Renewal,Urgent,Resolved,29,E014
+CI00534,C0140,2026-01-10,Portal,Renewal,Low,Open,4,E078
+CI00535,C0190,2026-01-05,Portal,Question,Low,Pending,45,E001
+CI00536,C0288,2025-05-23,Portal,Question,Urgent,Pending,43,E005
+CI00537,C0094,2026-01-30,Email,Upsell,High,Escalated,32,E002
+CI00538,C0108,2026-08-06,Meeting,Complaint,High,Open,9,E076
+CI00539,C0214,2026-11-06,Phone,Technical Support,High,Escalated,44,E019
+CI00540,C0283,2025-12-09,Portal,Upsell,Low,Escalated,13,E072
+CI00541,C0142,2026-04-20,Portal,Renewal,Low,Escalated,30,E024
+CI00542,C0295,2026-07-31,Email,Question,Medium,Resolved,26,E046
+CI00543,C0021,2026-05-20,Meeting,Complaint,High,Pending,44,E078
+CI00544,C0168,2026-11-21,Portal,Renewal,Urgent,Pending,39,E041
+CI00545,C0241,2025-04-19,Portal,Renewal,Medium,Pending,33,E050
+CI00546,C0148,2026-03-21,Phone,Complaint,High,Pending,41,E046
+CI00547,C0114,2025-10-19,Email,Question,Low,Pending,28,E047
+CI00548,C0095,2026-01-05,Portal,Renewal,Low,Resolved,14,E076
+CI00549,C0161,2026-08-02,Chat,Complaint,Medium,Pending,19,E032
+CI00550,C0087,2026-01-30,Chat,Complaint,Urgent,Resolved,30,E046
+CI00551,C0252,2025-12-19,Phone,Complaint,High,Open,40,E005
+CI00552,C0109,2026-05-08,Phone,Upsell,Low,Escalated,19,E059
+CI00553,C0178,2025-12-01,Email,Upsell,Medium,Escalated,27,E073
+CI00554,C0204,2026-11-11,Email,Upsell,Urgent,Escalated,5,E066
+CI00555,C0268,2026-10-04,Phone,Complaint,Urgent,Open,26,E040
+CI00556,C0176,2026-09-24,Email,Complaint,Low,Pending,42,E075
+CI00557,C0291,2026-03-07,Phone,Question,Urgent,Resolved,13,E013
+CI00558,C0270,2025-04-16,Chat,Upsell,Medium,Pending,4,E038
+CI00559,C0223,2026-05-24,Email,Technical Support,High,Escalated,13,E041
+CI00560,C0269,2026-07-07,Chat,Technical Support,Low,Escalated,45,E062
+CI00561,C0028,2025-05-21,Email,Question,Urgent,Escalated,9,E011
+CI00562,C0258,2026-05-03,Meeting,Question,High,Resolved,44,E026
+CI00563,C0294,2026-10-06,Chat,Question,Urgent,Resolved,6,E070
+CI00564,C0034,2025-11-08,Phone,Question,Urgent,Escalated,9,E047
+CI00565,C0006,2026-08-09,Email,Renewal,High,Open,23,E070
+CI00566,C0131,2026-01-20,Phone,Complaint,Medium,Open,36,E078
+CI00567,C0113,2025-12-26,Phone,Technical Support,Medium,Pending,16,E004
+CI00568,C0262,2026-01-24,Meeting,Question,Low,Pending,18,E063
+CI00569,C0246,2026-11-12,Chat,Renewal,Urgent,Pending,21,E009
+CI00570,C0146,2025-11-01,Meeting,Complaint,Medium,Pending,10,E047
+CI00571,C0125,2026-09-02,Phone,Renewal,Low,Pending,3,E058
+CI00572,C0181,2025-06-09,Email,Upsell,Medium,Resolved,17,E069
+CI00573,C0110,2026-04-04,Meeting,Renewal,High,Resolved,25,E072
+CI00574,C0199,2026-07-31,Email,Question,High,Open,44,E011
+CI00575,C0251,2026-10-26,Meeting,Question,Medium,Escalated,2,E037
+CI00576,C0077,2026-11-10,Email,Technical Support,Urgent,Pending,17,E015
+CI00577,C0029,2026-07-03,Phone,Question,Low,Resolved,3,E025
+CI00578,C0167,2025-01-31,Phone,Question,Urgent,Open,9,E080
+CI00579,C0138,2025-07-29,Email,Upsell,Urgent,Escalated,42,E007
+CI00580,C0080,2026-08-18,Portal,Upsell,Medium,Open,37,E035
+CI00581,C0295,2026-02-03,Chat,Upsell,Urgent,Resolved,36,E079
+CI00582,C0152,2025-11-29,Phone,Renewal,High,Open,32,E006
+CI00583,C0129,2026-04-23,Meeting,Upsell,Medium,Pending,19,E057
+CI00584,C0121,2025-05-15,Phone,Technical Support,Medium,Pending,8,E044
+CI00585,C0059,2025-09-13,Phone,Question,Low,Escalated,25,E004
+CI00586,C0127,2025-08-04,Chat,Technical Support,Low,Pending,16,E073
+CI00587,C0278,2025-07-27,Phone,Renewal,Medium,Resolved,43,E018
+CI00588,C0105,2026-10-13,Chat,Upsell,High,Pending,5,E031
+CI00589,C0242,2026-10-12,Chat,Upsell,High,Pending,46,E071
+CI00590,C0290,2025-11-22,Portal,Question,Urgent,Open,16,E031
+CI00591,C0037,2025-04-06,Phone,Complaint,Low,Pending,47,E016
+CI00592,C0185,2025-06-10,Email,Complaint,Medium,Escalated,32,E038
+CI00593,C0032,2025-09-15,Chat,Question,Urgent,Escalated,36,E065
+CI00594,C0087,2025-07-25,Chat,Complaint,Urgent,Escalated,36,E034
+CI00595,C0022,2025-03-26,Phone,Upsell,High,Escalated,18,E022
+CI00596,C0036,2026-06-26,Email,Renewal,High,Resolved,23,E057
+CI00597,C0001,2025-10-05,Phone,Renewal,High,Escalated,23,E047
+CI00598,C0291,2025-11-13,Portal,Upsell,Low,Resolved,24,E072
+CI00599,C0120,2025-09-30,Portal,Renewal,Low,Resolved,8,E058
+CI00600,C0006,2025-06-01,Meeting,Question,Medium,Open,21,E035
+CI00601,C0012,2026-01-01,Phone,Upsell,Low,Open,47,E009
+CI00602,C0149,2026-02-10,Portal,Renewal,Medium,Resolved,16,E046
+CI00603,C0103,2025-04-20,Chat,Upsell,Urgent,Open,41,E080
+CI00604,C0116,2025-03-05,Portal,Complaint,Urgent,Pending,8,E072
+CI00605,C0265,2025-12-06,Phone,Complaint,Low,Pending,42,E018
+CI00606,C0121,2026-01-12,Chat,Technical Support,Medium,Open,34,E077
+CI00607,C0227,2026-04-05,Portal,Renewal,Medium,Pending,33,E051
+CI00608,C0126,2025-12-12,Chat,Complaint,Low,Pending,9,E002
+CI00609,C0237,2025-12-09,Portal,Complaint,Medium,Escalated,42,E010
+CI00610,C0118,2025-06-27,Phone,Renewal,Low,Escalated,41,E031
+CI00611,C0191,2025-02-28,Chat,Upsell,Urgent,Escalated,26,E036
+CI00612,C0184,2026-02-09,Meeting,Renewal,Medium,Resolved,6,E005
+CI00613,C0038,2025-05-31,Email,Question,High,Resolved,35,E022
+CI00614,C0291,2025-03-01,Phone,Technical Support,Low,Open,25,E058
+CI00615,C0017,2025-12-22,Meeting,Complaint,Medium,Escalated,4,E064
+CI00616,C0141,2026-08-21,Phone,Complaint,Urgent,Pending,32,E026
+CI00617,C0047,2025-04-20,Meeting,Upsell,Medium,Pending,2,E025
+CI00618,C0219,2025-09-03,Chat,Question,Medium,Resolved,8,E007
+CI00619,C0132,2025-05-26,Phone,Upsell,Low,Pending,36,E027
+CI00620,C0038,2025-07-08,Phone,Upsell,Medium,Resolved,22,E004
+CI00621,C0034,2026-10-27,Chat,Question,Low,Resolved,17,E060
+CI00622,C0274,2025-03-20,Portal,Question,Urgent,Pending,33,E067
+CI00623,C0007,2025-08-03,Meeting,Renewal,Low,Escalated,7,E003
+CI00624,C0089,2025-05-07,Phone,Question,High,Resolved,43,E019
+CI00625,C0225,2025-02-05,Email,Upsell,High,Open,30,E056
+CI00626,C0046,2025-10-25,Meeting,Upsell,Medium,Escalated,45,E050
+CI00627,C0243,2025-10-21,Chat,Complaint,Low,Open,12,E038
+CI00628,C0122,2026-11-11,Portal,Technical Support,High,Pending,21,E051
+CI00629,C0177,2025-09-14,Meeting,Upsell,Urgent,Open,18,E068
+CI00630,C0064,2025-10-15,Email,Renewal,High,Resolved,33,E005
+CI00631,C0204,2026-07-30,Portal,Renewal,Urgent,Resolved,22,E047
+CI00632,C0146,2026-04-06,Chat,Question,Low,Open,3,E050
+CI00633,C0137,2025-01-25,Meeting,Complaint,Urgent,Pending,39,E013
+CI00634,C0178,2026-08-11,Portal,Upsell,High,Open,45,E051
+CI00635,C0215,2026-02-09,Meeting,Technical Support,Urgent,Escalated,38,E079
+CI00636,C0138,2025-10-13,Email,Technical Support,Low,Open,9,E079
+CI00637,C0274,2026-05-04,Portal,Question,Low,Pending,32,E017
+CI00638,C0273,2025-02-10,Chat,Technical Support,Urgent,Escalated,30,E021
+CI00639,C0137,2025-03-07,Email,Renewal,Urgent,Escalated,7,E031
+CI00640,C0120,2026-09-02,Portal,Technical Support,Low,Escalated,29,E003
+CI00641,C0280,2026-02-26,Meeting,Question,Medium,Pending,40,E074
+CI00642,C0154,2025-05-04,Email,Renewal,Low,Resolved,22,E055
+CI00643,C0010,2026-10-16,Meeting,Question,Urgent,Resolved,17,E053
+CI00644,C0295,2026-08-21,Chat,Renewal,High,Pending,36,E024
+CI00645,C0158,2025-12-13,Chat,Upsell,Low,Resolved,42,E004
+CI00646,C0007,2025-03-23,Meeting,Renewal,Medium,Pending,46,E044
+CI00647,C0210,2025-03-07,Portal,Technical Support,High,Escalated,1,E053
+CI00648,C0212,2025-10-23,Chat,Complaint,Urgent,Open,4,E040
+CI00649,C0192,2025-05-28,Chat,Renewal,Medium,Resolved,15,E060
+CI00650,C0064,2025-03-10,Chat,Question,Low,Escalated,31,E002
+CI00651,C0131,2026-01-29,Chat,Technical Support,Urgent,Pending,4,E053
+CI00652,C0247,2026-11-04,Meeting,Complaint,High,Escalated,13,E027
+CI00653,C0186,2026-02-19,Chat,Renewal,Urgent,Resolved,30,E026
+CI00654,C0017,2025-01-18,Phone,Complaint,High,Open,48,E033
+CI00655,C0135,2026-03-09,Email,Complaint,High,Resolved,10,E031
+CI00656,C0132,2025-03-07,Portal,Technical Support,Medium,Escalated,29,E016
+CI00657,C0001,2026-03-06,Portal,Question,Medium,Open,15,E058
+CI00658,C0161,2025-01-21,Email,Technical Support,Urgent,Resolved,34,E004
+CI00659,C0094,2026-04-20,Phone,Renewal,High,Escalated,20,E031
+CI00660,C0067,2025-11-03,Phone,Upsell,Low,Resolved,15,E076
+CI00661,C0207,2026-09-21,Portal,Technical Support,Low,Resolved,17,E077
+CI00662,C0084,2025-08-02,Phone,Upsell,Low,Pending,15,E048
+CI00663,C0184,2025-02-14,Portal,Complaint,High,Open,27,E077
+CI00664,C0123,2026-04-29,Meeting,Complaint,Medium,Pending,31,E079
+CI00665,C0193,2025-11-22,Phone,Upsell,Medium,Pending,1,E065
+CI00666,C0102,2026-10-02,Email,Renewal,Medium,Open,12,E035
+CI00667,C0249,2025-04-15,Portal,Upsell,Urgent,Escalated,14,E064
+CI00668,C0096,2026-10-24,Portal,Technical Support,Medium,Escalated,26,E067
+CI00669,C0165,2025-02-01,Phone,Technical Support,Urgent,Escalated,39,E034
+CI00670,C0117,2026-05-24,Chat,Renewal,High,Escalated,14,E035
+CI00671,C0183,2026-02-14,Chat,Renewal,Medium,Resolved,35,E007
+CI00672,C0298,2026-02-25,Portal,Renewal,Low,Pending,30,E071
+CI00673,C0148,2025-01-21,Chat,Complaint,Medium,Open,7,E076
+CI00674,C0297,2025-02-27,Portal,Upsell,High,Open,33,E053
+CI00675,C0050,2026-06-29,Portal,Complaint,High,Pending,23,E019
+CI00676,C0169,2026-09-18,Meeting,Renewal,Low,Escalated,11,E050
+CI00677,C0220,2026-03-09,Portal,Upsell,Urgent,Escalated,32,E059
+CI00678,C0071,2025-03-12,Email,Complaint,Low,Escalated,48,E026
+CI00679,C0285,2025-07-05,Portal,Question,High,Escalated,13,E002
+CI00680,C0133,2026-10-15,Phone,Question,High,Open,43,E025
+CI00681,C0122,2026-04-08,Chat,Technical Support,High,Open,46,E049
+CI00682,C0061,2025-09-04,Portal,Upsell,Urgent,Pending,35,E002
+CI00683,C0180,2026-06-16,Meeting,Complaint,Urgent,Resolved,17,E044
+CI00684,C0216,2026-02-16,Portal,Renewal,High,Pending,2,E047
+CI00685,C0070,2026-05-27,Portal,Technical Support,Urgent,Pending,13,E079
+CI00686,C0036,2026-09-08,Portal,Technical Support,High,Open,2,E055
+CI00687,C0106,2025-05-16,Portal,Question,High,Open,11,E004
+CI00688,C0040,2025-09-28,Email,Technical Support,Low,Escalated,8,E078
+CI00689,C0248,2025-03-07,Phone,Complaint,Medium,Pending,48,E058
+CI00690,C0055,2025-02-07,Phone,Question,Urgent,Open,30,E004
+CI00691,C0185,2025-11-02,Chat,Question,Low,Escalated,43,E031
+CI00692,C0135,2026-01-13,Portal,Upsell,Urgent,Escalated,48,E057
+CI00693,C0201,2025-08-03,Meeting,Complaint,High,Pending,24,E016
+CI00694,C0118,2026-07-23,Email,Renewal,High,Pending,5,E014
+CI00695,C0176,2026-07-06,Meeting,Renewal,Urgent,Open,47,E047
+CI00696,C0198,2025-07-19,Phone,Renewal,Urgent,Pending,20,E026
+CI00697,C0033,2025-09-14,Phone,Renewal,Low,Resolved,11,E048
+CI00698,C0227,2026-11-08,Meeting,Question,High,Open,43,E026
+CI00699,C0282,2026-10-13,Portal,Question,Low,Resolved,25,E017
+CI00700,C0234,2025-03-20,Email,Complaint,Low,Open,18,E043
+CI00701,C0260,2026-11-06,Email,Renewal,Urgent,Resolved,40,E039
+CI00702,C0026,2026-07-07,Email,Technical Support,High,Open,42,E038
+CI00703,C0167,2026-08-11,Phone,Complaint,Urgent,Pending,7,E066
+CI00704,C0154,2026-04-20,Portal,Complaint,High,Open,10,E050
+CI00705,C0081,2025-12-25,Phone,Technical Support,High,Pending,26,E077
+CI00706,C0202,2026-01-21,Meeting,Complaint,Medium,Escalated,20,E027
+CI00707,C0196,2026-09-02,Email,Technical Support,Low,Open,28,E053
+CI00708,C0099,2026-01-21,Chat,Renewal,Low,Resolved,28,E055
+CI00709,C0095,2025-08-30,Phone,Technical Support,Medium,Open,18,E034
+CI00710,C0088,2025-05-16,Meeting,Complaint,Medium,Resolved,25,E069
+CI00711,C0010,2026-04-05,Meeting,Technical Support,Urgent,Escalated,40,E066
+CI00712,C0256,2025-08-08,Email,Technical Support,Low,Resolved,5,E080
+CI00713,C0210,2025-09-04,Phone,Renewal,Medium,Pending,41,E029
+CI00714,C0225,2026-10-26,Meeting,Complaint,Urgent,Open,37,E053
+CI00715,C0058,2026-10-08,Chat,Question,Urgent,Open,21,E050
+CI00716,C0184,2025-06-20,Portal,Question,High,Escalated,29,E032
+CI00717,C0105,2026-08-17,Portal,Complaint,High,Resolved,35,E040
+CI00718,C0006,2026-05-05,Phone,Upsell,Medium,Resolved,36,E014
+CI00719,C0228,2025-10-04,Meeting,Upsell,Urgent,Escalated,36,E068
+CI00720,C0211,2026-10-13,Email,Upsell,Low,Escalated,4,E026
+CI00721,C0018,2025-04-30,Email,Renewal,Urgent,Escalated,18,E002
+CI00722,C0119,2025-03-30,Chat,Upsell,High,Open,6,E067
+CI00723,C0224,2025-11-11,Portal,Question,Medium,Open,28,E024
+CI00724,C0146,2026-06-20,Chat,Technical Support,Medium,Resolved,26,E064
+CI00725,C0146,2025-09-08,Email,Technical Support,Low,Open,43,E073
+CI00726,C0069,2025-11-17,Chat,Upsell,Medium,Resolved,38,E021
+CI00727,C0225,2026-09-14,Portal,Question,Urgent,Pending,12,E013
+CI00728,C0284,2026-11-20,Portal,Renewal,Low,Pending,42,E050
+CI00729,C0026,2026-09-25,Email,Upsell,Medium,Pending,10,E015
+CI00730,C0216,2025-09-26,Chat,Question,Medium,Escalated,42,E070
+CI00731,C0242,2026-08-02,Phone,Technical Support,Low,Open,27,E070
+CI00732,C0275,2025-07-13,Meeting,Complaint,Low,Resolved,21,E050
+CI00733,C0258,2025-09-27,Email,Complaint,High,Pending,13,E026
+CI00734,C0240,2025-12-26,Meeting,Complaint,High,Escalated,13,E058
+CI00735,C0199,2025-12-25,Email,Complaint,Medium,Pending,30,E019
+CI00736,C0055,2026-07-12,Portal,Renewal,Urgent,Resolved,33,E079
+CI00737,C0282,2025-09-08,Phone,Renewal,Urgent,Open,23,E068
+CI00738,C0002,2026-08-20,Meeting,Upsell,Urgent,Resolved,9,E021
+CI00739,C0145,2026-05-03,Phone,Upsell,High,Open,17,E076
+CI00740,C0235,2026-05-27,Meeting,Question,Urgent,Pending,38,E003
+CI00741,C0247,2026-02-22,Phone,Question,Low,Open,9,E063
+CI00742,C0032,2026-03-04,Phone,Upsell,Low,Pending,28,E003
+CI00743,C0113,2025-03-25,Portal,Renewal,Medium,Resolved,46,E065
+CI00744,C0299,2025-12-04,Meeting,Renewal,High,Resolved,16,E077
+CI00745,C0093,2025-10-14,Portal,Renewal,Low,Open,7,E066
+CI00746,C0036,2025-01-25,Meeting,Complaint,Low,Escalated,40,E068
+CI00747,C0257,2026-08-17,Phone,Complaint,Low,Escalated,7,E029
+CI00748,C0230,2025-08-02,Meeting,Question,Low,Pending,38,E073
+CI00749,C0289,2026-06-22,Email,Upsell,Medium,Open,39,E048
+CI00750,C0024,2025-10-29,Email,Complaint,Urgent,Resolved,46,E073
+CI00751,C0072,2026-06-01,Meeting,Complaint,Urgent,Open,15,E034
+CI00752,C0195,2025-12-10,Portal,Complaint,Medium,Resolved,30,E008
+CI00753,C0090,2026-07-15,Email,Technical Support,Low,Pending,30,E068
+CI00754,C0290,2025-09-03,Chat,Renewal,Medium,Resolved,13,E025
+CI00755,C0172,2025-06-24,Meeting,Complaint,Low,Escalated,19,E014
+CI00756,C0116,2026-10-17,Meeting,Complaint,High,Open,21,E061
+CI00757,C0130,2025-10-27,Phone,Complaint,Medium,Resolved,32,E009
+CI00758,C0107,2025-04-07,Meeting,Question,Urgent,Open,10,E057
+CI00759,C0053,2025-05-21,Phone,Technical Support,High,Pending,28,E028
+CI00760,C0037,2026-10-24,Phone,Technical Support,High,Open,45,E047
+CI00761,C0158,2026-07-13,Email,Question,Urgent,Open,47,E009
+CI00762,C0030,2025-08-17,Portal,Complaint,High,Resolved,15,E072
+CI00763,C0153,2026-07-15,Email,Complaint,Low,Pending,33,E058
+CI00764,C0287,2026-02-10,Email,Upsell,Low,Open,38,E022
+CI00765,C0078,2026-02-09,Meeting,Technical Support,Low,Pending,44,E005
+CI00766,C0151,2025-05-20,Email,Technical Support,Low,Open,43,E042
+CI00767,C0013,2025-01-02,Meeting,Technical Support,Urgent,Resolved,31,E019
+CI00768,C0013,2025-04-16,Portal,Upsell,Urgent,Pending,8,E028
+CI00769,C0216,2026-08-17,Meeting,Technical Support,High,Resolved,26,E076
+CI00770,C0238,2025-04-25,Meeting,Upsell,Medium,Escalated,36,E019
+CI00771,C0289,2026-08-09,Portal,Renewal,Medium,Pending,4,E014
+CI00772,C0133,2026-05-28,Chat,Complaint,Urgent,Resolved,27,E007
+CI00773,C0189,2026-03-24,Phone,Renewal,Low,Escalated,45,E022
+CI00774,C0012,2026-06-02,Chat,Complaint,Low,Escalated,34,E042
+CI00775,C0208,2025-05-04,Meeting,Technical Support,Medium,Escalated,7,E033
+CI00776,C0269,2025-12-22,Phone,Renewal,Medium,Escalated,31,E080
+CI00777,C0091,2025-11-28,Meeting,Upsell,Urgent,Escalated,33,E013
+CI00778,C0121,2026-01-19,Meeting,Upsell,Urgent,Resolved,15,E018
+CI00779,C0132,2026-08-31,Chat,Renewal,Urgent,Pending,20,E067
+CI00780,C0203,2025-03-30,Portal,Complaint,Medium,Pending,44,E048
+CI00781,C0171,2026-04-27,Phone,Technical Support,Medium,Resolved,3,E021
+CI00782,C0239,2026-03-09,Meeting,Technical Support,Urgent,Resolved,19,E038
+CI00783,C0186,2025-11-30,Chat,Complaint,Urgent,Pending,22,E045
+CI00784,C0085,2026-01-29,Meeting,Question,Urgent,Resolved,34,E057
+CI00785,C0187,2025-11-09,Portal,Upsell,Low,Pending,32,E058
+CI00786,C0094,2025-12-02,Phone,Renewal,Medium,Escalated,33,E054
+CI00787,C0149,2025-07-01,Portal,Upsell,Medium,Escalated,44,E044
+CI00788,C0163,2025-11-20,Email,Complaint,Urgent,Pending,37,E025
+CI00789,C0282,2025-02-13,Chat,Technical Support,Medium,Escalated,1,E041
+CI00790,C0258,2025-01-07,Portal,Complaint,Medium,Escalated,33,E032
+CI00791,C0007,2025-09-14,Chat,Upsell,Medium,Pending,32,E051
+CI00792,C0255,2026-11-14,Meeting,Renewal,Low,Open,3,E069
+CI00793,C0003,2026-11-05,Email,Question,Low,Open,38,E077
+CI00794,C0021,2025-02-21,Email,Renewal,Low,Resolved,48,E023
+CI00795,C0115,2025-07-25,Chat,Complaint,Medium,Pending,8,E006
+CI00796,C0041,2026-08-09,Chat,Question,High,Resolved,2,E072
+CI00797,C0067,2026-02-23,Portal,Upsell,Urgent,Resolved,13,E072
+CI00798,C0013,2026-05-09,Phone,Renewal,High,Open,45,E036
+CI00799,C0136,2025-04-14,Portal,Complaint,Medium,Pending,43,E077
+CI00800,C0149,2026-04-24,Meeting,Question,Urgent,Pending,37,E029

@@ -1,0 +1,101 @@
+approval_id,request_type,priority,requested_amount_tnd,requester_employee_id,approver_employee_id,approval_status,request_date,request_description
+APR0001,Expense,Low,60962.51,E031,E033,Approved,2025-06-22,Approval request 001
+APR0002,Project,High,93903.43,E015,E067,Rejected,2025-07-23,Approval request 002
+APR0003,Pricing Exception,Medium,56136.9,E026,E016,More Information,2026-05-12,Approval request 003
+APR0004,Expense,High,94435.93,E014,E069,More Information,2026-05-10,Approval request 004
+APR0005,Purchase,Critical,120005.44,E054,E008,Pending,2026-02-16,Approval request 005
+APR0006,Purchase,Critical,41423.97,E036,E078,Pending,2025-09-10,Approval request 006
+APR0007,Purchase,Low,111577.3,E007,E066,More Information,2025-05-10,Approval request 007
+APR0008,Purchase,High,112399.39,E028,E039,Rejected,2026-02-03,Approval request 008
+APR0009,Project,Critical,16530.84,E025,E064,Pending,2026-02-15,Approval request 009
+APR0010,Budget,Critical,92213.27,E005,E017,Pending,2025-11-15,Approval request 010
+APR0011,Pricing Exception,Medium,101226.99,E027,E060,Approved,2026-08-05,Approval request 011
+APR0012,Budget,Critical,83814.79,E058,E029,More Information,2025-03-07,Approval request 012
+APR0013,Project,Medium,49303.75,E051,E034,Approved,2026-08-29,Approval request 013
+APR0014,Pricing Exception,Critical,78811.28,E068,E038,Approved,2026-01-04,Approval request 014
+APR0015,Project,High,83095.09,E031,E052,Approved,2025-03-02,Approval request 015
+APR0016,Expense,Low,72768.81,E050,E049,Rejected,2026-02-20,Approval request 016
+APR0017,Expense,Critical,100225.42,E011,E075,Rejected,2026-07-04,Approval request 017
+APR0018,Budget,Low,40453.18,E017,E071,Rejected,2025-05-23,Approval request 018
+APR0019,Pricing Exception,High,62594.94,E030,E017,More Information,2025-05-20,Approval request 019
+APR0020,Purchase,Critical,139787.51,E030,E079,More Information,2025-10-12,Approval request 020
+APR0021,Budget,High,52539.88,E038,E028,Rejected,2025-03-10,Approval request 021
+APR0022,Purchase,Critical,118806.07,E038,E014,More Information,2026-09-23,Approval request 022
+APR0023,Purchase,Medium,83040.18,E054,E076,Pending,2026-07-05,Approval request 023
+APR0024,Project,Critical,49130.2,E002,E073,More Information,2026-08-04,Approval request 024
+APR0025,Purchase,Medium,10469.82,E076,E036,Pending,2025-08-25,Approval request 025
+APR0026,Project,Critical,9314.96,E013,E066,Approved,2025-07-06,Approval request 026
+APR0027,Purchase,High,40094.93,E059,E072,More Information,2025-04-20,Approval request 027
+APR0028,Pricing Exception,High,33249.25,E026,E026,More Information,2026-01-06,Approval request 028
+APR0029,Purchase,Low,27793.19,E026,E028,More Information,2025-02-14,Approval request 029
+APR0030,Project,Low,5407.85,E006,E070,Pending,2026-05-03,Approval request 030
+APR0031,Expense,Low,36018.89,E043,E078,Pending,2026-08-28,Approval request 031
+APR0032,Budget,Low,57893.81,E010,E056,Pending,2025-01-30,Approval request 032
+APR0033,Expense,Low,148637.51,E019,E079,Approved,2026-03-15,Approval request 033
+APR0034,Expense,Medium,47854.08,E059,E036,Pending,2025-05-29,Approval request 034
+APR0035,Expense,Medium,21908.58,E070,E039,Pending,2025-10-29,Approval request 035
+APR0036,Purchase,High,9336.34,E026,E037,Pending,2026-10-03,Approval request 036
+APR0037,Pricing Exception,High,79037.72,E022,E065,Approved,2026-04-05,Approval request 037
+APR0038,Purchase,High,133712.4,E074,E010,More Information,2026-07-12,Approval request 038
+APR0039,Expense,High,24539.47,E007,E007,More Information,2025-05-17,Approval request 039
+APR0040,Purchase,Low,100803.43,E048,E073,Approved,2026-11-13,Approval request 040
+APR0041,Budget,Low,7601.49,E004,E009,Approved,2025-05-27,Approval request 041
+APR0042,Project,Critical,112818.69,E033,E010,More Information,2026-09-27,Approval request 042
+APR0043,Budget,Low,67775.07,E011,E032,Approved,2026-07-09,Approval request 043
+APR0044,Expense,Medium,58772.89,E043,E016,Approved,2026-04-11,Approval request 044
+APR0045,Budget,Low,128982.18,E046,E008,Pending,2025-10-22,Approval request 045
+APR0046,Purchase,High,57680.8,E010,E058,More Information,2025-04-23,Approval request 046
+APR0047,Budget,Low,90934.23,E030,E075,Rejected,2026-04-15,Approval request 047
+APR0048,Budget,High,21507.52,E031,E007,More Information,2026-05-20,Approval request 048
+APR0049,Purchase,High,65713.26,E051,E058,More Information,2026-08-18,Approval request 049
+APR0050,Pricing Exception,Medium,119703.01,E074,E022,Approved,2025-12-03,Approval request 050
+APR0051,Budget,Medium,27639.02,E071,E008,Approved,2026-10-29,Approval request 051
+APR0052,Expense,Critical,80625.89,E011,E029,Pending,2026-08-07,Approval request 052
+APR0053,Project,Critical,91931.68,E015,E008,Pending,2025-02-07,Approval request 053
+APR0054,Project,High,136511.82,E064,E079,Pending,2025-03-06,Approval request 054
+APR0055,Pricing Exception,Medium,54954.32,E031,E003,Pending,2026-02-04,Approval request 055
+APR0056,Project,Low,142763.24,E004,E010,More Information,2025-10-27,Approval request 056
+APR0057,Pricing Exception,Critical,79372.0,E064,E072,Rejected,2025-07-21,Approval request 057
+APR0058,Expense,High,5531.03,E002,E076,Approved,2025-10-08,Approval request 058
+APR0059,Budget,High,110222.78,E075,E009,More Information,2025-10-17,Approval request 059
+APR0060,Project,High,52781.06,E072,E036,More Information,2025-12-09,Approval request 060
+APR0061,Budget,High,41713.83,E079,E012,Pending,2025-07-23,Approval request 061
+APR0062,Pricing Exception,Low,16819.36,E024,E030,More Information,2025-03-20,Approval request 062
+APR0063,Pricing Exception,Medium,102095.42,E030,E077,Approved,2026-04-26,Approval request 063
+APR0064,Pricing Exception,Critical,21600.78,E014,E020,Pending,2026-11-12,Approval request 064
+APR0065,Project,High,7181.71,E002,E071,Pending,2026-08-11,Approval request 065
+APR0066,Expense,High,61659.76,E026,E020,Pending,2025-01-28,Approval request 066
+APR0067,Purchase,Low,16291.02,E061,E073,More Information,2025-11-12,Approval request 067
+APR0068,Purchase,Medium,60638.92,E058,E076,Approved,2025-05-19,Approval request 068
+APR0069,Pricing Exception,Low,67744.16,E016,E052,Pending,2025-06-21,Approval request 069
+APR0070,Purchase,High,118239.16,E015,E014,Approved,2026-02-14,Approval request 070
+APR0071,Pricing Exception,Critical,63731.59,E045,E010,More Information,2026-05-16,Approval request 071
+APR0072,Project,Low,50781.91,E017,E054,Rejected,2026-08-03,Approval request 072
+APR0073,Budget,Critical,91340.22,E063,E078,More Information,2026-07-04,Approval request 073
+APR0074,Purchase,Medium,75953.82,E060,E028,More Information,2025-04-14,Approval request 074
+APR0075,Pricing Exception,Low,109824.81,E022,E057,Pending,2026-04-21,Approval request 075
+APR0076,Purchase,Low,45492.62,E028,E007,Pending,2025-08-19,Approval request 076
+APR0077,Expense,Critical,5696.84,E031,E004,Rejected,2026-03-07,Approval request 077
+APR0078,Project,Critical,110450.81,E074,E057,Approved,2025-10-04,Approval request 078
+APR0079,Project,Critical,95134.4,E033,E005,More Information,2026-07-09,Approval request 079
+APR0080,Expense,Critical,80290.97,E039,E076,Rejected,2026-05-23,Approval request 080
+APR0081,Project,Critical,142677.9,E066,E027,Rejected,2026-06-22,Approval request 081
+APR0082,Expense,High,48146.29,E040,E031,Pending,2025-09-11,Approval request 082
+APR0083,Project,Critical,132684.47,E066,E076,Pending,2025-01-24,Approval request 083
+APR0084,Project,Medium,56492.49,E048,E039,Approved,2025-04-26,Approval request 084
+APR0085,Budget,Critical,147702.76,E004,E037,More Information,2025-11-20,Approval request 085
+APR0086,Budget,Critical,65666.99,E018,E054,Approved,2026-10-08,Approval request 086
+APR0087,Project,High,67324.15,E070,E055,Approved,2026-04-29,Approval request 087
+APR0088,Expense,Medium,58401.98,E078,E075,Pending,2026-07-28,Approval request 088
+APR0089,Purchase,Medium,3647.75,E038,E044,Rejected,2025-04-27,Approval request 089
+APR0090,Pricing Exception,Medium,144169.9,E072,E008,Pending,2025-05-18,Approval request 090
+APR0091,Project,High,128296.47,E022,E014,More Information,2026-02-07,Approval request 091
+APR0092,Purchase,High,103705.01,E013,E025,Approved,2026-08-12,Approval request 092
+APR0093,Purchase,Medium,42917.25,E061,E052,Pending,2025-11-05,Approval request 093
+APR0094,Purchase,High,143539.15,E032,E014,Rejected,2026-03-20,Approval request 094
+APR0095,Budget,Critical,91855.83,E057,E033,Pending,2026-09-23,Approval request 095
+APR0096,Project,High,50818.22,E057,E031,More Information,2025-07-18,Approval request 096
+APR0097,Purchase,High,51854.32,E054,E049,Rejected,2025-01-17,Approval request 097
+APR0098,Project,High,765.7,E014,E039,Approved,2026-09-22,Approval request 098
+APR0099,Pricing Exception,Critical,114670.09,E020,E025,Pending,2026-01-25,Approval request 099
+APR0100,Project,Medium,45651.44,E053,E073,More Information,2025-11-17,Approval request 100

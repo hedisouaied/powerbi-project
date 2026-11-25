@@ -1,0 +1,81 @@
+employee_id,employee_name,department_id,job_title,employment_status,location,monthly_salary_tnd,hire_date
+E001,Employee 001,D01,Manager,Active,Sfax,5437.59,2023-10-06
+E002,Employee 002,D02,Specialist,Active,Tunis,5835.41,2022-07-10
+E003,Employee 003,D03,Senior Analyst,Active,Sfax,5077.63,2021-02-27
+E004,Employee 004,D04,Manager,On Leave,Tunis,6385.43,2020-07-16
+E005,Employee 005,D05,Director,Active,Tunis,5377.36,2024-02-15
+E006,Employee 006,D06,Analyst,Active,Sfax,2402.13,2024-07-08
+E007,Employee 007,D07,Analyst,On Leave,Tunis,3916.81,2022-11-16
+E008,Employee 008,D08,Associate,Active,Tunis,6155.8,2022-02-17
+E009,Employee 009,D01,Senior Analyst,On Leave,Sousse,4826.17,2022-04-25
+E010,Employee 010,D02,Specialist,Active,Tunis,3884.05,2024-09-23
+E011,Employee 011,D03,Coordinator,Active,Tunis,2868.02,2020-07-12
+E012,Employee 012,D04,Engineer,Active,Sousse,2099.94,2023-03-10
+E013,Employee 013,D05,Coordinator,Active,Tunis,5689.87,2021-08-04
+E014,Employee 014,D06,Associate,Active,Sousse,5363.01,2023-08-19
+E015,Employee 015,D07,Manager,Active,Sfax,3466.27,2020-05-22
+E016,Employee 016,D08,Coordinator,Active,Sfax,5997.67,2025-07-31
+E017,Employee 017,D01,Manager,Active,Sfax,5458.4,2024-05-14
+E018,Employee 018,D02,Analyst,Active,Tunis,3993.59,2021-02-12
+E019,Employee 019,D03,Analyst,Active,Sousse,2005.88,2023-02-21
+E020,Employee 020,D04,Specialist,On Leave,Sfax,5010.33,2020-11-20
+E021,Employee 021,D05,Coordinator,Active,Sousse,5300.38,2022-02-08
+E022,Employee 022,D06,Coordinator,Active,Sfax,3331.38,2025-07-24
+E023,Employee 023,D07,Specialist,Active,Sfax,3541.16,2020-06-09
+E024,Employee 024,D08,Senior Analyst,Active,Tunis,2690.52,2022-09-13
+E025,Employee 025,D01,Associate,On Leave,Sousse,2410.63,2023-12-12
+E026,Employee 026,D02,Analyst,Active,Tunis,2866.47,2022-09-25
+E027,Employee 027,D03,Analyst,Active,Sousse,4948.13,2025-05-28
+E028,Employee 028,D04,Engineer,Active,Tunis,5713.59,2022-07-07
+E029,Employee 029,D05,Analyst,Active,Tunis,5091.25,2020-07-23
+E030,Employee 030,D06,Associate,On Leave,Sfax,5711.62,2021-10-17
+E031,Employee 031,D07,Associate,Active,Sousse,5582.39,2024-11-02
+E032,Employee 032,D08,Senior Analyst,Active,Sfax,3155.14,2022-03-24
+E033,Employee 033,D01,Specialist,On Leave,Sfax,5007.73,2023-08-30
+E034,Employee 034,D02,Engineer,Active,Tunis,2739.57,2020-10-20
+E035,Employee 035,D03,Senior Analyst,On Leave,Tunis,1834.6,2024-07-31
+E036,Employee 036,D04,Director,Active,Tunis,4924.8,2022-09-17
+E037,Employee 037,D05,Senior Analyst,On Leave,Sfax,5469.43,2024-01-20
+E038,Employee 038,D06,Manager,On Leave,Sousse,3956.9,2022-11-27
+E039,Employee 039,D07,Associate,Active,Sfax,2457.05,2023-04-09
+E040,Employee 040,D08,Director,Active,Sfax,2338.29,2022-07-12
+E041,Employee 041,D01,Specialist,Active,Tunis,4014.15,2023-11-04
+E042,Employee 042,D02,Specialist,On Leave,Tunis,4456.61,2020-06-15
+E043,Employee 043,D03,Associate,Active,Sfax,4783.18,2024-05-25
+E044,Employee 044,D04,Specialist,Active,Sfax,4401.82,2020-07-09
+E045,Employee 045,D05,Manager,Active,Sfax,3228.57,2023-03-20
+E046,Employee 046,D06,Analyst,Active,Sousse,1944.84,2021-12-30
+E047,Employee 047,D07,Senior Analyst,Active,Sfax,2808.55,2022-07-06
+E048,Employee 048,D08,Coordinator,On Leave,Tunis,3720.08,2025-09-15
+E049,Employee 049,D01,Manager,Active,Sousse,2899.52,2024-11-27
+E050,Employee 050,D02,Analyst,Active,Tunis,2074.02,2024-12-01
+E051,Employee 051,D03,Manager,Active,Sfax,3179.89,2021-08-13
+E052,Employee 052,D04,Associate,Active,Sfax,4911.01,2020-09-22
+E053,Employee 053,D05,Senior Analyst,Active,Sfax,5484.32,2023-03-15
+E054,Employee 054,D06,Associate,Active,Sousse,4922.27,2022-05-09
+E055,Employee 055,D07,Engineer,Active,Sfax,5625.9,2022-05-03
+E056,Employee 056,D08,Analyst,Active,Sousse,2584.77,2021-12-03
+E057,Employee 057,D01,Coordinator,On Leave,Sfax,2223.22,2020-02-17
+E058,Employee 058,D02,Associate,Active,Tunis,5195.09,2024-01-03
+E059,Employee 059,D03,Analyst,Active,Sousse,2557.98,2022-08-27
+E060,Employee 060,D04,Director,Active,Sfax,4154.91,2025-05-23
+E061,Employee 061,D05,Analyst,Active,Tunis,5072.71,2020-11-15
+E062,Employee 062,D06,Director,Active,Tunis,3896.93,2020-12-15
+E063,Employee 063,D07,Director,Active,Tunis,3217.11,2022-03-11
+E064,Employee 064,D08,Analyst,Active,Sfax,4762.33,2023-06-29
+E065,Employee 065,D01,Associate,Active,Sfax,2211.95,2022-01-29
+E066,Employee 066,D02,Senior Analyst,On Leave,Tunis,2354.63,2021-12-12
+E067,Employee 067,D03,Associate,On Leave,Tunis,6070.33,2025-07-12
+E068,Employee 068,D04,Manager,Active,Sfax,5088.62,2022-08-18
+E069,Employee 069,D05,Engineer,Active,Sousse,6355.13,2021-07-12
+E070,Employee 070,D06,Engineer,On Leave,Sfax,5460.13,2021-07-02
+E071,Employee 071,D07,Director,Active,Tunis,3912.0,2024-02-14
+E072,Employee 072,D08,Engineer,Active,Tunis,3079.54,2020-06-15
+E073,Employee 073,D01,Analyst,Active,Tunis,6042.23,2020-07-21
+E074,Employee 074,D02,Associate,Active,Sousse,3942.15,2024-01-18
+E075,Employee 075,D03,Senior Analyst,Active,Sousse,3238.0,2021-02-28
+E076,Employee 076,D04,Analyst,Active,Sousse,4522.33,2023-02-22
+E077,Employee 077,D05,Manager,Active,Sfax,5826.09,2021-01-06
+E078,Employee 078,D06,Director,Active,Tunis,5365.04,2022-10-31
+E079,Employee 079,D07,Senior Analyst,On Leave,Sousse,3830.84,2024-02-19
+E080,Employee 080,D08,Associate,Active,Sousse,4748.35,2020-10-21
