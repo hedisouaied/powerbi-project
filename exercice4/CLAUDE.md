@@ -50,6 +50,15 @@ Load the one that fits before starting the work (`.claude/skills/`):
 
 **Do the work; don't hand the user homework.** Don't take their screen; use headless Chrome. See the user's memory notes.
 
+## Deployment (Railway)
+
+- **Live:** https://web-production-7ed674ac.up.railway.app. Project `mission-control`; services `web` (Dockerfile) and `MySQL`.
+- **CLI:** `railway` is installed globally with Node 22 and signed in as the user. Redeploy with `railway up --service web --ci` from `exercice4/`, then run `MC_BASE=<url>/app/ node tools/e2e.js`.
+- **Data safety:** never run `migrate:fresh` or a plain `mc:import` on Railway; they wipe users and edits. `start.sh` uses `--if-empty`.
+- **Variables live on the Railway service**, including APP_KEY and the DB references. Don't commit them.
+- **Don't apply a generic IaC template.** `railway config init` produced one that didn't match the project (wrong name, no MySQL), so it was removed.
+- **No config file is used.** The service builds from the Dockerfile; `railway.json` was removed because it is deprecated and was never read.
+
 ## Commands
 
 ```powershell

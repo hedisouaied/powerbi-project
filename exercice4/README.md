@@ -44,6 +44,36 @@ npm install
 node node_modules\vite\bin\vite.js build      # writes backend/public/app
 ```
 
+## Live deployment (Railway)
+
+**https://web-production-7ed674ac.up.railway.app** — sign in with `demo@missioncontrol.local` / `Demo12345`, or create an account.
+
+The Railway project is `mission-control` with two services:
+
+| Service | What it runs |
+|---|---|
+| `MySQL` | Railway's MySQL, with a volume |
+| `web` | Built from `exercice4/Dockerfile` |
+
+How the `web` service is built and started:
+- **Build:** Node 22 builds the React app, then Laravel runs on PHP 8.5.
+- **Start** (`backend/docker/start.sh`):
+  1. caches the config and routes;
+  2. runs `migrate --force`;
+  3. runs `mc:import --if-empty`, which loads the CSVs only on the first deploy, so later deploys keep users' edits;
+  4. runs `mc:demo-user`;
+  5. starts `php artisan serve` on `$PORT`.
+- **Variables** are set on the service and never in the repo: `APP_KEY` (generated for production), `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL`, `LOG_CHANNEL=stderr`, `CACHE_STORE=file`, and `DB_*` as references to the MySQL service (`${{MySQL.MYSQLHOST}}` and so on).
+
+Redeploy after a change, from `exercice4/` (Railway CLI, signed in):
+
+```powershell
+railway up --service web --ci
+node tools\e2e.js     # with MC_BASE=https://web-production-7ed674ac.up.railway.app/app/ to test the live site (16 checks)
+```
+
+`php artisan serve` with 4 workers is enough for a demo. For real traffic, switch to FrankenPHP/Octane or nginx + php-fpm.
+
 ## API
 
 | Method | Path | |

@@ -12,12 +12,17 @@ use Illuminate\Support\Facades\DB;
  */
 class ImportMissionControl extends Command
 {
-    protected $signature = 'mc:import {--check : only run the checks}';
+    protected $signature = 'mc:import {--check : only run the checks} {--if-empty : import only when the database has no orders yet (safe on every deploy)}';
 
     protected $description = 'Import the Mission Control CSV files and verify relationships and totals';
 
     public function handle(): int
     {
+        if ($this->option('if-empty') && DB::table('sales_orders')->exists()) {
+            $this->info('Data already loaded: import skipped (user edits are kept).');
+
+            return self::SUCCESS;
+        }
         if (! $this->option('check')) {
             $this->import();
         }

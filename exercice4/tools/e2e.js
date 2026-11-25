@@ -7,7 +7,7 @@ const { spawn } = require("child_process");
 const fs = require("fs"), path = require("path"), os = require("os");
 const out = process.argv[2] || path.join(os.tmpdir(), "mc-web-e2e");
 const EMAIL = process.argv[3] || "demo@missioncontrol.local", PASS = process.argv[4] || "Demo12345";
-const BASE = "http://localhost:8000/app/", W = 1600, H = 900, PORT = 9341;
+const BASE = process.env.MC_BASE || "http://localhost:8000/app/", W = 1600, H = 900, PORT = 9341;
 fs.mkdirSync(out, { recursive: true });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const results = []; const ok = (name, cond, info = "") => { results.push(`${cond ? "ok  " : "FAIL"} ${name}${cond || !info ? "" : " (" + info + ")"}`); };
