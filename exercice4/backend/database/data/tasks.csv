@@ -1,0 +1,401 @@
+task_id,project_id,department_id,assignee_employee_id,task_title,task_status,priority,created_date,due_date,task_type
+T0001,PR022,D07,E016,Work item 001,Backlog,Critical,2026-10-13,2026-11-18,Operational
+T0002,PR012,D03,E030,Work item 002,Backlog,Critical,2026-05-22,2026-05-31,Compliance
+T0003,PR022,D07,E008,Work item 003,In Progress,High,2025-07-05,2026-10-12,Internal
+T0004,PR028,D08,E003,Work item 004,Done,Low,2026-06-23,2026-01-26,Internal
+T0005,PR026,D01,E021,Work item 005,Blocked,Medium,2025-09-08,2026-09-19,Customer
+T0006,PR026,D01,E034,Work item 006,Blocked,Low,2025-08-06,2026-12-23,Internal
+T0007,PR029,D08,E042,Work item 007,Blocked,High,2025-01-17,2026-12-19,Compliance
+T0008,PR019,D03,E045,Work item 008,Done,Critical,2025-03-19,2026-12-28,Operational
+T0009,PR022,D07,E018,Work item 009,Done,High,2025-09-09,2026-05-06,Compliance
+T0010,PR027,D01,E039,Work item 010,To Do,Medium,2026-08-27,2026-09-08,Customer
+T0011,PR012,D03,E033,Work item 011,Backlog,High,2026-07-14,2026-07-01,Internal
+T0012,PR021,D04,E010,Work item 012,Blocked,Low,2025-10-22,2026-07-29,Internal
+T0013,PR011,D03,E068,Work item 013,Blocked,Low,2025-05-26,2026-11-06,Internal
+T0014,PR002,D06,E035,Work item 014,To Do,Critical,2025-12-24,2026-04-03,Operational
+T0015,PR017,D06,E073,Work item 015,Blocked,Critical,2025-11-03,2026-07-16,Compliance
+T0016,PR029,D08,E074,Work item 016,Done,High,2025-01-10,2026-09-22,Operational
+T0017,PR026,D01,E076,Work item 017,In Progress,Low,2026-07-08,2026-01-31,Customer
+T0018,PR023,D08,E068,Work item 018,To Do,Low,2025-12-29,2026-01-08,Customer
+T0019,PR006,D06,E023,Work item 019,Backlog,Low,2026-08-20,2026-02-15,Customer
+T0020,PR023,D08,E015,Work item 020,Backlog,Medium,2026-07-30,2026-01-05,Operational
+T0021,PR008,D06,E009,Work item 021,To Do,Medium,2026-01-19,2026-10-12,Operational
+T0022,PR013,D01,E043,Work item 022,Done,Medium,2026-03-19,2026-06-15,Internal
+T0023,PR023,D08,E023,Work item 023,In Progress,Critical,2025-05-01,2026-03-10,Customer
+T0024,PR006,D06,E004,Work item 024,Blocked,Critical,2025-01-31,2026-01-20,Internal
+T0025,PR005,D06,E051,Work item 025,Backlog,Medium,2025-06-15,2026-08-01,Customer
+T0026,PR003,D03,E065,Work item 026,Blocked,Critical,2025-09-03,2026-06-10,Operational
+T0027,PR021,D04,E080,Work item 027,Backlog,Critical,2026-07-03,2026-05-27,Customer
+T0028,PR011,D03,E028,Work item 028,To Do,High,2025-02-27,2026-05-03,Operational
+T0029,PR023,D08,E023,Work item 029,Backlog,High,2025-09-28,2026-01-26,Internal
+T0030,PR008,D06,E006,Work item 030,Backlog,Critical,2025-11-22,2026-04-19,Operational
+T0031,PR030,D07,E048,Work item 031,Blocked,High,2025-09-15,2026-07-15,Internal
+T0032,PR029,D08,E015,Work item 032,Blocked,Critical,2025-06-24,2026-07-18,Operational
+T0033,PR004,D06,E042,Work item 033,Done,Critical,2025-04-19,2026-11-11,Customer
+T0034,PR024,D05,E004,Work item 034,Backlog,Low,2026-01-07,2026-03-18,Operational
+T0035,PR018,D05,E044,Work item 035,Done,High,2026-10-31,2026-03-06,Internal
+T0036,PR016,D05,E078,Work item 036,In Progress,Critical,2025-03-22,2026-04-03,Operational
+T0037,PR022,D07,E009,Work item 037,Backlog,Critical,2025-05-24,2026-12-15,Compliance
+T0038,PR018,D05,E005,Work item 038,Blocked,Critical,2026-08-14,2026-07-10,Internal
+T0039,PR015,D01,E080,Work item 039,To Do,High,2025-08-06,2026-05-18,Customer
+T0040,PR018,D05,E020,Work item 040,Blocked,High,2025-03-29,2026-02-20,Operational
+T0041,PR010,D01,E007,Work item 041,To Do,Medium,2025-12-15,2026-12-28,Compliance
+T0042,PR008,D06,E004,Work item 042,Done,Critical,2025-01-28,2026-03-02,Customer
+T0043,PR018,D05,E038,Work item 043,In Progress,Critical,2025-10-05,2026-10-02,Operational
+T0044,PR012,D03,E050,Work item 044,In Progress,Critical,2026-11-20,2026-03-03,Customer
+T0045,PR004,D06,E018,Work item 045,Done,Medium,2025-04-17,2026-10-29,Compliance
+T0046,PR027,D01,E045,Work item 046,Backlog,Critical,2025-04-01,2026-11-06,Customer
+T0047,PR028,D08,E033,Work item 047,To Do,Medium,2026-04-10,2026-08-10,Customer
+T0048,PR016,D05,E029,Work item 048,Done,Critical,2025-07-12,2026-04-11,Internal
+T0049,PR011,D03,E061,Work item 049,Blocked,Critical,2026-07-25,2026-02-11,Compliance
+T0050,PR002,D06,E039,Work item 050,To Do,Medium,2026-06-16,2026-07-24,Internal
+T0051,PR025,D03,E058,Work item 051,Backlog,High,2026-05-03,2026-07-16,Compliance
+T0052,PR002,D06,E015,Work item 052,In Progress,Medium,2026-05-29,2026-04-23,Customer
+T0053,PR022,D07,E028,Work item 053,Done,Low,2025-01-10,2026-09-04,Internal
+T0054,PR027,D01,E036,Work item 054,In Progress,Critical,2025-04-02,2026-05-31,Internal
+T0055,PR029,D08,E026,Work item 055,Done,Medium,2025-02-18,2026-10-07,Internal
+T0056,PR008,D06,E003,Work item 056,Done,Medium,2026-04-22,2026-05-04,Operational
+T0057,PR005,D06,E005,Work item 057,In Progress,High,2025-05-08,2026-02-24,Compliance
+T0058,PR001,D08,E030,Work item 058,Backlog,High,2026-07-26,2026-05-25,Customer
+T0059,PR002,D06,E071,Work item 059,Done,Low,2026-03-14,2026-12-18,Internal
+T0060,PR018,D05,E039,Work item 060,Blocked,Critical,2025-12-20,2026-01-03,Internal
+T0061,PR012,D03,E036,Work item 061,Backlog,Low,2025-07-26,2026-11-01,Internal
+T0062,PR029,D08,E039,Work item 062,Done,Low,2026-06-27,2026-03-23,Customer
+T0063,PR028,D08,E057,Work item 063,Backlog,Medium,2026-05-23,2026-08-05,Compliance
+T0064,PR025,D03,E043,Work item 064,To Do,High,2026-10-29,2026-08-30,Operational
+T0065,PR014,D07,E017,Work item 065,Done,Critical,2026-09-19,2026-01-21,Internal
+T0066,PR002,D06,E003,Work item 066,To Do,High,2025-03-16,2026-03-31,Compliance
+T0067,PR015,D01,E023,Work item 067,To Do,Low,2025-11-10,2026-06-13,Customer
+T0068,PR014,D07,E005,Work item 068,Blocked,Critical,2026-01-07,2026-04-20,Internal
+T0069,PR017,D06,E005,Work item 069,To Do,Critical,2026-08-25,2026-09-20,Compliance
+T0070,PR011,D03,E029,Work item 070,In Progress,Medium,2025-08-07,2026-12-27,Internal
+T0071,PR022,D07,E037,Work item 071,In Progress,High,2026-03-25,2026-01-24,Operational
+T0072,PR025,D03,E048,Work item 072,In Progress,Medium,2025-08-02,2026-01-03,Customer
+T0073,PR015,D01,E076,Work item 073,Done,Critical,2026-06-09,2026-01-17,Customer
+T0074,PR018,D05,E055,Work item 074,To Do,Critical,2025-12-30,2026-04-28,Operational
+T0075,PR021,D04,E034,Work item 075,Blocked,Critical,2026-10-18,2026-11-02,Compliance
+T0076,PR028,D08,E034,Work item 076,Backlog,Critical,2026-04-14,2026-02-22,Customer
+T0077,PR023,D08,E061,Work item 077,Backlog,Low,2026-06-20,2026-01-08,Internal
+T0078,PR014,D07,E022,Work item 078,In Progress,High,2026-09-25,2026-07-15,Operational
+T0079,PR019,D03,E036,Work item 079,To Do,Critical,2025-03-20,2026-08-14,Internal
+T0080,PR019,D03,E031,Work item 080,Blocked,Low,2026-03-11,2026-05-23,Customer
+T0081,PR020,D03,E028,Work item 081,Done,Low,2026-06-19,2026-11-19,Compliance
+T0082,PR015,D01,E002,Work item 082,Blocked,Critical,2026-04-17,2026-12-09,Compliance
+T0083,PR022,D07,E029,Work item 083,In Progress,High,2026-01-25,2026-05-13,Internal
+T0084,PR024,D05,E059,Work item 084,In Progress,Medium,2026-03-08,2026-05-22,Operational
+T0085,PR006,D06,E050,Work item 085,Blocked,Medium,2025-08-22,2026-11-25,Operational
+T0086,PR002,D06,E068,Work item 086,In Progress,Critical,2026-06-23,2026-07-07,Customer
+T0087,PR030,D07,E058,Work item 087,In Progress,Low,2025-01-29,2026-05-23,Internal
+T0088,PR026,D01,E063,Work item 088,Done,High,2025-04-21,2026-03-03,Operational
+T0089,PR028,D08,E004,Work item 089,To Do,High,2026-10-19,2026-07-16,Customer
+T0090,PR025,D03,E018,Work item 090,Backlog,High,2025-08-26,2026-09-23,Compliance
+T0091,PR005,D06,E009,Work item 091,To Do,Low,2026-02-25,2026-01-04,Internal
+T0092,PR029,D08,E055,Work item 092,Done,High,2026-05-09,2026-07-02,Customer
+T0093,PR019,D03,E077,Work item 093,In Progress,Critical,2025-01-04,2026-04-01,Internal
+T0094,PR021,D04,E010,Work item 094,Backlog,High,2025-06-19,2026-01-09,Compliance
+T0095,PR002,D06,E036,Work item 095,Done,High,2026-04-02,2026-02-06,Internal
+T0096,PR030,D07,E063,Work item 096,Backlog,Low,2026-04-03,2026-01-27,Operational
+T0097,PR016,D05,E074,Work item 097,In Progress,Low,2025-06-14,2026-07-16,Operational
+T0098,PR017,D06,E056,Work item 098,In Progress,Medium,2026-09-27,2026-02-17,Customer
+T0099,PR002,D06,E008,Work item 099,In Progress,High,2025-07-04,2026-05-09,Compliance
+T0100,PR027,D01,E042,Work item 100,Done,Medium,2026-05-30,2026-07-29,Operational
+T0101,PR029,D08,E027,Work item 101,Done,Medium,2026-04-08,2026-04-10,Internal
+T0102,PR008,D06,E079,Work item 102,In Progress,Medium,2025-01-17,2026-04-10,Compliance
+T0103,PR012,D03,E012,Work item 103,Blocked,Low,2026-06-18,2026-05-11,Customer
+T0104,PR014,D07,E025,Work item 104,Blocked,Critical,2026-09-09,2026-06-03,Internal
+T0105,PR024,D05,E050,Work item 105,Backlog,Low,2026-10-23,2026-08-08,Operational
+T0106,PR030,D07,E056,Work item 106,To Do,Critical,2025-02-10,2026-02-27,Customer
+T0107,PR024,D05,E004,Work item 107,Blocked,Low,2025-05-12,2026-10-15,Compliance
+T0108,PR011,D03,E018,Work item 108,Done,Critical,2025-05-17,2026-04-25,Operational
+T0109,PR026,D01,E037,Work item 109,In Progress,Critical,2026-10-22,2026-09-18,Operational
+T0110,PR009,D04,E014,Work item 110,Blocked,Critical,2026-10-15,2026-11-25,Operational
+T0111,PR004,D06,E026,Work item 111,To Do,Medium,2026-05-29,2026-12-24,Customer
+T0112,PR028,D08,E023,Work item 112,Blocked,Critical,2026-09-12,2026-09-22,Customer
+T0113,PR014,D07,E031,Work item 113,Done,Low,2026-07-16,2026-11-01,Customer
+T0114,PR028,D08,E037,Work item 114,Blocked,Critical,2025-07-04,2026-11-13,Internal
+T0115,PR010,D01,E061,Work item 115,To Do,High,2025-12-18,2026-08-02,Internal
+T0116,PR007,D07,E020,Work item 116,Done,Critical,2026-03-28,2026-04-05,Internal
+T0117,PR021,D04,E080,Work item 117,Backlog,High,2025-02-26,2026-12-03,Compliance
+T0118,PR006,D06,E012,Work item 118,Backlog,Medium,2026-07-31,2026-03-16,Internal
+T0119,PR020,D03,E009,Work item 119,In Progress,High,2025-03-01,2026-03-15,Compliance
+T0120,PR016,D05,E024,Work item 120,In Progress,High,2025-06-04,2026-11-01,Operational
+T0121,PR006,D06,E008,Work item 121,Backlog,Medium,2025-03-18,2026-11-18,Customer
+T0122,PR015,D01,E078,Work item 122,Done,Critical,2026-07-12,2026-04-13,Internal
+T0123,PR024,D05,E037,Work item 123,In Progress,High,2026-01-23,2026-07-12,Customer
+T0124,PR023,D08,E017,Work item 124,To Do,Critical,2025-02-11,2026-09-24,Internal
+T0125,PR029,D08,E047,Work item 125,Backlog,High,2025-03-23,2026-02-10,Internal
+T0126,PR017,D06,E072,Work item 126,Backlog,Critical,2026-03-01,2026-04-20,Operational
+T0127,PR019,D03,E013,Work item 127,Done,High,2025-11-28,2026-12-24,Operational
+T0128,PR019,D03,E009,Work item 128,In Progress,Critical,2025-05-20,2026-01-22,Operational
+T0129,PR013,D01,E020,Work item 129,Done,Medium,2026-11-08,2026-04-27,Customer
+T0130,PR002,D06,E035,Work item 130,Done,Critical,2026-05-25,2026-09-07,Operational
+T0131,PR030,D07,E030,Work item 131,Blocked,Medium,2025-12-28,2026-07-23,Compliance
+T0132,PR001,D08,E001,Work item 132,Backlog,Critical,2026-07-05,2026-05-21,Operational
+T0133,PR021,D04,E076,Work item 133,To Do,Critical,2025-06-19,2026-10-10,Compliance
+T0134,PR007,D07,E060,Work item 134,Done,Low,2025-04-21,2026-04-21,Operational
+T0135,PR015,D01,E040,Work item 135,In Progress,Low,2025-01-21,2026-11-04,Customer
+T0136,PR001,D08,E071,Work item 136,Backlog,High,2025-05-23,2026-09-16,Internal
+T0137,PR022,D07,E037,Work item 137,Done,Low,2026-01-07,2026-01-27,Customer
+T0138,PR028,D08,E010,Work item 138,Done,Low,2026-03-31,2026-01-01,Customer
+T0139,PR023,D08,E029,Work item 139,Blocked,Low,2025-11-29,2026-01-09,Internal
+T0140,PR007,D07,E035,Work item 140,Done,Medium,2026-05-11,2026-08-06,Internal
+T0141,PR008,D06,E048,Work item 141,In Progress,Medium,2025-06-04,2026-07-22,Customer
+T0142,PR017,D06,E019,Work item 142,Done,Critical,2025-05-19,2026-07-08,Internal
+T0143,PR018,D05,E079,Work item 143,Done,High,2025-12-09,2026-06-11,Operational
+T0144,PR015,D01,E070,Work item 144,Done,Low,2025-08-01,2026-05-19,Operational
+T0145,PR012,D03,E050,Work item 145,Backlog,High,2026-04-29,2026-06-25,Operational
+T0146,PR008,D06,E056,Work item 146,To Do,Critical,2025-07-10,2026-11-23,Internal
+T0147,PR019,D03,E036,Work item 147,Done,High,2025-06-11,2026-08-10,Operational
+T0148,PR027,D01,E057,Work item 148,In Progress,Low,2026-06-30,2026-02-03,Internal
+T0149,PR001,D08,E053,Work item 149,Backlog,Medium,2025-01-01,2026-11-21,Compliance
+T0150,PR027,D01,E047,Work item 150,To Do,Medium,2026-05-19,2026-06-03,Compliance
+T0151,PR029,D08,E003,Work item 151,Backlog,Medium,2025-07-22,2026-09-11,Compliance
+T0152,PR024,D05,E020,Work item 152,Blocked,Medium,2026-07-08,2026-06-17,Internal
+T0153,PR026,D01,E022,Work item 153,Done,High,2026-04-24,2026-03-17,Customer
+T0154,PR005,D06,E057,Work item 154,Backlog,Low,2026-04-16,2026-04-17,Compliance
+T0155,PR019,D03,E076,Work item 155,Blocked,Low,2025-08-19,2026-07-02,Compliance
+T0156,PR007,D07,E042,Work item 156,To Do,Critical,2026-09-04,2026-08-20,Compliance
+T0157,PR005,D06,E060,Work item 157,In Progress,Critical,2025-10-19,2026-01-07,Internal
+T0158,PR019,D03,E024,Work item 158,Backlog,Medium,2026-11-03,2026-12-29,Customer
+T0159,PR021,D04,E051,Work item 159,Done,Medium,2025-07-30,2026-01-26,Operational
+T0160,PR002,D06,E038,Work item 160,Done,Critical,2025-08-08,2026-12-16,Internal
+T0161,PR009,D04,E018,Work item 161,In Progress,Low,2026-07-20,2026-11-01,Compliance
+T0162,PR012,D03,E007,Work item 162,Blocked,Critical,2025-03-10,2026-07-09,Internal
+T0163,PR027,D01,E031,Work item 163,Blocked,Low,2025-01-13,2026-05-17,Operational
+T0164,PR001,D08,E034,Work item 164,To Do,Low,2025-11-25,2026-09-24,Compliance
+T0165,PR003,D03,E039,Work item 165,Done,Low,2025-05-03,2026-06-19,Customer
+T0166,PR030,D07,E060,Work item 166,Done,Medium,2026-08-07,2026-01-15,Compliance
+T0167,PR023,D08,E070,Work item 167,Done,Critical,2026-04-09,2026-10-12,Operational
+T0168,PR002,D06,E060,Work item 168,Backlog,Medium,2026-08-01,2026-03-25,Customer
+T0169,PR015,D01,E034,Work item 169,In Progress,Medium,2025-03-09,2026-02-16,Customer
+T0170,PR010,D01,E009,Work item 170,Done,Critical,2025-12-13,2026-01-21,Operational
+T0171,PR001,D08,E051,Work item 171,Backlog,Low,2025-06-24,2026-05-18,Operational
+T0172,PR011,D03,E038,Work item 172,Done,High,2025-11-17,2026-02-18,Customer
+T0173,PR001,D08,E036,Work item 173,Backlog,Low,2026-01-26,2026-10-07,Operational
+T0174,PR006,D06,E007,Work item 174,In Progress,High,2026-02-17,2026-11-25,Operational
+T0175,PR008,D06,E007,Work item 175,In Progress,Medium,2025-10-06,2026-07-24,Compliance
+T0176,PR019,D03,E010,Work item 176,Backlog,Medium,2026-03-30,2026-05-05,Internal
+T0177,PR001,D08,E074,Work item 177,In Progress,Low,2026-01-05,2026-04-22,Operational
+T0178,PR025,D03,E064,Work item 178,Backlog,Medium,2025-05-23,2026-12-16,Compliance
+T0179,PR016,D05,E021,Work item 179,Blocked,Medium,2025-11-06,2026-03-10,Compliance
+T0180,PR026,D01,E022,Work item 180,In Progress,High,2025-10-31,2026-01-25,Operational
+T0181,PR029,D08,E025,Work item 181,In Progress,Medium,2026-03-27,2026-05-09,Compliance
+T0182,PR017,D06,E045,Work item 182,In Progress,Medium,2025-07-21,2026-06-07,Operational
+T0183,PR018,D05,E018,Work item 183,Done,High,2025-04-01,2026-03-06,Internal
+T0184,PR013,D01,E018,Work item 184,To Do,Low,2025-07-16,2026-09-07,Operational
+T0185,PR021,D04,E076,Work item 185,Backlog,Low,2026-06-12,2026-06-04,Customer
+T0186,PR028,D08,E074,Work item 186,Blocked,Critical,2025-06-03,2026-03-04,Operational
+T0187,PR027,D01,E072,Work item 187,Done,Low,2026-08-08,2026-06-17,Internal
+T0188,PR026,D01,E062,Work item 188,Done,Low,2026-05-27,2026-08-08,Operational
+T0189,PR009,D04,E060,Work item 189,Backlog,High,2026-08-30,2026-11-18,Operational
+T0190,PR018,D05,E004,Work item 190,Done,High,2026-05-27,2026-04-03,Operational
+T0191,PR007,D07,E007,Work item 191,To Do,Low,2025-04-19,2026-06-28,Internal
+T0192,PR009,D04,E031,Work item 192,Blocked,High,2025-12-20,2026-07-11,Customer
+T0193,PR013,D01,E037,Work item 193,Blocked,Low,2025-07-15,2026-01-05,Customer
+T0194,PR025,D03,E007,Work item 194,Backlog,High,2026-06-20,2026-04-29,Compliance
+T0195,PR026,D01,E014,Work item 195,To Do,Low,2025-04-24,2026-05-29,Compliance
+T0196,PR013,D01,E058,Work item 196,To Do,Medium,2026-03-24,2026-12-28,Operational
+T0197,PR021,D04,E017,Work item 197,In Progress,Low,2025-03-03,2026-04-07,Compliance
+T0198,PR030,D07,E062,Work item 198,Blocked,Medium,2026-05-28,2026-04-10,Internal
+T0199,PR015,D01,E057,Work item 199,To Do,Critical,2026-10-17,2026-08-01,Internal
+T0200,PR001,D08,E069,Work item 200,In Progress,Critical,2026-10-08,2026-01-13,Customer
+T0201,PR012,D03,E079,Work item 201,Done,Medium,2026-10-21,2026-12-17,Customer
+T0202,PR030,D07,E002,Work item 202,Backlog,Medium,2025-04-15,2026-07-01,Internal
+T0203,PR019,D03,E033,Work item 203,To Do,High,2025-07-05,2026-04-03,Customer
+T0204,PR019,D03,E079,Work item 204,Done,High,2026-07-25,2026-03-05,Customer
+T0205,PR005,D06,E022,Work item 205,Backlog,High,2026-05-22,2026-01-03,Operational
+T0206,PR022,D07,E047,Work item 206,Backlog,Critical,2026-04-02,2026-11-10,Internal
+T0207,PR018,D05,E050,Work item 207,In Progress,Critical,2025-11-28,2026-08-26,Operational
+T0208,PR012,D03,E006,Work item 208,In Progress,Low,2025-01-18,2026-09-18,Operational
+T0209,PR020,D03,E033,Work item 209,Blocked,High,2026-05-31,2026-06-22,Internal
+T0210,PR008,D06,E047,Work item 210,To Do,Low,2025-09-19,2026-12-22,Compliance
+T0211,PR022,D07,E060,Work item 211,Blocked,Critical,2026-04-21,2026-09-06,Compliance
+T0212,PR024,D05,E035,Work item 212,Backlog,Critical,2026-07-22,2026-01-13,Customer
+T0213,PR020,D03,E044,Work item 213,In Progress,Low,2025-01-06,2026-08-29,Internal
+T0214,PR001,D08,E057,Work item 214,To Do,Critical,2025-12-29,2026-08-10,Internal
+T0215,PR019,D03,E025,Work item 215,To Do,Medium,2026-03-07,2026-03-22,Customer
+T0216,PR023,D08,E008,Work item 216,In Progress,High,2025-04-08,2026-09-13,Internal
+T0217,PR002,D06,E078,Work item 217,Backlog,Low,2025-01-22,2026-07-11,Operational
+T0218,PR030,D07,E054,Work item 218,Blocked,Low,2026-03-14,2026-09-10,Compliance
+T0219,PR022,D07,E013,Work item 219,In Progress,Medium,2025-08-02,2026-03-11,Internal
+T0220,PR007,D07,E017,Work item 220,Blocked,Medium,2026-03-17,2026-12-06,Compliance
+T0221,PR017,D06,E002,Work item 221,Backlog,High,2026-04-24,2026-07-16,Customer
+T0222,PR024,D05,E031,Work item 222,Backlog,Critical,2025-10-24,2026-08-29,Internal
+T0223,PR022,D07,E018,Work item 223,Blocked,Low,2026-02-10,2026-12-16,Internal
+T0224,PR002,D06,E027,Work item 224,Backlog,Low,2026-01-04,2026-12-04,Operational
+T0225,PR030,D07,E048,Work item 225,In Progress,Low,2026-01-13,2026-05-31,Customer
+T0226,PR014,D07,E059,Work item 226,Backlog,Critical,2026-01-12,2026-07-21,Internal
+T0227,PR026,D01,E012,Work item 227,In Progress,Critical,2026-10-24,2026-09-14,Internal
+T0228,PR018,D05,E047,Work item 228,Backlog,Low,2026-02-03,2026-07-25,Internal
+T0229,PR011,D03,E060,Work item 229,In Progress,Critical,2025-06-24,2026-08-26,Operational
+T0230,PR016,D05,E030,Work item 230,Backlog,Critical,2026-07-10,2026-04-26,Customer
+T0231,PR020,D03,E021,Work item 231,Done,Low,2025-05-19,2026-07-29,Operational
+T0232,PR030,D07,E024,Work item 232,Blocked,Critical,2025-03-21,2026-02-13,Operational
+T0233,PR015,D01,E063,Work item 233,Done,Low,2026-05-08,2026-03-18,Compliance
+T0234,PR026,D01,E014,Work item 234,Backlog,Critical,2026-01-22,2026-11-06,Compliance
+T0235,PR025,D03,E057,Work item 235,Done,Medium,2025-08-17,2026-10-06,Internal
+T0236,PR012,D03,E029,Work item 236,Backlog,Low,2026-01-04,2026-08-13,Internal
+T0237,PR007,D07,E075,Work item 237,Done,Medium,2026-08-23,2026-04-13,Customer
+T0238,PR008,D06,E006,Work item 238,Done,High,2025-10-08,2026-03-04,Compliance
+T0239,PR028,D08,E072,Work item 239,Blocked,Critical,2026-07-27,2026-04-13,Operational
+T0240,PR021,D04,E040,Work item 240,To Do,Medium,2025-07-08,2026-07-14,Customer
+T0241,PR005,D06,E077,Work item 241,Backlog,Low,2025-04-24,2026-04-20,Customer
+T0242,PR007,D07,E042,Work item 242,In Progress,Critical,2026-04-10,2026-12-15,Compliance
+T0243,PR012,D03,E017,Work item 243,In Progress,Medium,2025-01-15,2026-08-06,Customer
+T0244,PR030,D07,E006,Work item 244,Blocked,High,2026-11-20,2026-04-06,Compliance
+T0245,PR028,D08,E006,Work item 245,In Progress,High,2026-09-09,2026-05-01,Internal
+T0246,PR009,D04,E017,Work item 246,Done,Medium,2025-04-03,2026-10-18,Internal
+T0247,PR003,D03,E038,Work item 247,To Do,Low,2026-10-18,2026-05-28,Operational
+T0248,PR025,D03,E056,Work item 248,In Progress,Medium,2026-07-04,2026-12-11,Customer
+T0249,PR003,D03,E025,Work item 249,To Do,Low,2025-08-11,2026-01-25,Compliance
+T0250,PR004,D06,E009,Work item 250,To Do,Critical,2026-10-19,2026-11-09,Operational
+T0251,PR018,D05,E068,Work item 251,Done,High,2025-08-26,2026-06-23,Compliance
+T0252,PR027,D01,E012,Work item 252,Done,High,2025-04-12,2026-07-11,Operational
+T0253,PR008,D06,E054,Work item 253,In Progress,Medium,2026-03-16,2026-05-01,Internal
+T0254,PR004,D06,E007,Work item 254,Blocked,Low,2025-11-03,2026-04-28,Operational
+T0255,PR002,D06,E056,Work item 255,To Do,Low,2026-10-24,2026-12-23,Customer
+T0256,PR004,D06,E016,Work item 256,To Do,Critical,2025-10-26,2026-11-29,Customer
+T0257,PR018,D05,E037,Work item 257,To Do,Critical,2026-10-02,2026-08-30,Compliance
+T0258,PR030,D07,E070,Work item 258,Blocked,Medium,2026-11-21,2026-07-22,Operational
+T0259,PR012,D03,E005,Work item 259,To Do,Low,2026-05-20,2026-04-07,Compliance
+T0260,PR001,D08,E065,Work item 260,Backlog,Low,2025-10-21,2026-07-21,Compliance
+T0261,PR024,D05,E027,Work item 261,Backlog,Low,2026-07-19,2026-08-01,Customer
+T0262,PR018,D05,E022,Work item 262,In Progress,Critical,2026-06-30,2026-03-29,Customer
+T0263,PR019,D03,E067,Work item 263,Done,High,2025-03-22,2026-05-26,Internal
+T0264,PR021,D04,E022,Work item 264,Backlog,Medium,2025-01-20,2026-05-29,Customer
+T0265,PR015,D01,E074,Work item 265,In Progress,Medium,2026-07-12,2026-03-07,Customer
+T0266,PR009,D04,E015,Work item 266,In Progress,Medium,2026-09-22,2026-05-09,Compliance
+T0267,PR027,D01,E005,Work item 267,Done,Medium,2026-01-22,2026-01-28,Customer
+T0268,PR017,D06,E001,Work item 268,To Do,Low,2025-04-19,2026-02-23,Customer
+T0269,PR022,D07,E052,Work item 269,In Progress,Low,2026-01-21,2026-03-13,Internal
+T0270,PR008,D06,E031,Work item 270,To Do,Critical,2026-11-08,2026-09-14,Internal
+T0271,PR001,D08,E003,Work item 271,In Progress,Medium,2025-08-29,2026-03-18,Compliance
+T0272,PR013,D01,E080,Work item 272,Blocked,Medium,2025-05-16,2026-08-06,Compliance
+T0273,PR015,D01,E053,Work item 273,In Progress,Medium,2026-01-13,2026-07-07,Operational
+T0274,PR009,D04,E078,Work item 274,Backlog,Low,2025-07-04,2026-02-22,Customer
+T0275,PR003,D03,E006,Work item 275,To Do,Medium,2025-09-01,2026-10-25,Customer
+T0276,PR005,D06,E001,Work item 276,Done,Critical,2026-01-02,2026-07-24,Compliance
+T0277,PR017,D06,E001,Work item 277,In Progress,Critical,2025-05-21,2026-05-07,Customer
+T0278,PR023,D08,E053,Work item 278,Backlog,Medium,2026-07-17,2026-07-19,Compliance
+T0279,PR013,D01,E045,Work item 279,To Do,High,2025-09-23,2026-02-27,Customer
+T0280,PR018,D05,E024,Work item 280,Backlog,High,2025-07-02,2026-09-16,Customer
+T0281,PR002,D06,E002,Work item 281,Done,Critical,2025-09-04,2026-08-05,Customer
+T0282,PR026,D01,E042,Work item 282,Backlog,Critical,2025-06-28,2026-05-06,Internal
+T0283,PR012,D03,E027,Work item 283,To Do,Critical,2026-04-08,2026-10-18,Compliance
+T0284,PR022,D07,E031,Work item 284,Blocked,Critical,2025-07-18,2026-01-30,Customer
+T0285,PR024,D05,E077,Work item 285,In Progress,High,2025-02-07,2026-02-17,Operational
+T0286,PR007,D07,E064,Work item 286,Blocked,Critical,2025-05-30,2026-01-06,Compliance
+T0287,PR011,D03,E030,Work item 287,Done,Critical,2025-10-01,2026-07-07,Internal
+T0288,PR008,D06,E003,Work item 288,To Do,Medium,2025-03-16,2026-09-25,Customer
+T0289,PR020,D03,E021,Work item 289,Blocked,Medium,2026-10-13,2026-07-16,Operational
+T0290,PR024,D05,E064,Work item 290,To Do,High,2025-07-27,2026-08-04,Operational
+T0291,PR018,D05,E037,Work item 291,Blocked,Medium,2026-03-16,2026-05-03,Compliance
+T0292,PR003,D03,E004,Work item 292,In Progress,Low,2025-11-05,2026-11-29,Customer
+T0293,PR007,D07,E048,Work item 293,Backlog,High,2025-04-24,2026-08-18,Operational
+T0294,PR006,D06,E036,Work item 294,Done,High,2026-07-13,2026-05-16,Customer
+T0295,PR029,D08,E004,Work item 295,Done,Low,2025-02-27,2026-03-03,Operational
+T0296,PR008,D06,E035,Work item 296,Done,High,2026-09-24,2026-03-29,Operational
+T0297,PR011,D03,E004,Work item 297,Blocked,Critical,2026-05-09,2026-07-18,Operational
+T0298,PR002,D06,E038,Work item 298,Blocked,High,2025-05-31,2026-06-03,Operational
+T0299,PR009,D04,E063,Work item 299,In Progress,High,2025-02-09,2026-08-07,Operational
+T0300,PR024,D05,E001,Work item 300,Backlog,Medium,2026-09-17,2026-10-05,Operational
+T0301,PR009,D04,E039,Work item 301,To Do,High,2026-04-16,2026-07-08,Internal
+T0302,PR023,D08,E072,Work item 302,In Progress,Low,2025-09-05,2026-02-09,Compliance
+T0303,PR013,D01,E048,Work item 303,Done,Low,2026-06-20,2026-04-13,Compliance
+T0304,PR028,D08,E003,Work item 304,To Do,Low,2026-02-06,2026-06-09,Internal
+T0305,PR021,D04,E023,Work item 305,Backlog,High,2026-10-06,2026-01-01,Internal
+T0306,PR025,D03,E040,Work item 306,Done,Medium,2025-12-23,2026-04-24,Compliance
+T0307,PR012,D03,E035,Work item 307,To Do,High,2025-08-03,2026-01-05,Compliance
+T0308,PR013,D01,E033,Work item 308,In Progress,High,2026-05-14,2026-06-21,Customer
+T0309,PR017,D06,E038,Work item 309,Done,Medium,2025-10-20,2026-09-18,Compliance
+T0310,PR021,D04,E080,Work item 310,Backlog,High,2025-12-10,2026-01-11,Compliance
+T0311,PR018,D05,E032,Work item 311,In Progress,Critical,2025-03-08,2026-11-08,Operational
+T0312,PR019,D03,E051,Work item 312,Done,Low,2026-03-16,2026-12-25,Operational
+T0313,PR021,D04,E058,Work item 313,Done,Medium,2026-06-03,2026-09-21,Operational
+T0314,PR022,D07,E007,Work item 314,To Do,Medium,2025-10-06,2026-04-11,Customer
+T0315,PR027,D01,E047,Work item 315,Blocked,Medium,2025-12-23,2026-07-10,Operational
+T0316,PR021,D04,E062,Work item 316,Blocked,High,2025-05-20,2026-12-28,Internal
+T0317,PR023,D08,E017,Work item 317,In Progress,Medium,2026-02-23,2026-06-05,Operational
+T0318,PR012,D03,E070,Work item 318,Blocked,Medium,2025-07-17,2026-11-02,Operational
+T0319,PR020,D03,E066,Work item 319,Blocked,Low,2026-05-30,2026-08-14,Compliance
+T0320,PR006,D06,E080,Work item 320,To Do,Medium,2026-03-20,2026-05-11,Compliance
+T0321,PR008,D06,E010,Work item 321,Backlog,Critical,2025-08-07,2026-02-18,Compliance
+T0322,PR027,D01,E035,Work item 322,In Progress,Medium,2026-03-09,2026-10-21,Operational
+T0323,PR029,D08,E037,Work item 323,Blocked,Critical,2025-02-06,2026-08-11,Compliance
+T0324,PR029,D08,E029,Work item 324,In Progress,Low,2025-03-12,2026-09-18,Internal
+T0325,PR019,D03,E013,Work item 325,To Do,Medium,2025-01-03,2026-07-09,Compliance
+T0326,PR005,D06,E015,Work item 326,Done,Critical,2025-08-02,2026-06-20,Operational
+T0327,PR025,D03,E035,Work item 327,To Do,Critical,2026-08-01,2026-08-09,Internal
+T0328,PR012,D03,E041,Work item 328,Done,Critical,2025-04-08,2026-12-22,Customer
+T0329,PR010,D01,E073,Work item 329,Blocked,Low,2026-03-22,2026-04-18,Compliance
+T0330,PR015,D01,E010,Work item 330,Done,Critical,2026-03-02,2026-01-24,Compliance
+T0331,PR020,D03,E016,Work item 331,Backlog,Medium,2025-03-30,2026-03-22,Internal
+T0332,PR003,D03,E072,Work item 332,Done,Medium,2026-10-09,2026-12-03,Internal
+T0333,PR022,D07,E019,Work item 333,Done,Critical,2026-06-09,2026-10-04,Internal
+T0334,PR008,D06,E067,Work item 334,To Do,Medium,2026-11-20,2026-05-18,Internal
+T0335,PR018,D05,E070,Work item 335,Blocked,High,2025-07-01,2026-12-26,Customer
+T0336,PR010,D01,E078,Work item 336,To Do,High,2025-06-11,2026-07-11,Internal
+T0337,PR012,D03,E036,Work item 337,Blocked,Low,2025-06-06,2026-09-02,Compliance
+T0338,PR030,D07,E047,Work item 338,Done,Low,2025-07-10,2026-09-01,Customer
+T0339,PR014,D07,E074,Work item 339,In Progress,Critical,2025-07-02,2026-07-08,Operational
+T0340,PR015,D01,E071,Work item 340,To Do,Low,2025-03-18,2026-08-13,Customer
+T0341,PR025,D03,E029,Work item 341,Done,Critical,2025-12-16,2026-04-18,Operational
+T0342,PR013,D01,E077,Work item 342,Backlog,Critical,2025-09-08,2026-03-15,Customer
+T0343,PR018,D05,E038,Work item 343,To Do,Medium,2026-06-23,2026-01-14,Compliance
+T0344,PR028,D08,E057,Work item 344,Blocked,Critical,2026-08-05,2026-05-29,Customer
+T0345,PR014,D07,E027,Work item 345,Done,High,2026-07-31,2026-01-26,Customer
+T0346,PR016,D05,E021,Work item 346,Done,Critical,2026-03-17,2026-12-17,Compliance
+T0347,PR021,D04,E004,Work item 347,To Do,Low,2025-10-04,2026-01-12,Customer
+T0348,PR015,D01,E014,Work item 348,Blocked,Low,2026-04-24,2026-07-14,Operational
+T0349,PR010,D01,E069,Work item 349,Done,Medium,2026-06-01,2026-08-17,Compliance
+T0350,PR011,D03,E022,Work item 350,Done,Critical,2026-02-09,2026-10-15,Operational
+T0351,PR026,D01,E063,Work item 351,Blocked,Low,2025-01-17,2026-12-25,Internal
+T0352,PR008,D06,E001,Work item 352,In Progress,Critical,2026-01-23,2026-06-15,Compliance
+T0353,PR004,D06,E018,Work item 353,In Progress,Critical,2025-05-23,2026-06-10,Customer
+T0354,PR023,D08,E055,Work item 354,Blocked,Medium,2025-01-18,2026-03-05,Customer
+T0355,PR019,D03,E065,Work item 355,Done,Critical,2025-01-24,2026-05-03,Operational
+T0356,PR004,D06,E039,Work item 356,Blocked,Medium,2025-09-27,2026-03-05,Internal
+T0357,PR029,D08,E062,Work item 357,Blocked,Low,2026-01-13,2026-10-06,Customer
+T0358,PR010,D01,E075,Work item 358,To Do,High,2025-10-12,2026-05-21,Compliance
+T0359,PR018,D05,E047,Work item 359,Backlog,Medium,2026-03-05,2026-10-31,Operational
+T0360,PR009,D04,E057,Work item 360,Blocked,Low,2025-05-17,2026-03-29,Compliance
+T0361,PR015,D01,E042,Work item 361,Backlog,Low,2026-03-22,2026-02-20,Compliance
+T0362,PR025,D03,E045,Work item 362,Blocked,Critical,2026-02-14,2026-09-29,Customer
+T0363,PR021,D04,E035,Work item 363,In Progress,Medium,2025-12-01,2026-03-26,Internal
+T0364,PR018,D05,E017,Work item 364,Blocked,Low,2026-03-16,2026-06-02,Internal
+T0365,PR008,D06,E039,Work item 365,Blocked,Critical,2026-10-08,2026-07-24,Compliance
+T0366,PR011,D03,E037,Work item 366,Blocked,Medium,2026-02-22,2026-02-25,Operational
+T0367,PR017,D06,E003,Work item 367,Backlog,Low,2026-08-13,2026-08-10,Compliance
+T0368,PR004,D06,E038,Work item 368,Backlog,Medium,2026-09-04,2026-12-18,Compliance
+T0369,PR005,D06,E022,Work item 369,Blocked,Critical,2025-04-10,2026-05-15,Operational
+T0370,PR026,D01,E057,Work item 370,Backlog,Low,2025-06-27,2026-04-29,Customer
+T0371,PR019,D03,E048,Work item 371,Blocked,Medium,2025-11-17,2026-06-03,Operational
+T0372,PR029,D08,E041,Work item 372,In Progress,Medium,2026-06-25,2026-12-16,Customer
+T0373,PR011,D03,E063,Work item 373,Backlog,Low,2026-07-17,2026-03-21,Customer
+T0374,PR007,D07,E013,Work item 374,In Progress,Low,2026-03-02,2026-10-05,Operational
+T0375,PR023,D08,E032,Work item 375,To Do,Low,2026-05-01,2026-01-11,Internal
+T0376,PR020,D03,E038,Work item 376,In Progress,Medium,2026-07-28,2026-12-19,Operational
+T0377,PR017,D06,E050,Work item 377,In Progress,Medium,2026-10-04,2026-05-05,Customer
+T0378,PR005,D06,E041,Work item 378,Backlog,Medium,2025-09-03,2026-08-20,Operational
+T0379,PR024,D05,E041,Work item 379,Backlog,Low,2025-08-01,2026-07-25,Operational
+T0380,PR014,D07,E015,Work item 380,In Progress,Critical,2026-06-19,2026-05-01,Internal
+T0381,PR017,D06,E073,Work item 381,Done,Low,2025-05-10,2026-06-05,Internal
+T0382,PR006,D06,E035,Work item 382,Blocked,Medium,2025-07-28,2026-11-30,Customer
+T0383,PR010,D01,E050,Work item 383,In Progress,Medium,2025-04-05,2026-06-16,Customer
+T0384,PR026,D01,E054,Work item 384,Backlog,Low,2025-07-15,2026-12-20,Operational
+T0385,PR025,D03,E033,Work item 385,Backlog,Low,2026-11-04,2026-03-10,Compliance
+T0386,PR010,D01,E075,Work item 386,To Do,Low,2026-11-02,2026-10-27,Customer
+T0387,PR006,D06,E018,Work item 387,Backlog,Medium,2026-03-24,2026-01-21,Customer
+T0388,PR030,D07,E076,Work item 388,Backlog,Critical,2026-07-13,2026-12-19,Internal
+T0389,PR007,D07,E071,Work item 389,In Progress,High,2025-06-27,2026-02-14,Customer
+T0390,PR008,D06,E062,Work item 390,Done,Medium,2026-10-14,2026-08-11,Operational
+T0391,PR008,D06,E049,Work item 391,Blocked,Low,2025-12-19,2026-07-08,Customer
+T0392,PR011,D03,E012,Work item 392,To Do,Low,2025-09-07,2026-11-21,Compliance
+T0393,PR013,D01,E002,Work item 393,In Progress,Medium,2025-08-27,2026-06-17,Internal
+T0394,PR018,D05,E052,Work item 394,Blocked,High,2025-10-22,2026-02-22,Internal
+T0395,PR014,D07,E001,Work item 395,Blocked,Medium,2025-12-16,2026-06-12,Operational
+T0396,PR011,D03,E053,Work item 396,To Do,Low,2025-07-02,2026-07-03,Compliance
+T0397,PR016,D05,E041,Work item 397,Done,High,2025-10-06,2026-03-18,Internal
+T0398,PR006,D06,E003,Work item 398,Backlog,Medium,2025-02-06,2026-10-22,Operational
+T0399,PR003,D03,E069,Work item 399,In Progress,Critical,2026-09-12,2026-03-29,Internal
+T0400,PR014,D07,E029,Work item 400,Done,Medium,2025-09-30,2026-05-11,Compliance

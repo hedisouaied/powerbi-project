@@ -1,0 +1,16 @@
+**/node_modules
+backend/vendor
+backend/.env
+backend/.env.*
+!backend/.env.example
+backend/public/app
+backend/bootstrap/cache/*.php
+backend/storage/logs/*
+backend/storage/framework/cache/*
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+backend/.mcp.json
+backend/boost.json
+.claude
+tools
+*.log

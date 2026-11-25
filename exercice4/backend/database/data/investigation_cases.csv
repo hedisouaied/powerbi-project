@@ -1,0 +1,101 @@
+case_id,case_title,case_type,severity,case_status,case_owner_employee_id,department_id,opened_date,case_summary,review_status
+CASE0001,Investigation Case 001,Payment mismatch,Low,Closed,E032,D03,2026-05-07,Case summary 001,Under Review
+CASE0002,Investigation Case 002,Delivery delay,Critical,New,E048,D02,2025-09-06,Case summary 002,Open
+CASE0003,Investigation Case 003,Payment mismatch,Medium,New,E072,D05,2026-08-03,Case summary 003,Resolved
+CASE0004,Investigation Case 004,Data quality,Critical,New,E012,D05,2026-01-11,Case summary 004,Open
+CASE0005,Investigation Case 005,Revenue anomaly,Medium,Closed,E031,D02,2025-10-31,Case summary 005,Open
+CASE0006,Investigation Case 006,Data quality,Critical,New,E043,D01,2025-10-08,Case summary 006,Under Review
+CASE0007,Investigation Case 007,Payment mismatch,Critical,Awaiting Review,E011,D07,2026-11-17,Case summary 007,Resolved
+CASE0008,Investigation Case 008,Revenue anomaly,Critical,Awaiting Review,E045,D03,2026-07-09,Case summary 008,Open
+CASE0009,Investigation Case 009,Data quality,Low,Closed,E004,D01,2026-11-08,Case summary 009,Resolved
+CASE0010,Investigation Case 010,Payment mismatch,Medium,Investigating,E071,D01,2026-01-07,Case summary 010,Open
+CASE0011,Investigation Case 011,Payment mismatch,Critical,Awaiting Review,E008,D04,2026-07-20,Case summary 011,Resolved
+CASE0012,Investigation Case 012,Payment mismatch,High,New,E058,D02,2026-04-18,Case summary 012,Under Review
+CASE0013,Investigation Case 013,Revenue anomaly,Critical,Awaiting Review,E042,D03,2025-08-30,Case summary 013,Open
+CASE0014,Investigation Case 014,Delivery delay,Critical,Awaiting Review,E044,D08,2026-09-06,Case summary 014,Resolved
+CASE0015,Investigation Case 015,Customer churn,Low,New,E045,D01,2025-04-28,Case summary 015,Under Review
+CASE0016,Investigation Case 016,Delivery delay,High,Investigating,E029,D05,2026-02-14,Case summary 016,Under Review
+CASE0017,Investigation Case 017,Data quality,Low,Awaiting Review,E005,D08,2025-05-19,Case summary 017,Under Review
+CASE0018,Investigation Case 018,Data quality,Critical,Investigating,E038,D02,2026-07-19,Case summary 018,Open
+CASE0019,Investigation Case 019,Payment mismatch,Low,Awaiting Review,E014,D01,2026-09-26,Case summary 019,Resolved
+CASE0020,Investigation Case 020,Supplier review,Critical,New,E052,D01,2025-01-11,Case summary 020,Resolved
+CASE0021,Investigation Case 021,Data quality,High,Closed,E017,D04,2025-02-07,Case summary 021,Under Review
+CASE0022,Investigation Case 022,Payment mismatch,Medium,Closed,E035,D01,2025-10-04,Case summary 022,Resolved
+CASE0023,Investigation Case 023,Customer churn,Medium,Investigating,E053,D02,2025-10-18,Case summary 023,Resolved
+CASE0024,Investigation Case 024,Delivery delay,Low,Awaiting Review,E028,D05,2026-06-16,Case summary 024,Open
+CASE0025,Investigation Case 025,Delivery delay,Medium,Awaiting Review,E038,D01,2026-08-03,Case summary 025,Open
+CASE0026,Investigation Case 026,Data quality,Low,Closed,E080,D08,2025-03-26,Case summary 026,Resolved
+CASE0027,Investigation Case 027,Payment mismatch,High,New,E049,D04,2025-05-30,Case summary 027,Open
+CASE0028,Investigation Case 028,Revenue anomaly,High,Closed,E043,D04,2026-01-15,Case summary 028,Under Review
+CASE0029,Investigation Case 029,Supplier review,High,Closed,E056,D08,2025-03-28,Case summary 029,Under Review
+CASE0030,Investigation Case 030,Data quality,High,New,E063,D03,2025-09-21,Case summary 030,Resolved
+CASE0031,Investigation Case 031,Payment mismatch,Low,Closed,E044,D02,2025-06-19,Case summary 031,Under Review
+CASE0032,Investigation Case 032,Delivery delay,High,Investigating,E033,D07,2025-08-12,Case summary 032,Under Review
+CASE0033,Investigation Case 033,Supplier review,Medium,New,E001,D07,2026-05-05,Case summary 033,Under Review
+CASE0034,Investigation Case 034,Customer churn,Low,Closed,E037,D07,2026-07-26,Case summary 034,Open
+CASE0035,Investigation Case 035,Data quality,Low,Investigating,E041,D03,2026-03-08,Case summary 035,Resolved
+CASE0036,Investigation Case 036,Revenue anomaly,Critical,Awaiting Review,E042,D03,2026-07-12,Case summary 036,Under Review
+CASE0037,Investigation Case 037,Delivery delay,High,Awaiting Review,E030,D05,2025-03-04,Case summary 037,Open
+CASE0038,Investigation Case 038,Customer churn,Medium,Awaiting Review,E014,D03,2025-09-18,Case summary 038,Resolved
+CASE0039,Investigation Case 039,Customer churn,High,Awaiting Review,E075,D06,2025-04-15,Case summary 039,Resolved
+CASE0040,Investigation Case 040,Data quality,Low,Closed,E014,D02,2025-09-22,Case summary 040,Resolved
+CASE0041,Investigation Case 041,Supplier review,Medium,New,E063,D05,2026-02-12,Case summary 041,Open
+CASE0042,Investigation Case 042,Revenue anomaly,Low,Closed,E024,D07,2026-08-01,Case summary 042,Resolved
+CASE0043,Investigation Case 043,Revenue anomaly,Medium,Closed,E025,D01,2026-01-11,Case summary 043,Resolved
+CASE0044,Investigation Case 044,Customer churn,High,New,E065,D08,2025-11-22,Case summary 044,Open
+CASE0045,Investigation Case 045,Customer churn,Critical,New,E054,D04,2026-05-15,Case summary 045,Under Review
+CASE0046,Investigation Case 046,Payment mismatch,Medium,Awaiting Review,E056,D06,2026-10-12,Case summary 046,Under Review
+CASE0047,Investigation Case 047,Revenue anomaly,Critical,Awaiting Review,E023,D07,2025-06-08,Case summary 047,Under Review
+CASE0048,Investigation Case 048,Supplier review,Low,Closed,E025,D05,2025-02-02,Case summary 048,Under Review
+CASE0049,Investigation Case 049,Delivery delay,Low,Awaiting Review,E073,D01,2026-01-05,Case summary 049,Under Review
+CASE0050,Investigation Case 050,Delivery delay,Medium,New,E023,D04,2026-09-06,Case summary 050,Under Review
+CASE0051,Investigation Case 051,Payment mismatch,Low,Investigating,E054,D04,2026-07-24,Case summary 051,Under Review
+CASE0052,Investigation Case 052,Payment mismatch,Medium,Closed,E024,D05,2025-05-09,Case summary 052,Under Review
+CASE0053,Investigation Case 053,Payment mismatch,High,New,E052,D07,2026-10-27,Case summary 053,Resolved
+CASE0054,Investigation Case 054,Delivery delay,Critical,Closed,E003,D05,2026-08-06,Case summary 054,Resolved
+CASE0055,Investigation Case 055,Payment mismatch,Critical,Investigating,E017,D03,2026-06-08,Case summary 055,Resolved
+CASE0056,Investigation Case 056,Supplier review,Low,New,E080,D02,2026-01-13,Case summary 056,Open
+CASE0057,Investigation Case 057,Data quality,High,Closed,E071,D07,2026-08-29,Case summary 057,Open
+CASE0058,Investigation Case 058,Data quality,Low,Awaiting Review,E017,D08,2025-01-18,Case summary 058,Under Review
+CASE0059,Investigation Case 059,Data quality,Medium,Closed,E002,D07,2025-05-21,Case summary 059,Resolved
+CASE0060,Investigation Case 060,Customer churn,Medium,Closed,E038,D03,2026-05-20,Case summary 060,Under Review
+CASE0061,Investigation Case 061,Supplier review,Critical,Closed,E038,D02,2025-12-02,Case summary 061,Open
+CASE0062,Investigation Case 062,Supplier review,Critical,Investigating,E043,D01,2025-01-01,Case summary 062,Resolved
+CASE0063,Investigation Case 063,Customer churn,Medium,Awaiting Review,E037,D02,2026-11-05,Case summary 063,Open
+CASE0064,Investigation Case 064,Delivery delay,High,New,E062,D01,2026-01-28,Case summary 064,Open
+CASE0065,Investigation Case 065,Data quality,Low,Awaiting Review,E046,D08,2026-03-02,Case summary 065,Open
+CASE0066,Investigation Case 066,Customer churn,Critical,Awaiting Review,E027,D04,2026-07-09,Case summary 066,Under Review
+CASE0067,Investigation Case 067,Supplier review,Critical,New,E032,D05,2025-04-15,Case summary 067,Open
+CASE0068,Investigation Case 068,Customer churn,Critical,Investigating,E051,D08,2026-02-03,Case summary 068,Open
+CASE0069,Investigation Case 069,Supplier review,Critical,New,E052,D05,2025-09-23,Case summary 069,Open
+CASE0070,Investigation Case 070,Supplier review,High,Investigating,E005,D03,2025-02-28,Case summary 070,Open
+CASE0071,Investigation Case 071,Payment mismatch,Medium,Investigating,E057,D08,2025-05-10,Case summary 071,Under Review
+CASE0072,Investigation Case 072,Revenue anomaly,Critical,New,E052,D06,2026-03-22,Case summary 072,Open
+CASE0073,Investigation Case 073,Delivery delay,Critical,Closed,E037,D07,2026-07-26,Case summary 073,Open
+CASE0074,Investigation Case 074,Payment mismatch,Medium,New,E026,D01,2025-03-17,Case summary 074,Open
+CASE0075,Investigation Case 075,Supplier review,Low,Closed,E057,D02,2025-04-17,Case summary 075,Open
+CASE0076,Investigation Case 076,Customer churn,Critical,Investigating,E013,D03,2025-01-24,Case summary 076,Resolved
+CASE0077,Investigation Case 077,Data quality,Medium,Closed,E051,D08,2025-10-30,Case summary 077,Under Review
+CASE0078,Investigation Case 078,Supplier review,Critical,Awaiting Review,E069,D04,2025-12-10,Case summary 078,Resolved
+CASE0079,Investigation Case 079,Data quality,Critical,Closed,E049,D06,2025-12-03,Case summary 079,Resolved
+CASE0080,Investigation Case 080,Payment mismatch,Low,New,E028,D03,2025-05-13,Case summary 080,Resolved
+CASE0081,Investigation Case 081,Supplier review,Critical,Investigating,E053,D06,2025-12-14,Case summary 081,Open
+CASE0082,Investigation Case 082,Revenue anomaly,Low,New,E057,D08,2025-12-09,Case summary 082,Under Review
+CASE0083,Investigation Case 083,Delivery delay,Medium,New,E018,D02,2026-08-01,Case summary 083,Under Review
+CASE0084,Investigation Case 084,Data quality,Critical,Closed,E001,D08,2026-07-07,Case summary 084,Under Review
+CASE0085,Investigation Case 085,Revenue anomaly,Medium,Investigating,E054,D05,2025-02-01,Case summary 085,Resolved
+CASE0086,Investigation Case 086,Payment mismatch,High,Awaiting Review,E049,D01,2026-06-09,Case summary 086,Open
+CASE0087,Investigation Case 087,Payment mismatch,Critical,Closed,E046,D08,2025-05-08,Case summary 087,Under Review
+CASE0088,Investigation Case 088,Data quality,Critical,Investigating,E047,D03,2025-09-10,Case summary 088,Open
+CASE0089,Investigation Case 089,Customer churn,Low,Awaiting Review,E074,D03,2025-05-19,Case summary 089,Open
+CASE0090,Investigation Case 090,Supplier review,High,Awaiting Review,E047,D04,2026-08-06,Case summary 090,Resolved
+CASE0091,Investigation Case 091,Data quality,High,New,E014,D06,2025-11-07,Case summary 091,Open
+CASE0092,Investigation Case 092,Payment mismatch,Critical,Investigating,E012,D06,2025-09-03,Case summary 092,Open
+CASE0093,Investigation Case 093,Data quality,Low,Awaiting Review,E019,D02,2026-09-25,Case summary 093,Resolved
+CASE0094,Investigation Case 094,Delivery delay,Medium,Investigating,E034,D02,2026-05-08,Case summary 094,Open
+CASE0095,Investigation Case 095,Data quality,Medium,New,E032,D02,2026-05-19,Case summary 095,Resolved
+CASE0096,Investigation Case 096,Payment mismatch,Low,Investigating,E028,D07,2026-08-19,Case summary 096,Under Review
+CASE0097,Investigation Case 097,Delivery delay,Medium,Closed,E027,D01,2025-11-03,Case summary 097,Under Review
+CASE0098,Investigation Case 098,Customer churn,Medium,New,E059,D01,2025-04-25,Case summary 098,Under Review
+CASE0099,Investigation Case 099,Supplier review,High,Awaiting Review,E071,D03,2025-08-21,Case summary 099,Open
+CASE0100,Investigation Case 100,Revenue anomaly,Critical,Awaiting Review,E020,D06,2025-01-21,Case summary 100,Open

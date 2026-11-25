@@ -1,0 +1,201 @@
+comment_id,comment_date,author_employee_id,linked_item_type,linked_item_reference,comment_text,comment_type
+COM0001,2025-04-20,E033,Risk,REF-98414,Collaboration note 001,Review Note
+COM0002,2025-06-24,E033,Project,REF-53707,Collaboration note 002,Decision Note
+COM0003,2026-09-09,E029,Decision,REF-40687,Collaboration note 003,Comment
+COM0004,2026-07-20,E024,Project,REF-22531,Collaboration note 004,Decision Note
+COM0005,2025-11-25,E028,Risk,REF-43983,Collaboration note 005,Mention
+COM0006,2026-08-24,E005,Risk,REF-67445,Collaboration note 006,Review Note
+COM0007,2026-07-27,E026,Risk,REF-69370,Collaboration note 007,Comment
+COM0008,2025-06-15,E078,KPI,REF-95377,Collaboration note 008,Decision Note
+COM0009,2025-10-12,E025,Case,REF-14155,Collaboration note 009,Decision Note
+COM0010,2026-01-30,E020,Case,REF-76495,Collaboration note 010,Mention
+COM0011,2026-07-09,E025,Decision,REF-28635,Collaboration note 011,Mention
+COM0012,2025-06-25,E040,Project,REF-66061,Collaboration note 012,Review Note
+COM0013,2025-04-11,E026,Project,REF-19533,Collaboration note 013,Review Note
+COM0014,2025-06-04,E040,Case,REF-16542,Collaboration note 014,Review Note
+COM0015,2026-11-05,E034,KPI,REF-34848,Collaboration note 015,Comment
+COM0016,2025-08-20,E018,Case,REF-10825,Collaboration note 016,Review Note
+COM0017,2025-01-01,E076,Risk,REF-92890,Collaboration note 017,Mention
+COM0018,2026-03-20,E036,Decision,REF-79552,Collaboration note 018,Decision Note
+COM0019,2025-08-17,E043,Project,REF-67870,Collaboration note 019,Mention
+COM0020,2026-05-25,E021,Project,REF-46909,Collaboration note 020,Decision Note
+COM0021,2026-03-13,E007,KPI,REF-13259,Collaboration note 021,Decision Note
+COM0022,2025-04-23,E048,Case,REF-65801,Collaboration note 022,Mention
+COM0023,2025-02-20,E026,Case,REF-44365,Collaboration note 023,Mention
+COM0024,2025-01-01,E021,Case,REF-28337,Collaboration note 024,Decision Note
+COM0025,2025-05-01,E071,Project,REF-85938,Collaboration note 025,Mention
+COM0026,2025-05-26,E032,Task,REF-24317,Collaboration note 026,Decision Note
+COM0027,2025-02-28,E048,Decision,REF-72455,Collaboration note 027,Comment
+COM0028,2026-02-09,E010,Project,REF-71030,Collaboration note 028,Decision Note
+COM0029,2025-05-18,E036,Case,REF-37873,Collaboration note 029,Mention
+COM0030,2025-07-02,E065,Decision,REF-63337,Collaboration note 030,Review Note
+COM0031,2025-12-11,E044,Risk,REF-11531,Collaboration note 031,Comment
+COM0032,2025-07-04,E023,Case,REF-16933,Collaboration note 032,Mention
+COM0033,2026-06-22,E016,Decision,REF-32018,Collaboration note 033,Mention
+COM0034,2025-04-13,E014,Task,REF-64190,Collaboration note 034,Review Note
+COM0035,2026-11-05,E051,Case,REF-97724,Collaboration note 035,Mention
+COM0036,2026-09-11,E039,Risk,REF-79847,Collaboration note 036,Comment
+COM0037,2025-09-23,E079,Risk,REF-33446,Collaboration note 037,Mention
+COM0038,2025-06-07,E038,Case,REF-36030,Collaboration note 038,Mention
+COM0039,2025-01-25,E008,Task,REF-37438,Collaboration note 039,Review Note
+COM0040,2025-10-11,E051,Task,REF-14103,Collaboration note 040,Decision Note
+COM0041,2025-03-16,E004,Case,REF-76669,Collaboration note 041,Decision Note
+COM0042,2026-02-07,E067,Decision,REF-32054,Collaboration note 042,Decision Note
+COM0043,2025-06-25,E060,Case,REF-16487,Collaboration note 043,Review Note
+COM0044,2026-07-14,E051,Risk,REF-29074,Collaboration note 044,Mention
+COM0045,2025-07-21,E078,Project,REF-12593,Collaboration note 045,Comment
+COM0046,2026-05-29,E009,Project,REF-88452,Collaboration note 046,Decision Note
+COM0047,2026-04-23,E019,Case,REF-26189,Collaboration note 047,Decision Note
+COM0048,2025-04-02,E014,Task,REF-85639,Collaboration note 048,Review Note
+COM0049,2025-01-11,E045,Risk,REF-11372,Collaboration note 049,Comment
+COM0050,2025-04-14,E027,Decision,REF-89074,Collaboration note 050,Comment
+COM0051,2026-01-04,E031,Case,REF-84496,Collaboration note 051,Mention
+COM0052,2026-07-29,E014,Project,REF-59104,Collaboration note 052,Review Note
+COM0053,2026-04-14,E029,KPI,REF-24813,Collaboration note 053,Mention
+COM0054,2025-01-23,E046,Case,REF-11101,Collaboration note 054,Comment
+COM0055,2026-02-06,E076,Risk,REF-70162,Collaboration note 055,Mention
+COM0056,2025-07-29,E074,Risk,REF-73043,Collaboration note 056,Decision Note
+COM0057,2026-03-25,E041,Project,REF-15736,Collaboration note 057,Comment
+COM0058,2026-11-05,E018,Case,REF-37831,Collaboration note 058,Review Note
+COM0059,2026-08-27,E001,Project,REF-13644,Collaboration note 059,Decision Note
+COM0060,2026-06-07,E059,Decision,REF-15402,Collaboration note 060,Review Note
+COM0061,2026-02-15,E018,Decision,REF-66885,Collaboration note 061,Mention
+COM0062,2025-10-11,E005,Decision,REF-25174,Collaboration note 062,Comment
+COM0063,2026-09-17,E017,Case,REF-97127,Collaboration note 063,Mention
+COM0064,2025-05-19,E018,KPI,REF-46396,Collaboration note 064,Comment
+COM0065,2025-06-28,E009,Decision,REF-91844,Collaboration note 065,Decision Note
+COM0066,2026-03-29,E080,Task,REF-40735,Collaboration note 066,Comment
+COM0067,2025-03-11,E014,Decision,REF-34936,Collaboration note 067,Comment
+COM0068,2025-08-02,E021,Project,REF-85876,Collaboration note 068,Decision Note
+COM0069,2025-03-26,E048,KPI,REF-39396,Collaboration note 069,Mention
+COM0070,2025-01-17,E039,Decision,REF-70616,Collaboration note 070,Decision Note
+COM0071,2026-06-03,E071,Task,REF-73472,Collaboration note 071,Comment
+COM0072,2026-06-17,E057,Decision,REF-58703,Collaboration note 072,Mention
+COM0073,2026-08-24,E008,Case,REF-26165,Collaboration note 073,Comment
+COM0074,2026-09-06,E001,Risk,REF-45398,Collaboration note 074,Comment
+COM0075,2025-03-14,E029,Project,REF-66359,Collaboration note 075,Review Note
+COM0076,2026-01-27,E009,Risk,REF-10944,Collaboration note 076,Mention
+COM0077,2026-04-23,E020,Decision,REF-24586,Collaboration note 077,Review Note
+COM0078,2025-10-19,E042,Task,REF-10948,Collaboration note 078,Review Note
+COM0079,2026-05-12,E048,Case,REF-81210,Collaboration note 079,Review Note
+COM0080,2026-09-17,E075,KPI,REF-15717,Collaboration note 080,Review Note
+COM0081,2025-02-17,E018,Case,REF-44690,Collaboration note 081,Decision Note
+COM0082,2025-04-10,E032,Task,REF-71045,Collaboration note 082,Mention
+COM0083,2025-07-24,E072,KPI,REF-42095,Collaboration note 083,Review Note
+COM0084,2025-04-09,E037,Task,REF-39813,Collaboration note 084,Mention
+COM0085,2025-03-19,E014,Case,REF-59917,Collaboration note 085,Comment
+COM0086,2025-03-17,E037,Decision,REF-19950,Collaboration note 086,Comment
+COM0087,2026-08-07,E028,Project,REF-58545,Collaboration note 087,Mention
+COM0088,2026-03-17,E035,Task,REF-64869,Collaboration note 088,Review Note
+COM0089,2025-12-29,E062,Case,REF-16620,Collaboration note 089,Decision Note
+COM0090,2026-02-25,E075,Task,REF-11381,Collaboration note 090,Review Note
+COM0091,2026-10-30,E072,Decision,REF-39921,Collaboration note 091,Mention
+COM0092,2026-08-04,E047,KPI,REF-32142,Collaboration note 092,Mention
+COM0093,2025-10-29,E019,Risk,REF-46058,Collaboration note 093,Mention
+COM0094,2026-02-26,E013,Task,REF-90511,Collaboration note 094,Decision Note
+COM0095,2026-05-07,E045,Case,REF-25140,Collaboration note 095,Review Note
+COM0096,2025-02-26,E001,Risk,REF-86340,Collaboration note 096,Decision Note
+COM0097,2026-08-27,E031,Decision,REF-36922,Collaboration note 097,Review Note
+COM0098,2026-04-10,E070,Decision,REF-29978,Collaboration note 098,Comment
+COM0099,2026-04-13,E036,Decision,REF-60553,Collaboration note 099,Comment
+COM0100,2025-12-21,E021,Risk,REF-98161,Collaboration note 100,Mention
+COM0101,2026-05-20,E044,Risk,REF-25091,Collaboration note 101,Mention
+COM0102,2025-09-27,E060,KPI,REF-90041,Collaboration note 102,Decision Note
+COM0103,2026-06-16,E032,Project,REF-51187,Collaboration note 103,Review Note
+COM0104,2025-07-28,E036,Case,REF-26086,Collaboration note 104,Decision Note
+COM0105,2025-01-17,E075,Task,REF-33936,Collaboration note 105,Review Note
+COM0106,2026-11-08,E048,Case,REF-74972,Collaboration note 106,Mention
+COM0107,2025-07-23,E006,Risk,REF-98276,Collaboration note 107,Mention
+COM0108,2025-12-21,E027,Task,REF-85988,Collaboration note 108,Decision Note
+COM0109,2026-07-10,E072,KPI,REF-94494,Collaboration note 109,Mention
+COM0110,2025-02-07,E022,Project,REF-91699,Collaboration note 110,Mention
+COM0111,2026-05-20,E046,Decision,REF-17058,Collaboration note 111,Review Note
+COM0112,2025-06-22,E013,Project,REF-12087,Collaboration note 112,Decision Note
+COM0113,2025-04-08,E058,Decision,REF-26249,Collaboration note 113,Mention
+COM0114,2026-02-25,E071,Project,REF-38215,Collaboration note 114,Mention
+COM0115,2025-06-12,E054,Decision,REF-80075,Collaboration note 115,Comment
+COM0116,2025-11-13,E076,Project,REF-32071,Collaboration note 116,Review Note
+COM0117,2026-08-24,E072,Project,REF-48653,Collaboration note 117,Comment
+COM0118,2025-05-10,E064,Case,REF-21788,Collaboration note 118,Decision Note
+COM0119,2026-07-14,E069,Case,REF-59418,Collaboration note 119,Comment
+COM0120,2026-05-25,E013,Decision,REF-75750,Collaboration note 120,Decision Note
+COM0121,2026-02-26,E033,KPI,REF-41107,Collaboration note 121,Mention
+COM0122,2025-08-13,E029,Task,REF-73464,Collaboration note 122,Review Note
+COM0123,2025-05-18,E060,Decision,REF-69679,Collaboration note 123,Comment
+COM0124,2025-03-01,E048,Decision,REF-70355,Collaboration note 124,Decision Note
+COM0125,2025-08-27,E011,Case,REF-75224,Collaboration note 125,Comment
+COM0126,2026-07-04,E027,Task,REF-35506,Collaboration note 126,Decision Note
+COM0127,2025-06-16,E011,Risk,REF-78285,Collaboration note 127,Mention
+COM0128,2026-03-25,E079,Decision,REF-92628,Collaboration note 128,Decision Note
+COM0129,2025-03-02,E059,Case,REF-36037,Collaboration note 129,Comment
+COM0130,2026-07-24,E061,Project,REF-15707,Collaboration note 130,Decision Note
+COM0131,2025-07-12,E032,Case,REF-70982,Collaboration note 131,Comment
+COM0132,2025-02-17,E066,Risk,REF-84344,Collaboration note 132,Mention
+COM0133,2025-01-17,E026,KPI,REF-12376,Collaboration note 133,Mention
+COM0134,2026-10-18,E048,Risk,REF-68525,Collaboration note 134,Review Note
+COM0135,2025-08-20,E024,Project,REF-16193,Collaboration note 135,Decision Note
+COM0136,2026-06-01,E029,Risk,REF-32264,Collaboration note 136,Mention
+COM0137,2025-03-24,E042,KPI,REF-61074,Collaboration note 137,Comment
+COM0138,2025-06-06,E069,Risk,REF-20692,Collaboration note 138,Comment
+COM0139,2026-10-25,E009,KPI,REF-72303,Collaboration note 139,Decision Note
+COM0140,2025-07-23,E068,Task,REF-80602,Collaboration note 140,Review Note
+COM0141,2026-01-18,E076,Project,REF-29962,Collaboration note 141,Comment
+COM0142,2026-11-10,E054,Task,REF-64047,Collaboration note 142,Comment
+COM0143,2026-11-02,E041,Task,REF-73574,Collaboration note 143,Comment
+COM0144,2025-02-18,E074,KPI,REF-33414,Collaboration note 144,Decision Note
+COM0145,2026-01-31,E058,Risk,REF-70370,Collaboration note 145,Comment
+COM0146,2026-06-08,E023,Decision,REF-89582,Collaboration note 146,Mention
+COM0147,2025-12-02,E017,Project,REF-76858,Collaboration note 147,Mention
+COM0148,2026-09-12,E048,Project,REF-26157,Collaboration note 148,Comment
+COM0149,2025-03-05,E002,KPI,REF-85811,Collaboration note 149,Mention
+COM0150,2025-07-28,E026,KPI,REF-69086,Collaboration note 150,Comment
+COM0151,2026-06-12,E015,Case,REF-29630,Collaboration note 151,Review Note
+COM0152,2026-02-01,E063,Task,REF-23751,Collaboration note 152,Review Note
+COM0153,2025-07-26,E026,Case,REF-13115,Collaboration note 153,Comment
+COM0154,2026-03-24,E025,Risk,REF-86707,Collaboration note 154,Review Note
+COM0155,2025-06-10,E052,Case,REF-93744,Collaboration note 155,Review Note
+COM0156,2026-04-27,E018,KPI,REF-79761,Collaboration note 156,Review Note
+COM0157,2025-07-14,E004,Decision,REF-44047,Collaboration note 157,Review Note
+COM0158,2025-07-23,E007,KPI,REF-70098,Collaboration note 158,Comment
+COM0159,2026-02-17,E031,Case,REF-30379,Collaboration note 159,Review Note
+COM0160,2026-11-22,E050,Case,REF-63725,Collaboration note 160,Mention
+COM0161,2026-09-06,E068,Task,REF-17922,Collaboration note 161,Mention
+COM0162,2025-09-07,E021,Decision,REF-32187,Collaboration note 162,Comment
+COM0163,2025-08-20,E041,Risk,REF-58186,Collaboration note 163,Comment
+COM0164,2025-03-16,E003,Case,REF-64046,Collaboration note 164,Comment
+COM0165,2026-04-17,E013,KPI,REF-94487,Collaboration note 165,Comment
+COM0166,2025-09-11,E043,KPI,REF-18208,Collaboration note 166,Decision Note
+COM0167,2025-11-29,E058,Decision,REF-83283,Collaboration note 167,Comment
+COM0168,2025-05-28,E058,Task,REF-65877,Collaboration note 168,Decision Note
+COM0169,2025-06-13,E028,Decision,REF-50053,Collaboration note 169,Comment
+COM0170,2025-03-21,E003,Project,REF-27417,Collaboration note 170,Mention
+COM0171,2025-07-13,E040,Project,REF-21694,Collaboration note 171,Decision Note
+COM0172,2026-04-04,E042,Project,REF-88966,Collaboration note 172,Decision Note
+COM0173,2025-08-27,E022,Risk,REF-33243,Collaboration note 173,Decision Note
+COM0174,2025-09-11,E044,Decision,REF-91439,Collaboration note 174,Review Note
+COM0175,2026-10-24,E065,Case,REF-25161,Collaboration note 175,Decision Note
+COM0176,2025-09-23,E004,Task,REF-66029,Collaboration note 176,Review Note
+COM0177,2025-02-11,E046,Case,REF-39444,Collaboration note 177,Mention
+COM0178,2026-10-27,E076,Decision,REF-52392,Collaboration note 178,Comment
+COM0179,2026-08-14,E075,Risk,REF-45328,Collaboration note 179,Review Note
+COM0180,2025-06-21,E021,KPI,REF-45224,Collaboration note 180,Review Note
+COM0181,2026-01-30,E069,Project,REF-38806,Collaboration note 181,Mention
+COM0182,2025-11-13,E044,Task,REF-48199,Collaboration note 182,Review Note
+COM0183,2025-12-30,E060,Project,REF-53893,Collaboration note 183,Decision Note
+COM0184,2025-08-02,E064,Project,REF-64649,Collaboration note 184,Comment
+COM0185,2025-01-13,E021,Project,REF-42595,Collaboration note 185,Comment
+COM0186,2026-09-26,E076,Case,REF-85670,Collaboration note 186,Review Note
+COM0187,2026-01-25,E008,Decision,REF-92860,Collaboration note 187,Decision Note
+COM0188,2025-01-15,E048,Decision,REF-41000,Collaboration note 188,Decision Note
+COM0189,2025-02-24,E069,KPI,REF-10944,Collaboration note 189,Mention
+COM0190,2026-08-31,E073,Risk,REF-88524,Collaboration note 190,Comment
+COM0191,2026-07-31,E053,Decision,REF-13994,Collaboration note 191,Mention
+COM0192,2026-03-24,E014,Task,REF-61387,Collaboration note 192,Review Note
+COM0193,2025-11-15,E004,KPI,REF-36047,Collaboration note 193,Comment
+COM0194,2026-07-17,E061,KPI,REF-36865,Collaboration note 194,Mention
+COM0195,2026-03-09,E024,Task,REF-92705,Collaboration note 195,Mention
+COM0196,2025-03-06,E044,Task,REF-40257,Collaboration note 196,Review Note
+COM0197,2025-08-28,E080,Risk,REF-31191,Collaboration note 197,Review Note
+COM0198,2026-02-07,E056,Decision,REF-59832,Collaboration note 198,Decision Note
+COM0199,2025-11-11,E055,Case,REF-86828,Collaboration note 199,Decision Note
+COM0200,2025-05-23,E027,Project,REF-67809,Collaboration note 200,Comment

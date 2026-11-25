@@ -1,0 +1,10 @@
+# Frontend dependencies and build output (rebuild with: node node_modules/vite/bin/vite.js build, or tools/start.ps1 -Build)
+frontend/node_modules/
+backend/public/app/
+
+# Secrets: backend/.env holds the MySQL password and APP_KEY (also ignored by backend/.gitignore)
+.env
+.env.*
+!.env.example
+
+*.log

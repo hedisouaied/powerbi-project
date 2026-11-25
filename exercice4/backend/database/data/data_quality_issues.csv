@@ -1,0 +1,91 @@
+issue_id,source_table,issue_type,severity,issue_status,issue_description,detected_date
+DQ0001,employees.csv,Referential Integrity,Critical,Fixed,Example data quality finding 001,2025-01-03
+DQ0002,payments.csv,Duplicate Record,Medium,Accepted,Example data quality finding 002,2025-03-30
+DQ0003,sales_orders.csv,Duplicate Record,Medium,Accepted,Example data quality finding 003,2026-09-12
+DQ0004,inventory_snapshots.csv,Invalid Date,Critical,Under Review,Example data quality finding 004,2026-07-07
+DQ0005,sales_orders.csv,Referential Integrity,High,Accepted,Example data quality finding 005,2025-03-07
+DQ0006,employees.csv,Referential Integrity,Medium,Accepted,Example data quality finding 006,2026-09-03
+DQ0007,sales_orders.csv,Invalid Date,High,Fixed,Example data quality finding 007,2026-01-11
+DQ0008,sales_orders.csv,Outlier,Low,Under Review,Example data quality finding 008,2025-11-08
+DQ0009,payments.csv,Referential Integrity,High,Accepted,Example data quality finding 009,2026-11-22
+DQ0010,payments.csv,Duplicate Record,Medium,Fixed,Example data quality finding 010,2026-08-26
+DQ0011,customers.csv,Unexpected Value,Low,Fixed,Example data quality finding 011,2025-09-25
+DQ0012,employees.csv,Invalid Date,Low,Accepted,Example data quality finding 012,2025-11-26
+DQ0013,payments.csv,Outlier,High,Under Review,Example data quality finding 013,2026-10-13
+DQ0014,employees.csv,Outlier,Low,Accepted,Example data quality finding 014,2026-09-29
+DQ0015,customers.csv,Missing Value,Low,Under Review,Example data quality finding 015,2026-03-12
+DQ0016,customers.csv,Outlier,Critical,Accepted,Example data quality finding 016,2026-03-25
+DQ0017,customers.csv,Duplicate Record,High,Accepted,Example data quality finding 017,2026-05-24
+DQ0018,sales_orders.csv,Outlier,Low,Under Review,Example data quality finding 018,2025-07-19
+DQ0019,employees.csv,Duplicate Record,Low,Fixed,Example data quality finding 019,2026-09-26
+DQ0020,inventory_snapshots.csv,Missing Value,Critical,Accepted,Example data quality finding 020,2025-07-23
+DQ0021,inventory_snapshots.csv,Duplicate Record,High,Accepted,Example data quality finding 021,2026-07-29
+DQ0022,customers.csv,Outlier,Critical,Accepted,Example data quality finding 022,2026-07-21
+DQ0023,customers.csv,Missing Value,High,Fixed,Example data quality finding 023,2025-07-19
+DQ0024,employees.csv,Missing Value,Critical,Fixed,Example data quality finding 024,2026-07-13
+DQ0025,customers.csv,Duplicate Record,Critical,Open,Example data quality finding 025,2026-08-23
+DQ0026,customers.csv,Referential Integrity,Low,Open,Example data quality finding 026,2025-12-10
+DQ0027,payments.csv,Duplicate Record,Medium,Open,Example data quality finding 027,2026-01-08
+DQ0028,payments.csv,Outlier,Low,Under Review,Example data quality finding 028,2025-12-18
+DQ0029,employees.csv,Missing Value,Low,Open,Example data quality finding 029,2026-01-09
+DQ0030,sales_orders.csv,Unexpected Value,Low,Fixed,Example data quality finding 030,2026-04-11
+DQ0031,employees.csv,Duplicate Record,Medium,Accepted,Example data quality finding 031,2026-01-23
+DQ0032,customers.csv,Unexpected Value,Low,Open,Example data quality finding 032,2025-12-12
+DQ0033,sales_orders.csv,Unexpected Value,Medium,Under Review,Example data quality finding 033,2025-12-13
+DQ0034,sales_orders.csv,Missing Value,Low,Open,Example data quality finding 034,2026-01-06
+DQ0035,sales_orders.csv,Invalid Date,Medium,Under Review,Example data quality finding 035,2026-10-05
+DQ0036,sales_orders.csv,Unexpected Value,Low,Accepted,Example data quality finding 036,2025-10-12
+DQ0037,customers.csv,Unexpected Value,Medium,Accepted,Example data quality finding 037,2025-06-05
+DQ0038,payments.csv,Unexpected Value,Critical,Under Review,Example data quality finding 038,2025-02-14
+DQ0039,inventory_snapshots.csv,Outlier,Low,Accepted,Example data quality finding 039,2026-08-25
+DQ0040,payments.csv,Referential Integrity,Low,Open,Example data quality finding 040,2025-05-05
+DQ0041,payments.csv,Missing Value,High,Under Review,Example data quality finding 041,2025-10-16
+DQ0042,employees.csv,Referential Integrity,Medium,Open,Example data quality finding 042,2026-06-07
+DQ0043,sales_orders.csv,Missing Value,Medium,Fixed,Example data quality finding 043,2025-05-04
+DQ0044,payments.csv,Missing Value,Critical,Fixed,Example data quality finding 044,2025-06-11
+DQ0045,employees.csv,Invalid Date,High,Under Review,Example data quality finding 045,2026-03-15
+DQ0046,inventory_snapshots.csv,Outlier,High,Under Review,Example data quality finding 046,2026-03-10
+DQ0047,employees.csv,Duplicate Record,High,Fixed,Example data quality finding 047,2025-06-18
+DQ0048,payments.csv,Duplicate Record,Low,Open,Example data quality finding 048,2026-01-10
+DQ0049,inventory_snapshots.csv,Outlier,Low,Accepted,Example data quality finding 049,2026-05-02
+DQ0050,sales_orders.csv,Unexpected Value,Critical,Open,Example data quality finding 050,2025-06-02
+DQ0051,sales_orders.csv,Outlier,High,Open,Example data quality finding 051,2025-11-03
+DQ0052,employees.csv,Outlier,High,Accepted,Example data quality finding 052,2025-07-13
+DQ0053,customers.csv,Unexpected Value,Critical,Fixed,Example data quality finding 053,2026-10-12
+DQ0054,inventory_snapshots.csv,Outlier,Critical,Fixed,Example data quality finding 054,2025-09-23
+DQ0055,employees.csv,Unexpected Value,Medium,Under Review,Example data quality finding 055,2026-08-15
+DQ0056,employees.csv,Missing Value,Low,Fixed,Example data quality finding 056,2026-09-01
+DQ0057,inventory_snapshots.csv,Invalid Date,Critical,Fixed,Example data quality finding 057,2025-04-26
+DQ0058,inventory_snapshots.csv,Invalid Date,Critical,Accepted,Example data quality finding 058,2026-10-13
+DQ0059,payments.csv,Missing Value,Critical,Accepted,Example data quality finding 059,2025-02-03
+DQ0060,sales_orders.csv,Missing Value,High,Accepted,Example data quality finding 060,2025-09-25
+DQ0061,payments.csv,Invalid Date,High,Open,Example data quality finding 061,2025-04-20
+DQ0062,inventory_snapshots.csv,Unexpected Value,Medium,Under Review,Example data quality finding 062,2025-02-01
+DQ0063,employees.csv,Missing Value,Medium,Open,Example data quality finding 063,2026-01-17
+DQ0064,sales_orders.csv,Invalid Date,Critical,Under Review,Example data quality finding 064,2026-02-20
+DQ0065,customers.csv,Outlier,Medium,Open,Example data quality finding 065,2026-02-07
+DQ0066,inventory_snapshots.csv,Invalid Date,Medium,Fixed,Example data quality finding 066,2025-10-16
+DQ0067,employees.csv,Outlier,Medium,Under Review,Example data quality finding 067,2026-06-28
+DQ0068,inventory_snapshots.csv,Referential Integrity,Critical,Accepted,Example data quality finding 068,2025-12-07
+DQ0069,inventory_snapshots.csv,Missing Value,Critical,Open,Example data quality finding 069,2026-01-05
+DQ0070,customers.csv,Duplicate Record,Low,Fixed,Example data quality finding 070,2025-11-02
+DQ0071,inventory_snapshots.csv,Referential Integrity,High,Under Review,Example data quality finding 071,2025-05-24
+DQ0072,payments.csv,Referential Integrity,Critical,Under Review,Example data quality finding 072,2026-03-29
+DQ0073,inventory_snapshots.csv,Invalid Date,Low,Fixed,Example data quality finding 073,2026-07-27
+DQ0074,payments.csv,Outlier,High,Accepted,Example data quality finding 074,2025-07-30
+DQ0075,employees.csv,Duplicate Record,Medium,Fixed,Example data quality finding 075,2025-11-17
+DQ0076,customers.csv,Unexpected Value,High,Under Review,Example data quality finding 076,2026-09-09
+DQ0077,customers.csv,Referential Integrity,Critical,Open,Example data quality finding 077,2025-05-23
+DQ0078,sales_orders.csv,Invalid Date,High,Accepted,Example data quality finding 078,2025-10-19
+DQ0079,payments.csv,Missing Value,High,Under Review,Example data quality finding 079,2025-07-06
+DQ0080,customers.csv,Unexpected Value,Critical,Fixed,Example data quality finding 080,2025-08-25
+DQ0081,employees.csv,Outlier,High,Under Review,Example data quality finding 081,2025-11-14
+DQ0082,payments.csv,Outlier,Medium,Under Review,Example data quality finding 082,2026-09-30
+DQ0083,payments.csv,Invalid Date,Critical,Open,Example data quality finding 083,2025-01-09
+DQ0084,customers.csv,Referential Integrity,Low,Accepted,Example data quality finding 084,2025-09-05
+DQ0085,payments.csv,Referential Integrity,High,Open,Example data quality finding 085,2026-08-22
+DQ0086,employees.csv,Invalid Date,Critical,Fixed,Example data quality finding 086,2025-02-27
+DQ0087,sales_orders.csv,Invalid Date,Critical,Under Review,Example data quality finding 087,2025-12-16
+DQ0088,customers.csv,Unexpected Value,Medium,Fixed,Example data quality finding 088,2025-04-18
+DQ0089,sales_orders.csv,Invalid Date,Medium,Under Review,Example data quality finding 089,2026-01-22
+DQ0090,sales_orders.csv,Outlier,High,Accepted,Example data quality finding 090,2026-05-09
