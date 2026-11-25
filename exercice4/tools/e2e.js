@@ -26,7 +26,7 @@ const results = []; const ok = (name, cond, info = "") => { results.push(`${cond
     const shot = async name => { const r = await send("Page.captureScreenshot", { format: "png" }); fs.writeFileSync(path.join(out, name), Buffer.from(r.data, "base64")); };
     const center = async sel => js(`(() => { const e = ${sel}; if (!e) return null; e.scrollIntoView({block:'nearest'}); const r = e.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; })()`);
     const click = async sel => { const p = await center(sel); if (!p) { return false; } for (const type of ["mousePressed", "mouseReleased"]) { await send("Input.dispatchMouseEvent", { type, x: p.x, y: p.y, button: "left", clickCount: 1 }); } await sleep(300); return true; };
-    const type = async (sel, text) => { await click(sel); await send("Input.insertText", { text }); await sleep(150); };
+    const type = async (sel, text) => { await click(sel); await js(`(() => { const e = ${sel}; if (e && e.select) e.select(); })()`); await send("Input.insertText", { text }); await sleep(150); };
     const byText = (sel, t) => `Array.from(document.querySelectorAll(${JSON.stringify(sel)})).find(e => e.textContent.trim() === ${JSON.stringify(t)} || e.title === ${JSON.stringify(t)})`;
 
     await send("Emulation.setDeviceMetricsOverride", { width: W, height: H, deviceScaleFactor: 1, mobile: false });
@@ -34,6 +34,7 @@ const results = []; const ok = (name, cond, info = "") => { results.push(`${cond
     await send("Page.navigate", { url: BASE });
     ok("login page shows", await waitFor("!!document.querySelector('.auth-card')"));
     await sleep(600); await shot("01-login.png");
+    ok("sign-in form is prefilled with the demo account", await js("document.querySelector('input[type=email]').value === 'demo@missioncontrol.local' && document.querySelector('input[type=password]').value.length > 0"));
     // wrong password
     await type("document.querySelector('input[type=email]')", EMAIL); await type("document.querySelector('input[type=password]')", "wrong-pass9");
     await click("document.querySelector('.auth-submit')");

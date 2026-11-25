@@ -1,10 +1,14 @@
 import React, { FormEvent, useState } from "react";
 import { api, ApiError, User } from "./api";
 
+/** The sign-in form starts filled with the public demo account; "Create account" starts empty. */
+const DEMO_FORM = { name: "", email: "demo@missioncontrol.local", password: "Demo12345", password_confirmation: "" };
+const EMPTY_FORM = { name: "", email: "", password: "", password_confirmation: "" };
+
 /** Sign in / create account, in the Mission Control dark-gold design. */
 export function AuthPage({ onSignedIn }: { onSignedIn: (user: User, token: string) => void }): React.ReactElement {
     const [mode, setMode] = useState<"login" | "register">("login");
-    const [form, setForm] = useState({ name: "", email: "", password: "", password_confirmation: "" });
+    const [form, setForm] = useState(DEMO_FORM);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [busy, setBusy] = useState(false);
     const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>): void => setForm({ ...form, [k]: e.target.value });
@@ -40,8 +44,8 @@ export function AuthPage({ onSignedIn }: { onSignedIn: (user: User, token: strin
                     <div><div className="auth-name">Mission Control</div><div className="auth-sub">Enterprise Intelligence Terminal</div></div>
                 </div>
                 <div className="auth-tabs" role="tablist">
-                    <button type="button" role="tab" aria-selected={mode === "login"} className={mode === "login" ? "on" : ""} onClick={() => { setMode("login"); setErrors({}); }}>Sign in</button>
-                    <button type="button" role="tab" aria-selected={mode === "register"} className={mode === "register" ? "on" : ""} onClick={() => { setMode("register"); setErrors({}); }}>Create account</button>
+                    <button type="button" role="tab" aria-selected={mode === "login"} className={mode === "login" ? "on" : ""} onClick={() => { setMode("login"); setForm(DEMO_FORM); setErrors({}); }}>Sign in</button>
+                    <button type="button" role="tab" aria-selected={mode === "register"} className={mode === "register" ? "on" : ""} onClick={() => { setMode("register"); setForm(EMPTY_FORM); setErrors({}); }}>Create account</button>
                 </div>
                 <form onSubmit={submit} noValidate>
                     {mode === "register" && field("name", "Full name", "text", "name")}
