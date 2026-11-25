@@ -26,6 +26,15 @@ class AuthApiTest extends TestCase
             ->assertUnprocessable()->assertJsonValidationErrors(['name', 'email', 'password']);
     }
 
+    public function test_messages_are_in_french(): void
+    {
+        $this->postJson('/api/auth/register', ['name' => '', 'email' => 'x@example.com', 'password' => 'abcdefgh', 'password_confirmation' => 'abcdefgh'])
+            ->assertJsonPath('errors.name.0', 'Le champ nom est obligatoire.')
+            ->assertJsonPath('errors.password.0', 'Le champ mot de passe doit contenir au moins un chiffre.');
+        $this->postJson('/api/auth/login', ['email' => 'nobody@example.com', 'password' => 'secret123'])
+            ->assertJsonPath('errors.email.0', 'Ces identifiants ne correspondent à aucun compte.');
+    }
+
     public function test_login_with_correct_and_wrong_password(): void
     {
         User::factory()->create(['email' => 'sami@example.com', 'password' => 'secret123']);

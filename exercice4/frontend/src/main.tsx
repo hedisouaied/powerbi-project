@@ -21,7 +21,7 @@ function Root(): React.ReactElement {
         api<{ user: User }>("/auth/me").then(r => setUser(r.user)).catch(() => setToken(null)).finally(() => setChecking(false));
     }, []);
 
-    if (checking) { return <div className="auth-loading"><div className="auth-spinner" aria-label="Loading" /></div>; }
+    if (checking) { return <div className="auth-loading"><div className="auth-spinner" aria-label="Chargement" /></div>; }
     if (!user) { return <AuthPage onSignedIn={(u, token) => { setToken(token); setUser(u); }} />; }
     return <Dashboard user={user} onSignOut={signOut} />;
 }

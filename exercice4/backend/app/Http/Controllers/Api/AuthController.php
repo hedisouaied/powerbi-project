@@ -35,7 +35,7 @@ class AuthController extends Controller
         ]);
         $user = User::where('email', $data['email'])->first();
         if (! $user || ! Hash::check($data['password'], $user->password)) {
-            throw ValidationException::withMessages(['email' => 'These credentials do not match our records.']);
+            throw ValidationException::withMessages(['email' => 'Ces identifiants ne correspondent à aucun compte.']);
         }
 
         return response()->json(['user' => $this->profile($user), 'token' => $user->createToken('dashboard')->plainTextToken]);

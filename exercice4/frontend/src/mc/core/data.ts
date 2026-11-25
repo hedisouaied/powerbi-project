@@ -106,12 +106,12 @@ export class Index {
     /** Human label of any entity id used in the relationship graph. */
     public entityLabel(type: string, id: string): string {
         switch (type) {
-            case "Customer": return this.custName(id);
-            case "Product": return this.prodName(id);
-            case "Supplier": return this.suppName(id);
-            case "Employee": return this.empName(id);
-            case "Department": return this.deptName(id);
-            case "Project": return this.projName(id);
+            case "Client": return this.custName(id);
+            case "Produit": return this.prodName(id);
+            case "Fournisseur": return this.suppName(id);
+            case "Employé": return this.empName(id);
+            case "Département": return this.deptName(id);
+            case "Projet": return this.projName(id);
             default: return id;
         }
     }

@@ -50,6 +50,31 @@ Load the one that fits before starting the work (`.claude/skills/`):
 
 **Do the work; don't hand the user homework.** Don't take their screen; use headless Chrome. See the user's memory notes.
 
+## French (the app is entirely in French)
+
+The user asked for French everywhere: interface, API messages and the data.
+
+**Data:**
+- The CSVs stay English (source). `mc:import` translates every text column with `backend/database/data/translations_fr.json` and writes French to MySQL.
+- `translations_fr.json` has one shared `values` dictionary, `patterns` for numbered texts, and `keep` for untranslated columns (file names, places, references).
+- A value always has one translation, and no column may map two values to the same French. Check with `node tools/i18n/check-values.js`.
+- `mc:import --if-empty` re-imports once when the database still holds English data (`hasFrenchData()` looks for "Ventes").
+
+**Code:**
+- The dashboard compares French values (`"Terminé"`, `"Ouvert"`, `"Critique"`…). New code must use the French values; see `translations_fr.json`.
+- Key names compared with `e.key` stay English (`"Enter"`, `"Escape"`). Icon names stay English (`icon("Info")`).
+
+**Interface:**
+- Strings come from `tools/i18n/ui.fr.*.json`, applied by `tools/i18n/apply-ui.js` (exact literal match, idempotent).
+- JSX text, the Data Explorer block (a regex literal confuses the tokenizer) and number formats were fixed by `tools/i18n/fix-*.js`.
+- Write new UI text directly in French.
+- Formats: `fmt` in `frontend/src/mc/core/ui.ts` gives `30,90 M TND`, `43,9 %`, `22 nov. 2026`, with no-break spaces before units.
+- Shell `sed` loses backslashes such as ` ` and `\s`. Use the Edit tool or a node script for those.
+
+**Proof that nothing broke:** `node tools/i18n/equivalence.js` runs the original English engine (exercice3) on English data and the French engine on French data. Every number must match (43 result groups, 0 difference).
+
+**API:** `APP_LOCALE=fr` (local `.env`, `.env.example` and Railway), `backend/lang/fr/validation.php`. Controller messages and audit actions (`Créé`, `Mis à jour`, `Supprimé`) are French.
+
 ## Deployment (Railway)
 
 - **Live:** https://web-production-7ed674ac.up.railway.app. Project `mission-control`; services `web` (Dockerfile) and `MySQL`.
@@ -66,5 +91,5 @@ powershell -ExecutionPolicy Bypass -File exercice4\tools\start.ps1 [-Dev] [-Buil
 node exercice4\tools\e2e.js                                   # 16 checks
 ```
 ```bash
-wsl -e bash -lc 'cd /mnt/c/Users/DELL/Downloads/powerBiProject/exercice4/backend && php artisan test'   # 13 tests
+wsl -e bash -lc 'cd /mnt/c/Users/DELL/Downloads/powerBiProject/exercice4/backend && php artisan test'   # 15 tests
 ```

@@ -22,7 +22,7 @@ class PreferenceController extends Controller
         $data = $request->validate(['preferences' => ['sometimes', 'array'], 'workspace' => ['sometimes', 'array']]);
         foreach (['preferences', 'workspace'] as $key) {
             if (array_key_exists($key, $data) && strlen((string) json_encode($data[$key])) > 500_000) {
-                return response()->json(['message' => "{$key} is too large."], 422);
+                return response()->json(['message' => "{$key} est trop volumineux."], 422);
             }
         }
         $request->user()->fill($data)->save();

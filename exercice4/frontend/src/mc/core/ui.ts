@@ -66,20 +66,20 @@ export function s(tag: string, attrs: Record<string, string | number> = {}, ...c
 
 // ---------------------------------------------------------------- formatters
 export const fmt = {
-    money: (v: number | null | undefined): string => (v === null || v === undefined || isNaN(v) ? "—" : `${v.toLocaleString("en-US", { maximumFractionDigits: 0 })} TND`),
-    money2: (v: number | null | undefined): string => (v === null || v === undefined || isNaN(v) ? "—" : v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })),
+    money: (v: number | null | undefined): string => (v === null || v === undefined || isNaN(v) ? "—" : `${v.toLocaleString("fr-FR", { maximumFractionDigits: 0 })} TND`),
+    money2: (v: number | null | undefined): string => (v === null || v === undefined || isNaN(v) ? "—" : v.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })),
     compact: (v: number | null | undefined, unit = " TND"): string => {
         if (v === null || v === undefined || isNaN(v)) { return "—"; }
         const a = Math.abs(v);
-        return (a >= 1e6 ? `${(v / 1e6).toFixed(2)}M` : a >= 1e3 ? `${(v / 1e3).toFixed(1)}K` : v.toFixed(0)) + unit;
+        return (a >= 1e6 ? `${(v / 1e6).toFixed(2).replace(".", ",")} M` : a >= 1e3 ? `${(v / 1e3).toFixed(1).replace(".", ",")} k` : v.toFixed(0)) + unit;
     },
-    int: (v: number | null | undefined): string => (v === null || v === undefined || isNaN(v) ? "—" : Math.round(v).toLocaleString("en-US")),
-    pct: (v: number | null | undefined, d = 1): string => (v === null || v === undefined || isNaN(v) ? "—" : `${(v * 100).toFixed(d)}%`),
-    signedPct: (v: number | null | undefined, d = 1): string => (v === null || v === undefined || isNaN(v) ? "—" : `${v > 0 ? "+" : ""}${(v * 100).toFixed(d)}%`),
+    int: (v: number | null | undefined): string => (v === null || v === undefined || isNaN(v) ? "—" : Math.round(v).toLocaleString("fr-FR")),
+    pct: (v: number | null | undefined, d = 1): string => (v === null || v === undefined || isNaN(v) ? "—" : `${(v * 100).toFixed(d).replace(".", ",")} %`),
+    signedPct: (v: number | null | undefined, d = 1): string => (v === null || v === undefined || isNaN(v) ? "—" : `${v > 0 ? "+" : ""}${(v * 100).toFixed(d).replace(".", ",")} %`),
     date: (iso: string | null | undefined): string => {
         if (!iso) { return "—"; }
         const [y, m, d] = String(iso).slice(0, 10).split("-");
-        return `${Number(d)} ${["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Number(m) - 1]} ${y}`;
+        return `${Number(d)} ${["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."][Number(m) - 1]} ${y}`;
     },
     time: (iso: string | null | undefined): string => (iso && iso.length > 11 ? String(iso).slice(11, 16) : "")
 };
@@ -102,7 +102,7 @@ export function iconBtn(name: string, title: string, onClick: () => void, cls = 
 export function chip(text: string, tone: string = "muted", title?: string): HTMLElement { return h("span", { class: `mc-chip mc-tone-${tone}`, title: title ?? null }, text); }
 export function badge(n: number | string, tone = "bad"): HTMLElement { return h("span", { class: `mc-badge mc-tone-${tone}` }, String(n)); }
 export function select(options: Array<{ value: string; label: string }>, value: string, onChange: (v: string) => void, label?: string, allLabel?: string): HTMLElement {
-    const sel = h("select", { class: "mc-select", "aria-label": label ?? "Select" }) as HTMLSelectElement;
+    const sel = h("select", { class: "mc-select", "aria-label": label ?? "Sélection" }) as HTMLSelectElement;
     if (allLabel !== undefined) { const o = h("option", null, allLabel) as HTMLOptionElement; o.value = ""; sel.appendChild(o); }
     options.forEach(op => { const o = h("option", null, op.label) as HTMLOptionElement; o.value = op.value; sel.appendChild(o); });
     sel.value = value;
@@ -125,8 +125,8 @@ export function range(value: number, min: number, max: number, step: number, onI
 export function empty(text: string, iconName = "Inbox"): HTMLElement { return h("div", "mc-empty", icon(iconName, 26), h("div", null, text)); }
 export function skeleton(lines = 4): HTMLElement { return h("div", "mc-skeleton", ...Array.from({ length: lines }, (_, i) => h("div", { class: "mc-skel-line", style: { width: `${90 - i * 12}%` } }))); }
 export function sessionTag(persisted: boolean): HTMLElement {
-    return persisted ? chip("Saved to the database", "good", "Written to MySQL through the API and recorded in the activity log.")
-        : chip("Demo session — not saved", "warn", "In-memory only: lost on refresh or reopen. Not written to the CSV files or the data model.");
+    return persisted ? chip("Enregistré dans la base de données", "good", "Écrit dans MySQL via l'API et consigné dans le journal d'activité.")
+        : chip("Session de démonstration — non enregistrée", "warn", "En mémoire uniquement : perdu au rechargement. Non écrit dans les fichiers CSV ni dans le modèle.");
 }
 
 /** Panel/card with header (title, subtitle, actions) and a body. */
@@ -177,7 +177,7 @@ export function kpiTile(k: KpiSpec): HTMLElement {
         h("div", "mc-kpi-main",
             h("div", "mc-kpi-label", k.label), val,
             h("div", "mc-kpi-foot",
-                k.delta === null || k.delta === undefined ? null : h("span", { class: `mc-delta ${good ? "mc-delta-good" : "mc-delta-bad"}` }, icon(k.delta >= 0 ? "ArrowUp" : "ArrowDown", 11), `${Math.abs(k.delta * 100).toFixed(1)}%`),
+                k.delta === null || k.delta === undefined ? null : h("span", { class: `mc-delta ${good ? "mc-delta-good" : "mc-delta-bad"}` }, icon(k.delta >= 0 ? "ArrowUp" : "ArrowDown", 11), `${Math.abs(k.delta * 100).toFixed(1).replace(".", ",")} %`),
                 k.note ? h("span", "mc-kpi-note", k.note) : null)),
         k.spark && k.spark.length > 1 ? sparkline(k.spark, 96, 34) : null);
     tile.onclick = (): void => k.onClick?.();
@@ -223,13 +223,13 @@ export function dataTable<T>(cols: Array<Col<T>>, rows: T[], st: TableState, rer
     const visible = cols.filter(c => !st.hidden.includes(c.key));
     const tools = h("div", "mc-table-tools");
     if (opts.search !== false) {
-        const i = input(st.q, v => { st.q = v; st.page = 0; rerender(); }, "Search rows…", "search", opts.id ? `tbl-${opts.id}` : undefined);
+        const i = input(st.q, v => { st.q = v; st.page = 0; rerender(); }, "Rechercher dans les lignes…", "search", opts.id ? `tbl-${opts.id}` : undefined);
         tools.appendChild(h("label", "mc-search-box", icon("Search", 14), i));
     }
     (opts.toolbar ?? []).forEach(n => tools.appendChild(n));
-    tools.appendChild(h("span", "mc-table-count", `${shown.length.toLocaleString("en-US")} of ${rows.length.toLocaleString("en-US")} rows`));
+    tools.appendChild(h("span", "mc-table-count", `${shown.length.toLocaleString("fr-FR")} sur ${rows.length.toLocaleString("fr-FR")} lignes`));
     if (opts.chooser) {
-        const menu = h("details", "mc-col-chooser", h("summary", null, icon("Columns2", 14), "Columns"));
+        const menu = h("details", "mc-col-chooser", h("summary", null, icon("Columns2", 14), "Colonnes"));
         const list = h("div", "mc-col-list");
         cols.forEach(c => { const cb = h("input", { type: "checkbox" }) as HTMLInputElement; cb.checked = !st.hidden.includes(c.key); cb.onchange = (): void => { st.hidden = cb.checked ? st.hidden.filter(k => k !== c.key) : st.hidden.concat(c.key); rerender(); }; list.appendChild(h("label", null, cb, c.label)); });
         menu.appendChild(list); tools.appendChild(menu);
@@ -246,11 +246,11 @@ export function dataTable<T>(cols: Array<Col<T>>, rows: T[], st: TableState, rer
         if (opts.onRow) { tr.onclick = (): void => opts.onRow?.(r); tr.onkeydown = (e): void => { if (e.key === "Enter") { opts.onRow?.(r); } }; }
         tbody.appendChild(tr);
     });
-    const table = page.length ? h("div", "mc-table-scroll", h("table", "mc-table", h("thead", null, thead), tbody)) : empty(opts.emptyText ?? (st.q ? "No row matches the search." : "No rows for the current filters."));
+    const table = page.length ? h("div", "mc-table-scroll", h("table", "mc-table", h("thead", null, thead), tbody)) : empty(opts.emptyText ?? (st.q ? "Aucune ligne ne correspond à la recherche." : "Aucune ligne pour les filtres actuels."));
     const pager = pages > 1 ? h("div", "mc-pager",
-        btn("", { icon: "ChevronLeft", small: true, title: "Previous page", disabled: st.page === 0, onClick: () => { st.page--; rerender(); } }),
+        btn("", { icon: "ChevronLeft", small: true, title: "Page précédente", disabled: st.page === 0, onClick: () => { st.page--; rerender(); } }),
         h("span", null, `Page ${st.page + 1} / ${pages}`),
-        btn("", { icon: "ChevronRight", small: true, title: "Next page", disabled: st.page >= pages - 1, onClick: () => { st.page++; rerender(); } })) : null;
+        btn("", { icon: "ChevronRight", small: true, title: "Page suivante", disabled: st.page >= pages - 1, onClick: () => { st.page++; rerender(); } })) : null;
     return h("div", "mc-datatable", tools, table, pager);
 }
 
@@ -258,14 +258,14 @@ export function dataTable<T>(cols: Array<Col<T>>, rows: T[], st: TableState, rer
 export function drawer(host: HTMLElement, title: string, body: Node, onClose: () => void, opts: { icon?: string; width?: number; actions?: Node[] } = {}): HTMLElement {
     const veil = h("div", "mc-veil"); veil.onclick = onClose;
     const panel = h("aside", { class: "mc-drawer", role: "dialog", "aria-label": title, style: opts.width ? { width: `${opts.width}px` } : null },
-        h("div", "mc-drawer-head", h("div", "mc-drawer-title", opts.icon ? icon(opts.icon, 18) : null, h("span", null, title)), h("div", "mc-row-gap", ...(opts.actions ?? []), iconBtn("X", "Close", onClose))),
+        h("div", "mc-drawer-head", h("div", "mc-drawer-title", opts.icon ? icon(opts.icon, 18) : null, h("span", null, title)), h("div", "mc-row-gap", ...(opts.actions ?? []), iconBtn("X", "Fermer", onClose))),
         h("div", "mc-drawer-body", body));
     host.appendChild(veil); host.appendChild(panel);
     return panel;
 }
 export function modal(host: HTMLElement, title: string, body: Node, actions: Node[], onClose: () => void, iconName = "Pencil"): HTMLElement {
     const veil = h("div", "mc-veil"); veil.onclick = onClose;
-    const box = h("div", { class: "mc-modal", role: "dialog", "aria-modal": "true", "aria-label": title }, h("div", "mc-modal-head", icon(iconName, 18), h("span", null, title), iconBtn("X", "Close", onClose)), h("div", "mc-modal-body", body), h("div", "mc-modal-actions", ...actions));
+    const box = h("div", { class: "mc-modal", role: "dialog", "aria-modal": "true", "aria-label": title }, h("div", "mc-modal-head", icon(iconName, 18), h("span", null, title), iconBtn("X", "Fermer", onClose)), h("div", "mc-modal-body", body), h("div", "mc-modal-actions", ...actions));
     host.appendChild(veil); host.appendChild(box);
     return box;
 }

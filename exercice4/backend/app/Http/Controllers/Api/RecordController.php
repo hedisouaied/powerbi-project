@@ -21,10 +21,10 @@ class RecordController extends Controller
         $meta = $this->editable($table);
         $data = MissionData::toDb($table, $request->validate(MissionData::rules($table, true)));
         if (DB::table($table)->where($meta['primaryKey'], $data[$meta['primaryKey']])->exists()) {
-            return response()->json(['message' => "{$data[$meta['primaryKey']]} already exists."], 409);
+            return response()->json(['message' => "{$data[$meta['primaryKey']]} existe déjà."], 409);
         }
 
-        return $this->write($request, $table, 'Created', (string) $data[$meta['primaryKey']], fn () => DB::table($table)->insert($data));
+        return $this->write($request, $table, 'Créé', (string) $data[$meta['primaryKey']], fn () => DB::table($table)->insert($data));
     }
 
     public function update(Request $request, string $table, string $id): JsonResponse
@@ -34,7 +34,7 @@ class RecordController extends Controller
         unset($data[$meta['primaryKey']]);
         abort_unless(DB::table($table)->where($meta['primaryKey'], $id)->exists(), 404);
 
-        return $this->write($request, $table, 'Updated', $id, fn () => $data ? DB::table($table)->where($meta['primaryKey'], $id)->update($data) : 0);
+        return $this->write($request, $table, 'Mis à jour', $id, fn () => $data ? DB::table($table)->where($meta['primaryKey'], $id)->update($data) : 0);
     }
 
     public function destroy(Request $request, string $table, string $id): JsonResponse
@@ -42,7 +42,7 @@ class RecordController extends Controller
         $meta = $this->editable($table);
         abort_unless(DB::table($table)->where($meta['primaryKey'], $id)->exists(), 404);
 
-        return $this->write($request, $table, 'Deleted', $id, fn () => DB::table($table)->where($meta['primaryKey'], $id)->delete());
+        return $this->write($request, $table, 'Supprimé', $id, fn () => DB::table($table)->where($meta['primaryKey'], $id)->delete());
     }
 
     /**
@@ -51,7 +51,7 @@ class RecordController extends Controller
     private function editable(string $table): array
     {
         $meta = MissionData::table($table);
-        abort_unless($meta && $meta['editable'], 404, 'This table is read-only.');
+        abort_unless($meta && $meta['editable'], 404, 'Cette table est en lecture seule.');
 
         return $meta;
     }
@@ -68,18 +68,18 @@ class RecordController extends Controller
                         'employee_id' => null,
                         'action_type' => $action,
                         'module_name' => $table,
-                        'result' => 'Success',
-                        'event_details' => "{$action} {$id} by {$request->user()->name} (web app)",
+                        'result' => 'Succès',
+                        'event_details' => "{$id} : {$action} par {$request->user()->name} (application web)",
                     ]);
                 }
             });
         } catch (QueryException $e) {
-            return response()->json(['message' => 'The change breaks a relationship or a constraint: '.$e->errorInfo[2]], 422);
+            return response()->json(['message' => 'La modification enfreint une relation ou une contrainte : '.$e->errorInfo[2]], 422);
         }
         MissionData::bump();
         $meta = MissionData::table($table);
         $row = DB::table($table)->where($meta['primaryKey'], $id)->first();
 
-        return response()->json(['ok' => true, 'version' => MissionData::version(), 'row' => $row], $action === 'Created' ? 201 : 200);
+        return response()->json(['ok' => true, 'version' => MissionData::version(), 'row' => $row], $action === 'Créé' ? 201 : 200);
     }
 }

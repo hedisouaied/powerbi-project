@@ -46,10 +46,10 @@ export function palette(t: Tokens): string[] {
     return [t.accent, t.teal, t.info, "#A78BFA", t.good, t.warn, t.bad, "#F472B6", "#94A3B8"];
 }
 
-export const SEVERITY_COLOR = (t: Tokens, s: string): string => ({ Critical: t.bad, High: t.warn, Warning: t.warn, Medium: t.info, Low: t.muted, Info: t.muted } as Record<string, string>)[s] ?? t.muted;
+export const SEVERITY_COLOR = (t: Tokens, s: string): string => ({ "Critique": t.bad, "Élevée": t.warn, "Avertissement": t.warn, "Moyenne": t.info, "Faible": t.muted, Info: t.muted } as Record<string, string>)[s] ?? t.muted;
 export const STATUS_TONE: Record<string, "good" | "warn" | "bad" | "info" | "muted"> = {
-    Completed: "good", Done: "good", Resolved: "good", Closed: "muted", Approved: "good", Implemented: "good", Achieved: "good", Paid: "good", Active: "good", Healthy: "good", Reviewed: "good", Fixed: "good", Connected: "good",
-    "In Progress": "info", Processing: "info", Investigating: "info", Measuring: "info", Mitigating: "info", Scheduled: "info", "On Track": "info", "Under Review": "info", Acknowledged: "info", Rescheduled: "info",
-    Pending: "warn", "More Information": "warn", Proposed: "warn", "Not Started": "muted", Backlog: "muted", "To Do": "muted", New: "warn", Open: "warn", Watch: "warn", "Awaiting Review": "warn", Partial: "warn", "On Hold": "warn", Unreviewed: "warn", Accepted: "muted",
-    Blocked: "bad", "At Risk": "bad", Cancelled: "bad", Rejected: "bad", Overdue: "bad", Critical: "bad", "Off Track": "bad", Returned: "bad", Churned: "bad", Flagged: "bad", Escalated: "bad", Voided: "muted", Refunded: "muted"
+    "Terminé": "good", "Résolu": "good", "Clôturé": "muted", "Approuvé": "good", "Mis en œuvre": "good", "Atteint": "good", "Payé": "good", "Actif": "good", Healthy: "good", "Examiné": "good", "Corrigé": "good", "Connecté (démo)": "good",
+    "En cours": "info", "En traitement": "info", "En investigation": "info", "En mesure": "info", "En atténuation": "info", "Planifié": "info", "En bonne voie": "info", "En revue": "info", "Pris en compte": "info", "Reprogrammé": "info",
+    "En attente": "warn", "Informations requises": "warn", "Proposé": "warn", "Non démarré": "muted", "À planifier": "muted", "À faire": "muted", "Nouveau": "warn", "Ouvert": "warn", Watch: "warn", "En attente de revue": "warn", "Partiel": "warn", "En pause": "warn", "Non examiné": "warn", "Accepté": "muted",
+    "Bloqué": "bad", "À risque": "bad", "Annulé": "bad", "Rejeté": "bad", "En retard": "bad", "Critique": "bad", "Hors trajectoire": "bad", "Retourné": "bad", "Perdu": "bad", "Signalé": "bad", "Escaladé": "bad", "Remboursé": "muted"
 };

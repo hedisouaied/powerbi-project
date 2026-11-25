@@ -45,27 +45,36 @@ class DataApiTest extends TestCase
     public function test_a_task_can_be_created_updated_and_deleted_and_is_audited(): void
     {
         $api = $this->withToken($this->token);
-        $task = ['task_id' => 'T9001', 'project_id' => 'PR001', 'department_id' => 'D01', 'assignee_employee_id' => 'E001', 'task_title' => 'Prepare Q4 board review',
-            'task_status' => 'To Do', 'priority' => 'High', 'created_date' => '2026-11-22', 'due_date' => '2026-11-29', 'task_type' => 'Operational'];
+        $task = ['task_id' => 'T9001', 'project_id' => 'PR001', 'department_id' => 'D01', 'assignee_employee_id' => 'E001', 'task_title' => 'Préparer la revue du conseil T4',
+            'task_status' => 'À faire', 'priority' => 'Élevée', 'created_date' => '2026-11-22', 'due_date' => '2026-11-29', 'task_type' => 'Opérationnel'];
 
-        $api->postJson('/api/tables/tasks', $task)->assertCreated()->assertJsonPath('row.task_title', 'Prepare Q4 board review');
-        $api->patchJson('/api/tables/tasks/T9001', ['task_status' => 'In Progress'])->assertOk()->assertJsonPath('row.task_status', 'In Progress');
-        $this->assertDatabaseHas('activity_log', ['module_name' => 'tasks', 'action_type' => 'Updated']);
+        $api->postJson('/api/tables/tasks', $task)->assertCreated()->assertJsonPath('row.task_title', 'Préparer la revue du conseil T4');
+        $api->patchJson('/api/tables/tasks/T9001', ['task_status' => 'En cours'])->assertOk()->assertJsonPath('row.task_status', 'En cours');
+        $this->assertDatabaseHas('activity_log', ['module_name' => 'tasks', 'action_type' => 'Mis à jour']);
         $api->deleteJson('/api/tables/tasks/T9001')->assertOk();
         $this->assertDatabaseMissing('tasks', ['task_id' => 'T9001']);
+    }
+
+    public function test_data_is_imported_in_french(): void
+    {
+        $this->assertDatabaseHas('departments', ['department_id' => 'D02', 'department_name' => 'Ventes']);
+        $this->assertDatabaseHas('tasks', ['task_id' => 'T0001', 'task_title' => 'Tâche 001', 'task_status' => 'À planifier', 'priority' => 'Critique']);
+        $this->assertDatabaseHas('customers', ['customer_id' => 'C0001', 'customer_name' => 'Client 0001']);
+        $this->assertDatabaseMissing('sales_orders', ['order_status' => 'Completed']);
+        $this->assertSame(0, Artisan::call('mc:import', ['--check' => true]), 'French statuses still give the Power BI totals');
     }
 
     public function test_feeds_reflect_writes(): void
     {
         $api = $this->withToken($this->token);
         $before = $api->getJson('/api/feeds')->json('version');
-        $api->patchJson('/api/tables/tasks/T0001', ['task_status' => 'Done'])->assertOk();
+        $api->patchJson('/api/tables/tasks/T0001', ['task_status' => 'Terminé'])->assertOk();
         $after = $api->getJson('/api/feeds');
 
         $this->assertGreaterThan($before, $after->json('version'));
         $feed = $after->json('feeds.tasks');
         $row = array_combine($feed['c'], $feed['r'][0]);
-        $this->assertSame('Done', $row['task_status']);
+        $this->assertSame('Terminé', $row['task_status']);
     }
 
     public function test_foreign_keys_are_enforced_and_read_only_tables_are_protected(): void

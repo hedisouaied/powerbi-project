@@ -1,127 +1,139 @@
-# MISSION CONTROL — web app (exercice4)
+# MISSION CONTROL — application web (exercice4)
 
-The exercice3 Power BI dashboard as a full web application:
-- **Laravel 13** API with **MySQL**;
-- a **React + TypeScript** frontend;
-- user accounts, with sign-in required.
+Le tableau de bord Power BI de l'exercice3, transformé en application web complète :
+- une API **Laravel 13** avec **MySQL** ;
+- une interface **React + TypeScript** ;
+- des comptes utilisateurs, avec connexion obligatoire.
 
-The dashboard looks and computes exactly like the Power BI version, because it runs the same TypeScript engine, modules and design system. In the web app, edits are **saved for real** in MySQL.
+L'application est **entièrement en français** : l'interface, les messages de l'API et les données elles-mêmes.
 
-| Power BI (exercice3) | Web app (exercice4) |
+Le tableau de bord a le même aspect et calcule les mêmes chiffres que la version Power BI : il exécute le même moteur TypeScript, les mêmes modules et le même design. Dans l'application web, les modifications sont **réellement enregistrées** dans MySQL.
+
+**En ligne :** https://web-production-7ed674ac.up.railway.app — compte de démonstration `demo@missioncontrol.local` / `Demo12345` (prérempli sur la page de connexion).
+
+| Power BI (exercice3) | Application web (exercice4) |
 |---|---|
-| CSV → Power Query → semantic model | CSV → `php artisan mc:import` → MySQL (same 31 tables + `dim_date`) |
-| 61 model relationships | The same 61: 54 foreign keys, plus 7 indexed role-playing date links (inactive in Power BI too) |
-| 31 `Feed <table>` DAX measures | `GET /api/feeds`: same columns and format, **identical values** (checked table by table) |
-| Edits: session-only or kept in the report | Edits written to MySQL and logged in `activity_log` with the user's name |
-| Preferences in the visual's settings | Preferences on the user's account (`users.preferences`) |
-| No sign-in | `users` table + Sanctum token auth (register, sign in, sign out) |
+| CSV → Power Query → modèle sémantique | CSV (anglais) → `php artisan mc:import` (traduit en français) → MySQL (les mêmes 31 tables + `dim_date`) |
+| 61 relations du modèle | Les mêmes 61 : 54 clés étrangères, plus 7 liens de dates indexés (inactifs dans Power BI aussi) |
+| 31 mesures DAX `Feed <table>` | `GET /api/feeds` : mêmes colonnes et même format |
+| Modifications : en session ou dans le rapport | Modifications écrites dans MySQL et journalisées dans `activity_log` avec le nom de l'utilisateur |
+| Préférences dans le visuel | Préférences sur le compte de l'utilisateur (`users.preferences`) |
+| Pas de connexion | Table `users` + authentification par jeton Sanctum (inscription, connexion, déconnexion) |
 
-## Run it
+## Lancer l'application
 
-Requirements:
-- **WSL Ubuntu** with PHP 8.5, Composer and MySQL 8, all already installed here;
-- portable **Node 22** on Windows (`C:\Users\DELL\tools\node-v22.23.5-win-x64`).
+Prérequis :
+- **WSL Ubuntu** avec PHP 8.5, Composer et MySQL 8 (déjà installés sur ce PC) ;
+- **Node 22** portable sous Windows (`C:\Users\DELL\tools\node-v22.23.5-win-x64`).
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File exercice4\tools\start.ps1        # checks MySQL, starts Laravel, builds the frontend if needed
+powershell -ExecutionPolicy Bypass -File exercice4\tools\start.ps1        # vérifie MySQL, démarre Laravel, construit le front si besoin
 ```
 
-Then open **http://localhost:8000**. Create an account, or use the demo account `demo@missioncontrol.local` / `Demo12345`.
+Puis ouvrez **http://localhost:8000**.
 
-**Frontend hot reload** while coding: `start.ps1 -Dev`, then open http://localhost:5173/app/. Vite proxies `/api` to Laravel.
+**Rechargement à chaud** pendant le développement : `start.ps1 -Dev`, puis http://localhost:5173/app/. Vite redirige `/api` vers Laravel.
 
-### First-time setup (already done on this PC)
+### Première installation (déjà faite sur ce PC)
 
 ```bash
-# in WSL
-mysql -u root -e "CREATE DATABASE mission_control; CREATE USER 'mission_control'@'localhost' IDENTIFIED BY '<password>'; GRANT ALL ON mission_control.* TO 'mission_control'@'localhost';"
-cd exercice4/backend && composer install && cp .env.example .env && php artisan key:generate   # set DB_* in .env
+# dans WSL
+mysql -u root -e "CREATE DATABASE mission_control; CREATE USER 'mission_control'@'localhost' IDENTIFIED BY '<mot de passe>'; GRANT ALL ON mission_control.* TO 'mission_control'@'localhost';"
+cd exercice4/backend && composer install && cp .env.example .env && php artisan key:generate   # renseignez DB_* dans .env
 php artisan migrate && php artisan mc:import
 ```
 ```powershell
-# on Windows, in exercice4\frontend (Node 22; cmd AutoRun must be paused for npm on this PC)
+# sous Windows, dans exercice4\frontend (Node 22 ; l'AutoRun de cmd doit être suspendu pour npm sur ce PC)
 npm install
-node node_modules\vite\bin\vite.js build      # writes backend/public/app
+node node_modules\vite\bin\vite.js build      # écrit backend/public/app
 ```
 
-## Live deployment (Railway)
+## Traduction française
 
-**https://web-production-7ed674ac.up.railway.app** — sign in with `demo@missioncontrol.local` / `Demo12345`, or create an account.
-
-The Railway project is `mission-control` with two services:
-
-| Service | What it runs |
+| Élément | Comment il est traduit |
 |---|---|
-| `MySQL` | Railway's MySQL, with a volume |
-| `web` | Built from `exercice4/Dockerfile` |
+| **Données** | `backend/database/data/translations_fr.json`. Un seul dictionnaire pour toutes les valeurs (statuts, priorités, types, catégories…), plus des motifs pour les textes numérotés (« Work item 001 » → « Tâche 001 »). Les CSV restent en anglais (la source), `mc:import` écrit le français dans MySQL. |
+| **Interface** | `tools/i18n/ui.fr.*.json` : 1 141 textes. `tools/i18n/apply-ui.js` les applique, et les scripts `fix-*.js` traitent les cas particuliers (texte JSX, formats). |
+| **Code du tableau de bord** | `tools/i18n/apply-values.js` remplace les comparaisons avec les valeurs anglaises par les valeurs françaises. |
+| **Formats** | Nombres `30,90 M TND`, `43,9 %` ; dates `22 nov. 2026`. |
+| **API** | `APP_LOCALE=fr`, messages de validation dans `backend/lang/fr/validation.php`. |
 
-How the `web` service is built and started:
-- **Build:** Node 22 builds the React app, then Laravel runs on PHP 8.5.
-- **Start** (`backend/docker/start.sh`):
-  1. caches the config and routes;
-  2. runs `migrate --force`;
-  3. runs `mc:import --if-empty`, which loads the CSVs only on the first deploy, so later deploys keep users' edits;
-  4. runs `mc:demo-user`;
-  5. starts `php artisan serve` on `$PORT`.
-- **Variables** are set on the service and never in the repo: `APP_KEY` (generated for production), `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL`, `LOG_CHANNEL=stderr`, `CACHE_STORE=file`, and `DB_*` as references to the MySQL service (`${{MySQL.MYSQLHOST}}` and so on).
-
-Redeploy after a change, from `exercice4/` (Railway CLI, signed in):
-
-```powershell
-railway up --service web --ci
-node tools\e2e.js     # with MC_BASE=https://web-production-7ed674ac.up.railway.app/app/ to test the live site (16 checks)
-```
-
-`php artisan serve` with 4 workers is enough for a demo. For real traffic, switch to FrankenPHP/Octane or nginx + php-fpm.
+**Vérifications :**
+- `node tools/i18n/check-values.js` : toutes les valeurs sont traduites, sans collision dans une même colonne.
+- `node tools/i18n/equivalence.js` : le moteur en français sur les données françaises donne **exactement** les mêmes résultats que le moteur Power BI en anglais. 43 groupes de résultats comparés, 0 différence.
 
 ## API
 
-| Method | Path | |
+| Méthode | Chemin | |
 |---|---|---|
 | POST | `/api/auth/register` | name, email, password, password_confirmation → `{user, token}` |
-| POST | `/api/auth/login` | email, password → `{user, token}`. Limited to 10 per minute. |
-| GET | `/api/auth/me` · POST `/api/auth/logout` | Bearer token |
-| GET | `/api/feeds` | The 31 tables as `{c: columns, r: rows}`. Cached until the next write. Salary is never included. |
-| GET / PUT | `/api/me/preferences` | `{preferences, workspace}` for the signed-in user |
-| POST | `/api/tables/{table}` | Create a row in an editable table. The primary key is required. |
-| PATCH / DELETE | `/api/tables/{table}/{id}` | Update or delete a row |
+| POST | `/api/auth/login` | email, password → `{user, token}`. Limité à 10 par minute. |
+| GET | `/api/auth/me` · POST `/api/auth/logout` | Jeton Bearer |
+| GET | `/api/feeds` | Les 31 tables au format `{c: colonnes, r: lignes}`. Mis en cache jusqu'à la prochaine écriture. Les salaires ne sont jamais inclus. |
+| GET / PUT | `/api/me/preferences` | `{preferences, workspace}` de l'utilisateur connecté |
+| POST | `/api/tables/{table}` | Crée une ligne dans une table modifiable. La clé primaire est obligatoire. |
+| PATCH / DELETE | `/api/tables/{table}/{id}` | Modifie ou supprime une ligne |
 
-**Editable tables:** tasks, calendar_events, approval_requests, decisions, collaboration_comments, notifications, investigation_cases, alerts, incidents, products, activity_log.
+**Tables modifiables :** tasks, calendar_events, approval_requests, decisions, collaboration_comments, notifications, investigation_cases, alerts, incidents, products, activity_log.
 
-**Read-only tables** answer 404 to writes.
+**Les tables en lecture seule** répondent 404 aux écritures.
 
-**Foreign keys are enforced.** A broken link returns 422, and the dashboard undoes the change on screen and says why.
+**Les clés étrangères sont appliquées.** Un lien cassé renvoie 422 ; le tableau de bord annule la modification à l'écran et explique pourquoi.
 
 ## Tests
 
 ```bash
-# WSL, exercice4/backend — 13 tests on a separate database (mission_control_test)
+# WSL, exercice4/backend — 15 tests sur une base séparée (mission_control_test)
 php artisan test
-php artisan mc:import --check      # 61 relationships, and revenue / incidents / alerts = the Power BI values
+php artisan mc:import --check      # 61 relations, et CA / incidents / alertes = valeurs Power BI
 ```
 ```powershell
-# Windows: end-to-end in a hidden Chrome (sign in, KPIs = Power BI, all 33 modules, task create → MySQL → reload, theme kept, sign out)
+# Windows : de bout en bout dans un Chrome invisible (connexion, KPI = Power BI, 33 modules, tâche créée → MySQL → rechargement, thème conservé, déconnexion)
 node exercice4\tools\e2e.js
 ```
 
-| Test | Result |
+| Test | Résultat |
 |---|---|
-| Backend tests | 13 / 13 |
-| End-to-end | 16 / 16 |
-| API feeds vs. Power BI feeds | 31 / 31 tables identical |
+| Tests backend | 15 / 15 |
+| De bout en bout | 17 / 17 |
+| Moteur français vs Power BI | 0 différence sur 43 groupes de résultats |
 
-## Layout
+## Mise en ligne (Railway)
 
-| Path | Contents |
+Le projet Railway s'appelle `mission-control` et contient deux services :
+
+| Service | Ce qu'il exécute |
 |---|---|
-| `backend/` | Laravel. `app/Support/MissionData.php` (table metadata, feeds, typing), `app/Http/Controllers/Api/*`, `app/Console/Commands/ImportMissionControl.php`, migrations, `database/data/*.csv` |
-| `backend/config/mission_control.php` | Tables, columns, types, keys and relationships. **Generated** by `tools/gen-schema.js` from exercice3. |
-| `frontend/src/mc/` | The dashboard: exercice3's visual code, adapted for the web by `tools/webify.js` (API sync, signed-in user, wording) |
-| `frontend/src/*.tsx` | React shell: sign-in / register page, dashboard host, API client |
-| `tools/` | `start.ps1`, `e2e.js`, `gen-schema.js`, `webify.js` |
+| `MySQL` | Le MySQL de Railway, avec un volume |
+| `web` | Construit depuis `exercice4/Dockerfile` |
 
-## Notes
+Construction et démarrage du service `web` :
+- **Construction :** Node 22 construit l'application React, puis Laravel tourne sous PHP 8.5.
+- **Démarrage** (`backend/docker/start.sh`) :
+  1. met en cache la configuration et les routes ;
+  2. exécute `migrate --force` ;
+  3. exécute `mc:import --if-empty`, qui importe les CSV uniquement si la base est vide ou encore en anglais ; les modifications des utilisateurs sont conservées sinon ;
+  4. exécute `mc:demo-user` ;
+  5. démarre `php artisan serve` sur `$PORT`.
+- **Variables**, définies sur le service et jamais dans le dépôt : `APP_KEY` (générée pour la production), `APP_ENV=production`, `APP_DEBUG=false`, `APP_LOCALE=fr`, `APP_URL`, `LOG_CHANNEL=stderr`, `CACHE_STORE=file`, et `DB_*` en références vers le service MySQL.
 
-- **The AI assistant is rule-based.** The API-key field shows only a fake placeholder. A real key would live in `backend/.env`, never in the browser.
-- **The token is kept in `localStorage`.** That's fine for this local app. For a public deployment, switch to Sanctum's cookie (SPA) authentication.
-- **`backend/.env` holds the MySQL password and the app key.** It is git-ignored.
+Redéployer depuis `exercice4/` (CLI Railway connectée) :
+```powershell
+railway up --service web --ci
+```
+
+## Organisation
+
+| Chemin | Contenu |
+|---|---|
+| `backend/` | Laravel : `app/Support/MissionData.php` (métadonnées, flux, typage), `app/Http/Controllers/Api/*`, `app/Console/Commands/*` (import, compte de démo), migrations, `database/data/*.csv` et `translations_fr.json`, `lang/fr` |
+| `backend/config/mission_control.php` | Tables, colonnes, types, clés et relations. **Généré** par `tools/gen-schema.js` depuis l'exercice3. |
+| `frontend/src/mc/` | Le tableau de bord : le code du visuel de l'exercice3, adapté au web (`tools/webify.js`) et traduit (`tools/i18n/`) |
+| `frontend/src/*.tsx` | Coquille React : page de connexion / inscription, hôte du tableau de bord, client API |
+| `tools/` | `start.ps1`, `e2e.js`, `gen-schema.js`, `webify.js`, `i18n/` |
+
+## Remarques
+
+- **L'assistant IA fonctionne par règles.** Il comprend les questions en français et en anglais. Le champ de clé API n'affiche qu'une clé factice ; une vraie clé resterait dans `backend/.env`, jamais dans le navigateur.
+- **Le jeton est stocké dans `localStorage`.** C'est suffisant pour cette application ; pour un déploiement public sérieux, passez à l'authentification SPA de Sanctum par cookie.
+- **`backend/.env` contient le mot de passe MySQL et la clé de l'application.** Il est ignoré par git.

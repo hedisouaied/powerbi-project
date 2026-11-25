@@ -49,7 +49,7 @@ export class Charts {
         if (!hex.startsWith("#")) { return hex; }
         const n = parseInt(hex.slice(1), 16); return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
     }
-    public short(v: number): string { const a = Math.abs(v); return a >= 1e6 ? `${(v / 1e6).toFixed(1)}M` : a >= 1e3 ? `${(v / 1e3).toFixed(0)}K` : String(Math.round(v)); }
+    public short(v: number): string { const a = Math.abs(v); return a >= 1e6 ? `${(v / 1e6).toFixed(1).replace(".", ",")} M` : a >= 1e3 ? `${(v / 1e3).toFixed(0)} k` : String(Math.round(v)); }
 
     // ---------- chart types
     public line(el: HTMLElement, cats: string[], series: Array<{ name: string; data: Array<number | null>; color?: string; area?: boolean; dashed?: boolean; band?: [number[], number[]] }>, onClick?: Click, yFmt?: (v: number) => string): void {
@@ -109,7 +109,7 @@ export class Charts {
         const max = Math.max(1, ...points.map(p => p.size));
         this.queue(el, {
             grid: { left: 8, right: 16, top: 16, bottom: 22, containLabel: true },
-            tooltip: this.tooltip({ trigger: "item", formatter: (p: any) => { const q = points[p.dataIndex]; return `${q.name}<br/>${xName}: ${this.short(q.x)}<br/>${yName}: ${this.short(q.y)}`; } }),
+            tooltip: this.tooltip({ trigger: "item", formatter: (p: any) => { const q = points[p.dataIndex]; return `${q.name}<br/>${xName} : ${this.short(q.x)}<br/>${yName} : ${this.short(q.y)}`; } }),
             xAxis: { type: "value", name: xName, nameLocation: "middle", nameGap: 22, nameTextStyle: { color: this.t.muted, fontSize: 10 }, scale: true, ...this.axis({ axisLabel: { color: this.t.muted, fontSize: 10, formatter: (v: number) => this.short(v) } }) },
             yAxis: { type: "value", name: yName, nameTextStyle: { color: this.t.muted, fontSize: 10 }, scale: true, ...this.axis({ axisLabel: { color: this.t.muted, fontSize: 10, formatter: (v: number) => this.short(v) } }) },
             series: [{ type: "scatter", data: points.map(p => ({ value: [p.x, p.y], itemStyle: { color: p.color ?? this.t.accent, opacity: 0.85 } })), symbolSize: (_: any, p: any) => 8 + 22 * (points[p.dataIndex].size / max), cursor: onClick ? "pointer" : "default" }]

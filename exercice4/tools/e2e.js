@@ -44,10 +44,10 @@ const results = []; const ok = (name, cond, info = "") => { results.push(`${cond
     await click("document.querySelector('.auth-submit')");
     ok("dashboard loads after sign-in", await waitFor("!!document.querySelector('.mc-kpi-value')", 30000));
     await sleep(2500);
-    const kpi = await js("document.querySelector('.mc-kpi-value').textContent");
-    ok("total revenue (12 months) = 30.90M TND, as in Power BI", kpi === "30.90M TND", kpi);
-    ok("ribbon shows 120 incidents · 31 critical", (await js("document.querySelector('.mc-ribbon').textContent")).includes("120 · 31 critical"));
-    ok("signed-in user in the header", (await js("document.querySelector('.mc-profile-name').textContent")).length > 0);
+    const kpi = await js("document.querySelector('.mc-kpi-value')?.textContent ?? document.body.innerText.slice(0, 300)");
+    ok("CA total (12 mois) = 30,90 M TND, comme dans Power BI", /^30,90\sM\sTND$/.test(kpi), kpi);
+    ok("bandeau : 120 incidents · 31 critiques", (await js("document.querySelector('.mc-ribbon')?.textContent ?? ''")).includes("120 · 31 critiques"));
+    ok("signed-in user in the header", (await js("document.querySelector('.mc-profile-name')?.textContent ?? ''")).length > 0);
     ok("no feed issue banner", !(await js("!!document.querySelector('.mc-feed-alert')")));
     await shot("02-dashboard-dark.png");
     // every module renders
@@ -55,27 +55,27 @@ const results = []; const ok = (name, cond, info = "") => { results.push(`${cond
     ok("all 33 modules render", modErr.length === 0, modErr.join("; "));
     // create a task through the UI
     const title = `Web task ${Date.now() % 100000}`;
-    await click(byText(".mc-nav", "Task Manager")); await sleep(300);
-    await click(byText(".mc-btn", "New task")); await sleep(300);
+    await click(byText(".mc-nav", "Gestionnaire de tâches")); await sleep(300);
+    await click(byText(".mc-btn", "Nouvelle tâche")); await sleep(300);
     await type("document.querySelector('[data-focus=\"tf-title\"]')", title);
-    await click(byText(".mc-modal-actions .mc-btn", "Create")); await sleep(1500);
-    ok("task visible on the board", (await js("document.querySelector('.mc-outlet').textContent")).includes(title));
+    await click(byText(".mc-modal-actions .mc-btn", "Créer")); await sleep(1500);
+    ok("task visible on the board", (await js("(document.querySelector('.mc-outlet')?.textContent ?? '')")).includes(title));
     const inDb = await js(`fetch('/api/feeds', { headers: { Authorization: 'Bearer ' + localStorage.getItem('mc.token'), Accept: 'application/json' } }).then(r => r.json()).then(j => j.feeds.tasks.r.some(r => r.includes(${JSON.stringify(title)})))`);
     ok("task saved in MySQL (returned by the API)", inDb === true);
     await shot("03-task-created.png");
     // theme persists across reload (preferences saved on the account)
-    await click("document.querySelector('.mc-theme-switch [title=\"Light theme\"]')"); await sleep(1200);
+    await click("document.querySelector('.mc-theme-switch [title=\"Thème clair\"]')"); await sleep(1200);
     await send("Page.reload"); await waitFor("!!document.querySelector('.mc-kpi-value')", 30000); await sleep(1500);
     ok("light theme kept after reload", await js("!!document.querySelector('.mc-theme-light')"));
-    await click(byText(".mc-nav", "Task Manager")); await sleep(300); await type("document.querySelector('[data-focus=\"task-q\"]')", title); await sleep(500);
-    ok("new task found with the board search after reload", (await js("document.querySelector('.mc-outlet').textContent")).includes(title));
-    await click(byText(".mc-nav", "Command Center")); await sleep(1500); await shot("04-dashboard-light.png");
+    await click(byText(".mc-nav", "Gestionnaire de tâches")); await sleep(300); await type("document.querySelector('[data-focus=\"task-q\"]')", title); await sleep(500);
+    ok("new task found with the board search after reload", (await js("(document.querySelector('.mc-outlet')?.textContent ?? '')")).includes(title));
+    await click(byText(".mc-nav", "Centre de commande")); await sleep(1500); await shot("04-dashboard-light.png");
     // remove the test task again (the API deletes it from MySQL)
     const del = await js(`(async () => { const h = { Authorization: 'Bearer ' + localStorage.getItem('mc.token'), Accept: 'application/json' }; const j = await (await fetch('/api/feeds', { headers: h })).json(); const f = j.feeds.tasks; const row = f.r.find(r => r.includes(${JSON.stringify(title)})); if (!row) return false; const id = row[f.c.indexOf('task_id')]; return (await fetch('/api/tables/tasks/' + id, { method: 'DELETE', headers: h })).ok; })()`);
     ok("test task deleted through the API", del === true);
     // restore dark for the next run, then sign out
-    await click("document.querySelector('.mc-theme-switch [title=\"Dark theme\"]')"); await sleep(1000);
-    await click("document.querySelector('[title=\"Sign out\"]')");
+    await click("document.querySelector('.mc-theme-switch [title=\"Thème sombre\"]')"); await sleep(1000);
+    await click("document.querySelector('[title=\"Se déconnecter\"]')");
     ok("sign-out returns to the login page", await waitFor("!!document.querySelector('.auth-card')"));
     ok("token removed", !(await js("localStorage.getItem('mc.token')")));
     ok("no JavaScript errors", errors.length === 0, errors.join(" | ").slice(0, 300));

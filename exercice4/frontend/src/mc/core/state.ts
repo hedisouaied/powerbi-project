@@ -71,15 +71,15 @@ export class Store {
     public clearSavedWs(): void { this.savedWs = ""; this.persist("workspace", ""); }
 
     private patch(t: TableName): TablePatch { const p = this.ws[t] ?? { added: [], changed: {}, removed: [] }; this.ws[t] = p; return p; }
-    public add(t: TableName, row: Row, module: string, detail: string): void { this.patch(t).added.push(row); this.audit(module, "Created", detail); this.saveWs(); this.sync?.("add", t, String(row[KEYS[t]]), row); }
-    public change(t: TableName, id: string, fields: Row, module: string, detail: string): void { const p = this.patch(t); p.changed[id] = { ...(p.changed[id] ?? {}), ...fields }; this.audit(module, "Updated", detail); this.saveWs(); this.sync?.("change", t, id, fields); }
-    public remove(t: TableName, id: string, module: string, detail: string): void { this.patch(t).removed.push(id); this.audit(module, "Deleted", detail); this.saveWs(); this.sync?.("remove", t, id, {}); }
+    public add(t: TableName, row: Row, module: string, detail: string): void { this.patch(t).added.push(row); this.audit(module, "Créé", detail); this.saveWs(); this.sync?.("add", t, String(row[KEYS[t]]), row); }
+    public change(t: TableName, id: string, fields: Row, module: string, detail: string): void { const p = this.patch(t); p.changed[id] = { ...(p.changed[id] ?? {}), ...fields }; this.audit(module, "Mis à jour", detail); this.saveWs(); this.sync?.("change", t, id, fields); }
+    public remove(t: TableName, id: string, module: string, detail: string): void { this.patch(t).removed.push(id); this.audit(module, "Supprimé", detail); this.saveWs(); this.sync?.("remove", t, id, {}); }
     /** Undo a local patch when the server rejected the write. */
     public revert(op: "add" | "change" | "remove", t: TableName, id: string): void { const p = this.patch(t); if (op === "add") { p.added = p.added.filter(r => String(r[KEYS[t]]) !== id); } else if (op === "change") { delete p.changed[id]; } else { p.removed = p.removed.filter(x => x !== id); } }
     public toggle(list: "acks" | "reviewed", id: string, module: string): void {
         const l = this.extras[list]; const i = l.indexOf(id);
         if (i >= 0) { l.splice(i, 1); } else { l.push(id); }
-        this.audit(module, i >= 0 ? "Reopened" : list === "acks" ? "Acknowledged" : "Marked reviewed", id); this.saveWs();
+        this.audit(module, i >= 0 ? "Rouvert" : list === "acks" ? "Pris en compte" : "Marqué comme examiné", id); this.saveWs();
     }
     public audit(module: string, action: string, detail: string): void {
         const d = new Date(); const p = (n: number): string => String(n).padStart(2, "0");

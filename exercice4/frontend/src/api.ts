@@ -23,7 +23,7 @@ export async function api<T>(path: string, init: { method?: string; body?: unkno
     if (res.status === 401 && token) { setToken(null); onUnauthorized(); }
     if (!res.ok) {
         const fields = (data?.errors ?? {}) as Record<string, string[]>;
-        throw new ApiError(res.status, data?.message ?? `Request failed (${res.status})`, fields);
+        throw new ApiError(res.status, data?.message ?? `La requête a échoué (${res.status})`, fields);
     }
     return data as T;
 }

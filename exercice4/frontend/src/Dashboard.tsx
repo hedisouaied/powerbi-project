@@ -24,10 +24,10 @@ export function Dashboard({ user, onSignOut }: { user: User; onSignOut: () => vo
             window.clearTimeout(timers[object]);
             timers[object] = window.setTimeout(() => {
                 const body = object === "prefs" ? { preferences: JSON.parse(json || "{}") } : { workspace: JSON.parse(json || "{}") };
-                api("/me/preferences", { method: "PUT", body }).catch(() => app.toast("Could not save your preferences", "bad"));
+                api("/me/preferences", { method: "PUT", body }).catch(() => app.toast("Impossible d'enregistrer vos préférences", "bad"));
             }, 500);
         });
-        app.user = { name: user.name, email: user.email, role: user.role };
+        app.user = { name: user.name, email: user.email, role: ({ analyst: "analyste", admin: "administrateur", manager: "responsable" } as Record<string, string>)[user.role] ?? user.role };
         app.onLogout = onSignOut;
         app.exporter = async (fileName: string, text: string): Promise<boolean> => {
             const url = URL.createObjectURL(new Blob(["﻿" + text], { type: "text/csv;charset=utf-8" }));
@@ -42,7 +42,7 @@ export function Dashboard({ user, onSignOut }: { user: User; onSignOut: () => vo
             req.catch((e: ApiError) => {
                 app.store.revert(op, table, id);
                 const first = Object.values(e.fields ?? {})[0]?.[0];
-                app.toast(`Not saved: ${first ?? e.message}`, "bad");
+                app.toast(`Non enregistré : ${first ?? e.message}`, "bad");
                 app.render();
             });
         };
@@ -64,7 +64,7 @@ export function Dashboard({ user, onSignOut }: { user: User; onSignOut: () => vo
         Promise.all([api<FeedsResponse>("/feeds"), api<PrefsResponse>("/me/preferences")]).then(([f, p]) => {
             if (!alive) { return; }
             const d = emptyDataset(); const sizes: Record<string, number> = {}; const issues: string[] = [];
-            TABLES.forEach(t => { d[t] = decode(f.feeds[t]); sizes[t] = f.feeds[t]?.r?.length ?? 0; if (!f.feeds[t]) { issues.push(`${t} (no data)`); } });
+            TABLES.forEach(t => { d[t] = decode(f.feeds[t]); sizes[t] = f.feeds[t]?.r?.length ?? 0; if (!f.feeds[t]) { issues.push(`${t} (aucune donnée)`); } });
             app.feedSizes = sizes; app.feedIssues = issues;
             app.setData(d);
             const prefs = p.preferences && Object.keys(p.preferences).length ? JSON.stringify(p.preferences) : "";
@@ -77,7 +77,7 @@ export function Dashboard({ user, onSignOut }: { user: User; onSignOut: () => vo
 
     return (
         <div className="mc-host mc-web" ref={host}>
-            {error && <div className="auth-error mc-load-error" role="alert">Could not load the data: {error}. Is the API running (php artisan serve)?</div>}
+            {error && <div className="auth-error mc-load-error" role="alert">Impossible de charger les données : {error}. L'API est-elle démarrée (php artisan serve) ?</div>}
         </div>
     );
 }
